@@ -11,7 +11,7 @@
  *= require_self
  *= require css/bootstrap.min.css
  *= require css/bootstrap-reset.css
- *= require font-awesome/css/font-awesome.css 
+ *= require font-awesome/css/font-awesome.css.erb 
  *= require css/style.css
  *= require css/style-responsive.css
 */
