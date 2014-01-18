@@ -13,4 +13,9 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= require_tree .
+//= require js/bootstrap.min.js
+//= require js/jquery.dcjqaccordion.2.7.js
+//= require js/jquery.scrollTo.min.js
+//= require js/jquery.nicescroll.js
+//= require js/respond.min.js
+//= require js/common-scripts.js
