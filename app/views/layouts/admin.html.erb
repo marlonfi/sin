@@ -20,10 +20,13 @@
 </head>
 
 <body>
-<section id="container" >
-  <%= yield %>
-  <%= javascript_include_tag "admin", "data-turbolinks-track" => true %>
-  <%= yield (:js_per_page)%>  
-</section>
+  <section id="container" >
+    <%= render 'layouts/admin_partials/header'%>
+    <%= render 'layouts/admin_partials/aside'%>
+    <%= yield %>
+    <%= render 'layouts/admin_partials/footer'%>
+    <%= javascript_include_tag "admin", "data-turbolinks-track" => true %>
+    <%= yield (:js_per_page)%>  
+  </section>
 </body>
 </html>
