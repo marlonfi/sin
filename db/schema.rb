@@ -11,9 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20140125154818) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "red_asistencials", force: true do |t|
+    t.string   "cod_essalud"
+    t.string   "nombre"
+    t.string   "contacto_nombre"
+    t.string   "contacto_telefono"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "red_asistencials", ["cod_essalud"], name: "index_red_asistencials_on_cod_essalud", using: :btree
 
 end

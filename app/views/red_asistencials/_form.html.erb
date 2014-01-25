@@ -1,0 +1,33 @@
+<%= form_for(@red_asistencial) do |f| %>
+  <% if @red_asistencial.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@red_asistencial.errors.count, "error") %> prohibited this red_asistencial from being saved:</h2>
+
+      <ul>
+      <% @red_asistencial.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :cod_essalud %><br>
+    <%= f.text_field :cod_essalud %>
+  </div>
+  <div class="field">
+    <%= f.label :nombre %><br>
+    <%= f.text_field :nombre %>
+  </div>
+  <div class="field">
+    <%= f.label :contacto_nombre %><br>
+    <%= f.text_field :contacto_nombre %>
+  </div>
+  <div class="field">
+    <%= f.label :contacto_telefono %><br>
+    <%= f.text_field :contacto_telefono %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,33 @@
+<h1>Listing red_asistencials</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Cod essalud</th>
+      <th>Nombre</th>
+      <th>Contacto nombre</th>
+      <th>Contacto telefono</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @red_asistencials.each do |red_asistencial| %>
+      <tr>
+        <td><%= red_asistencial.cod_essalud %></td>
+        <td><%= red_asistencial.nombre %></td>
+        <td><%= red_asistencial.contacto_nombre %></td>
+        <td><%= red_asistencial.contacto_telefono %></td>
+        <td><%= link_to 'Show', red_asistencial %></td>
+        <td><%= link_to 'Edit', edit_red_asistencial_path(red_asistencial) %></td>
+        <td><%= link_to 'Destroy', red_asistencial, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Red asistencial', new_red_asistencial_path %>
