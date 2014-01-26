@@ -7,8 +7,8 @@
   <meta name="author" content="Iokero">
   <meta name="keyword" content="Iokero, Sinesss">
   <link rel="shortcut icon" href="img/favicon.png">
-
-  <title>SINESSS</title>
+  <title><%=full_title(yield(:title))%></title>
+  
   <%= stylesheet_link_tag    "admin", media: "all", "data-turbolinks-track" => true %>
   <%= yield (:css_per_page)%>
   <%= csrf_meta_tags %>
@@ -23,7 +23,12 @@
   <section id="container" >
     <%= render 'layouts/admin_partials/header'%>
     <%= render 'layouts/admin_partials/aside'%>
-    <%= yield %>
+    <section id="main-content">
+      <section class="wrapper site-min-height">
+        <%= render 'layouts/admin_partials/content_header'%>
+        <%= yield %>
+      </section>
+    </section>    
     <%= render 'layouts/admin_partials/footer'%>
     <%= javascript_include_tag "admin", "data-turbolinks-track" => true %>
     <%= yield (:js_per_page)%>  

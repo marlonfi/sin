@@ -4,7 +4,11 @@
         <!-- sidebar menu start-->
         <ul class="sidebar-menu" id="nav-accordion">
             <li>
-                <a class="active" href="index.html">
+                <% if  controller_name == 'home' %>
+                <a href="javascript:;" class="active">
+                <%else%>        
+                <a href="javascript:;">
+                <% end %>
                     <i class="fa fa-dashboard"></i>
                     <span>Dashboard</span>
                 </a>

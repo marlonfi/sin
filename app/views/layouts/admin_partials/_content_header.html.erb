@@ -1,0 +1,35 @@
+<div class="row">
+    <div class="col-lg-12">
+        <ul class="breadcrumb">
+            <li>
+            	<a href="<%=yield(:content_header_path)%>">
+            		<%=yield(:content_header_data1)%>
+            	</a>	
+            </li>
+            <% if content_for?(:content_header_data2) %>
+            <li><%=yield(:content_header_data2)%></a></li>
+            <%end%>
+            <% if content_for?(:content_header_data3) %>
+            <li><%=yield(:content_header_data3)%></li>
+            <%end%>
+        </ul>
+    </div>
+</div>
+
+<%if flash[:alert]%>
+	<div class="alert alert-block alert-danger fade in">
+	  <button data-dismiss="alert" class="close close-sm" type="button">
+	      <i class="fa fa-times"></i>
+	  </button>
+  	<strong>Ups! </strong><%= flash[:alert] %>
+	</div>
+<%elsif flash[:notice]%>
+	<div class="alert alert-success fade in">
+	    <button data-dismiss="alert" class="close close-sm" type="button">
+	        <i class="fa fa-times"></i>
+	    </button>
+	    <strong>OK! </strong><%= flash[:notice] %>
+	</div>		    
+<%end%>
+
+

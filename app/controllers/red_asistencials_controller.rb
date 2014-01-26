@@ -1,7 +1,7 @@
 #encoding: utf-8
 class RedAsistencialsController < ApplicationController
   before_action :set_red_asistencial, only: [:show, :edit, :update, :destroy]
-
+  layout 'admin'
   def index
     @red_asistencials = RedAsistencial.order(cod_essalud: :asc)
   end
@@ -36,7 +36,7 @@ class RedAsistencialsController < ApplicationController
 
   def destroy
     @red_asistencial.destroy
-    redirect_to red_asistencials_path
+    redirect_to red_asistencials_path, notice: "Se eliminó correctamente la red asistencial"
     end
 
   private

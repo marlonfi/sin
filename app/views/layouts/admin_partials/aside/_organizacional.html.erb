@@ -1,12 +1,22 @@
 <li class="sub-menu">
-    <a href="javascript:;" >
+    <% if  controller_name == 'red_asistencials' %>
+    <a href="javascript:;" class="active">
+    <%else%>        
+    <a href="javascript:;">
+    <% end %>
         <i class="fa fa-group"></i>
-        <span>Organizacional</span>
+        <span>Organizacional</span>        
     </a>
     <ul class="sub">
         <li><%= link_to '<i class="fa fa-h-square"></i> Bases'.html_safe, '#'%></li>
         <li><%= link_to '<i class="fa fa-female"></i> Enfermeras'.html_safe, '#'%></li>
-        <li><%= link_to '<i class="fa fa-sitemap"></i> Redes Asistenciales'.html_safe, '#'%></li>
+        <% if  controller_name == 'red_asistencials' %>
+        <li class="active">
+        <%else%>
+        <li>  
+        <% end %>
+            <%= link_to '<i class="fa fa-sitemap"></i> Redes Asistenciales'.html_safe,  red_asistencials_path%>
+        </li>
         <li><%= link_to '<i class="fa fa-hospital-o"></i> Entes'.html_safe, '#'%></li>
     </ul>
 </li>

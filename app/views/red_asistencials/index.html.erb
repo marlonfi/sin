@@ -1,33 +1,63 @@
-<h1>Listing red_asistencials</h1>
+<% provide(:title, 'Listado de RA') %>
+<% provide(:content_header_path,  red_asistencials_path) %>
+<% provide(:content_header_data1,
+          "<i class='fa fa-sitemap'></i> Redes Asistenciales".html_safe) %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Cod essalud</th>
-      <th>Nombre</th>
-      <th>Contacto nombre</th>
-      <th>Contacto telefono</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
+<div class="row">
+  <div class="col-lg-12">
+    <section class="panel">
+      <header class="panel-heading">
+        Listado de redes asistenciales
+      </header>
+      <div class="panel-body">
+        <table class="table table-striped table-advance table-hover">
+          <thead>
+            <tr>
+              <th><i class="fa fa-bullhorn"></i> ID Único ESSALUD</th>
+              <th><i class="fa fa-sitemap"></i> Nombre de la red</th>
+              <th class="hidden-phone"><i class="fa fa-user"></i> Contacto</th>
+              <th><i class="fa fa-phone-square"></i> Teléfono</th>
+              <th><i class=" fa fa-hospital-o"></i> Entes</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @red_asistencials.each do |red_asistencial| %>
+              <tr>
+                <td><%= red_asistencial.cod_essalud %></td>
+                <td><%= red_asistencial.nombre %></td>
+                <td><%= red_asistencial.contacto_nombre %></td>
+                <td><%= red_asistencial.contacto_telefono %></td>
+                <td> # entes </td>
+                <td>
+                  <%= link_to(edit_red_asistencial_path(red_asistencial), :class => 'btn btn-primary btn-xs') do %>
+                    <i class="fa fa-pencil"> </i> Editar
+                  <% end %>
+                  <%= link_to red_asistencial, :class => 'btn btn-danger btn-xs', method: :delete, data: { confirm: '¿Estás seguro?. Se eliminará una red asistencial. ' } do %>
+                    <i class="fa fa-trash-o"> </i> Eliminar
+                  <% end %>
+                </td>             
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
 
-  <tbody>
-    <% @red_asistencials.each do |red_asistencial| %>
-      <tr>
-        <td><%= red_asistencial.cod_essalud %></td>
-        <td><%= red_asistencial.nombre %></td>
-        <td><%= red_asistencial.contacto_nombre %></td>
-        <td><%= red_asistencial.contacto_telefono %></td>
-        <td><%= link_to 'Show', red_asistencial %></td>
-        <td><%= link_to 'Edit', edit_red_asistencial_path(red_asistencial) %></td>
-        <td><%= link_to 'Destroy', red_asistencial, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      <header class="panel-heading" style= 'text-align: center'>
+        <%= link_to new_red_asistencial_path, :class => 'btn btn-success' do %>
+          <i class="fa fa-sitemap"> </i> Nueva RA
+        <% end %>
+        <%= link_to '#', :class => 'btn btn-warning' do %>
+          <i class="fa fa-upload"> </i> Importar
+        <% end %> 
+      </header>
+      
 
-<br>
+    </section>
+  </div>
+</div>
 
-<%= link_to 'New Red asistencial', new_red_asistencial_path %>
+
+
+
+            
