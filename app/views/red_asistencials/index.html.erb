@@ -22,23 +22,7 @@
             </tr>
           </thead>
           <tbody>
-            <% @red_asistencials.each do |red_asistencial| %>
-              <tr>
-                <td><%= red_asistencial.cod_essalud %></td>
-                <td><%= red_asistencial.nombre %></td>
-                <td><%= red_asistencial.contacto_nombre %></td>
-                <td><%= red_asistencial.contacto_telefono %></td>
-                <td> # entes </td>
-                <td>
-                  <%= link_to(edit_red_asistencial_path(red_asistencial), :class => 'btn btn-primary btn-xs') do %>
-                    <i class="fa fa-pencil"> </i> Editar
-                  <% end %>
-                  <%= link_to red_asistencial, :class => 'btn btn-danger btn-xs', method: :delete, data: { confirm: '¿Estás seguro?. Se eliminará una red asistencial. ' } do %>
-                    <i class="fa fa-trash-o"> </i> Eliminar
-                  <% end %>
-                </td>             
-              </tr>
-            <% end %>
+            <%= render @red_asistencials %>
           </tbody>
         </table>
       </div>
@@ -47,17 +31,14 @@
         <%= link_to new_red_asistencial_path, :class => 'btn btn-success' do %>
           <i class="fa fa-sitemap"> </i> Nueva RA
         <% end %>
-        <%= link_to '#', :class => 'btn btn-warning' do %>
-          <i class="fa fa-upload"> </i> Importar
-        <% end %> 
+        <a class="btn btn-warning" data-toggle="modal" href="#myImportRAModal">
+            <i class="fa fa-upload"> </i> Importar
+        </a>         
       </header>
-      
-
     </section>
   </div>
 </div>
-
-
+<%= render 'import_modal' %>
 
 
             

@@ -1,0 +1,15 @@
+<tr>
+  <td><%= red_asistencial.cod_essalud %></td>
+  <td><%= red_asistencial.nombre %></td>
+  <td><%= red_asistencial.contacto_nombre %></td>
+  <td><%= red_asistencial.contacto_telefono %></td>
+  <td> # entes </td>
+  <td>
+    <%= link_to(edit_red_asistencial_path(red_asistencial), :class => 'btn btn-primary btn-xs') do %>
+      <i class="fa fa-pencil"> </i> Editar
+    <% end %>
+    <%= link_to red_asistencial, :class => 'btn btn-danger btn-xs', method: :delete, data: { confirm: '¿Estás seguro?. Se eliminará una red asistencial. ' } do %>
+      <i class="fa fa-trash-o"> </i> Eliminar
+    <% end %>
+  </td>             
+</tr>
