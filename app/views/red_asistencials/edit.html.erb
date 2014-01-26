@@ -1,6 +1,18 @@
-<h1>Editing red_asistencial</h1>
+<% provide(:title, 'Editar RA') %>
+<% provide(:content_header_path,  red_asistencials_path) %>
+<% provide(:content_header_data1,
+          "<i class='fa fa-sitemap'></i> Redes Asistenciales".html_safe) %>
+<% provide(:content_header_data2,  'Editar RA') %>
 
-<%= render 'form' %>
-
-<%= link_to 'Show', @red_asistencial %> |
-<%= link_to 'Back', red_asistencials_path %>
+<div class="row">
+	  <div class="col-lg-10">
+        <section class="panel">
+            <header class="panel-heading">
+                Editar RA
+            </header>
+            <div class="panel-body">
+            	<%= render 'form' %>    
+            </div>
+        </section>
+	  </div>
+</div>

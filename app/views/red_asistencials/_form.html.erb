@@ -1,33 +1,43 @@
-<%= form_for(@red_asistencial) do |f| %>
-  <% if @red_asistencial.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@red_asistencial.errors.count, "error") %> prohibited this red_asistencial from being saved:</h2>
-
-      <ul>
-      <% @red_asistencial.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+<%= form_for @red_asistencial, :html => {:class => 'form-horizontal'} do |f| %>
+  
+  <div class="form-group">
+    <%= f.label :cod_essalud, 'ID ESSALUD', class: 'col-lg-2 col-sm-2 control-label' %>
+    <div class="col-lg-10">
+      <%= f.text_field :cod_essalud, class: 'form-control' %>
+      <p class="help-block" id="error_notice"><%= f.object.errors[:cod_essalud].join(", ")%></p>
     </div>
-  <% end %>
+  </div>
 
-  <div class="field">
-    <%= f.label :cod_essalud %><br>
-    <%= f.text_field :cod_essalud %>
+  <div class="form-group">
+    <%= f.label :nombre , class: 'col-lg-2 col-sm-2 control-label' %>
+    <div class="col-lg-10">
+      <%= f.text_field :nombre, class: 'form-control' %>
+      <p class="help-block" id="error_notice"><%= f.object.errors[:nombre].join(", ")%></p>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :nombre %><br>
-    <%= f.text_field :nombre %>
+
+  <div class="form-group">
+    <%= f.label :contacto_nombre,'Contacto', class: 'col-lg-2 col-sm-2 control-label'  %>
+    <div class="col-lg-10">
+      <%= f.text_field :contacto_nombre, class: 'form-control',
+                       placeholder: 'Cargo y nombre del contacto' %>
+      <p class="help-block" id="error_notice"><%= f.object.errors[:contacto_nombre].join(", ")%></p>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :contacto_nombre %><br>
-    <%= f.text_field :contacto_nombre %>
+
+  <div class="form-group">
+    <%= f.label :contacto_telefono, 'Teléfono', class: 'col-lg-2 col-sm-2 control-label'  %>
+    <div class="col-lg-10">
+      <%= f.text_field :contacto_telefono, class: 'form-control',
+                       placeholder: 'Teléfono o móvil del contacto' %>
+      <p class="help-block" id="error_notice"><%= f.object.errors[:contacto_telefono].join(", ")%></p>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :contacto_telefono %><br>
-    <%= f.text_field :contacto_telefono %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.submit 'Guardar', class:'btn btn-success' %>
+    </div> 
   </div>
 <% end %>
+

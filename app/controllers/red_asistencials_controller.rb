@@ -17,7 +17,7 @@ class RedAsistencialsController < ApplicationController
     @red_asistencial = RedAsistencial.new(red_asistencial_params)
     if @red_asistencial.save
       redirect_to(red_asistencials_path,
-                  notice: "Se registró correctamente la red asistencial #{@red_asistencial.cod_essalud}.")
+                  notice: "Se registró correctamente la red asistencial: #{@red_asistencial.cod_essalud}.")
     else
       flash.now[:alert] = 'Hubo un problema. No se registró la red asistencial.'
       render action: 'new'
@@ -26,7 +26,7 @@ class RedAsistencialsController < ApplicationController
 
   def update
     if @red_asistencial.update(red_asistencial_params)
-      redirect_to red_asistencials_path, notice: "Se actualizó correctamente la red asistencial #{@red_asistencial.cod_essalud}."
+      redirect_to red_asistencials_path, notice: "Se actualizó correctamente la red asistencial: #{@red_asistencial.cod_essalud}."
     else
       flash.now[:alert] = 'Hubo un problema. No se pudo actualizar los datos.'
       render action: 'edit'
