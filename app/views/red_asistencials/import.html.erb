@@ -4,10 +4,10 @@
             Atención! Se van a importar redes asistenciales, el archivo debe ser la MATRIZ proveida por ESSALUD en formato CSV. 
         </header>
         <div class="panel-body">
-        		<%= form_tag(red_asistencial_importar_path) do %>
+        		<%= form_tag red_asistencial_importar_path, multipart: true  do %>
 	        		<div class="form-group">
-	        			<label for="file">Archivo</label>
-	        			<%= file_field_tag "file",:accept => '.csv', :multiple => true %>
+	        			<label for="archivo">Archivo</label>
+	        			<%= file_field_tag :archivo ,:accept => '.csv' %>
 	        			<p class="help-block">El formato debe ser CSV.</p>
 	        		</div>
 	        		<div class="form-group">

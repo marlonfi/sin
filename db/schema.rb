@@ -11,10 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140125154818) do
+ActiveRecord::Schema.define(version: 20140127175509) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "imports", force: true do |t|
+    t.string   "tipo_clase"
+    t.date     "fecha_pago"
+    t.string   "responsable"
+    t.string   "archivo"
+    t.string   "descripcion"
+    t.string   "formato_org"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "imports", ["tipo_clase", "fecha_pago", "created_at"], name: "index_imports_on_tipo_clase_and_fecha_pago_and_created_at", using: :btree
 
   create_table "red_asistencials", force: true do |t|
     t.string   "cod_essalud"
@@ -26,5 +39,15 @@ ActiveRecord::Schema.define(version: 20140125154818) do
   end
 
   add_index "red_asistencials", ["cod_essalud"], name: "index_red_asistencials_on_cod_essalud", using: :btree
+
+  create_table "sessions", force: true do |t|
+    t.string   "session_id", null: false
+    t.text     "data"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "sessions", ["session_id"], name: "index_sessions_on_session_id", unique: true, using: :btree
+  add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at", using: :btree
 
 end

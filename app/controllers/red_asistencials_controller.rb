@@ -20,10 +20,18 @@ class RedAsistencialsController < ApplicationController
       render :layout => false
     end  
   end
+
   def importar
-    debugger
-    redirect_to red_asistencials_path
-  end  
+    importacion = Import.new(archivo: params[:archivo], tipo_clase: 'Red Asistencial',
+                            descripcion: params[:descripcion], formato_org: 'ESSALUD')
+    if importacion.save
+      RedAsistencial.import(importacion)
+      redirect_to dashboard_path, notice:'El proceso de importacion durará unos minutos.'
+    else
+      redirect_to dashboard_path, alert: 'El archivo es muy grande, o tiene un formato incorrecto.'
+    end
+  end 
+
   def create
     @red_asistencial = RedAsistencial.new(red_asistencial_params)
     if @red_asistencial.save
