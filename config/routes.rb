@@ -1,5 +1,7 @@
 Sinesss::Application.routes.draw do
-  resources :red_asistencials
+  resources :red_asistencials, :except => :show
+  get '/red_asistencials/import', to:'red_asistencials#import', as: 'red_asistencial_import'
+  post '/red_asistencials/importar', to:'red_asistencials#importar', as: 'red_asistencial_importar'
 
   get "/dashboard", to: 'home#dashboard'
   # The priority is based upon order of creation: first created -> highest priority.

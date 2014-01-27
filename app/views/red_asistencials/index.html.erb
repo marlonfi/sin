@@ -2,6 +2,10 @@
 <% provide(:content_header_path,  red_asistencials_path) %>
 <% provide(:content_header_data1,
           "<i class='fa fa-sitemap'></i> Redes Asistenciales".html_safe) %>
+<% content_for :js_per_page do %>
+  <%= javascript_include_tag "import_ra", "data-turbolinks-track" => true %>
+<% end %>
+
 
 <div class="row">
   <div class="col-lg-12">
@@ -31,14 +35,14 @@
         <%= link_to new_red_asistencial_path, :class => 'btn btn-success' do %>
           <i class="fa fa-sitemap"> </i> Nueva RA
         <% end %>
-        <a class="btn btn-warning" data-toggle="modal" href="#myImportRAModal">
+        <a class="btn btn-warning" data-toggle="modal" href="#myImportRAModal", id='btnImportRA'>
             <i class="fa fa-upload"> </i> Importar
         </a>         
       </header>
     </section>
   </div>
 </div>
-<%= render 'import_modal' %>
+<%= render 'index_import_modal' %>
 
 
             

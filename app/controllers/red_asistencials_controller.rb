@@ -1,6 +1,6 @@
 #encoding: utf-8
 class RedAsistencialsController < ApplicationController
-  before_action :set_red_asistencial, only: [:show, :edit, :update, :destroy]
+  before_action :set_red_asistencial, only: [:edit, :update, :destroy]
   layout 'admin'
   def index
     @red_asistencials = RedAsistencial.order(cod_essalud: :asc)
@@ -13,6 +13,17 @@ class RedAsistencialsController < ApplicationController
   def edit
   end
 
+  def import
+    if !request.xhr?
+      redirect_to red_asistencials_path, alert: 'No autorizado.'
+    else
+      render :layout => false
+    end  
+  end
+  def importar
+    debugger
+    redirect_to red_asistencials_path
+  end  
   def create
     @red_asistencial = RedAsistencial.new(red_asistencial_params)
     if @red_asistencial.save
@@ -38,7 +49,8 @@ class RedAsistencialsController < ApplicationController
     @red_asistencial.destroy
     redirect_to red_asistencials_path, notice: "Se eliminó correctamente la red asistencial"
     end
-
+  def show
+  end  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_red_asistencial
