@@ -11,5 +11,4 @@ FactoryGirl.define do
       cod_essalud "a"*255
     end
   end
-
 end
