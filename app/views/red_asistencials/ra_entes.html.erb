@@ -1,0 +1,71 @@
+<% provide(:title, "Entes de #{@red_asistencial.cod_essalud}") %>
+<% provide(:content_header_path,  red_asistencials_path) %>
+<% provide(:content_header_data1,
+          "<i class='fa fa-sitemap'></i> Redes Asistenciales".html_safe) %>
+<% provide(:content_header_data2, "Entes".html_safe) %>
+<% content_for :js_per_page do %>
+  <%= javascript_include_tag "datatables", "data-turbolinks-track" => true %>
+<% end %>
+<% content_for :css_per_page do %>
+  <%= stylesheet_link_tag "datatables", media: "all", "data-turbolinks-track" => true %>
+<% end %>
+
+<div class="row">
+  <div class="col-lg-12">
+    <section class="panel">
+      <header class="panel-heading">
+        <%= panel_heading(@red_asistencial)%> (Total: <%= @entes.count%> entes)
+      </header>
+      <div class="panel-body">
+        <div class="adv-table">
+          <table  class="display table table-bordered table-striped" id="example">
+            <thead>
+              <tr>
+                <th><i class="fa fa-bullhorn"></i> ID ESSALUD</th>
+                <th><i class=" fa fa-hospital-o"></i> Nombre del ente</th>
+                <th><i class="fa fa-h-square"></i> Base</th>
+                <th><i class="fa fa-female"></i> Enfermeras</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @entes.each do |ente|%>
+              <tr class="gradeX">
+                <td><%= ente.cod_essalud %></td>
+                <td><%= ente.nombre %></td>
+                <td><%= ente.base_id %></td>
+                <td> # enfermeras </td>
+                <td>
+                  <%= link_to ente, :class => 'btn btn-success btn-xs' do %>
+                    <i class="fa fa-eye"> </i> Ver ente
+                  <% end %>
+                  <%= link_to(edit_ente_path(ente), :class => 'btn btn-primary btn-xs') do %>
+                    <i class="fa fa-pencil"> </i> Editar
+                  <% end %>
+                </td>    
+              </tr>
+              <% end %>
+            </tbody>
+            <tfoot>
+              <tr>
+                <th><i class="fa fa-bullhorn"></i> ID ESSALUD</th>
+                <th><i class=" fa fa-hospital-o"></i> Nombre del ente</th>
+                <th><i class="fa fa-h-square"></i> Base</th>
+                <th><i class="fa fa-female"></i> Enfermeras</th>
+                <th></th>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+      <header class="panel-heading" style= 'text-align: center'>
+        <%= link_to new_ente_path, :class => 'btn btn-success' do %>
+          <i class="fa fa-hospital-o"> </i> Nuevo ente
+        <% end %>
+        <a class="btn btn-warning" data-toggle="modal" href="#myImportEnteModal", id='btnImportEnte'>
+            <i class="fa fa-upload"> </i> Importar
+        </a>         
+      </header>
+    </section>
+  </div>
+</div>

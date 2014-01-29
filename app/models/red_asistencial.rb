@@ -1,9 +1,11 @@
 class RedAsistencial < ActiveRecord::Base
+	has_many :entes
 	validates_presence_of :cod_essalud
 	validates_uniqueness_of :cod_essalud, :case_sensitive => false
 	validates :cod_essalud, length: { maximum: 250 }
 	validates :contacto_nombre, length: { maximum: 250 }
 	validates :contacto_telefono, length: { maximum: 250 }
+	validates :nombre, length: { maximum: 250 }
 
 	def self.import(import)
 		path = import.archivo.path

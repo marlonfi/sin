@@ -138,5 +138,66 @@ describe RedAsistencialsController do
     end
   end
 
-  describe 'POST importar'
+  #Especial actions
+  describe 'Get #entes' do
+    before(:each) do
+      @red = create(:red_asistencial)
+      @ente1 = @red.entes.create(cod_essalud: 'CM Pauca')
+      @ente2 = @red.entes.create(cod_essalud: 'CM PIO')
+    end 
+    it "returns ordered by cod_essalud" do
+      get :entes, red_asistencial_id: @red
+      expect(assigns(:entes)).to eq([@ente1,@ente2])
+    end
+
+    it "renders the :entes view" do
+      get :entes, red_asistencial_id: @red
+      expect(response).to render_template 'ra_entes'
+    end
+  end
+  describe 'GET #import' do
+    it "renders the :import template" do
+      xhr :get, :import
+      expect(response).to render_template :import
+    end
+  end
+
+  describe 'POST importar' do
+    context 'good import' do
+      it 'create a new imported file' do
+        expect{
+            post :importar, archivo: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root,
+                 '/spec/factories/files/relacion.csv')))
+          }.to change(Import,:count).by(1)
+      end
+      it "redirects to dashboard" do
+        post :importar, archivo: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root,
+                        '/spec/factories/files/relacion.csv')))
+        expect(response).to redirect_to dashboard_path
+      end
+      it "sets the notice message" do
+        post :importar, archivo: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root,
+                        '/spec/factories/files/relacion.csv')))
+        flash[:notice].should =~ /El proceso de importacion durará unos minutos./i
+      end
+    end
+    context 'bad import' do
+      it ' not create a new imported file' do
+        expect{
+            post :importar, archivo: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root,
+                 '/spec/factories/files/bad.ods')))
+          }.to change(Import,:count).by(0)
+      end
+      it "redirects to dashboard" do
+        post :importar, archivo: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root,
+                 '/spec/factories/files/bad.ods')))
+        expect(response).to redirect_to red_asistencials_path
+      end
+      it "sets the alert message" do
+        post :importar, archivo: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root,
+                        '/spec/factories/files/bad.ods')))
+        flash[:alert].should =~ /El archivo es muy grande, o tiene un formato incorrecto./i
+      end
+    end
+  end
 end

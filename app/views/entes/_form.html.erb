@@ -1,10 +1,9 @@
-<%= form_for @red_asistencial, :html => {:class => 'form-horizontal'} do |f| %>
-  
+<%= form_for @ente, :html => {:class => 'form-horizontal'}  do |f| %>
   <div class="form-group">
     <%= f.label :cod_essalud, 'ID ESSALUD', class: 'col-lg-2 col-sm-2 control-label' %>
     <div class="col-lg-10">
       <%= f.text_field :cod_essalud, class: 'form-control',
-                       id: 'disabledInput', disabled: action_name == 'edit' %>
+                       id: 'disabledInput', disabled: action_name == 'edit'  %>
       <p class="help-block" id="error_notice"><%= f.object.errors[:cod_essalud].join(", ")%></p>
     </div>
   </div>
@@ -18,6 +17,23 @@
   </div>
 
   <div class="form-group">
+    <%= f.label :red_asistencial_id,'Red Asistencial', class: 'col-lg-2 col-sm-2 control-label' %>
+    <div class="col-lg-10">
+      <%= collection_select(:ente, :red_asistencial_id, @redes,
+         :id, :cod_essalud, {:prompt => 'Ingresa una red'}, {class: "form-control m-bot15 s"})  %>
+      <p class="help-block" id="error_notice"><%= f.object.errors[:red_asistencial_id].join(", ")%></p>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :base_id,'Base', class: 'col-lg-2 col-sm-2 control-label' %>
+    <div class="col-lg-10">
+      <%= f.text_field :base_id, class: 'form-control' %>
+      <p class="help-block" id="error_notice"><%= f.object.errors[:base_id].join(", ")%></p>
+    </div>
+  </div>
+  
+  <div class="form-group">
     <%= f.label :contacto_nombre,'Contacto', class: 'col-lg-2 col-sm-2 control-label'  %>
     <div class="col-lg-10">
       <%= f.text_field :contacto_nombre, class: 'form-control',
@@ -27,11 +43,11 @@
   </div>
 
   <div class="form-group">
-    <%= f.label :contacto_telefono, 'Teléfono', class: 'col-lg-2 col-sm-2 control-label'  %>
+    <%= f.label :contacto_numero, 'Teléfono', class: 'col-lg-2 col-sm-2 control-label'  %>
     <div class="col-lg-10">
-      <%= f.text_field :contacto_telefono, class: 'form-control',
+      <%= f.text_field :contacto_numero, class: 'form-control',
                        placeholder: 'Teléfono o móvil del contacto' %>
-      <p class="help-block" id="error_notice"><%= f.object.errors[:contacto_telefono].join(", ")%></p>
+      <p class="help-block" id="error_notice"><%= f.object.errors[:contacto_numero].join(", ")%></p>
     </div>
   </div>
 

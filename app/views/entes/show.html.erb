@@ -1,0 +1,57 @@
+<% provide(:title, "Ente #{@ente.cod_essalud}") %>
+<% provide(:content_header_path,  entes_path) %>
+<% provide(:content_header_data1,
+          "<i class='fa fa-sitemap'></i> Entes".html_safe) %>
+<% provide(:content_header_data2,  "#{@ente.cod_essalud}") %>
+<div class="row">
+  <div class="col-lg-12">
+    <section class="panel">
+        <header class="panel-heading">
+          Datos de relaciones
+        </header>
+        <div class="panel-body bio-graph-info">     
+          <div class="row">
+              <div class="bio-row">
+                  <p><span>RED</span><span class="label label-info">
+                    <%= @red.cod_essalud%></span></p>
+              </div>
+              <div class="bio-row">
+                  <p><span>BASE</span><span class="label label-info">Nombre de Base</span></p>
+              </div>               
+          </div>
+        </div>  
+        <header class="panel-heading">
+        Datos del ente   
+        </header>
+        <div class="panel-body bio-graph-info">
+            <h1></h1>
+            <div class="row">
+                <div class="bio-row">
+                    <p><span>ID ESSALUD</span>: <%= @ente.cod_essalud%></p>
+                </div>
+                <div class="bio-row">
+                    <p><span>Nombre </span>: <%= @ente.nombre%></p>
+                </div>
+                <div class="bio-row">
+                    <p><span>Nombre del contacto</span>: <%= @ente.contacto_nombre%></p>
+                </div>
+                <div class="bio-row">
+                    <p><span>Teléfono del contacto</span>: <%= @ente.contacto_numero%></p>
+                </div>                
+            </div>
+        </div>
+        <header class="panel-heading" style= 'text-align: center'>
+        <%= link_to edit_ente_path(@ente), :class => 'btn btn-primary' do %>
+          <i class="fa fa-pencil"> </i> Editar
+        <% end %>          
+        <%= link_to red_asistencial_entes_path(@red), :class => 'btn btn-default' do %>
+          <i class="fa fa-sitemap"> </i> Ver RA
+        <% end %>
+        <%= link_to "#", :class => 'btn btn-default' do %>
+          <i class="fa fa-h-square"> </i> Ver Base
+        <% end %>
+                
+      </header>
+    </section>
+  </div>      
+</div>

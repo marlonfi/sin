@@ -1,0 +1,19 @@
+<% provide(:title, 'Nuevo Ente') %>
+<% provide(:content_header_path,  entes_path) %>
+<% provide(:content_header_data1,
+          "<i class='fa fa-sitemap'></i> Entes".html_safe) %>
+<% provide(:content_header_data2,  'Nuevo') %>
+
+<div class="row">
+	  <div class="col-lg-10">
+        <section class="panel">
+            <header class="panel-heading">
+                Nuevo Ente
+            </header>
+            <div class="panel-body">
+            	<%= render 'form' %>    
+            </div>
+        </section>
+	  </div>
+</div>
+

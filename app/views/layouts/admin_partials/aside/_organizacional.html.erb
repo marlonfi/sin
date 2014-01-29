@@ -1,5 +1,5 @@
 <li class="sub-menu">
-    <% if  controller_name == 'red_asistencials' %>
+    <% if  controller_name == 'red_asistencials' || controller_name == 'entes'%>
     <a href="javascript:;" class="active">
     <%else%>        
     <a href="javascript:;">
@@ -17,6 +17,12 @@
         <% end %>
             <%= link_to '<i class="fa fa-sitemap"></i> Redes Asistenciales'.html_safe,  red_asistencials_path%>
         </li>
-        <li><%= link_to '<i class="fa fa-hospital-o"></i> Entes'.html_safe, '#'%></li>
+        <% if  controller_name == 'entes' %>
+        <li class="active">
+        <%else%>
+        <li>  
+        <% end %>        
+            <%= link_to '<i class="fa fa-hospital-o"></i> Entes'.html_safe, entes_path%>
+        </li>
     </ul>
 </li>

@@ -12,7 +12,11 @@ class RedAsistencialsController < ApplicationController
 
   def edit
   end
-
+  def entes
+    @red_asistencial = RedAsistencial.find(params[:red_asistencial_id])
+    @entes = @red_asistencial.entes
+    render 'ra_entes'
+  end
   def import
     if !request.xhr?
       redirect_to red_asistencials_path, alert: 'No autorizado.'
@@ -25,10 +29,10 @@ class RedAsistencialsController < ApplicationController
     importacion = Import.new(archivo: params[:archivo], tipo_clase: 'Red Asistencial',
                             descripcion: params[:descripcion], formato_org: 'ESSALUD')
     if importacion.save
-      RedAsistencial.import(importacion)
+      RedAsistencial.delay.import(importacion)
       redirect_to dashboard_path, notice:'El proceso de importacion durará unos minutos.'
     else
-      redirect_to dashboard_path, alert: 'El archivo es muy grande, o tiene un formato incorrecto.'
+      redirect_to red_asistencials_path, alert: 'El archivo es muy grande, o tiene un formato incorrecto.'
     end
   end 
 
@@ -55,10 +59,12 @@ class RedAsistencialsController < ApplicationController
 
   def destroy
     @red_asistencial.destroy
-    redirect_to red_asistencials_path, notice: "Se eliminó correctamente la red asistencial"
-    end
+    redirect_to red_asistencials_path, notice: "Se eliminó correctamente la red asistencial."
+  end
+
   def show
-  end  
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_red_asistencial

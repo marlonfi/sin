@@ -1,7 +1,16 @@
 Sinesss::Application.routes.draw do
-  resources :red_asistencials, :except => :show
+  
+  match '/entes/import', to:'entes#import', as: 'entes_import', via: 'get'
+  match '/entes/importar', to:'entes#importar', as: 'entes_importar', via: 'post'
+  resources :entes
+
+
   get '/red_asistencials/import', to:'red_asistencials#import', as: 'red_asistencial_import'
   post '/red_asistencials/importar', to:'red_asistencials#importar', as: 'red_asistencial_importar'
+  resources :red_asistencials, :except => :show do
+    match '/entes', to:'red_asistencials#entes', as: 'entes', via: 'get'
+  end
+  
 
   get "/dashboard", to: 'home#dashboard'
   # The priority is based upon order of creation: first created -> highest priority.

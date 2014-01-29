@@ -7,4 +7,7 @@ module ApplicationHelper
 			return "#{page_title} | #{base_title}"	
 		end
 	end
+	def panel_heading(element)
+		 element.nombre.to_s == '' ? element.cod_essalud : element.nombre
+		end
 end

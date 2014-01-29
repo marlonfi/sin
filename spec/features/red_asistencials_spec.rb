@@ -11,17 +11,17 @@ feature 'Redes asistenciales management' do
 	scenario "Creates a new red_asistencial" do
 		click_link 'Nueva RA'
 		expect{
-			fill_in 'ID ESSALUD', with: 'RA Callao'
+			fill_in 'red_asistencial[cod_essalud]', with: 'RA Callao'
 			click_button 'Guardar'
 		}.to change(RedAsistencial, :count).by(1)
 		expect(page).to have_content 'Se registró correctamente la red asistencial'
 		expect(page).to have_content 'RA Callao'
 	end
 
-	scenario "Creates a new red_asistencial with an existing id_essalud" do
+	scenario "Do not creates a new red_asistencial with an existing id_essalud" do
 		click_link 'Nueva RA'
 		expect{
-			fill_in 'ID ESSALUD', with: 'RA Puno'
+			fill_in 'red_asistencial[cod_essalud]', with: 'RA Puno'
 			click_button 'Guardar'			
 		}.to_not change(RedAsistencial, :count)
 		expect(current_path).to eq red_asistencials_path
