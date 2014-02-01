@@ -50,7 +50,7 @@ class EntesController < ApplicationController
     importacion = Import.new(archivo: params[:archivo], tipo_clase: 'Entes',
                             descripcion: params[:descripcion], formato_org: 'ESSALUD')
     if importacion.save
-      Ente.delay.import(importacion)
+      Ente.import(importacion)
       redirect_to dashboard_path, notice:'El proceso de importacion durará unos minutos.'
     else
       redirect_to entes_path, alert: 'El archivo es muy grande, o tiene un formato incorrecto.'
