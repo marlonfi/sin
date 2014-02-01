@@ -42,7 +42,7 @@
     <%= f.label :ente_id,'Ente Perteneciente', class: 'col-lg-2 col-sm-2 control-label' %>
     <div class="col-lg-10">
       <%= collection_select(:enfermera, :ente_id, Ente.all,
-         :id, :cod_essalud, {:prompt => 'Ingresa una red'}, {class: "form-control m-bot15 s"})  %>
+         :id, :cod_essalud, {:prompt => 'Ingresa un ente'}, {class: "form-control m-bot15 s"})  %>
       <p class="help-block" id="error_notice"><%= f.object.errors[:ente_id].join(", ")%></p>
     </div>
   </div>
