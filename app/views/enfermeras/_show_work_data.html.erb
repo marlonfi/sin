@@ -1,0 +1,30 @@
+<div class="panel-body bio-graph-info">
+    <h1>Datos laborales</h1>
+    <div class="row">
+        <div class="bio-row">
+            <p><span>Cod. Planilla </span>: <%=@enfermera.cod_planilla %></p>
+        </div>
+        <div class="bio-row">
+            <p><span>Trabaja </span>: <%= @enfermera.ente.cod_essalud %></p>
+        </div>
+        <div class="bio-row">
+            <p><span>Régimen </span>: <%= @enfermera.regimen %></p>
+        </div>
+        <div class="bio-row">
+            <p><span>¿SINESSS?</span>: <%= afiliado?(@enfermera.b_sinesss).html_safe %></p>
+        </div>
+        <div class="bio-row">
+            <p><span>¿FED-CUT? </span>: <%= afiliado?(@enfermera.b_fedcut).html_safe %></p>
+        </div>
+        <div class="bio-row">
+            <p><span>¿FAMENSSALUD? </span>: <%= afiliado?(@enfermera.b_famesalud).html_safe %></p>
+        </div>
+        <div class="bio-row">
+            <p><span>Fecha inscripción al SINESSS </span>:</p>
+        </div>
+        <div class="bio-row">
+            <p><span>Fecha ingreso a ESSALUD </span>:</p>
+        </div>
+        
+    </div>
+</div>

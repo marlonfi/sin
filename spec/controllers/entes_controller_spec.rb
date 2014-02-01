@@ -3,15 +3,6 @@ require 'spec_helper'
 describe EntesController do
   describe 'GET #index' do
     context 'without adittional parameters' do
-      it "returns an array with entes" do
-        red = RedAsistencial.create(cod_essalud: 'cod1')
-        ente1 = red.entes.create(cod_essalud: 'HI Huancayo')
-        ente2 = red.entes.create(cod_essalud: 'HII Huancayo')
-        ente3 = red.entes.create(cod_essalud: 'HIII Huancayo')
-        get :index
-        expect(assigns(:entes)).to eq([ente1,ente2,ente3])
-      end
-
       it "renders the :index view" do
         get :index
         expect(response).to render_template :index
@@ -143,7 +134,7 @@ describe EntesController do
 
     it "show a success message" do
       delete :destroy, id: @ente
-      flash[:notice].should =~ /Se eliminó correctamente la red asistencial./i
+      flash[:notice].should =~ /Se eliminó correctamente el ente./i
     end
   end
 

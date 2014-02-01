@@ -29,7 +29,7 @@ feature 'Redes asistenciales management' do
 	end
 end
 
-feature "Import managment" do
+feature "Import managment RA" do
 	scenario "toggles modal for import", js: true do
 		visit red_asistencials_path
 		expect(page).to_not have_content 'Importar Redes Asistenciales'

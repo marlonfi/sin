@@ -1,0 +1,39 @@
+<aside class="profile-nav col-lg-3">
+    <section class="panel">
+        <div class="user-heading round">
+            <a href="#">
+                 <%= image_tag("logo.jpg", size: "", alt: "") %>
+            </a>
+            <h5><%=@enfermera.full_name%></h5>
+            <p><%=@enfermera.email%></p>
+        </div>
+
+        <ul class="nav nav-pills nav-stacked">
+            
+            <% if  action_name == 'show' %>
+            <li class="active">
+            <%else%>
+            <li>
+            <% end %>
+                <%= link_to '<i class="fa fa-user"></i> Datos'.html_safe, @enfermera %>
+            </li>
+
+            <% if  action_name == 'edit' %>
+            <li class="active">
+            <%else%>
+            <li>
+            <% end %>
+                <%= link_to '<i class="fa fa-pencil"></i> Editar Datos'.html_safe, edit_enfermera_path(@enfermera)%>
+            </li>
+
+            <li>
+                 <%= link_to '<i class="fa  fa-book"></i> Bitácora'.html_safe, ''%>
+            </li>
+            <li>
+                 <%= link_to '<i class="fa fa-usd"></i> Aportaciones'.html_safe, 's'%>
+            </li>
+
+        </ul>
+
+    </section>
+</aside>

@@ -1,0 +1,18 @@
+<% provide(:title, "Enfermera #{@enfermera.full_name}") %>
+<% provide(:content_header_path,  enfermeras_path) %>
+<% provide(:content_header_data1,
+          "<i class='fa fa-female'></i> Enfermeras".html_safe) %>
+<% provide(:content_header_data2,
+          "Ver Datos".html_safe) %>
+<div class="row">
+    <%= render 'show_aside'%>
+    <aside class="profile-info col-lg-9">
+        <section class="panel">
+            <div class="bio-graph-heading">
+            </div>
+            <%= render 'show_work_data'%>
+            <header class="panel-heading"></header>
+            <%= render 'show_personal_data'%>            
+        </section>       
+    </aside>
+</div>

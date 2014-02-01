@@ -1,0 +1,47 @@
+<% provide(:title, "Enfermeras de #{@ente.cod_essalud}") %>
+<% provide(:content_header_path,  entes_path) %>
+<% provide(:content_header_data1,
+          "<i class='fa fa-hospital-o'></i> Entes".html_safe) %>
+<% provide(:content_header_data2, "Enfermeras".html_safe) %>
+<% content_for :js_per_page do %>
+  <%= javascript_include_tag "datatables_ente_enfermeras", "data-turbolinks-track" => true %>
+<% end %>
+<% content_for :css_per_page do %>
+  <%= stylesheet_link_tag "datatables", media: "all", "data-turbolinks-track" => true %>
+<% end %>
+<%= render 'ente_enfermeras_estadisticas'%>
+<div class="row">
+  <div class="col-lg-12">
+    <section class="panel">
+      <header class="panel-heading">
+        <%= @ente.cod_essalud%> - <%= @ente.red_asistencial.cod_essalud%>
+      </header>
+      <div class="panel-body">
+        <div class="adv-table">
+          <table  class="display table table-bordered table-striped" id="ente_enfermeras"
+                  data-source='<%= ente_enfermeras_path(@ente, format: "json")%>'>
+            <thead>
+              <tr>
+                <th><i class="fa fa-bullhorn"></i> COD PLANILLA</th>
+                <th><i class=" fa fa-user"></i> APELLIDOS Y NOMBRES</th> 
+                <th><i class=" fa fa-star"></i> ¿SINESSS?</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>          
+            </tbody>
+            <tfoot>
+              <tr>
+                <th><i class="fa fa-bullhorn"></i> COD PLANILLA</th>
+                <th><i class=" fa fa-user"></i> APELLIDOS Y NOMBRES</th> 
+                <th><i class=" fa fa-star"></i> ¿SINESSS?</th>
+                <th></th>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+
+    </section>
+  </div>
+</div>

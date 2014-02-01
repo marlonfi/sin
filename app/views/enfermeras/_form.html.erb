@@ -1,0 +1,105 @@
+<%= form_for @enfermera, :html => {:class => 'form-horizontal'}  do |f| %>
+  <div class="form-group">
+    <%= f.label :cod_planilla, 'Cod. Planilla', class: 'col-lg-2 col-sm-2 control-label' %>
+    <div class="col-lg-10">
+      <%= f.text_field :cod_planilla, class: 'form-control',
+                       id: 'disabledInput', disabled: action_name == 'edit'  %>
+      <p class="help-block" id="error_notice"><%= f.object.errors[:cod_planilla].join(", ")%></p>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :apellido_paterno,'Ap. Paterno', class: 'col-lg-2 col-sm-2 control-label' %>
+    <div class="col-lg-10">
+      <%= f.text_field :apellido_paterno, class: 'form-control' %>
+      <p class="help-block" id="error_notice"><%= f.object.errors[:apellido_paterno].join(", ")%></p>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :apellido_materno,'Ap. Materno', class: 'col-lg-2 col-sm-2 control-label' %>
+    <div class="col-lg-10">
+      <%= f.text_field :apellido_materno, class: 'form-control' %>
+      <p class="help-block" id="error_notice"><%= f.object.errors[:apellido_materno].join(", ")%></p>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :nombres, class: 'col-lg-2 col-sm-2 control-label' %>
+    <div class="col-lg-10">
+      <%= f.text_field :nombres, class: 'form-control' %>
+      <p class="help-block" id="error_notice"><%= f.object.errors[:nombres].join(", ")%></p>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :ente_id,'Ente Perteneciente', class: 'col-lg-2 col-sm-2 control-label' %>
+    <div class="col-lg-10">
+      <%= collection_select(:enfermera, :ente_id, Ente.all,
+         :id, :cod_essalud, {:prompt => 'Ingresa una red'}, {class: "form-control m-bot15 s"})  %>
+      <p class="help-block" id="error_notice"><%= f.object.errors[:ente_id].join(", ")%></p>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :email, class: 'col-lg-2 col-sm-2 control-label' %>
+    <div class="col-lg-10">
+      <%= f.text_field :email, class: 'form-control' %>
+      <p class="help-block" id="error_notice"><%= f.object.errors[:email].join(", ")%></p>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :regimen, 'Régimen', class: 'col-lg-2 col-sm-2 control-label' %>
+    <div class="col-lg-10">
+      <%= f.select :regimen, ['CONTRATADO', 'CAS', 'NOMBRADO'], {:prompt => 'Selecciona'}, {class: "form-control m-bot15 s"}  %>
+      <p class="help-block" id="error_notice"><%= f.object.errors[:regimen].join(", ")%></p>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :b_sinesss,'¿SINESSS?', class: 'col-lg-2 col-sm-2 control-label' %>
+    <div class="col-lg-10">
+      <label class="radio inline">
+          <%= f.radio_button :b_sinesss, true,  class: 'multiple_classes'%> Agremiado
+        </label> 
+        <label class="radio inline"> 
+          <%= f.radio_button :b_sinesss, false,  class: 'multiple_classes'%> No agremiado
+        </label>
+      <p class="help-block" id="error_notice"><%= f.object.errors[:b_sinesss].join(", ")%></p>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :b_fedcut,'¿FED_CUT?', class: 'col-lg-2 col-sm-2 control-label' %>
+    <div class="col-lg-10">
+      <label class="radio inline">
+          <%= f.radio_button :b_fedcut, true,  class: 'multiple_classes'%> Agremiado
+        </label> 
+        <label class="radio inline"> 
+          <%= f.radio_button :b_fedcut, false,  class: 'multiple_classes'%> No agremiado
+        </label>
+      <p class="help-block" id="error_notice"><%= f.object.errors[:b_fedcut].join(", ")%></p>
+    </div>
+  </div>
+
+    <div class="form-group">
+    <%= f.label :b_famesalud,'¿FAMENSSALUD?', class: 'col-lg-2 col-sm-2 control-label' %>
+    <div class="col-lg-10">
+      <label class="radio inline">
+          <%= f.radio_button :b_famesalud, true,  class: 'multiple_classes'%> Agremiado
+        </label> 
+        <label class="radio inline"> 
+          <%= f.radio_button :b_famesalud, false,  class: 'multiple_classes'%> No agremiado
+        </label>
+      <p class="help-block" id="error_notice"><%= f.object.errors[:b_famesalud].join(", ")%></p>
+    </div>
+  </div>
+ <div class="form-group">
+      <div class="col-lg-offset-2 col-lg-10">
+          <%= f.submit 'Guardar', class:'btn btn-info'%>
+         
+      </div>
+  </div>
+
+<% end %>

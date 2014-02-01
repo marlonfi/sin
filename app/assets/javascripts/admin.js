@@ -12,7 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
+//= require jquery.turbolinks
 //= require js/bootstrap.min.js
 //= require js/jquery.dcjqaccordion.2.7.js
 //= require js/jquery.scrollTo.min.js

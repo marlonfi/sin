@@ -1,8 +1,14 @@
 Sinesss::Application.routes.draw do
   
+  match '/enfermeras/import_essalud', to:'enfermeras#import_essalud', as: 'enfermeras_import_essalud', via: 'get'
+  match '/enfermeras/importar_essalud', to:'enfermeras#importar_essalud', as: 'enfermeras_importar_essalud', via: 'post'
+  resources :enfermeras
+
   match '/entes/import', to:'entes#import', as: 'entes_import', via: 'get'
   match '/entes/importar', to:'entes#importar', as: 'entes_importar', via: 'post'
-  resources :entes
+  resources :entes do
+    match '/enfermeras', to:'entes#enfermeras', as: 'enfermeras', via: 'get'
+  end
 
 
   get '/red_asistencials/import', to:'red_asistencials#import', as: 'red_asistencial_import'

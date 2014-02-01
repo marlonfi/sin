@@ -38,7 +38,7 @@ feature 'Entes management' do
 	end
 end
 
-feature "Import managment" do
+feature "Import managment Ente" do
 
 	scenario "toggles modal for import", js: true do
 		visit entes_path

@@ -50,7 +50,9 @@
         <%= link_to "#", :class => 'btn btn-default' do %>
           <i class="fa fa-h-square"> </i> Ver Base
         <% end %>
-                
+        <%= link_to @ente, :class => 'btn btn-danger', method: :delete, data: { confirm: '¿Estás seguro?. Se eliminará este ente. ' } do %>
+          <i class="fa fa-trash-o"> </i> Eliminar
+        <% end %>        
       </header>
     </section>
   </div>      

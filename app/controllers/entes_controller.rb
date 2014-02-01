@@ -3,8 +3,22 @@ class EntesController < ApplicationController
   layout 'admin'
   # GET /entes
   # GET /entes.json
+
+  def enfermeras
+    if !request.xhr?
+      @ente = Ente.find(params[:ente_id])
+    end
+    respond_to do |format|
+      format.html { render 'ente_enfermeras' }
+      format.json { render json: EntesEnfermerasDatatable.new(view_context) }
+    end
+  end
+
   def index
-    @entes = Ente.includes(:red_asistencial)
+    respond_to do |format|
+      format.html
+      format.json { render json: EntesDatatable.new(view_context) }
+    end
   end
 
   # GET /entes/1
@@ -29,7 +43,8 @@ class EntesController < ApplicationController
       redirect_to red_asistencials_path, alert: 'No autorizado.'
     else
       render :layout => false
-    end    end
+    end
+  end
 
   def importar
     importacion = Import.new(archivo: params[:archivo], tipo_clase: 'Entes',
@@ -70,7 +85,7 @@ class EntesController < ApplicationController
   # DELETE /entes/1.json
   def destroy
     @ente.destroy
-    redirect_to entes_path, notice: "Se eliminó correctamente la red asistencial."
+    redirect_to entes_path, notice: "Se eliminó correctamente el ente."
   end
 
   private

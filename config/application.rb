@@ -38,5 +38,6 @@ module Sinesss
     # config.i18n.default_locale = :de
     I18n.enforce_available_locales = true
     config.assets.paths << Rails.root.join("app", "assets", "fonts")
+    
   end
 end

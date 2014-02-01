@@ -1,0 +1,30 @@
+<div class="row state-overview">
+    <div class="col-lg-3 col-sm-6">
+        <section class="panel">
+            <div class="symbol terques">
+                <i class="fa fa-thumbs-o-up"></i>
+            </div>
+            <div class="value">
+                <h1 class="count">
+                    <%= Enfermera.afiliados_sinesss_por_ente(@ente.id).count%>
+                </h1>
+                <p>AGREMIADOS SINESSS</p>
+            </div>
+        </section>
+    </div>
+
+    <div class="col-lg-3 col-sm-6">
+        <section class="panel">
+            <div class="symbol red">
+                <i class="fa fa-thumbs-o-down"></i>
+            </div>
+            <div class="value">
+                <h1 class="count">
+                    <%= Enfermera.no_afiliados_sinesss_por_ente(@ente.id).count%>
+                </h1>
+                <p>NO AGREMIADOS SINESSS</p>
+            </div>
+        </section>
+    </div>
+    
+</div> 
