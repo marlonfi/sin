@@ -13,15 +13,15 @@
 //= require others/jquery.dataTables.js
 //= require others/DT_bootstrap.js
 $(function() {
-  $('#entes').dataTable( {
-      "aaSorting": [[ 0, "asc" ]],
+  $('#miembros').dataTable( {
+      "aaSorting": [[ 1, "asc" ]],
       "iDisplayLength": 10,
       "bServerSide": true,
       "aoColumnDefs": [
-          { 'bSortable': false, 'aTargets': [1,2,3,4,5] }
+          { 'bSortable': false, 'aTargets': [0,2,5] }
        ],
       "bDestroy": true,
-      "sAjaxSource": $('#ente_enfermeras').data('source'),
+      "sAjaxSource": $('#miembros').data('source'),
       "oLanguage": {
 								    "sProcessing":     "Procesando...",
 								    "sLengthMenu":     "Mostrar _MENU_ registros",

@@ -1,0 +1,51 @@
+<% provide(:title, "Miembros de #{@basis.codigo_base}") %>
+<% provide(:content_header_path,  bases_path) %>
+<% provide(:content_header_data1,
+          "<i class='fa fa-h-square'></i> Bases".html_safe) %>
+<% provide(:content_header_data2, "Miembros de #{@basis.codigo_base}") %>
+
+<% content_for :js_per_page do %>
+  <%= javascript_include_tag "datatables_bases_miembros" %>
+<% end %>
+<% content_for :css_per_page do %>
+  <%= stylesheet_link_tag "datatables", media: "all"%>
+<% end %>
+
+<div class="row">
+  <div class="col-lg-12">
+    <section class="panel">
+      <header class="panel-heading">
+        Listado de miembros de la Base <%= @basis.codigo_base %>
+      </header>
+      <div class="panel-body">
+        <div class="adv-table">
+          <table  class="display table table-bordered table-striped" id="miembros"
+                  data-source="<%= basis_miembros_path(format: "json") %>">
+            <thead>
+              <tr>
+                <th><i class="fa fa-bullhorn"></i> COD PLANILLA</th>
+                <th><i class=" fa fa-user"></i> APELLIDOS Y NOMBRES</th> 
+                <th><i class=" fa fa-hospital-o"></i> Ente</th>
+                <th><i class=" fa fa-star"></i> ¿FEDCUT?</th>
+                <th><i class=" fa fa-star"></i> ¿FAMENSSALUD?</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>                  
+            </tbody>
+            <tfoot>
+              <tr>
+                <th><i class="fa fa-bullhorn"></i> COD PLANILLA</th>
+                <th><i class=" fa fa-user"></i> APELLIDOS Y NOMBRES</th> 
+                <th><i class=" fa fa-hospital-o"></i> Ente</th>
+                <th><i class=" fa fa-star"></i> ¿FEDCUT?</th>
+                <th><i class=" fa fa-star"></i> ¿FAMENSSALUD?</th>
+                <th></th>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

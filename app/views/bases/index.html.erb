@@ -1,0 +1,60 @@
+<% provide(:title, 'Listado de Bases') %>
+<% provide(:content_header_path,  bases_path) %>
+<% provide(:content_header_data1,
+          "<i class='fa fa-h-square'></i> Bases".html_safe) %>
+
+<% content_for :js_per_page do %>
+  <%= javascript_include_tag "import_base"%>
+  <%= javascript_include_tag "datatables_bases" %>
+<% end %>
+<% content_for :css_per_page do %>
+  <%= stylesheet_link_tag "datatables", media: "all" %>
+<% end %>
+
+<div class="row">
+  <div class="col-lg-12">
+    <section class="panel">
+      <header class="panel-heading">
+        Listado de bases
+      </header>
+      <div class="panel-body">
+        <div class="adv-table">
+          <table  class="display table table-bordered table-striped" id="bases",
+                  data-source='<%= bases_path(format: "json")%>'>
+            <thead>
+              <tr>
+                <th><i class="fa fa-bullhorn"></i> Cod. Base</th>
+                <th><i class=" fa fa-h-square"></i> Nombre Base</th>
+                <th><i class="fa fa-sitemap"></i> Sec. General</th>
+                <th># Miembros</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+            <tfoot>
+              <tr>
+                <th><i class="fa fa-bullhorn"></i> Cod. Base</th>
+                <th><i class=" fa fa-h-square"></i> Nombre Base</th>
+                <th><i class="fa fa-sitemap"></i> Sec. General</th>
+                <th># Miembros</th>
+                <th>Acciones</th>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+      <header class="panel-heading" style= 'text-align: center'>
+        <%= link_to new_basis_path, :class => 'btn btn-success' do %>
+          <i class="fa fa-h-square"> </i> Nueva base
+        <% end %>
+        <a class="btn btn-warning" data-toggle="modal" href="#myImportBaseModal", id='btnImportBase'>
+            <i class="fa fa-upload"> </i> Importar
+        </a>         
+      </header>
+    </section>
+  </div>
+</div>
+<%= render 'index_import_bases_modal' %>
+
+

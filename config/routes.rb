@@ -1,5 +1,10 @@
 Sinesss::Application.routes.draw do
-  
+  match '/bases/import', to:'bases#import', as: 'bases_import', via: 'get'
+  match '/bases/importar', to:'bases#importar', as: 'bases_importar', via: 'post'
+  resources :bases do
+    match '/miembros', to:'bases#miembros', as: 'miembros', via: 'get'
+  end
+
   match '/enfermeras/import_essalud', to:'enfermeras#import_essalud', as: 'enfermeras_import_essalud', via: 'get'
   match '/enfermeras/importar_essalud', to:'enfermeras#importar_essalud', as: 'enfermeras_importar_essalud', via: 'post'
   resources :enfermeras

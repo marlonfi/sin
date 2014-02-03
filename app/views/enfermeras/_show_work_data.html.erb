@@ -5,7 +5,7 @@
             <p><span>Cod. Planilla </span>: <%=@enfermera.cod_planilla %></p>
         </div>
         <div class="bio-row">
-            <p><span>Trabaja </span>: <%= @enfermera.ente.cod_essalud %></p>
+            <p><span>Trabaja </span>: <%= link_to @enfermera.ente.cod_essalud, ente_path(@enfermera.ente) %></p>
         </div>
         <div class="bio-row">
             <p><span>Régimen </span>: <%= @enfermera.regimen %></p>

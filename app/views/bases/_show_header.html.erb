@@ -1,0 +1,40 @@
+<section class="panel">
+    <header class="panel-heading summary-head">
+        <h4><%= @basis.codigo_base %></h4>
+        <p>BASE</p>
+    </header>
+    <div class="panel-body">
+        <ul class="summary-list">
+            <li>
+                <%= link_to basis_miembros_path(@basis) do %>
+                  <i class=" fa fa-female text-primary"></i>
+                    <%= @basis.enfermeras.total_sinesss.count %> miembros
+                <% end %>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="fa fa-hospital-o text-info"></i>
+                    <%= @basis.entes.count %> Entes
+                </a>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="fa fa-picture-o text-muted"></i>
+                    #######
+                </a>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="fa fa-tags text-success"></i>
+                    #######
+                </a>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="fa fa-microphone text-danger"></i>
+                    #######
+                </a>
+            </li>
+        </ul>
+        </div>
+    </section>

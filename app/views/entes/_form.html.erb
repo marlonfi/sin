@@ -25,23 +25,6 @@
   </div>
 
   <div class="form-group">
-    <%= f.label :red_asistencial_id,'Red Asistencial', class: 'col-lg-2 col-sm-2 control-label' %>
-    <div class="col-lg-10">
-      <%= collection_select(:ente, :red_asistencial_id, @redes,
-         :id, :cod_essalud, {:prompt => 'Ingresa una red'}, {class: "form-control m-bot15 s"})  %>
-      <p class="help-block" id="error_notice"><%= f.object.errors[:red_asistencial_id].join(", ")%></p>
-    </div>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :base_id,'Base', class: 'col-lg-2 col-sm-2 control-label' %>
-    <div class="col-lg-10">
-      <%= f.text_field :base_id, class: 'form-control' %>
-      <p class="help-block" id="error_notice"><%= f.object.errors[:base_id].join(", ")%></p>
-    </div>
-  </div>
-  
-  <div class="form-group">
     <%= f.label :contacto_nombre,'Contacto', class: 'col-lg-2 col-sm-2 control-label'  %>
     <div class="col-lg-10">
       <%= f.text_field :contacto_nombre, class: 'form-control',
@@ -59,6 +42,23 @@
     </div>
   </div>
 
+  <div class="form-group">
+    <%= f.label :red_asistencial_id,'Red Asistencial', class: 'col-lg-2 col-sm-2 control-label' %>
+    <div class="col-lg-10">
+      <%= collection_select(:ente, :red_asistencial_id, @redes,
+         :id, :cod_essalud, {:prompt => 'Ingresa una red'}, {class: "form-control m-bot15 s"})  %>
+      <p class="help-block" id="error_notice"><%= f.object.errors[:red_asistencial_id].join(", ")%></p>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :base_id,'Base', class: 'col-lg-2 col-sm-2 control-label' %>
+    <div class="col-lg-10">
+      <%= collection_select(:ente, :base_id, @bases,
+         :id, :codigo_base, {:prompt => 'Sin Base'}, {class: "form-control m-bot15 s"})  %>
+      <p class="help-block" id="error_notice"><%= f.object.errors[:base_id].join(", ")%></p>
+    </div>
+  </div>
+  
   <div class="form-group">
     <div class="col-lg-offset-2 col-lg-10">
       <%= f.submit 'Guardar', class:'btn btn-success' %>

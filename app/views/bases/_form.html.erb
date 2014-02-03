@@ -1,0 +1,25 @@
+<%= form_for @basis, :html => {:class => 'form-horizontal'} do |f| %>
+  
+  <div class="form-group">
+    <%= f.label :codigo_base, 'Cod. Base', class: 'col-lg-2 col-sm-2 control-label' %>
+    <div class="col-lg-10">
+      <%= f.text_field :codigo_base, class: 'form-control' %>
+      <p class="help-block" id="error_notice"><%= f.object.errors[:codigo_base].join(", ")%></p>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :nombre_base , class: 'col-lg-2 col-sm-2 control-label' %>
+    <div class="col-lg-10">
+      <%= f.text_field :nombre_base, class: 'form-control' %>
+      <p class="help-block" id="error_notice"><%= f.object.errors[:nombre_base].join(", ")%></p>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.submit 'Guardar', class:'btn btn-success' %>
+    </div> 
+  </div>
+<% end %>
+

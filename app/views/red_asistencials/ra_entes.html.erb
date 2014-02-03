@@ -33,7 +33,7 @@
               <tr class="gradeX">
                 <td><%= ente.cod_essalud %></td>
                 <td><%= ente.nombre %></td>
-                <td><%= ente.base_id %></td>
+                <td><%= mostrar_base(ente) %></td>
                 <td> <%= link_to(ente_enfermeras_path(ente), :class => '') do %>
                       Ver <span class="badge bg-primary"><%= ente.enfermeras.count %></span> enfermeras
                     <% end %></td>

@@ -14,10 +14,10 @@
 //= require others/DT_bootstrap.js
 $(function() {
   $('#ra_entes').dataTable( {
-      "aaSorting": [[ 4, "desc" ]],
+      "aaSorting": [[ 2, "desc" ]],
       "iDisplayLength": 25,
       "aoColumnDefs": [
-          { 'bSortable': false, 'aTargets': [4] }
+          { 'bSortable': false, 'aTargets': [3,4] }
        ],
       "oLanguage": {
 								    "sProcessing":     "Procesando...",

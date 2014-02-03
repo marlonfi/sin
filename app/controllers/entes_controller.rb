@@ -30,12 +30,14 @@ class EntesController < ApplicationController
   # GET /entes/new
   def new
     @redes = RedAsistencial.all
+    @bases = Base.all
     @ente = Ente.new
   end
 
   # GET /entes/1/edit
   def edit
     @redes = RedAsistencial.all
+    @bases = Base.all
   end
 
   def import
@@ -50,7 +52,7 @@ class EntesController < ApplicationController
     importacion = Import.new(archivo: params[:archivo], tipo_clase: 'Entes',
                             descripcion: params[:descripcion], formato_org: 'ESSALUD')
     if importacion.save
-      Ente.import(importacion)
+      Ente.delay.import(importacion)
       redirect_to dashboard_path, notice:'El proceso de importacion durará unos minutos.'
     else
       redirect_to entes_path, alert: 'El archivo es muy grande, o tiene un formato incorrecto.'
@@ -64,6 +66,7 @@ class EntesController < ApplicationController
       redirect_to @ente, notice: 'Se registró correctamente el ente.'
     else
       @redes = RedAsistencial.all
+      @bases = Base.all
       flash.now[:alert] = 'Hubo un problema. No se registró el ente.'
       render action: 'new'
     end
@@ -76,6 +79,7 @@ class EntesController < ApplicationController
       redirect_to @ente, notice: 'Se actualizó correctamente el ente.'
     else
       @redes = RedAsistencial.all
+      @bases = Base.all
       flash.now[:alert] = 'Hubo un problema. No se pudo actualizar los datos.'
       render action: 'edit'
     end

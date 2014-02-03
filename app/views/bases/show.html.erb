@@ -1,0 +1,13 @@
+<% provide(:title, "Base #{@basis.codigo_base}") %>
+<% provide(:content_header_path,  bases_path) %>
+<% provide(:content_header_data1,
+          "<i class='fa fa-h-square'></i> Bases".html_safe) %>
+<% provide(:content_header_data2,  "#{@basis.codigo_base}") %>
+
+
+<div class="row">
+  <div class="col-lg-12">
+      <%= render 'show_header'%>
+      <%= render 'show_content'%>   
+  </div>
+</div>

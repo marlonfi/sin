@@ -1,5 +1,6 @@
 class Ente < ActiveRecord::Base
 	belongs_to :red_asistencial
+	belongs_to :base
 	has_many :enfermeras
 	validates_presence_of :red_asistencial
 	validates_presence_of :cod_essalud

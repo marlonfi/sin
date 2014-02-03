@@ -1,0 +1,19 @@
+<% provide(:title, 'Editar Base') %>
+<% provide(:content_header_path,  bases_path) %>
+<% provide(:content_header_data1,
+          "<i class='fa fa-h-square'></i> Bases".html_safe) %>
+<% provide(:content_header_data2,  'Editar Base') %>
+
+<div class="row">
+	  <div class="col-lg-10">
+        <section class="panel">
+            <header class="panel-heading">
+                Editar Base
+            </header>
+            <div class="panel-body">
+            	<%= render 'form' %>    
+            </div>
+        </section>
+	  </div>
+</div>
+

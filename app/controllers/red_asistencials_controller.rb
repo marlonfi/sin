@@ -29,7 +29,7 @@ class RedAsistencialsController < ApplicationController
     importacion = Import.new(archivo: params[:archivo], tipo_clase: 'Red Asistencial',
                             descripcion: params[:descripcion], formato_org: 'ESSALUD')
     if importacion.save
-      RedAsistencial.import(importacion)
+      RedAsistencial.delay.import(importacion)
       redirect_to dashboard_path, notice:'El proceso de importacion durará unos minutos.'
     else
       redirect_to red_asistencials_path, alert: 'El archivo es muy grande, o tiene un formato incorrecto.'

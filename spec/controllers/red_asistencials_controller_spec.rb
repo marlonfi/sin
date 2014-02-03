@@ -126,13 +126,13 @@ describe RedAsistencialsController do
       @red = create(:red_asistencial)
     end
     
-    it "deletes the contact" do
+    it "deletes the RA" do
       expect{
         delete :destroy, id: @red
       }.to change(RedAsistencial,:count).by(-1)
     end
     
-    it "redirects to contacts#index" do
+    it "redirects to ra#index" do
       delete :destroy, id: @red
       expect(response).to redirect_to red_asistencials_path
     end

@@ -1,5 +1,5 @@
 class EntesDatatable
-  delegate :params, :h, :link_to, :number_to_currency, :sinesss? , to: :@view
+  delegate :params, :h, :link_to, :number_to_currency, :sinesss?, :mostrar_base , to: :@view
   #include Rails.application.routes.url_helpers
   
 
@@ -25,7 +25,7 @@ private
         ente.cod_essalud,
         ente.nombre,
         link_to(ente.red_asistencial.cod_essalud, "/red_asistencials/#{ente.red_asistencial.id}/entes"),
-        'COD-Base',
+        mostrar_base(ente),
         link_to("Ver <span class='badge bg-primary'>#{ente.enfermeras.count}</span> enfermeras".html_safe,
                "/entes/#{ente.id}/enfermeras"),
         link_to("<i class='fa fa-eye'></i> Ver   ".html_safe,

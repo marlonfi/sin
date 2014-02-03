@@ -12,11 +12,17 @@
         <div class="panel-body bio-graph-info">     
           <div class="row">
               <div class="bio-row">
-                  <p><span>RED</span><span class="label label-info">
+                  <p><span>RED</span><span class="label label-info" style='width:150px'>
                     <%= @red.cod_essalud%></span></p>
               </div>
               <div class="bio-row">
-                  <p><span>BASE</span><span class="label label-info">Nombre de Base</span></p>
+                  <p><span>BASE</span><span class="label label-warning" style='width:150px'>
+                    <%if @ente.base%>
+                      <%= link_to mostrar_base(@ente), basis_path(@ente.base)%>
+                    <%else%>
+                      <%= mostrar_base(@ente)%>
+                    <%end%>
+                  </span></p>
               </div>               
           </div>
         </div>  
@@ -47,8 +53,8 @@
         <%= link_to red_asistencial_entes_path(@red), :class => 'btn btn-default' do %>
           <i class="fa fa-sitemap"> </i> Ver RA
         <% end %>
-        <%= link_to "#", :class => 'btn btn-default' do %>
-          <i class="fa fa-h-square"> </i> Ver Base
+        <%= link_to ente_enfermeras_path(@ente), :class => 'btn btn-default' do %>
+          <i class="fa fa-female"> </i> Ver Enfermeras
         <% end %>
         <%= link_to @ente, :class => 'btn btn-danger', method: :delete, data: { confirm: '¿Estás seguro?. Se eliminará este ente. ' } do %>
           <i class="fa fa-trash-o"> </i> Eliminar
