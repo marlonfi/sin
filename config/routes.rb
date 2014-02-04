@@ -1,8 +1,15 @@
 Sinesss::Application.routes.draw do
   match '/bases/import', to:'bases#import', as: 'bases_import', via: 'get'
   match '/bases/importar', to:'bases#importar', as: 'bases_importar', via: 'post'
+  match '/bases/import_juntas', to:'bases#import_juntas', as: 'bases_import_juntas', via: 'get'
+  match '/bases/importar_juntas', to:'bases#importar_juntas', as: 'bases_importar_juntas', via: 'post'
   resources :bases do
     match '/miembros', to:'bases#miembros', as: 'miembros', via: 'get'
+    match '/new_junta', to:'juntas#new', as: 'new_junta', via: 'get'
+    match '/crear_junta', to:'juntas#create', as: 'create_junta', via: 'post'
+    match '/edit_junta/:junta_id', to:'juntas#edit', as: 'edit_junta', via: 'get'
+    match '/editar_junta/:junta_id', to:'juntas#update', as: 'editar_junta', via: 'patch'
+    match '/destruir_junta/:junta_id', to:'juntas#destroy', as: 'destroy_junta', via: 'delete'
   end
 
   match '/enfermeras/import_essalud', to:'enfermeras#import_essalud', as: 'enfermeras_import_essalud', via: 'get'
@@ -28,7 +35,7 @@ Sinesss::Application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  root :to => redirect("/dashboard")
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

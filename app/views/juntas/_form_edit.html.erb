@@ -1,0 +1,86 @@
+<% content_for :js_per_page do %>
+  <%= javascript_include_tag "js/bootstrap-datepicker.js"%>
+  <%= javascript_include_tag "js/advanced-form-components.js"%>   
+<% end %>
+<% content_for :css_per_page do %>
+  <%= stylesheet_link_tag "css/datepicker.css", media: "all" %>
+<% end %>
+
+<%= form_for @junta, url: basis_editar_junta_path, :html => {:class => 'form-horizontal'}  do |f| %>
+
+  <div class="form-group">
+    <%= f.label :secretaria_general,'Secretaria General',
+                 class: 'col-lg-2 col-sm-2 control-label' %>
+    <div class="col-lg-10">
+      <%= f.text_field :secretaria_general, class: 'form-control' %>
+      <p class="help-block" id="error_notice"></p>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :email, class: 'col-lg-2 col-sm-2 control-label' %>
+    <div class="col-lg-10">
+      <%= f.text_field :email, class: 'form-control' %>
+      <p class="help-block" id="error_notice"></p>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :numero_celular, class: 'col-lg-2 col-sm-2 control-label' %>
+    <div class="col-lg-10">
+      <%= f.text_field :numero_celular, class: 'form-control' %>
+      <p class="help-block" id="error_notice"></p>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :status, 'Status', class: 'col-lg-2 col-sm-2 control-label' %>
+    <div class="col-lg-10">
+      <%= f.select :status, ['VIGENTE', 'FINALIZADO'], {:prompt => 'Selecciona'}, {class: "form-control m-bot15 s"}  %>
+      <p class="help-block" id="error_notice"></p>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :inicio_gestion, class: 'col-lg-2 col-sm-2 control-label' %>
+    <div class="col-md-3 col-xs-11">
+      <div data-date-viewmode="years" data-date-format="dd-mm-yyyy" data-date=""  class="input-append date dpYears">
+          <%= f.text_field :inicio_gestion, class: 'form-control', :value => fecha_con_formato(f.object.inicio_gestion) %>
+          <span class="input-group-btn add-on">
+            <button class="btn btn-danger" type="button"><i class="fa fa-calendar"></i></button>
+          </span>
+      </div>
+      <span class="help-block">Selecciona fecha</span>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :fin_gestion, class: 'col-lg-2 col-sm-2 control-label' %>
+    <div class="col-md-3 col-xs-11">
+      <div data-date-viewmode="years" data-date-format="dd-mm-yyyy" data-date=""
+           class="input-append date dpYears">
+          <%= f.text_field :fin_gestion, class: 'form-control', :value => fecha_con_formato(f.object.fin_gestion) %>
+          <span class="input-group-btn add-on">
+            <button class="btn btn-danger" type="button"><i class="fa fa-calendar"></i></button>
+          </span>
+      </div>
+      <span class="help-block">Selecciona fecha</span>
+    </div>
+  </div>
+ 
+
+  <div class="form-group">
+    <%= f.label :descripcion, 'Otros', class: 'col-lg-2 col-sm-2 control-label' %>
+    <div class="col-lg-10">
+      <%= f.text_area :descripcion, class: 'form-control' %>
+      <p class="help-block" id="error_notice"></p>
+    </div>
+  </div>
+  
+  <div class="form-group">
+      <div class="col-lg-offset-2 col-lg-10">
+          <%= f.submit 'Guardar', class:'btn btn-info'%>         
+      </div>
+  </div>
+
+<% end %>

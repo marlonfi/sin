@@ -27,7 +27,7 @@ class EnfermerasController < ApplicationController
   #get
   def import_essalud
     if !request.xhr?
-      redirect_to red_asistencials_path, alert: 'No autorizado.'
+      redirect_to enfermeras_path, alert: 'No autorizado.'
     else
       render :layout => false
     end
@@ -40,7 +40,7 @@ class EnfermerasController < ApplicationController
       Enfermera.import_essalud(importacion)
       redirect_to dashboard_path, notice:'El proceso de importacion durará unos minutos.'
     else
-      redirect_to entes_path, alert: 'El archivo es muy grande, o tiene un formato incorrecto.'
+      redirect_to enfermeras_path, alert: 'El archivo es muy grande, o tiene un formato incorrecto.'
     end
   end
   # POST /enfermeras

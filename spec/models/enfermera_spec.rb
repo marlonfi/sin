@@ -74,5 +74,6 @@ describe Enfermera do
         Enfermera.import_essalud(archivo)
       }.to change(Enfermera, :count).by(51)
   end
-   it 'creates a bitacora when a enfermera changes sinesss' 					
+   it 'creates a bitacora when a enfermera changes sinesss'
+   it 'changes the full name before validate' 					
 end

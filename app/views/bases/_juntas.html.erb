@@ -1,0 +1,42 @@
+<section class="panel">
+<header class="panel-heading">
+  Listado de Juntas de esta Base
+</header>
+<div class="panel-body">
+  <table class="table table-striped table-advance table-hover">
+    <thead>
+      <tr>
+        <th> Secretaria General</th>
+        <th> Teléfono</th>
+        <th> Email</th>
+        <th> Status</th>
+        <th> Inicio gestión</th>
+        <th> Fin gestión</th>
+        <th> Otros</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @juntas.each do |junta|%>
+      <tr>
+        <td><%= junta.secretaria_general %></td>
+        <td><%= junta.numero_celular %></td>
+        <td><%= junta.email%></td>
+        <td><%= junta.status%></td>
+        <td><%= fecha_con_formato junta.inicio_gestion %></td>
+        <td><%= fecha_con_formato junta.fin_gestion %></td>
+        <td><%= junta.descripcion %></td>
+        <td>
+          <%= link_to(basis_edit_junta_path(@basis.id, junta.id), :class => 'btn btn-primary btn-xs') do %>
+            <i class="fa fa-pencil"> </i>
+          <% end %>
+          <%= link_to basis_destroy_junta_path(@basis.id,junta.id), :class => 'btn btn-danger btn-xs', method: :delete, data: { confirm: '¿Estás seguro?. Se eliminará una Junta Directiva. ' } do %>
+            <i class="fa fa-trash-o"> </i>
+          <% end %>
+        </td>          
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+</section>

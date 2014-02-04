@@ -25,6 +25,7 @@ gem 'activerecord-session_store', github: 'rails/activerecord-session_store'
 gem 'delayed_job_active_record'
 gem 'will_paginate', '~> 3.0'
 gem 'jquery-turbolinks'
+gem 'validates_timeliness', '~> 3.0'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 

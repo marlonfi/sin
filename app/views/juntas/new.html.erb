@@ -1,0 +1,19 @@
+<% provide(:title, "Nueva Junta #{@basis.codigo_base}") %>
+<% provide(:content_header_path,  bases_path) %>
+<% provide(:content_header_data1,
+          "<i class='fa fa-h-square'></i> Bases".html_safe) %>
+<% provide(:content_header_data2,
+          "Nueva Junta Directiva".html_safe) %>
+
+<div class="row">
+    <aside class="profile-info col-lg-9">
+        <section>
+            <div class="panel panel-primary">
+                <div class="panel-heading"> Registro de nueva junta directiva para Base: <%= @basis.codigo_base%></div>
+                <div class="panel-body">
+                 		<%= render 'form'%>    
+                </div>
+            </div>
+        </section>       
+    </aside>
+</div>

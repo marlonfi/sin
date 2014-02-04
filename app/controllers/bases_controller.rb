@@ -3,7 +3,24 @@ class BasesController < ApplicationController
   layout 'admin'
   # GET /bases
   # GET /bases.json
-
+  def import_juntas
+    if !request.xhr?
+      redirect_to bases_path, alert: 'No autorizado.'
+    else
+      render :layout => false
+    end
+  end
+  def importar_juntas
+     importacion = Import.new(archivo: params[:archivo], tipo_clase: 'Juntas',
+                            descripcion: params[:descripcion], formato_org: 'SINESSS')
+    if importacion.save
+      Base.import_juntas(importacion)
+      redirect_to dashboard_path, notice:'El proceso de importacion durará unos minutos.'
+    else
+      redirect_to bases_path, alert: 'El archivo es muy grande, o tiene un formato incorrecto.'
+    end
+  end
+  
   def miembros
     if !request.xhr?
       @basis = Base.find(params[:basis_id])
@@ -23,7 +40,7 @@ class BasesController < ApplicationController
 
   def import
     if !request.xhr?
-      redirect_to entes_path, alert: 'No autorizado.'
+      redirect_to bases_path, alert: 'No autorizado.'
     else
       render :layout => false
     end
@@ -41,6 +58,8 @@ class BasesController < ApplicationController
   # GET /bases/1
   # GET /bases/1.json
   def show
+    @junta = @basis.juntas.where(status:'VIGENTE').last
+    @juntas = @basis.juntas
   end
 
   # GET /bases/new

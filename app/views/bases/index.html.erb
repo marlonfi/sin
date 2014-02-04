@@ -25,9 +25,9 @@
               <tr>
                 <th><i class="fa fa-bullhorn"></i> Cod. Base</th>
                 <th><i class=" fa fa-h-square"></i> Nombre Base</th>
-                <th><i class="fa fa-sitemap"></i> Sec. General</th>
-                <th># Miembros</th>
-                <th>Acciones</th>
+                <th><i class="fa fa-user"></i> Sec. General</th>
+                <th><i class="fa fa-female"> Miembros</th>
+                <th>Links</th>
               </tr>
             </thead>
             <tbody>
@@ -36,9 +36,9 @@
               <tr>
                 <th><i class="fa fa-bullhorn"></i> Cod. Base</th>
                 <th><i class=" fa fa-h-square"></i> Nombre Base</th>
-                <th><i class="fa fa-sitemap"></i> Sec. General</th>
-                <th># Miembros</th>
-                <th>Acciones</th>
+                <th><i class="fa fa-user"></i> Sec. General</th>
+                <th><i class="fa fa-female"> Miembros</th>
+                <th>Links</th>
               </tr>
             </tfoot>
           </table>
@@ -50,11 +50,15 @@
         <% end %>
         <a class="btn btn-warning" data-toggle="modal" href="#myImportBaseModal", id='btnImportBase'>
             <i class="fa fa-upload"> </i> Importar
-        </a>         
+        </a>
+
+        <a class="btn btn-primary" data-toggle="modal" href="#myImportJuntasModal", id='btnImportJuntas'>
+            <i class="fa fa-upload"> </i> Imp. Juntas Directivas
+        </a>          
       </header>
     </section>
   </div>
 </div>
 <%= render 'index_import_bases_modal' %>
-
+<%= render 'index_import_juntas_modal' %>
 

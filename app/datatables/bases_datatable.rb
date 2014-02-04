@@ -21,14 +21,17 @@ private
 
   def data
     bases.map do |base|
+      if base.juntas.where(status:'VIGENTE').last
+        secretaria = base.juntas.where(status:'VIGENTE').last.secretaria_general
+      end
       [
         base.codigo_base,
         base.nombre_base,
-        'Secretaria',
+        secretaria,
         link_to("Ver <span class='badge bg-primary'>#{base.enfermeras.total_sinesss.count}</span> miembros".html_safe,
                "/bases/#{base.id}/miembros"),
-        link_to("<i class='fa fa-eye'></i> Ver Base".html_safe, "bases/#{base.id}", :class => 'btn btn-success btn-xs' )+ " " +
-        link_to("<i class='fa fa-pencil'></i> Editar".html_safe,
+        link_to("<i class='fa fa-eye'></i>".html_safe, "bases/#{base.id}", :class => 'btn btn-success btn-xs' )+ " " +
+        link_to("<i class='fa fa-pencil'></i>".html_safe,
                 "/bases/#{base.id}/edit", :class => 'btn btn-primary btn-xs' ),
       ]
     end

@@ -42,7 +42,7 @@ class EntesController < ApplicationController
 
   def import
     if !request.xhr?
-      redirect_to red_asistencials_path, alert: 'No autorizado.'
+      redirect_to entes_path, alert: 'No autorizado.'
     else
       render :layout => false
     end

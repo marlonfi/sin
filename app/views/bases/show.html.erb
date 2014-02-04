@@ -4,10 +4,23 @@
           "<i class='fa fa-h-square'></i> Bases".html_safe) %>
 <% provide(:content_header_data2,  "#{@basis.codigo_base}") %>
 
-
+<% content_for :junta_vencida do %>
+  <% if @junta %>
+  	<% if @junta.fin_gestion < Time.now %>
+	  	<div class="alert alert-info fade in">
+		    <button data-dismiss="alert" class="close close-sm" type="button">
+		        <i class="fa fa-times"></i>
+		    </button>
+		    <strong>Alerta! </strong> Se debe de convocar nuevas elecciones para elegir una nueva junta directiva.
+			</div>
+  	<% end %>	
+  <% end %>	
+<% end %>
+	
 <div class="row">
   <div class="col-lg-12">
       <%= render 'show_header'%>
-      <%= render 'show_content'%>   
+      <%= render 'show_content'%>
+      <%= render 'juntas'%>   
   </div>
 </div>

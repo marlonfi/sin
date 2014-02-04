@@ -188,7 +188,7 @@ describe EnfermerasController do
       it "redirects to dashboard" do
         post :importar_essalud, archivo: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root,
                  '/spec/factories/files/bad.ods')))
-        expect(response).to redirect_to entes_path
+        expect(response).to redirect_to enfermeras_path
       end
       it "sets the alert message" do
         post :importar_essalud, archivo: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root,

@@ -9,5 +9,12 @@ module ApplicationHelper
 	end
 	def panel_heading(element)
 		 element.nombre.to_s == '' ? element.cod_essalud : element.nombre
+	end
+	def fecha_con_formato(data)
+		if data.to_s != ''
+			return data.strftime("%d-%m-%Y").to_s
+		else  
+			return ''
 		end
+	end
 end

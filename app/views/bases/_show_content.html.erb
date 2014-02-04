@@ -31,18 +31,44 @@
         </header>
         <div class="panel-body bio-graph-info">
             <div class="row">
-               
+              <% if @junta %>
+                <div class="bio-row">
+                    <p><span>Secr.General</span>: <%= @junta.secretaria_general %></p>
+                </div>
+                <div class="bio-row">
+                    <p><span>Email</span>: <%= @junta.email %></p>
+                </div>
+                <div class="bio-row">
+                    <p><span>Inicio Gestión</span>: <%= fecha_con_formato @junta.inicio_gestion %></p>
+                </div>
+                <div class="bio-row">
+                    <p><span>Fin Gestión</span>: <%= fecha_con_formato @junta.fin_gestion %></p>
+                </div>
+                <div class="bio-row">
+                    <p><span>Teléfono</span>: <%= @junta.numero_celular %></p>
+                </div>
+                <div class="bio-row">
+                    <p><span>Otros</span>: <%= @junta.descripcion %></p>
+                </div>
+              <%else%>
+                <div class="bio-row">  
+                  <p><span>OJO </span>: Esta base no tiene un Junta directiva VIGENTE, agrega una.</p>
+                </div>                  
+              <%end%>
             </div>
         </div>
 
         <header class="panel-heading" style="text-align: center">
-        <a class="btn btn-primary" href="/entes/352/edit">
-          <i class="fa fa-pencil"> </i> Editar
-        </a>        <a class="btn btn-default" href="/red_asistencials/29/entes">
-          <i class="fa fa-sitemap"> </i> Ver RA
-        </a>        <a class="btn btn-default" href="/entes/352/enfermeras">
-          <i class="fa fa-female"> </i> Ver Enfermeras
-        </a>        <a class="btn btn-danger" data-confirm="¿Estás seguro?. Se eliminará este ente. " data-method="delete" href="/entes/352" rel="nofollow">
-          <i class="fa fa-trash-o"> </i> Eliminar
-        </a>      </header>
+
+        <%= link_to edit_basis_path(@basis), :class => 'btn btn-primary' do %>
+          <i class="fa fa-pencil"> </i> Editar Base
+        <% end %>          
+        <%= link_to @basis, :class => 'btn btn-danger', method: :delete, data: { confirm: '¿Estás seguro?. Se eliminará esta base. ' } do %>
+          <i class="fa fa-trash-o"> </i> Eliminar Base
+        <% end %>
+        <%= link_to basis_new_junta_path(@basis), :class => 'btn btn-success' do %>
+           Nueva Junta Directiva
+        <% end %> 
+
+
 </section>

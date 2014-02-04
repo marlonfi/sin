@@ -28,9 +28,9 @@ private
         mostrar_base(ente),
         link_to("Ver <span class='badge bg-primary'>#{ente.enfermeras.count}</span> enfermeras".html_safe,
                "/entes/#{ente.id}/enfermeras"),
-        link_to("<i class='fa fa-eye'></i> Ver   ".html_safe,
+        link_to("<i class='fa fa-eye'></i>".html_safe,
                 "/entes/#{ente.id}", :class => 'btn btn-success btn-xs' )+ " " +
-        link_to("<i class='fa fa-pencil'></i> Editar".html_safe,
+        link_to("<i class='fa fa-pencil'></i>".html_safe,
                 "/entes/#{ente.id}/edit", :class => 'btn btn-primary btn-xs' ),
       ]
     end

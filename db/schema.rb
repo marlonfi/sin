@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140201221302) do
+ActiveRecord::Schema.define(version: 20140203154532) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -91,6 +91,21 @@ ActiveRecord::Schema.define(version: 20140201221302) do
   end
 
   add_index "imports", ["tipo_clase", "fecha_pago", "created_at"], name: "index_imports_on_tipo_clase_and_fecha_pago_and_created_at", using: :btree
+
+  create_table "junta", force: true do |t|
+    t.string   "base_id"
+    t.string   "secretaria_general"
+    t.date     "inicio_gestion"
+    t.date     "fin_gestion"
+    t.string   "numero_celular"
+    t.string   "email"
+    t.text     "descripcion"
+    t.string   "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "junta", ["base_id"], name: "index_junta_on_base_id", using: :btree
 
   create_table "red_asistencials", force: true do |t|
     t.string   "cod_essalud"
