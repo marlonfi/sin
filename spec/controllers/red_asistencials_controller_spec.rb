@@ -18,6 +18,13 @@ describe RedAsistencialsController do
     end
   end
 
+  describe 'GET #new' do
+    it "renders the :new view" do
+      get :new
+      expect(response).to render_template :new
+    end    
+  end
+
   describe "POST #create" do
     context "with valid attributes" do
       it "saves the new red_asistencial in the database" do
@@ -160,6 +167,11 @@ describe RedAsistencialsController do
       xhr :get, :import
       expect(response).to render_template :import
     end
+    it "with no ajax redirects to index path" do
+      get :import
+      expect(response).to redirect_to red_asistencials_path
+    end
+
   end
 
   describe 'POST importar' do
@@ -167,17 +179,17 @@ describe RedAsistencialsController do
       it 'create a new imported file' do
         expect{
             post :importar, archivo: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root,
-                 '/spec/factories/files/relacion.csv')))
+                 '/spec/factories/files/lista_essalud.csv')))
           }.to change(Import,:count).by(1)
       end
       it "redirects to dashboard" do
         post :importar, archivo: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root,
-                        '/spec/factories/files/relacion.csv')))
+                        '/spec/factories/files/lista_essalud.csv')))
         expect(response).to redirect_to dashboard_path
       end
       it "sets the notice message" do
         post :importar, archivo: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root,
-                        '/spec/factories/files/relacion.csv')))
+                        '/spec/factories/files/lista_essalud.csv')))
         flash[:notice].should =~ /El proceso de importacion durará unos minutos./i
       end
     end

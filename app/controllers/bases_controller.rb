@@ -14,7 +14,7 @@ class BasesController < ApplicationController
      importacion = Import.new(archivo: params[:archivo], tipo_clase: 'Juntas',
                             descripcion: params[:descripcion], formato_org: 'SINESSS')
     if importacion.save
-      Base.import_juntas(importacion)
+      Base.delay.import_juntas(importacion)
       redirect_to dashboard_path, notice:'El proceso de importacion durará unos minutos.'
     else
       redirect_to bases_path, alert: 'El archivo es muy grande, o tiene un formato incorrecto.'
@@ -49,7 +49,7 @@ class BasesController < ApplicationController
     importacion = Import.new(archivo: params[:archivo], tipo_clase: 'Bases',
                             descripcion: params[:descripcion], formato_org: 'SINESSS')
     if importacion.save
-      Base.import_bases(importacion)
+      Base.delay.import_bases(importacion)
       redirect_to dashboard_path, notice:'El proceso de importacion durará unos minutos.'
     else
       redirect_to bases_path, alert: 'El archivo es muy grande, o tiene un formato incorrecto.'

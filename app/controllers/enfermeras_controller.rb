@@ -37,7 +37,7 @@ class EnfermerasController < ApplicationController
     importacion = Import.new(archivo: params[:archivo], tipo_clase: 'Enfermeras',
                             descripcion: params[:descripcion], formato_org: 'ESSALUD')
     if importacion.save
-      Enfermera.import_essalud(importacion)
+      Enfermera.delay.import_essalud(importacion)
       redirect_to dashboard_path, notice:'El proceso de importacion durará unos minutos.'
     else
       redirect_to enfermeras_path, alert: 'El archivo es muy grande, o tiene un formato incorrecto.'

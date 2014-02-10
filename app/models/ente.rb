@@ -88,11 +88,16 @@ class Ente < ActiveRecord::Base
 			  		end
 			  	end
 		  	end	
-		  else
+		  elsif row['PROGRAMA'] == 'AFESSALUD'
 		  	red = RedAsistencial.find_by_cod_essalud('ORG. DESCONCENTRADOS')
 		  	if red
-			  	ente = find_or_create_by(cod_essalud: row['PROGRAMA'])
-			  	red.entes << ente
+		  		if row['CONDICION'] == 'CAS'
+			  		ente = find_or_create_by(cod_essalud: 'AFESSALUD-CRUEN')
+			  		red.entes << ente
+			  	else
+			  		ente = find_or_create_by(cod_essalud: 'AFESSALUD-SEDE_CENTRAL')
+			  		red.entes << ente
+			  	end	
 			  end
 		  end	
 		end

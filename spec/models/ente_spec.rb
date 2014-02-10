@@ -32,13 +32,56 @@ describe Ente do
     expect(build(:ente, nombre: "a"*252)).to have(1).errors_on(:nombre)
   end
 
-	it "imports the entes" do
-    archivo = Import.create(tipo_clase: "Red Asistencial",
-                              archivo: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root, '/spec/factories/files/entes.csv'))))
-    RedAsistencial.import(archivo)
-    expect{
-        Ente.import(archivo)
-      }.to change(Ente, :count).by(29)
-  end 
-
+  context 'importation of entes' do
+    before(:each) do
+      @archivo = Import.create(tipo_clase: "Red Asistencial",
+                              archivo: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root,
+                              '/spec/factories/files/lista_essalud.csv'))))
+      RedAsistencial.import(@archivo)
+      Ente.import(@archivo)
+    end
+    it "imports all entes" do
+      expect(Ente.all.count).to eq(39) 
+    end
+    context 'imports in the correct RA' do
+      before(:each) do
+        @ra_junin = RedAsistencial.find_by_cod_essalud('RA Junin')
+        @ra_sabogal = RedAsistencial.find_by_cod_essalud('RA Sabogal')
+        @ra_otros = RedAsistencial.find_by_cod_essalud('ORG. DESCONCENTRADOS')
+      end
+      it 'gives to RA Junin 3 entes' do
+        expect(@ra_junin.entes.count).to eq(3) 
+      end
+      it 'gives the correct entes to RA Junin' do
+        ente1 = Ente.find_by_cod_essalud('H II A.Hurtado')
+        ente2 = Ente.find_by_cod_essalud('Def.del Asegu-RA Junin')
+        ente3 = Ente.find_by_cod_essalud('HII G.Lanatta')        
+        expect(@ra_junin.entes).to include(ente1)
+        expect(@ra_junin.entes).to include(ente2) 
+        expect(@ra_junin.entes).to_not include(ente3)  
+      end
+      it 'gives to RA Sabogal 9 entes' do
+        expect(@ra_sabogal.entes.count).to eq(9) 
+      end
+      it 'gives the correct entes to RA Sabogal' do
+        ente1 = Ente.find_by_cod_essalud('HII G.Lanatta')        
+        expect(@ra_sabogal.entes).to include(ente1)
+      end
+      it 'gives to ORG. DESCONCENTRADOS 12 entes' do
+        expect(@ra_otros.entes.count).to eq(12) 
+      end
+      it 'gives the correct entes to RA Sabogal' do
+        ente1 = Ente.find_by_cod_essalud('HII G.Lanatta')
+        ente2 = Ente.find_by_cod_essalud('STAE')
+        ente3 = Ente.find_by_cod_essalud('INCOR')
+        ente4 = Ente.find_by_cod_essalud('AFESSALUD-CRUEN')
+        ente5 = Ente.find_by_cod_essalud('AFESSALUD-SEDE_CENTRAL')        
+        expect(@ra_otros.entes).to_not include(ente1)
+        expect(@ra_otros.entes).to include(ente2)
+        expect(@ra_otros.entes).to include(ente3) 
+        expect(@ra_otros.entes).to include(ente4)
+        expect(@ra_otros.entes).to include(ente5) 
+      end
+    end
+  end	
 end

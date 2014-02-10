@@ -27,10 +27,10 @@ describe RedAsistencial do
   end
 	it "imports the red_asistencials" do
     archivo = Import.create(tipo_clase: "Red Asistencial",
-                            archivo: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root, '/spec/factories/files/relacion.csv'))))
+                            archivo: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root, '/spec/factories/files/lista_essalud.csv'))))
     expect{
       RedAsistencial.import(archivo)
-    }.to change(RedAsistencial, :count).by(6)
+    }.to change(RedAsistencial, :count).by(15)
   end 
 
 end

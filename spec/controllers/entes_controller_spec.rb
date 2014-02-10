@@ -158,17 +158,17 @@ describe EntesController do
       it 'create a new imported file' do
         expect{
             post :importar, archivo: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root,
-                 '/spec/factories/files/relacion.csv')))
+                 '/spec/factories/files/lista_essalud.csv')))
           }.to change(Import,:count).by(1)
       end
       it "redirects to dashboard" do
         post :importar, archivo: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root,
-                        '/spec/factories/files/relacion.csv')))
+                        '/spec/factories/files/lista_essalud.csv')))
         expect(response).to redirect_to dashboard_path
       end
       it "sets the notice message" do
         post :importar, archivo: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root,
-                        '/spec/factories/files/relacion.csv')))
+                        '/spec/factories/files/lista_essalud.csv')))
         flash[:notice].should =~ /El proceso de importacion durará unos minutos./i
       end
     end
