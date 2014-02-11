@@ -35,61 +35,8 @@ class Enfermera < ActiveRecord::Base
     path = import.archivo.path
     CSV.foreach(path, headers: true) do |row|
       data_enfermera, data_trabajo = parse_row(row)
-      if data_trabajo[:programa] == 'SALUD'
-        if data_trabajo[:sub_programa][0..2] == 'RA '
-          case data_trabajo[:actividad]
-          when 'Ger.Red Asist.'
-            ente = Ente.find_by_cod_essalud("Ger.Red Asist."+"-"+ data_trabajo[:sub_programa])
-            crear_enfermera(ente, data_enfermera) if ente
-          when 'Dir.Red Asist'
-            ente = Ente.find_by_cod_essalud("Dir.Red Asist"+"-"+ data_trabajo[:sub_programa])
-            crear_enfermera(ente, data_enfermera) if ente
-          when 'Dir.Red Asist.'
-            ente = Ente.find_by_cod_essalud("Dir.Red Asist"+"-"+ data_trabajo[:sub_programa])
-            crear_enfermera(ente, data_enfermera) if ente
-          else
-            if data_trabajo[:actividad] == 'PM San Miguel'
-              ente = Ente.find_by_cod_essalud("PM San Miguel"+"-"+ data_trabajo[:sub_programa])
-              crear_enfermera(ente, data_enfermera) if ente               
-            else
-              ente = Ente.find_by_cod_essalud(data_trabajo[:actividad])
-              crear_enfermera(ente, data_enfermera) if ente 
-            end
-          end
-        elsif data_trabajo[:sub_programa] == 'INCOR'
-          ente = Ente.find_by_cod_essalud(data_trabajo[:sub_programa])
-          crear_enfermera(ente, data_enfermera) if ente 
-        elsif data_trabajo[:sub_programa] == 'CN Salud Rena'
-          ente = Ente.find_by_cod_essalud(data_trabajo[:sub_programa])
-          crear_enfermera(ente, data_enfermera) if ente
-        elsif data_trabajo[:sub_programa] == 'Programa CEI'
-          ente = Ente.find_by_cod_essalud(data_trabajo[:sub_programa])
-          crear_enfermera(ente, data_enfermera) if ente
-        elsif data_trabajo[:sub_programa] == 'Def.del Asegu'
-          ente = Ente.find_by_cod_essalud('Def.del Asegu' +'-'+ data_trabajo[:sub_actividad1])
-          crear_enfermera(ente, data_enfermera) if ente          
-        elsif data_trabajo[:sub_programa] == 'GC Pre.Soc.y'
-          ente = Ente.find_by_cod_essalud('GC Pre.Soc.y' +'-'+ data_trabajo[:sub_actividad1])
-          crear_enfermera(ente, data_enfermera) if ente
-        elsif data_trabajo[:sub_programa] == 'Org.Ctrol.Ins'
-          ente = Ente.find_by_cod_essalud('Org.Ctrol.Ins' +'-'+ data_trabajo[:actividad])
-          crear_enfermera(ente, data_enfermera) if ente    
-        elsif data_trabajo[:sub_programa] == 'GC Prest Salu'
-          if data_trabajo[:sub_actividad1] == 'Despacho'
-            ente = Ente.find_by_cod_essalud('Despacho-GCPS')
-          else
-            ente = Ente.find_by_cod_essalud(data_trabajo[:sub_actividad1])
-          end
-          crear_enfermera(ente, data_enfermera) if ente 
-        end          
-      elsif data_trabajo[:programa] == 'AFESSALUD'
-        if data_enfermera[:regimen] == 'CAS'
-          ente = Ente.find_by_cod_essalud('AFESSALUD-CRUEN')
-        else
-          ente = Ente.find_by_cod_essalud('AFESSALUD-SEDE_CENTRAL')
-        end
-        crear_enfermera(ente, data_enfermera) if ente
-      end           
+      ente = Ente.get_ente(data_trabajo, data_enfermera[:regimen])
+      crear_enfermera(ente, data_enfermera) if ente      
     end
   end
 

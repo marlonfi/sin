@@ -11,7 +11,7 @@ class BasesController < ApplicationController
     end
   end
   def importar_juntas
-     importacion = Import.new(archivo: params[:archivo], tipo_clase: 'Juntas',
+    importacion = Import.new(archivo: params[:archivo], tipo_clase: 'Juntas',
                             descripcion: params[:descripcion], formato_org: 'SINESSS')
     if importacion.save
       Base.delay.import_juntas(importacion)
