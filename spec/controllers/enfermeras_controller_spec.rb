@@ -10,6 +10,13 @@ describe EnfermerasController do
     end
   end
 
+  describe 'GET #new' do
+    it "renders the :new view" do
+      get :new
+      expect(response).to render_template :new
+    end        
+  end
+
   describe "POST #create" do
     context "with valid attributes" do
       before(:each) do
@@ -156,6 +163,10 @@ describe EnfermerasController do
     it "renders the :import template" do
       xhr :get, :import_essalud
       expect(response).to render_template :import_essalud
+    end
+    it "with no ajax redirects to index path" do
+      get :import_essalud
+      expect(response).to redirect_to enfermeras_path
     end
   end
 

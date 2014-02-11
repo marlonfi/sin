@@ -10,6 +10,31 @@ describe EntesController do
     end
   end
 
+  describe 'GET #enfermeras' do
+    context 'simple request' do
+      it "renders the ente_enfermeras view" do
+        ente = create(:ente)
+        get :enfermeras, ente_id: ente
+        expect(response).to render_template :ente_enfermeras
+      end
+      it "assigns the requested ente to @ente" do
+        ente = create(:ente)
+        get :enfermeras, ente_id: ente
+        expect(assigns(:ente)).to eq ente
+      end
+    end
+    context 'datatable resquest' do
+      it "responds with json format"
+    end
+  end
+
+  describe 'GET #new' do
+    it "renders the :new view" do
+      get :new
+      expect(response).to render_template :new
+    end            
+  end
+
   describe "POST #create" do
     context "with valid attributes" do
       before(:each) do
@@ -138,18 +163,15 @@ describe EntesController do
     end
   end
 
+  ## methods for importation
   describe 'GET #import' do
     it "renders the :import template" do
       xhr :get, :import
       expect(response).to render_template :import
     end
-  end
-
-  ## methods for importation
-	describe 'GET #import' do
-    it "renders the :import template" do
-      xhr :get, :import
-      expect(response).to render_template :import
+    it "with no ajax redirects to index path" do
+      get :import
+      expect(response).to redirect_to entes_path
     end
   end
 

@@ -34,7 +34,7 @@ describe Ente do
 
   context 'importation of entes' do
     before(:each) do
-      @archivo = Import.create(tipo_clase: "Red Asistencial",
+      @archivo = Import.create(tipo_clase: "Ente",
                               archivo: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root,
                               '/spec/factories/files/lista_essalud.csv'))))
       RedAsistencial.import(@archivo)

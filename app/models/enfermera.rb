@@ -82,17 +82,16 @@ class Enfermera < ActiveRecord::Base
           end
           crear_enfermera(ente, data_enfermera) if ente 
         end          
-      else
-        ente = Ente.find_by_cod_essalud('AFESSALUD')
-        if ente
-          crear_enfermera(ente, data_enfermera) if ente
+      elsif data_trabajo[:programa] == 'AFESSALUD'
+        if data_enfermera[:regimen] == 'CAS'
+          ente = Ente.find_by_cod_essalud('AFESSALUD-CRUEN')
+        else
+          ente = Ente.find_by_cod_essalud('AFESSALUD-SEDE_CENTRAL')
         end
+        crear_enfermera(ente, data_enfermera) if ente
       end           
     end
   end
-
-
-
 
   def self.crear_enfermera(ente, data_enfermera)
     enfermera = Enfermera.find_by_cod_planilla(data_enfermera[:cod_planilla])
@@ -101,7 +100,8 @@ class Enfermera < ActiveRecord::Base
         generar_bitacora(enfermera, data_enfermera[:b_sinesss])
       end
       enfermera.update_attributes(regimen: data_enfermera[:regimen], b_sinesss: data_enfermera[:b_sinesss],
-                                 b_fedcut: data_enfermera[:b_fedcut], b_famesalud: data_enfermera[:b_famesalud])
+                                 b_fedcut: data_enfermera[:b_fedcut], b_famesalud: data_enfermera[:b_famesalud],
+                                 b_excel: data_enfermera[:b_excel])
     else
       ente.enfermeras.create!(data_enfermera)
     end
@@ -120,11 +120,12 @@ class Enfermera < ActiveRecord::Base
     data_enfermera[:apellido_paterno] = ap_nombres[0]
     data_enfermera[:apellido_materno] = ap_nombres[1]
     data_enfermera[:nombres] = ap_nombres[2..-1].join(' ')
-    data_enfermera[:cod_planilla] = row['CODIGO']  
-    data_enfermera[:regimen] = row['CONDICION']
+    data_enfermera[:cod_planilla] = row['CODIGO']
+    data_enfermera[:regimen] = check_regimen(row['CONDICION'])
     data_enfermera[:b_sinesss] = (row['SINESSS'] == 'X')
     data_enfermera[:b_fedcut] = (row['FED-CUT'] == 'X')
     data_enfermera[:b_famesalud] = (row['FAMENSSALUD'] == 'X')
+    data_enfermera[:b_excel] = true
     #para trabajo
     data_trabajo[:programa] = row['PROGRAMA']
     data_trabajo[:sub_programa] = row['SUB PROGRA']
@@ -134,6 +135,17 @@ class Enfermera < ActiveRecord::Base
   end 
 
  	private
+
+  def self.check_regimen(regimen)
+    if regimen[0..2] == 'CAS'
+      'CAS'
+    elsif regimen[0..2] == 'CON'
+      'CONTRATADO'
+    elsif regimen[0..2] == 'NOM'
+      'NOMBRADO'
+    end
+  end
+
  	def email_regex
     if email.present? and not email.match(/\A[^@]+@[^@]+\z/)
       errors.add :email, "formato incorrecto"
@@ -144,4 +156,5 @@ class Enfermera < ActiveRecord::Base
     self.full_name = self.apellido_paterno + ' ' + self.apellido_materno + ' ' +
                      self.nombres
   end
+  
 end

@@ -80,4 +80,6 @@ feature "Change Ente RA" do
 end
 
 
-feature "Change Base of Ente"
+feature "Change Base of Ente" do
+	scenario "with no base"
+end
