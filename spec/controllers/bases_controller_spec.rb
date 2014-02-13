@@ -213,17 +213,17 @@ describe BasesController do
       it 'create a new imported file' do
         expect{
             post :importar, archivo: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root,
-                 '/spec/factories/files/bases2.csv')))
+                 '/spec/factories/files/bases.csv')))
           }.to change(Import,:count).by(1)
       end
       it "redirects to dashboard" do
         post :importar, archivo: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root,
-                        '/spec/factories/files/bases2.csv')))
+                        '/spec/factories/files/bases.csv')))
         expect(response).to redirect_to dashboard_path
       end
       it "sets the notice message" do
         post :importar, archivo: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root,
-                        '/spec/factories/files/bases2.csv')))
+                        '/spec/factories/files/bases.csv')))
         flash[:notice].should =~ /El proceso de importacion durará unos minutos./i
       end
     end
@@ -252,17 +252,17 @@ describe BasesController do
       it 'create a new imported file' do
         expect{
             post :importar_juntas, archivo: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root,
-                 '/spec/factories/files/bases2.csv')))
+                 '/spec/factories/files/juntas.csv')))
           }.to change(Import,:count).by(1)
       end
       it "redirects to dashboard" do
         post :importar_juntas, archivo: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root,
-                        '/spec/factories/files/bases2.csv')))
+                        '/spec/factories/files/juntas.csv')))
         expect(response).to redirect_to dashboard_path
       end
       it "sets the notice message" do
         post :importar_juntas, archivo: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root,
-                        '/spec/factories/files/bases2.csv')))
+                        '/spec/factories/files/juntas.csv')))
         flash[:notice].should =~ /El proceso de importacion durará unos minutos./i
       end
     end

@@ -40,7 +40,7 @@ feature "Import managment RA" do
 	scenario "gives file and import", js: true do
 		visit red_asistencials_path
 		click_link 'Importar'
-		attach_file('Archivo', File.join(Rails.root, '/spec/factories/files/relacion.csv'))
+		attach_file('Archivo', File.join(Rails.root, '/spec/factories/files/lista_essalud.csv'))
 		click_button('Procesar')
 		expect(page).to have_content 'OK! El proceso de importacion durará unos minutos.'
 	end

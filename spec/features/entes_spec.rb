@@ -50,7 +50,7 @@ feature "Import managment Ente" do
 	scenario "gives file and import", js: true do
 		visit entes_path
 		click_link 'btnImportEnte'
-		attach_file('Archivo', File.join(Rails.root, '/spec/factories/files/relacion.csv'))
+		attach_file('Archivo', File.join(Rails.root, '/spec/factories/files/lista_essalud.csv'))
 		click_button('Procesar')
 		expect(page).to have_content 'OK! El proceso de importacion durará unos minutos.'
 	end
@@ -81,5 +81,31 @@ end
 
 
 feature "Change Base of Ente" do
-	scenario "with no base"
+	background do
+		@archivo = Import.create(tipo_clase: "Ente",
+                              archivo: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root,
+                              '/spec/factories/files/lista_essalud.csv'))))
+    @bases = Import.create(tipo_clase: "Ente",
+                            archivo: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root,
+                            '/spec/factories/files/bases.csv'))))
+    @juntas = Import.create(tipo_clase: "Ente",
+                            archivo: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root,
+                            '/spec/factories/files/juntas.csv'))))
+    RedAsistencial.import(@archivo)
+    Ente.import(@archivo)
+    Base.import_bases(@bases) 
+  	@base1 = Base.find_by_codigo_base('B-D HIV Huancayo')
+    @base2 = Base.find_by_codigo_base('B-HIV Sabogal')
+    @ente1 = Ente.find_by_cod_essalud('Def.del Asegu-RA Junin')
+	end
+	scenario "change the Ente::Base" do
+		expect(@base1.entes).to include(@ente1)
+		visit edit_ente_path(@ente1)
+		expect{
+			select 'B-HIV Sabogal', :from => 'ente_base_id'
+			click_button 'Guardar'			
+		}.to change(@base2.entes, :count).by(1)
+		expect(@base2.entes).to include(@ente1)
+		expect(@base1.entes).to_not include(@ente1) 		
+	end
 end

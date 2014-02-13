@@ -49,6 +49,5 @@ describe Junta do
   it "validates bad status" do
     expect(build(:juntum, status: 'FINALO')).to be_invalid
   end
-  it 'import juntas'
 end
 

@@ -39,7 +39,7 @@ feature "Import managment Base" do
 	scenario "gives file and import", js: true do
 		visit bases_path
 		click_link 'Importar'
-		attach_file('Archivo', File.join(Rails.root, '/spec/factories/files/bases2.csv'))
+		attach_file('Archivo', File.join(Rails.root, '/spec/factories/files/bases.csv'))
 		click_button('Procesar')
 		expect(page).to have_content 'OK! El proceso de importacion durará unos minutos.'
 	end

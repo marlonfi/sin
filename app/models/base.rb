@@ -38,6 +38,5 @@ class Base < ActiveRecord::Base
 				end
 			end	  	
 		end
-	end
-	
+	end	
 end
