@@ -11,11 +11,11 @@ class BasesController < ApplicationController
     end
   end
   def importar_juntas
-    importacion = Import.new(archivo: params[:archivo], tipo_clase: 'Juntas',
+    importacion = Import.new(status:'ESPERA', archivo: params[:archivo], tipo_clase: 'Juntas',
                             descripcion: params[:descripcion], formato_org: 'SINESSS')
     if importacion.save
       Base.delay.import_juntas(importacion)
-      redirect_to dashboard_path, notice:'El proceso de importacion durará unos minutos.'
+      redirect_to imports_path, notice:'El proceso de importacion durará unos minutos.'
     else
       redirect_to bases_path, alert: 'El archivo es muy grande, o tiene un formato incorrecto.'
     end
@@ -46,11 +46,11 @@ class BasesController < ApplicationController
     end
   end
   def importar
-    importacion = Import.new(archivo: params[:archivo], tipo_clase: 'Bases',
+    importacion = Import.new(status:'ESPERA',archivo: params[:archivo], tipo_clase: 'Bases',
                             descripcion: params[:descripcion], formato_org: 'SINESSS')
     if importacion.save
       Base.delay.import_bases(importacion)
-      redirect_to dashboard_path, notice:'El proceso de importacion durará unos minutos.'
+      redirect_to imports_path, notice:'El proceso de importacion durará unos minutos.'
     else
       redirect_to bases_path, alert: 'El archivo es muy grande, o tiene un formato incorrecto.'
     end

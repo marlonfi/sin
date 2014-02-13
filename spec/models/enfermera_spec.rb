@@ -66,10 +66,6 @@ describe Enfermera do
 	end
 
   it 'creates a bitacora when a enfermera changes sinesss'
-  it 'changes the full name before validate'
-
-
-
 
   context 'importation of enfermeras' do
     before(:each) do

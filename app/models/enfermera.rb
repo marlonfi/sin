@@ -32,11 +32,17 @@ class Enfermera < ActiveRecord::Base
 
 
   def self.import_essalud(import)
-    path = import.archivo.path
-    CSV.foreach(path, headers: true) do |row|
-      data_enfermera, data_trabajo = parse_row(row)
-      ente = Ente.get_ente(data_trabajo, data_enfermera[:regimen])
-      crear_enfermera(ente, data_enfermera) if ente      
+    begin
+      import.update_attributes(status: 'PROCESANDO')
+      path = import.archivo.path
+      CSV.foreach(path, headers: true) do |row|
+        data_enfermera, data_trabajo = parse_row(row)
+        ente = Ente.get_ente(data_trabajo, data_enfermera[:regimen])
+        crear_enfermera(ente, data_enfermera) if ente      
+      end
+      import.update_attributes(status: 'IMPORTADO')
+    rescue
+      import.update_attributes(status: 'ERROR')
     end
   end
 

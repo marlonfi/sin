@@ -185,7 +185,7 @@ describe RedAsistencialsController do
       it "redirects to dashboard" do
         post :importar, archivo: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root,
                         '/spec/factories/files/lista_essalud.csv')))
-        expect(response).to redirect_to dashboard_path
+        expect(response).to redirect_to imports_path
       end
       it "sets the notice message" do
         post :importar, archivo: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root,

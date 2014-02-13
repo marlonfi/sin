@@ -26,11 +26,11 @@ class RedAsistencialsController < ApplicationController
   end
 
   def importar
-    importacion = Import.new(archivo: params[:archivo], tipo_clase: 'Red Asistencial',
+    importacion = Import.new(status: 'ESPERA', archivo: params[:archivo], tipo_clase: 'Redes Asistenciales',
                             descripcion: params[:descripcion], formato_org: 'ESSALUD')
     if importacion.save
       RedAsistencial.delay.import(importacion)
-      redirect_to dashboard_path, notice:'El proceso de importacion durará unos minutos.'
+      redirect_to imports_path, notice:'El proceso de importacion durará unos minutos.'
     else
       redirect_to red_asistencials_path, alert: 'El archivo es muy grande, o tiene un formato incorrecto.'
     end

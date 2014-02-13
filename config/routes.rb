@@ -29,6 +29,7 @@ Sinesss::Application.routes.draw do
     match '/entes', to:'red_asistencials#entes', as: 'entes', via: 'get'
   end
   
+  resources :imports, :only => [:index, :destroy]
 
   get "/dashboard", to: 'home#dashboard'
   # The priority is based upon order of creation: first created -> highest priority.
