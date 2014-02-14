@@ -42,8 +42,7 @@ class EnfermerasController < ApplicationController
       redirect_to enfermeras_path, alert: 'El archivo es muy grande, o tiene un formato incorrecto.'
     end
   end
-  # POST /enfermeras
-  # POST /enfermeras.json
+
   def create
     @enfermera = Enfermera.new(enfermera_params)
 
@@ -56,8 +55,6 @@ class EnfermerasController < ApplicationController
     
   end
 
-  # PATCH/PUT /enfermeras/1
-  # PATCH/PUT /enfermeras/1.json
   def update
     if @enfermera.update(enfermera_params)
       redirect_to @enfermera, notice: 'Se actualizó correctamente la enfermera.'
@@ -68,13 +65,12 @@ class EnfermerasController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_enfermera
-      @enfermera = Enfermera.find(params[:id])
-    end
+  def set_enfermera
+    @enfermera = Enfermera.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def enfermera_params
-      params.require(:enfermera).permit(:ente_id, :cod_planilla, :apellido_paterno, :apellido_materno, :nombres, :email, :regimen, :b_sinesss, :b_fedcut, :b_famesalud, :b_excel)
-    end
+  def enfermera_params
+    params.require(:enfermera).permit(:ente_id, :cod_planilla, :apellido_paterno, :apellido_materno, :nombres, :email,
+                             :regimen, :b_sinesss, :b_fedcut, :b_famesalud, :b_excel, :dni)
+  end
 end

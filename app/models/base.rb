@@ -12,6 +12,7 @@ class Base < ActiveRecord::Base
       import.update_attributes(status: 'PROCESANDO')
 			path = import.archivo.path
 			CSV.foreach(path) do |row|
+				raise 'Formato Incorrecto' if row[0][0..1] != 'B-'
 				base = find_or_create_by(codigo_base: row.shift)
 				row.each do |ente_id|
 					if ente_id

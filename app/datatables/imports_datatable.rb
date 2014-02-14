@@ -1,5 +1,5 @@
 class ImportsDatatable
-  delegate :params, :h, :link_to , to: :@view
+  delegate :params, :h, :print_status, :link_to, to: :@view
   #include Rails.application.routes.url_helpers
   
   def initialize(view)
@@ -13,21 +13,19 @@ class ImportsDatatable
       iTotalDisplayRecords: imports.total_entries,
       aaData: data
     }
-    #debugger
   end
   
 private
   def data
     imports.map do |import|
       [
-        import.status,
+        print_status(import.status).html_safe,
         import.tipo_clase,
         import.fecha_pago,
         import.formato_org,
-        import.created_at,
-        import.archivo,
-        import.descripcion,
-        link_to("<i class='fa fa-eye'></i> Ver datos".html_safe, "#", :class => 'btn btn-success btn-xs' ),
+        import.created_at.strftime("%d/%m/%Y a las %I:%M%p"),
+        link_to(File.basename(import.archivo_url), "imports/#{import.id}/download", :target => "_blank"),
+        import.descripcion        
       ]
     end
   end

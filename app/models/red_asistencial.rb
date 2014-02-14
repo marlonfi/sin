@@ -13,8 +13,8 @@ class RedAsistencial < ActiveRecord::Base
 			path = import.archivo.path
 			CSV.foreach(path, headers: true) do |row|
 				if row['SUB PROGRA'][0..2] == 'RA '
-				  	find_or_create_by(cod_essalud: row['SUB PROGRA'])
-				  end		  	
+				  find_or_create_by(cod_essalud: row['SUB PROGRA'])
+				end		  	
 			end
 			find_or_create_by(cod_essalud: 'ORG. DESCONCENTRADOS')
 			import.update_attributes(status: 'IMPORTADO')

@@ -8,9 +8,14 @@ class ImportsController < ApplicationController
     end
   end
   
-  def destroy
-    @import = Import.find(params[:id])
-    @import.destroy
-    redirect_to imports_path, notice: 'Se eliminó correctamente el registro de Import de data.'
-  end
+  def download
+    @resource = Import.find(params[:import_id])
+    if @resource
+      send_file(@resource.archivo.path,
+                :disposition => 'attachment',
+                :url_based_filename => false)
+    else
+      redirect_to imports_path, alert: 'Prohibed'
+    end
+  end 
 end

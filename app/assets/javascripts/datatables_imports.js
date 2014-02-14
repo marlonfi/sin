@@ -18,7 +18,7 @@ $(function() {
       "iDisplayLength": 10,
       "bServerSide": true,
       "aoColumnDefs": [
-          { 'bSortable': false, 'aTargets': [3,5,6,7] }
+          { 'bSortable': false, 'aTargets': [3,5,6] }
        ],
       "bDestroy": true,
       "sAjaxSource": $('#imports').data('source'),
