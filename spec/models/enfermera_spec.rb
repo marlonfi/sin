@@ -202,4 +202,83 @@ describe Enfermera do
       end
     end
   end
+
+   context 'acualizacion of enfermeras' do
+    before(:each) do
+      @archivo = Import.create(tipo_clase: "Enfermera",
+                              archivo: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root,
+                              '/spec/factories/files/lista_essalud.csv'))))
+      @archivo2 = Import.create(tipo_clase: "Enfermera",
+                              archivo: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root,
+                              '/spec/factories/files/actualizacion_datos_enfermera.csv'))))
+      RedAsistencial.import(@archivo)
+      Ente.import(@archivo)
+      Enfermera.import_essalud(@archivo)
+      Enfermera.import_data_actualizada(@archivo2)
+    end
+    context 'a enfermeras has the correct data' do
+      before(:each) do
+        @enfermera1 = Enfermera.find_by_cod_planilla('2439438')
+        @enfermera2 = Enfermera.find_by_cod_planilla('4342750')
+        @enfermera3 = Enfermera.find_by_cod_planilla('1519397')
+        @enfermera4 = Enfermera.find_by_cod_planilla('1498788')
+        @enfermera5 = Enfermera.find_by_cod_planilla('1603512')
+      end
+      it 'has the correct ap_paterno' do
+        expect(@enfermera1.apellido_paterno).to eq('CARDENAS MONAGO OLINDA')
+        expect(@enfermera2.apellido_paterno).to eq('CACERES')
+        expect(@enfermera5.apellido_paterno).to eq('CARRILLO')
+      end
+      it 'has the correct ap_materno' do
+        expect(@enfermera1.apellido_materno).to eq('MONAGO')
+        expect(@enfermera2.apellido_materno).to eq('DEL CARPIO')
+        expect(@enfermera5.apellido_materno).to eq('ALFARO DE JIMENEZ')
+      end
+      it 'has the correct nombres' do
+        expect(@enfermera3.nombres).to eq('MARITZA SOLEDAD')
+      end
+      it 'has the full_name' do
+        expect(@enfermera5.full_name).to eq('CARRILLO ALFARO DE JIMENEZ CELIA HILDA')
+      end
+      it 'has the correct email' do
+        expect(@enfermera1.email).to eq('cardenas@gmail.com')
+        expect(@enfermera2.email).to eq('caceres@gmail.com')
+        expect(@enfermera3.email).to eq('motta@gmail.com')
+        expect(@enfermera4.email).to eq(nil)
+        expect(@enfermera5.email).to eq('carrillo@gmail.com')
+      end
+      it 'has the correct dni' do        
+        expect(@enfermera1.dni).to eq('23232323')
+        expect(@enfermera2.dni).to eq('23232324')
+        expect(@enfermera3.dni).to eq(nil)
+        expect(@enfermera4.dni).to eq(nil)
+        expect(@enfermera5.dni).to eq('23232327')
+      end
+      it 'has the correct sexo' do        
+        expect(@enfermera1.sexo).to eq('MASCULINO')
+        expect(@enfermera2.sexo).to eq('FEMENINO')
+        expect(@enfermera3.sexo).to eq('MASCULINO')
+        expect(@enfermera5.sexo).to eq('FEMENINO')
+      end
+      it 'has the correct factor_sanguineo' do                
+        expect(@enfermera1.factor_sanguineo).to eq('O')
+        expect(@enfermera2.factor_sanguineo).to eq(nil)
+      end
+      it 'has the correct domicilio_completo' do                        
+        expect(@enfermera1.domicilio_completo).to eq(nil)
+        expect(@enfermera2.domicilio_completo).to eq('JR.ATALAYA 1122')
+        expect(@enfermera3.domicilio_completo).to eq('JR.ATALAYA 1123')
+        expect(@enfermera4.domicilio_completo).to eq(nil)
+        expect(@enfermera5.domicilio_completo).to eq('JR.ATALAYA 1125')
+      end
+      it 'has the correct telefono' do
+        expect(@enfermera1.telefono).to eq('222268')
+        expect(@enfermera2.telefono).to eq('222269')
+      end
+      it 'has the correct regimen' do                
+        expect(@enfermera1.regimen).to eq('CAS')
+        expect(@enfermera2.regimen).to eq('CONTRATADO')
+      end  
+    end  
+  end
 end

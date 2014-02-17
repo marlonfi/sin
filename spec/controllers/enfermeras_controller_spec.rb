@@ -225,6 +225,56 @@ describe EnfermerasController do
     end
   end
 
-  
+    ## methods for importation
+  describe 'GET #import_data_actualizada' do
+    it "renders the :import_data_actualizada" do
+      xhr :get, :import_data_actualizada
+      expect(response).to render_template :import_data_actualizada
+    end
+    it "with no ajax redirects to index path" do
+      get :import_data_actualizada
+      expect(response).to redirect_to enfermeras_path
+    end
+  end
+
+  describe 'POST importar_data_actualizada' do
+    context 'good import_data_actualizada' do
+      it 'create a new imported file' do
+        expect{
+            post :importar_data_actualizada, archivo: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root,
+                 '/spec/factories/files/actualizacion_datos_enfermera.csv')))
+          }.to change(Import,:count).by(1)
+      end
+      it "redirects to dashboard" do
+        post :importar_data_actualizada, archivo: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root,
+                        '/spec/factories/files/actualizacion_datos_enfermera.csv')))
+        expect(response).to redirect_to imports_path
+      end
+      it "sets the notice message" do
+        post :importar_data_actualizada, archivo: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root,
+                        '/spec/factories/files/actualizacion_datos_enfermera.csv')))
+        flash[:notice].should =~ /El proceso de importacion durará unos minutos./i
+      end
+    end
+    context 'bad import' do
+      it ' not create a new imported file' do
+        expect{
+            post :importar_data_actualizada, archivo: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root,
+                 '/spec/factories/files/bad.ods')))
+          }.to change(Import,:count).by(0)
+      end
+      it "redirects to dashboard" do
+        post :importar_data_actualizada, archivo: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root,
+                 '/spec/factories/files/bad.ods')))
+        expect(response).to redirect_to enfermeras_path
+      end
+      it "sets the alert message" do
+        post :importar_data_actualizada, archivo: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root,
+                        '/spec/factories/files/bad.ods')))
+        flash[:alert].should =~ /El archivo es muy grande, o tiene un formato incorrecto./i
+      end
+    end
+  end
+
 end
 

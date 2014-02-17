@@ -4,6 +4,7 @@
           "<i class='fa fa-female'></i> Enfermeras".html_safe) %>
 <% content_for :js_per_page do %>
   <%= javascript_include_tag "import_enf" %>
+  <%= javascript_include_tag "import_data_enfermeras" %>
   <%= javascript_include_tag "datatables_enfermeras" %>
 <% end %>
 <% content_for :css_per_page do %>
@@ -50,7 +51,11 @@
         <% end %>
         <a class="btn btn-warning" data-toggle="modal" href="#myImportEnfModal", id='btnImportEnf1'>
             <i class="fa fa-upload"> </i> Importar
-        </a>         
+        </a>
+
+        <a class="btn btn-primary" data-toggle="modal" href="#myActDataEnf", id='btnActDataEnf'>
+            <i class="fa fa-upload"> </i> Actualizar Datos Enf.
+        </a>                  
       </header>
     </section>
   </div>

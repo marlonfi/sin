@@ -39,7 +39,25 @@ class Enfermera < ActiveRecord::Base
   #contar_por_ente
   scope :por_ente, ->(ente_id) { where("ente_id = ?", ente_id) }
 
+  #actualizar datos con excel
+  def self.import_data_actualizada(import)
+    begin
+      import.update_attributes(status: 'PROCESANDO')
+      path = import.archivo.path
+      CSV.foreach(path, headers: true) do |row|
+        data_enfermera = parse_actualizacion(row)
+        enfermera = Enfermera.find_by_cod_planilla(data_enfermera[:cod_planilla])
+        if enfermera
+          hola = enfermera.update_attributes(data_enfermera)
+        end    
+      end
+      import.update_attributes(status: 'IMPORTADO')
+    rescue
+      import.update_attributes(status: 'ERROR')
+    end
+  end
 
+  #importar matriz de essalud
   def self.import_essalud(import)
     begin
       import.update_attributes(status: 'PROCESANDO')
@@ -71,6 +89,24 @@ class Enfermera < ActiveRecord::Base
 
   def self.generar_bitacora(enfermera, condicion_actual)
     #codigo para generar la bitacora de cambio en el campo sinesss
+  end
+
+  def self.parse_actualizacion(row)
+    data_enfermera = {}
+    data_enfermera[:cod_planilla] = row['COD_PLANILLA'] if row['COD_PLANILLA']
+    data_enfermera[:apellido_paterno] = row['APELLIDO_PATERNO'] if row['APELLIDO_PATERNO']
+    data_enfermera[:apellido_materno] = row['APELLIDO_MATERNO'] if row['APELLIDO_MATERNO']
+    data_enfermera[:nombres] = row['NOMBRES'] if row['NOMBRES']
+    data_enfermera[:email] = row['EMAIL'] if row['EMAIL']
+    data_enfermera[:dni] = row['DNI'] if row['DNI']
+    data_enfermera[:sexo] = row['SEXO'] if row['SEXO']
+    data_enfermera[:telefono] = row['TELEFONO'] if row['TELEFONO']
+    data_enfermera[:fecha_nacimiento] = row['FECHA_NACIMIENTO'] if row['FECHA_NACIMIENTO']
+    data_enfermera[:factor_sanguineo] = row['FACTOR_SANGUINEO'] if row['FACTOR_SANGUINEO']
+    data_enfermera[:domicilio_completo] = row['DOMICILIO_COMPLETO'] if row['DOMICILIO_COMPLETO']
+    data_enfermera[:fecha_inscripcion_sinesss] = row['FECHA_INSCRIPCION_SINESSS'] if row['FECHA_INSCRIPCION_SINESSS']
+    data_enfermera[:regimen] = row['REGIMEN'] if row['REGIMEN']
+    return data_enfermera
   end
 
   def self.parse_row(row)

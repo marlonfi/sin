@@ -43,6 +43,25 @@ class EnfermerasController < ApplicationController
     end
   end
 
+  def import_data_actualizada
+    if !request.xhr?
+      redirect_to enfermeras_path, alert: 'No autorizado.'
+    else
+      render :layout => false
+    end
+  end
+
+  def importar_data_actualizada
+    importacion = Import.new(status: 'ESPERA', archivo: params[:archivo], tipo_clase: 'Enfermeras',
+                            descripcion: params[:descripcion], formato_org: 'SINESSS')
+    if importacion.save
+      Enfermera.delay.import_data_actualizada(importacion)
+      redirect_to imports_path, notice:'El proceso de importacion durará unos minutos.'
+    else
+      redirect_to enfermeras_path, alert: 'El archivo es muy grande, o tiene un formato incorrecto.'
+    end
+  end
+
   def create
     @enfermera = Enfermera.new(enfermera_params)
 

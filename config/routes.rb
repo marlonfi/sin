@@ -12,6 +12,8 @@ Sinesss::Application.routes.draw do
     match '/destruir_junta/:junta_id', to:'juntas#destroy', as: 'destroy_junta', via: 'delete'
   end
 
+  match '/enfermeras/import_data_actualizada', to:'enfermeras#import_data_actualizada', as: 'enfermeras_import_data_actualizada', via: 'get'
+  match '/enfermeras/importar_data_actualizada', to:'enfermeras#importar_data_actualizada', as: 'enfermeras_importar_data_actualizada', via: 'post'
   match '/enfermeras/import_essalud', to:'enfermeras#import_essalud', as: 'enfermeras_import_essalud', via: 'get'
   match '/enfermeras/importar_essalud', to:'enfermeras#importar_essalud', as: 'enfermeras_importar_essalud', via: 'post'
   resources :enfermeras
