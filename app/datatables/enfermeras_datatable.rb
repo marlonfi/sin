@@ -24,6 +24,7 @@ private
       [
         ERB::Util.h(enfermera.cod_planilla),
         enfermera.full_name,
+        enfermera.regimen,
         sinesss?(enfermera.b_sinesss),
         link_to("<i class='fa fa-eye'></i> Ver datos".html_safe, "enfermeras/#{enfermera.id}", :class => 'btn btn-success btn-xs' ),
       ]
@@ -52,7 +53,7 @@ private
   end
 
   def sort_column
-    columns = %w[cod_planilla full_name b_sinesss full_name]
+    columns = %w[cod_planilla full_name regimen b_sinesss full_name]
     columns[params[:iSortCol_0].to_i]
   end
 

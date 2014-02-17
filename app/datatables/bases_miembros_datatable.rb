@@ -26,6 +26,7 @@ private
         enfermera.cod_planilla,
         enfermera.full_name,
         enfermera.ente.cod_essalud,
+        enfermera.regimen,
         afiliado?(enfermera.b_fedcut),
         afiliado?(enfermera.b_famesalud),
         link_to("<i class='fa fa-eye'></i> Ver datos".html_safe, "/enfermeras/#{enfermera.id}", :class => 'btn btn-success btn-xs' ),
@@ -55,7 +56,7 @@ private
   end
 
   def sort_column
-    columns = %w[cod_planilla full_name ente b_fedcut b_famesalud ]
+    columns = %w[cod_planilla full_name ente regimen b_fedcut b_famesalud ]
     columns[params[:iSortCol_0].to_i]
   end
 

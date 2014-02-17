@@ -18,7 +18,7 @@ $(function() {
       "iDisplayLength": 10,
       "bServerSide": true,
       "aoColumnDefs": [
-          { 'bSortable': false, 'aTargets': [0,3] }
+          { 'bSortable': false, 'aTargets': [0,4] }
        ],
       "bDestroy": true,
       "sAjaxSource": $('#ente_enfermeras').data('source'),
