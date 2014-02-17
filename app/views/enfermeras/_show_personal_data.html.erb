@@ -2,19 +2,19 @@
     <h1>Datos de la enfermera</h1>
     <div class="row">
         <div class="bio-row">
-            <p><span>Ap. Paterno </span>: <%=@enfermera.apellido_paterno%></p>
+            <p><span>Ap. Paterno </span>: <%= @enfermera.apellido_paterno%></p>
         </div>
         <div class="bio-row">
-            <p><span>Ap. Materno </span>: <%=@enfermera.apellido_materno%></p>
+            <p><span>Ap. Materno </span>: <%= @enfermera.apellido_materno%></p>
         </div>
         <div class="bio-row">
-            <p><span>Nombres </span>: <%=@enfermera.nombres %></p>
+            <p><span>Nombres </span>: <%= @enfermera.nombres %></p>
         </div>
         <div class="bio-row">
-            <p><span>Sexo</span>:</p>
+            <p><span>Sexo</span>: <%= @enfermera.sexo %></p>
         </div>
         <div class="bio-row">
-            <p><span>Nacimiento </span>:</p>
+            <p><span>Nacimiento </span>: <%= fecha_con_formato @enfermera.fecha_nacimiento %></p>
         </div>
         <div class="bio-row">
             <p><span>Email </span>: <%=@enfermera.email %></p>
@@ -23,16 +23,13 @@
             <p><span>DNI </span>: <%=@enfermera.dni %></p>
         </div>
         <div class="bio-row">
-            <p><span>Teléfono casa </span>:</p>
+            <p><span>Teléfonos</span>: <%=@enfermera.telefono %></p>
+        </div>        
+        <div class="bio-row">
+            <p><span>Domicilio</span>: <%=@enfermera.domicilio_completo %></p>
         </div>
         <div class="bio-row">
-            <p><span>Teléfono celular</span>:</p>
-        </div>
-        <div class="bio-row">
-            <p><span>Factor sanguineo </span>:</p>
-        </div>
-        <div class="bio-row">
-            <p><span>Dirección </span>:</p>
+            <p><span>Factor Sanguineo </span>: <%=@enfermera.factor_sanguineo %></p>
         </div>
     </div>
 </div>

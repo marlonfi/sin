@@ -51,8 +51,7 @@ class EnfermerasController < ApplicationController
     else
       flash.now[:alert] = 'Hubo un problema. No se registró la enfermera'
       render action: 'new'      
-    end
-    
+    end    
   end
 
   def update
@@ -71,6 +70,8 @@ class EnfermerasController < ApplicationController
 
   def enfermera_params
     params.require(:enfermera).permit(:ente_id, :cod_planilla, :apellido_paterno, :apellido_materno, :nombres, :email,
-                             :regimen, :b_sinesss, :b_fedcut, :b_famesalud, :b_excel, :dni)
+                             :regimen, :b_sinesss, :b_fedcut, :b_famesalud, :b_excel, :dni,
+                             :sexo, :factor_sanguineo, :fecha_nacimiento, :domicilio_completo, :telefono,
+                             :telefono, :fecha_inscripcion_sinesss, :fecha_ingreso_essalud)
   end
 end

@@ -13,8 +13,17 @@ class Enfermera < ActiveRecord::Base
   validates :nombres, length: { maximum: 250 }
   validates :apellido_paterno, length: { maximum: 250 }
   validates :apellido_materno, length: { maximum: 250 }
-  validates_inclusion_of :regimen, :in => ['CONTRATADO', 'CAS', 'NOMBRADO']
+  validates :factor_sanguineo, length: { maximum: 250 }
+  validates :domicilio_completo, length: { maximum: 250 }
+  validates :telefono, length: { maximum: 250 }
 
+  validates_length_of :dni, :is => 8, :allow_blank => true
+
+  validates_date :fecha_nacimiento, :fecha_inscripcion_sinesss, :fecha_ingreso_essalud,
+                 :allow_blank => true
+
+  validates_inclusion_of :regimen, :in => ['CONTRATADO', 'CAS', 'NOMBRADO']
+  validates_inclusion_of :sexo, :in => ['MASCULINO', 'FEMENINO'], :allow_blank => true
  	#para enfermeras  
   scope :sin_sindicato, -> { where(b_sinesss: false, b_fedcut:false, b_famesalud:false) }
   scope :total_sinesss, -> { where(b_sinesss: true) }
@@ -69,6 +78,7 @@ class Enfermera < ActiveRecord::Base
     data_trabajo = {}
     #para enfermera
     data_enfermera[:full_name] = row['APELLIDOS Y NOMBRES']
+    data_enfermera[:fecha_ingreso_essalud] = row['FECHA INGR.']
     ap_nombres = data_enfermera[:full_name].split
     data_enfermera[:apellido_paterno] = ap_nombres[0]
     data_enfermera[:apellido_materno] = ap_nombres[1]

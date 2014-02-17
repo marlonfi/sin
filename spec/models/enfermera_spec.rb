@@ -47,8 +47,48 @@ describe Enfermera do
   it "does not allow a apellido paterno with more of 250 characters" do
     expect(build(:enfermera, apellido_paterno: "a"*252)).to have(1).errors_on(:apellido_paterno)
   end
-  it "validates lenght fo dni" do
-	end
+  it "does not allow a factor_sanguineo with more of 250 characters" do
+    expect(build(:enfermera, factor_sanguineo: "a"*252)).to have(1).errors_on(:factor_sanguineo)
+  end
+  it "does not allow a domicilio_completo with more of 250 characters" do
+    expect(build(:enfermera, domicilio_completo: "a"*252)).to have(1).errors_on(:domicilio_completo)
+  end
+  it "does not allow a dni without lenght of 8" do
+    expect(build(:enfermera, dni: "a"*9)).to have(1).errors_on(:dni)
+  end
+  it "does not allow a empty dni" do
+    expect(build(:enfermera, dni: "")).to be_valid
+  end
+  it "does not allow a telefono with more of 250 characters" do
+    expect(build(:enfermera, telefono: "a"*252)).to have(1).errors_on(:telefono)
+  end
+  it "validates sexo valid" do
+    expect(build(:enfermera, sexo: 'MASCULINO')).to be_valid
+  end
+  it "validates sexo valid" do
+    expect(build(:enfermera, sexo: 'FEMENINO')).to be_valid
+  end
+  it "validates invalid sexo"  do
+    expect(build(:enfermera, sexo: 'M')).to_not be_valid
+  end
+  it "is valid fecha_nacimiento" do
+    expect(build(:enfermera, fecha_nacimiento: '02/02/1990')).to be_valid
+  end
+  it "is valid fecha_inscripcion_sinesss" do
+    expect(build(:enfermera, fecha_inscripcion_sinesss: '02/02/1993')).to be_valid
+  end
+  it "is valid fecha_ingreso_essalud" do
+    expect(build(:enfermera, fecha_ingreso_essalud: '02/02/1994')).to be_valid
+  end
+  it "is invalid fecha_nacimiento" do
+    expect(build(:enfermera, fecha_nacimiento: '02/02s/1990')).to_not be_valid
+  end
+  it "is invalid fecha_ingreso_essalud" do
+    expect(build(:enfermera, fecha_ingreso_essalud: 'sadsa')).to_not be_valid
+  end
+  it "is invalid fecha_inscripcion_sinesss" do
+    expect(build(:enfermera, fecha_inscripcion_sinesss: '02/0d2/1993')).to_not be_valid
+  end
 	it "validates regimen in cas" do
 		expect(build(:enfermera, regimen: 'CAS')).to be_valid
 	end

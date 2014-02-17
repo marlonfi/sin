@@ -1,4 +1,4 @@
-<div class="panel-body bio-graph-info">
+ <div class="panel-body bio-graph-info">
     <h1>Datos laborales</h1>
     <div class="row">
         <div class="bio-row">
@@ -20,11 +20,10 @@
             <p><span>¿FAMENSSALUD? </span>: <%= afiliado?(@enfermera.b_famesalud).html_safe %></p>
         </div>
         <div class="bio-row">
-            <p><span>Fecha inscripción al SINESSS </span>:</p>
+            <p><span>Fecha inscripción al SINESSS </span>: <%=fecha_con_formato(@enfermera.fecha_inscripcion_sinesss) %></p>
         </div>
         <div class="bio-row">
-            <p><span>Fecha ingreso a ESSALUD </span>:</p>
-        </div>
-        
+            <p><span>Fecha ingreso a ESSALUD </span>: <%= fecha_con_formato(@enfermera.fecha_ingreso_essalud) %></p>
+        </div>        
     </div>
 </div>

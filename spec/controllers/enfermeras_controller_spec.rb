@@ -49,6 +49,22 @@ describe EnfermerasController do
         flash[:notice].should =~ /Se registró correctamente la enfermera/i
       end
 
+      context "with allowed params" do   
+        it "does update the forbidden params" do
+          post :create, enfermera: {ente_id: @ente.id, nombres: 'Iokero', cod_planilla:'1234456',
+                                    apellido_paterno: 'dsd', apellido_materno: 'sdsd', regimen:"CAS",
+                                    b_sinesss:true, b_fedcut:true, b_famesalud:false, dni: '46399081',
+                                    sexo: 'MASCULINO', factor_sanguineo: 'O+', fecha_nacimiento: '02/02/1990',
+                                    fecha_ingreso_essalud: '02/02/1990', fecha_inscripcion_sinesss: '02/02/1990',
+                                    domicilio_completo: 'Jr atalaya', telefono: '222268' }
+   
+          assigns(:enfermera).sexo.should eq('MASCULINO')
+          assigns(:enfermera).factor_sanguineo.should eq('O+')
+          assigns(:enfermera).domicilio_completo.should eq('Jr atalaya')
+          assigns(:enfermera).dni.should eq('46399081')
+          assigns(:enfermera).telefono.should eq('222268')
+        end
+      end
     end
 
     context "with invalid attributes" do

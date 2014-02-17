@@ -1,8 +1,11 @@
 <% content_for :js_per_page do %>
-  <%= javascript_include_tag "chosen"%>  
+  <%= javascript_include_tag "chosen"%>
+  <%= javascript_include_tag "js/bootstrap-datepicker.js"%>
+  <%= javascript_include_tag "js/advanced-form-components.js"%>     
 <% end %>
 <% content_for :css_per_page do %>
   <%= stylesheet_link_tag "chosen", media: "all" %>
+  <%= stylesheet_link_tag "css/datepicker.css", media: "all" %>
 <% end %>
 <%= form_for @enfermera, :html => {:class => 'form-horizontal'}  do |f| %>
   <div class="form-group">
@@ -39,19 +42,24 @@
   </div>
 
   <div class="form-group">
-    <%= f.label :ente_id,'Ente Perteneciente', class: 'col-lg-2 col-sm-2 control-label' %>
+    <%= f.label :sexo, 'Sexo', class: 'col-lg-2 col-sm-2 control-label' %>
     <div class="col-lg-10">
-      <%= collection_select(:enfermera, :ente_id, Ente.all,
-         :id, :cod_essalud, {:prompt => 'Ingresa un ente'}, {class: "form-control m-bot15 s"})  %>
-      <p class="help-block" id="error_notice"><%= f.object.errors[:ente_id].join(", ")%></p>
+      <%= f.select :sexo, ['MASCULINO', 'FEMENINO'], {:prompt => 'Selecciona'}, {class: "form-control m-bot15 s"}  %>
+      <p class="help-block" id="error_notice"><%= f.object.errors[:sexo].join(", ")%></p>
     </div>
   </div>
 
+
   <div class="form-group">
-    <%= f.label :email, class: 'col-lg-2 col-sm-2 control-label' %>
-    <div class="col-lg-10">
-      <%= f.text_field :email, class: 'form-control' %>
-      <p class="help-block" id="error_notice"><%= f.object.errors[:email].join(", ")%></p>
+    <%= f.label :fecha_nacimiento, class: 'col-lg-2 col-sm-2 control-label' %>
+    <div class="col-md-3 col-xs-11">
+      <div data-date-viewmode="years" data-date-format="dd-mm-yyyy" data-date=""  class="input-append date dpYears">
+          <%= f.text_field :fecha_nacimiento, class: 'form-control', :value => fecha_con_formato(f.object.fecha_nacimiento) %>
+          <span class="input-group-btn add-on">
+            <button class="btn btn-danger" type="button"><i class="fa fa-calendar"></i></button>
+          </span>
+      </div>
+      <span class="help-block">Selecciona fecha</span>
     </div>
   </div>
 
@@ -61,7 +69,49 @@
       <%= f.text_field :dni, class: 'form-control' %>
       <p class="help-block" id="error_notice"><%= f.object.errors[:dni].join(", ")%></p>
     </div>
+  </div> 
+
+  <div class="form-group">
+    <%= f.label :ente_id,'Ente Perteneciente', class: 'col-lg-2 col-sm-2 control-label' %>
+    <div class="col-lg-10">
+      <%= collection_select(:enfermera, :ente_id, Ente.all,
+         :id, :cod_essalud, {:prompt => 'Ingresa un ente'}, {class: "form-control m-bot15 s"})  %>
+      <p class="help-block" id="error_notice"><%= f.object.errors[:ente_id].join(", ")%></p>
+    </div>
   </div>
+
+  <div class="form-group">
+    <%= f.label :domicilio_completo, class: 'col-lg-2 col-sm-2 control-label' %>
+    <div class="col-lg-10">
+      <%= f.text_field :domicilio_completo, class: 'form-control' %>
+      <p class="help-block" id="error_notice"><%= f.object.errors[:domicilio_completo].join(", ")%></p>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :telefono,'Teléfono', class: 'col-lg-2 col-sm-2 control-label' %>
+    <div class="col-lg-10">
+      <%= f.text_field :telefono, class: 'form-control' %>
+      <p class="help-block" id="error_notice"><%= f.object.errors[:telefono].join(", ")%></p>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :factor_sanguineo,'Factor Sanguineo', class: 'col-lg-2 col-sm-2 control-label' %>
+    <div class="col-lg-10">
+      <%= f.text_field :factor_sanguineo, class: 'form-control' %>
+      <p class="help-block" id="error_notice"><%= f.object.errors[:factor_sanguineo].join(", ")%></p>
+    </div>
+  </div>
+
+
+  <div class="form-group">
+    <%= f.label :email, class: 'col-lg-2 col-sm-2 control-label' %>
+    <div class="col-lg-10">
+      <%= f.text_field :email, class: 'form-control' %>
+      <p class="help-block" id="error_notice"><%= f.object.errors[:email].join(", ")%></p>
+    </div>
+  </div> 
 
   <div class="form-group">
     <%= f.label :regimen, 'Régimen', class: 'col-lg-2 col-sm-2 control-label' %>
@@ -109,10 +159,36 @@
       <p class="help-block" id="error_notice"><%= f.object.errors[:b_famesalud].join(", ")%></p>
     </div>
   </div>
- <div class="form-group">
+
+  <div class="form-group">
+    <%= f.label :fecha_inscripcion_sinesss, class: 'col-lg-2 col-sm-2 control-label' %>
+    <div class="col-md-3 col-xs-11">
+      <div data-date-viewmode="years" data-date-format="dd-mm-yyyy" data-date=""  class="input-append date dpYears">
+          <%= f.text_field :fecha_inscripcion_sinesss, class: 'form-control', :value => fecha_con_formato(f.object.fecha_inscripcion_sinesss) %>
+          <span class="input-group-btn add-on">
+            <button class="btn btn-danger" type="button"><i class="fa fa-calendar"></i></button>
+          </span>
+      </div>
+      <span class="help-block">Selecciona fecha</span>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :fecha_ingreso_essalud, class: 'col-lg-2 col-sm-2 control-label' %>
+    <div class="col-md-3 col-xs-11">
+      <div data-date-viewmode="years" data-date-format="dd-mm-yyyy" data-date=""  class="input-append date dpYears">
+          <%= f.text_field :fecha_ingreso_essalud, class: 'form-control', :value => fecha_con_formato(f.object.fecha_ingreso_essalud) %>
+          <span class="input-group-btn add-on">
+            <button class="btn btn-danger" type="button"><i class="fa fa-calendar"></i></button>
+          </span>
+      </div>
+      <span class="help-block">Selecciona fecha</span>
+    </div>
+  </div>
+
+  <div class="form-group">
       <div class="col-lg-offset-2 col-lg-10">
-          <%= f.submit 'Guardar', class:'btn btn-info'%>
-         
+          <%= f.submit 'Guardar', class:'btn btn-info'%>         
       </div>
   </div>
 

@@ -9,7 +9,15 @@ FactoryGirl.define do
     nombres "Iokero Nombre"
     full_name "Iokero Iokero Iokero"
     email "ola@ase.com"
+    sexo 'MASCULINO'
+    factor_sanguineo 'iontknow'
+    fecha_nacimiento  '02/02/1990'
+    domicilio_completo 'ola ola'
+    telefono '222223'
+    fecha_inscripcion_sinesss '02/02/1990'
+    fecha_ingreso_essalud '02/02/1990'
     regimen "CAS"
+    dni '46399081'
     b_sinesss true
     b_fedcut false
     b_famesalud false
@@ -18,8 +26,7 @@ FactoryGirl.define do
       cod_planilla "a"*8
       apellido_paterno ''
       apellido_materno ''
-      nombres ''
-      
+      nombres ''      
     end
   end
 end
