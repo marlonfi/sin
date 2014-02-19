@@ -76,6 +76,11 @@ class Enfermera < ActiveRecord::Base
   def self.crear_enfermera(ente, data_enfermera)
     enfermera = Enfermera.find_by_cod_planilla(data_enfermera[:cod_planilla])
     if enfermera
+      if data_enfermera[:b_sinesss] == false
+        if enfermera.ente != ente
+          cambiar_ente(enfermera,ente)         
+        end
+      end 
       if enfermera.b_sinesss != data_enfermera[:b_sinesss]
         generar_bitacora(enfermera, data_enfermera[:b_sinesss])
       end
@@ -86,7 +91,10 @@ class Enfermera < ActiveRecord::Base
       ente.enfermeras.create!(data_enfermera)
     end
   end
-
+  def self.cambiar_ente(enfermera,ente)
+    enfermera.ente = ente
+    enfermera.save
+  end
   def self.generar_bitacora(enfermera, condicion_actual)
     #codigo para generar la bitacora de cambio en el campo sinesss
   end

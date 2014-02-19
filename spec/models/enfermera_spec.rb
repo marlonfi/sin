@@ -203,7 +203,7 @@ describe Enfermera do
     end
   end
 
-   context 'acualizacion of enfermeras' do
+  context 'acualizacion of enfermeras' do
     before(:each) do
       @archivo = Import.create(tipo_clase: "Enfermera",
                               archivo: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root,
@@ -282,3 +282,43 @@ describe Enfermera do
     end  
   end
 end
+describe Enfermera do
+  context 'on second Matriz importation' do
+    before(:each) do
+      @archivo = Import.create(tipo_clase: "Enfermera",
+                              archivo: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root,
+                              '/spec/factories/files/lista_essalud.csv'))))
+      @archivo2 = Import.create(tipo_clase: "Enfermera",
+                              archivo: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root,
+                              '/spec/factories/files/actualizacion_datos_enfermera.csv'))))
+      @archivo3 = Import.create(tipo_clase: "Enfermera",
+                              archivo: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root,
+                              '/spec/factories/files/segunda_lista_essalud.csv'))))
+      RedAsistencial.import(@archivo)
+      Ente.import(@archivo)
+      Enfermera.import_essalud(@archivo)
+    end
+    it 'creates the new enfermeras' do
+      expect{
+        Enfermera.import_essalud(@archivo3)
+      }.to change(Enfermera, :count).by(1)
+    end
+    it 'updates data of registered enfermeras' do
+      Enfermera.import_essalud(@archivo3)
+      enfermera1 = Enfermera.find_by_cod_planilla('5118432')
+      enfermera2 = Enfermera.find_by_cod_planilla('3478335')
+      expect(enfermera1.regimen).to eq('NOMBRADO')
+      expect(enfermera2.b_fedcut).to be_true
+      expect(enfermera2.b_famesalud).to be_true
+    end
+    it 'changes ente from the non_sinesss enfermeras' do
+      Enfermera.import_essalud(@archivo3)
+      enfermera1 = Enfermera.find_by_cod_planilla('1449707')
+      enfermera2 = Enfermera.find_by_cod_planilla('5118432')
+      ente = Ente.find_by_cod_essalud('H II A.Hurtado')
+      expect(enfermera1.ente).to eq(ente)
+      expect(enfermera2.ente).to eq(ente)
+    end      
+  end
+end
+
