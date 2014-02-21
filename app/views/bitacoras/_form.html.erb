@@ -1,0 +1,53 @@
+<% content_for :js_per_page do %>
+  <%= javascript_include_tag "chosen"%> 
+<% end %>
+<% content_for :css_per_page do %>
+  <%= stylesheet_link_tag "chosen", media: "all" %>
+<% end %>
+
+<%= form_for([@enfermera, @bitacora], :html => {:class => 'form-horizontal'} ) do |f| %>
+  <div class="form-group">
+    <%= f.label :tipo, 'Tipo de registro', class: 'col-lg-2 col-sm-2 control-label' %>
+    <div class="col-lg-10">
+      <%= f.select :tipo, ['AFILIACION', 'DESAFILIACION', 'TRASLADO', 'OTROS'], {:prompt => 'Selecciona'}, {class: "form-control m-bot15 s"}  %>
+      <p class="help-block" id="error_notice"><%= f.object.errors[:tipo].join(", ")%></p>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :status, 'Status', class: 'col-lg-2 col-sm-2 control-label' %>
+    <div class="col-lg-10">
+      <%= f.select :status, ['PENDIENTE','SOLUCIONADO'], {:prompt => 'Selecciona'}, {class: "form-control m-bot15 s"}  %>
+      <p class="help-block" id="error_notice"><%= f.object.errors[:status].join(", ")%></p>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :ente_inicio,'Ente Inicio', class: 'col-lg-2 col-sm-2 control-label' %>
+    <div class="col-lg-10">
+      <%= collection_select(:bitacora, :ente_inicio, Ente.all,
+         :cod_essalud, :cod_essalud, {:prompt => 'Ingresa un ente'}, {class: "form-control m-bot15 s"})  %>
+      <p class="help-block" id="error_notice"><%= f.object.errors[:ente_inicio].join(", ")%></p>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :ente_fin,'Ente Fin', class: 'col-lg-2 col-sm-2 control-label' %>
+    <div class="col-lg-10">
+      <%= collection_select(:bitacora, :ente_fin, Ente.all,
+         :cod_essalud, :cod_essalud, {:prompt => 'Ingresa un ente'}, {class: "form-control m-bot15 s"})  %>
+      <p class="help-block" id="error_notice"><%= f.object.errors[:ente_fin].join(", ")%></p>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :descripcion, 'Descripción (MAX 250)', class: 'col-lg-2 col-sm-2 control-label' %>
+    <div class="col-lg-10">
+      <%= f.text_area :descripcion, rows: 5, class: 'form-control' %>
+      <p class="help-block" id="error_notice"><%= f.object.errors[:descripcion].join(", ")%></p>
+    </div>
+  </div>
+
+  <div class="actions">
+    <%= f.submit 'Guardar', class:'btn btn-info'%>
+  </div>
+<% end %>

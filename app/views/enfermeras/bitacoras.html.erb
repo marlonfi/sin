@@ -1,0 +1,57 @@
+<% provide(:title, "Bitácora para enfermera: #{@enfermera.full_name}") %>
+<% provide(:content_header_path,  enfermera_path(@enfermera) ) %>
+<% provide(:content_header_data1,
+          "<i class='fa fa-female'></i> #{@enfermera.full_name}".html_safe) %>
+
+
+<div class="row">
+  <div class="col-lg-12">
+    <section class="panel">
+      <header class="panel-heading">
+        Bitácora para la enfermera: <%= @enfermera.full_name %> 
+      </header>
+      <div class="panel-body">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th><i class="fa fa-bullhorn"></i> TIPO DE REGISTRO</th>
+              <th><i class="fa fa-calendar"></i> GENERADO EL</th>
+              <th><i class="fa fa-exclamation-circle"></i> STATUS</th>
+              <th><i class="fa fa-hospital-o"></i> ENTE INICIO</th>
+              <th><i class="fa fa-hospital-o"></i> ENTE FIN</th>
+              <th><i class="fa fa-sort-amount-desc"></i> DESCRIPCION</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+           <% @bitacoras.each do |bitacora| %>
+            <tr>
+              <th><%= bitacora.tipo%></th>
+              <th><%= bitacora.created_at.strftime("%d/%m/%Y a las %I:%M%p")%></th>
+              <th><%= status_bitacora(bitacora.status).html_safe %></th>
+              <th><%= bitacora.ente_inicio%></th>
+              <th><%= bitacora.ente_fin%></th>
+              <th><%= bitacora.descripcion%></th>
+              <th>
+                <%= link_to(enfermera_bitacora_change_status_path(@enfermera.id, bitacora.id), method: :post, :class => 'btn btn-info btn-xs') do %>
+                  <i class="fa fa-pencil"> </i> Cambiar Status
+                <% end %>
+              </th>
+            <tr>
+           <%end%>
+          </tbody>
+        </table>
+      </div>
+      <header class="panel-heading" style= 'text-align: center'>
+        <%= link_to new_enfermera_bitacora_path(@enfermera),
+                   :class => 'btn btn-success' do %>
+          <i class="fa fa-briefcase"> </i> Nueva bitácora
+        <% end %>           
+      </header>
+    </section>
+  </div>
+</div>
+
+
+
+            

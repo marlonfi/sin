@@ -1,0 +1,53 @@
+<% provide(:title, 'Bitacoras') %>
+<% provide(:content_header_path,  bitacoras_path) %>
+<% provide(:content_header_data1,
+          "<i class='fa fa-female'></i> Bitacoras".html_safe) %>
+<% content_for :js_per_page do %>
+  <%= javascript_include_tag "datatables_bitacoras" %>
+<% end %>
+<% content_for :css_per_page do %>
+  <%= stylesheet_link_tag "datatables", media: "all"%>
+<% end %>
+
+<div class="row">
+  <div class="col-lg-12">
+    <section class="panel">
+      <header class="panel-heading">
+        Listado de bitacoras por resolver <%= request.path_parameters[:tipo].upcase if request.                                    path_parameters[:tipo]%> 
+      </header>
+      <div class="panel-body">
+        <div class="adv-table">
+          <table  class="display table table-bordered table-striped" id="bitacoras"
+                  data-source="<%= resolver_parametro(request.path_parameters[:tipo])%>">
+            <thead>
+              <tr>
+                <th><i class="fa fa-female"></i> ENFERMERA</th>
+                <th><i class="fa fa-bullhorn"></i> TIPO DE REGISTRO</th>
+                <th><i class="fa fa-calendar"></i> GENERADO EL</th>
+                <th><i class="fa  fa-exclamation-circle"></i> STATUS</th>
+                <th><i class="fa fa-hospital-o"></i> ENTE INICIO</th>
+                <th><i class="fa fa-hospital-o"></i> ENTE FIN</th>
+                <th><i class="fa fa-sort-amount-desc"></i> DESCRIPCION</th>
+              </tr>
+            </thead>
+            <tbody>                  
+            </tbody>
+            <tfoot>
+              <tr>
+                <th><i class="fa fa-female"></i> ENFERMERA</th>
+                <th><i class="fa fa-bullhorn"></i> TIPO DE REGISTRO</th>
+                <th><i class="fa fa-calendar"></i> GENERADO EL</th>
+                <th><i class="fa  fa-exclamation-circle"></i> STATUS</th>
+                <th><i class="fa fa-hospital-o"></i> ENTE INICIO</th>
+                <th><i class="fa fa-hospital-o"></i> ENTE FIN</th>
+                <th><i class="fa fa-sort-amount-desc"></i> DESCRIPCION</th>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+      <header class="panel-heading" style= 'text-align: center'>                 
+      </header>
+    </section>
+  </div>
+</div>

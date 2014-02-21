@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140217155618) do
+ActiveRecord::Schema.define(version: 20140219154132) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,20 @@ ActiveRecord::Schema.define(version: 20140217155618) do
   end
 
   add_index "bases", ["codigo_base"], name: "index_bases_on_codigo_base", using: :btree
+
+  create_table "bitacoras", force: true do |t|
+    t.integer  "enfermera_id"
+    t.string   "tipo"
+    t.integer  "import_id"
+    t.string   "status"
+    t.string   "ente_inicio"
+    t.string   "ente_fin"
+    t.string   "descripcion"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "bitacoras", ["enfermera_id", "tipo", "status"], name: "index_bitacoras_on_enfermera_id_and_tipo_and_status", using: :btree
 
   create_table "delayed_jobs", force: true do |t|
     t.integer  "priority",   default: 0, null: false
@@ -67,7 +81,6 @@ ActiveRecord::Schema.define(version: 20140217155618) do
     t.string   "photo"
   end
 
-  add_index "enfermeras", ["dni"], name: "index_enfermeras_on_dni", using: :btree
   add_index "enfermeras", ["ente_id", "cod_planilla", "b_sinesss"], name: "index_enfermeras_on_ente_id_and_cod_planilla_and_b_sinesss", using: :btree
   add_index "enfermeras", ["full_name"], name: "index_enfermeras_on_full_name", using: :btree
 

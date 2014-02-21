@@ -26,14 +26,23 @@
                 <%= link_to '<i class="fa fa-pencil"></i> Editar Datos'.html_safe, edit_enfermera_path(@enfermera)%>
             </li>
 
+            <% if  action_name == 'bitacoras' %>
+            <li class="active">
+            <%else%>
             <li>
-                 <%= link_to '<i class="fa  fa-book"></i> Bitácora'.html_safe, ''%>
+            <% end %>
+                <%= link_to enfermera_bitacoras_path(@enfermera) do %>
+                  <i class="fa  fa-book"></i> Bitácora
+                  <% if !@enfermera.bitacoras.empty? %>
+                  <span class="label label-danger pull-right r-activity">
+                    <%= @enfermera.bitacoras.count %>
+                  </span>
+                  <% end %>   
+                <% end %>               
             </li>
             <li>
                  <%= link_to '<i class="fa fa-usd"></i> Aportaciones'.html_safe, 's'%>
             </li>
-
         </ul>
-
     </section>
 </aside>

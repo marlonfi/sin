@@ -73,41 +73,58 @@
             </ul>
         </li>
         <!-- inbox dropdown end -->
+
         <!-- notification dropdown start-->
         <li id="header_notification_bar" class="dropdown">
-            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-
+            <a data-toggle="dropdown" class="dropdown-toggle" href="#" id='notificaciones'>
                 <i class="fa fa-bell-o"></i>
-                <span class="badge bg-warning">3</span>
+                <span class="badge bg-warning">
+                    <%= @total_notificaciones %>
+                </span>
             </a>
             <ul class="dropdown-menu extended notification">
                 <div class="notify-arrow notify-arrow-yellow"></div>
                 <li>
-                    <p class="yellow">Tienes 3 notificacion</p>
+                    <p class="yellow"><%= @total_notificaciones %> notificaciones pendientes</p>
                 </li>
+                <%if @total_afiliaciones != 0 %>
                 <li>
-                    <a href="#">
-                        <span class="label label-danger"><i class="fa fa-bolt"></i></span>
-                        Servidor #2 saturado.
-                        <span class="small italic">34 mins</span>
-                    </a>
+                    <%= link_to tipo_bitacora_path('afiliacion') do %>
+                      <span class="label label-danger"><i class="fa fa-bolt"></i></span>
+                        Afiliaciones sin resolver.
+                        <span class="small italic"><%= @total_afiliaciones%> casos</span>
+                    <% end %>                    
                 </li>
+                <%end%>
+                <%if @total_desafiliaciones!= 0 %>
                 <li>
-                    <a href="#">
+                    <%= link_to tipo_bitacora_path('desafiliacion') do %>
                         <span class="label label-warning"><i class="fa fa-bell"></i></span>
-                        Server #3 no responde.
-                        <span class="small italic">1 hora</span>
-                    </a>
+                        Desafiliaciones sin resolver.
+                        <span class="small italic"><%= @total_desafiliaciones%> casos</span>
+                    <% end %> 
                 </li>
+                <%end%>
+                <%if @total_traslados!= 0 %>
                 <li>
-                    <a href="#">
+                    <%= link_to tipo_bitacora_path('traslado') do %>
                         <span class="label label-danger"><i class="fa fa-bolt"></i></span>
-                        Base de Datos saturada 24%.
-                        <span class="small italic">2 hrs</span>
-                    </a>
+                        Traslados sin resolver.
+                        <span class="small italic"><%= @total_traslados%> casos</span>
+                    <% end %> 
                 </li>
+                <%end%>
+                <%if @total_otros!= 0 %>
                 <li>
-                    <a href="#">Ver todas las notificaciones</a>
+                    <%= link_to tipo_bitacora_path('otros') do %>
+                        <span class="label label-warning"><i class="fa fa-bell"></i></span>
+                        Otros sin resolver.
+                        <span class="small italic"><%= @total_otros%> casos</span>
+                    <% end %> 
+                </li>
+                <%end%>
+                <li>
+                    <%= link_to 'Ver todas las notificaciones.',bitacoras_path %>
                 </li>
             </ul>
         </li>

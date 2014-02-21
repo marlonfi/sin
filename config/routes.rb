@@ -1,4 +1,7 @@
 Sinesss::Application.routes.draw do
+  match '/bitacoras/:tipo', to:'bitacoras#index', as: 'tipo_bitacora', via: 'get'
+  resources :bitacoras, :only => :index
+
   match '/bases/import', to:'bases#import', as: 'bases_import', via: 'get'
   match '/bases/importar', to:'bases#importar', as: 'bases_importar', via: 'post'
   match '/bases/import_juntas', to:'bases#import_juntas', as: 'bases_import_juntas', via: 'get'
@@ -16,9 +19,15 @@ Sinesss::Application.routes.draw do
   match '/enfermeras/importar_data_actualizada', to:'enfermeras#importar_data_actualizada', as: 'enfermeras_importar_data_actualizada', via: 'post'
   match '/enfermeras/import_essalud', to:'enfermeras#import_essalud', as: 'enfermeras_import_essalud', via: 'get'
   match '/enfermeras/importar_essalud', to:'enfermeras#importar_essalud', as: 'enfermeras_importar_essalud', via: 'post'
-  resources :enfermeras
+  resources :enfermeras do
+    match '/bitacoras', to:'enfermeras#bitacoras', as: 'bitacoras', via: 'get'
+    resources :bitacoras, :only => [:new, :create] do
+      match '/status', to:'bitacoras#change_status', as: 'change_status', via: 'post'
+    end
+  end
 
   match '/entes/import', to:'entes#import', as: 'entes_import', via: 'get'
+
   match '/entes/importar', to:'entes#importar', as: 'entes_importar', via: 'post'
   resources :entes do
     match '/enfermeras', to:'entes#enfermeras', as: 'enfermeras', via: 'get'

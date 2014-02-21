@@ -62,6 +62,10 @@ class EnfermerasController < ApplicationController
     end
   end
 
+  def bitacoras
+    @enfermera = Enfermera.find(params[:enfermera_id])
+    @bitacoras = @enfermera.bitacoras.order(created_at: :desc)
+  end
   def create
     @enfermera = Enfermera.new(enfermera_params)
 

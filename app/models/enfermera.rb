@@ -1,5 +1,7 @@
 class Enfermera < ActiveRecord::Base
 	belongs_to :ente
+  has_many :bitacoras
+  
   before_validation :generar_full_name
   before_save :generar_full_name
 	validates :cod_planilla, length: { is: 7 }
@@ -60,6 +62,7 @@ class Enfermera < ActiveRecord::Base
   #importar matriz de essalud
   def self.import_essalud(import)
     begin
+      @import = import
       import.update_attributes(status: 'PROCESANDO')
       path = import.archivo.path
       CSV.foreach(path, headers: true) do |row|
@@ -80,9 +83,9 @@ class Enfermera < ActiveRecord::Base
         if enfermera.ente != ente
           cambiar_ente(enfermera,ente)         
         end
-      end 
+      end
       if enfermera.b_sinesss != data_enfermera[:b_sinesss]
-        generar_bitacora(enfermera, data_enfermera[:b_sinesss])
+        generar_bitacora(enfermera, ente)
       end
       enfermera.update_attributes(regimen: data_enfermera[:regimen], b_sinesss: data_enfermera[:b_sinesss],
                                  b_fedcut: data_enfermera[:b_fedcut], b_famesalud: data_enfermera[:b_famesalud],
@@ -95,8 +98,11 @@ class Enfermera < ActiveRecord::Base
     enfermera.ente = ente
     enfermera.save
   end
-  def self.generar_bitacora(enfermera, condicion_actual)
-    #codigo para generar la bitacora de cambio en el campo sinesss
+  def self.generar_bitacora(enfermera, ente)
+    tipo = enfermera.b_sinesss ? 'DESAFILIACION' : 'AFILIACION'
+    enfermera.bitacoras.create(import_id: @import.id, tipo: tipo,
+                              status: 'PENDIENTE', ente_inicio: ente.cod_essalud,
+                              ente_fin: ente.cod_essalud)
   end
 
   def self.parse_actualizacion(row)

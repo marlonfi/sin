@@ -203,7 +203,7 @@ describe Enfermera do
     end
   end
 
-  context 'acualizacion of enfermeras' do
+  context 'actualizacion of enfermeras' do
     before(:each) do
       @archivo = Import.create(tipo_clase: "Enfermera",
                               archivo: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root,
@@ -318,6 +318,19 @@ describe Enfermera do
       ente = Ente.find_by_cod_essalud('H II A.Hurtado')
       expect(enfermera1.ente).to eq(ente)
       expect(enfermera2.ente).to eq(ente)
+    end
+    it 'creates bitacora for afiliacion and desafiliacion' do
+      Enfermera.import_essalud(@archivo3)
+      enfermera1 = Enfermera.find_by_cod_planilla('5601041')
+      enfermera2 = Enfermera.find_by_cod_planilla('1513068')
+      bit_enf1 = enfermera1.bitacoras.first
+      bit_enf2 = enfermera2.bitacoras.first
+      expect(bit_enf1.import_id).to eq(@archivo3.id)
+      expect(bit_enf2.import_id).to eq(@archivo3.id)
+      expect(bit_enf1.tipo).to eq('AFILIACION')
+      expect(bit_enf2.tipo).to eq('DESAFILIACION')
+      expect(bit_enf1.status).to eq('PENDIENTE')
+      expect(bit_enf2.status).to eq('PENDIENTE')      
     end      
   end
 end

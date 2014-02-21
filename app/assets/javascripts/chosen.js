@@ -17,6 +17,8 @@ $(function() {
  $("#ente_red_asistencial_id").chosen();
  $("#enfermera_ente_id").chosen();
  $("#ente_base_id").chosen();
+ $("#bitacora_ente_inicio").chosen();
+ $("#bitacora_ente_fin").chosen();
 });
 
 
