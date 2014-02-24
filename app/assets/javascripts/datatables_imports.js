@@ -14,11 +14,11 @@
 //= require others/DT_bootstrap.js
 $(function() {
   $('#imports').dataTable( {
-      "aaSorting": [[ 4, "desc" ]],
+      "aaSorting": [[ 5, "desc" ]],
       "iDisplayLength": 10,
       "bServerSide": true,
       "aoColumnDefs": [
-          { 'bSortable': false, 'aTargets': [3,5,6] }
+          { 'bSortable': false, 'aTargets': [4,6,7] }
        ],
       "bDestroy": true,
       "sAjaxSource": $('#imports').data('source'),

@@ -1,0 +1,945 @@
+
+
+ESSALUD                                                      PAGINA :   1
+GC. GESTION DE LAS PERSONAS                                   FECHA : 19/12/2013
+
+           ANEXOS SELECTIVOS PLANILLA DE HABERES MES DE NOVIEMBRE  -  2013
+
+PROGRAMA     : 02  SALUD          
+SUB-PROGRAMA : 05  RA Moquegua     
+ACTIVIDAD    : 01  D HII Moquegua 
+S-ACTIVID.1  : 02  S Enfermeria 
+S-ACTIVID.2  : 02  Of Rec.Humanos 
+S-ACTIVID.3  : 00                 
+CONCEPTO     : 214 SNE ESSALUD        
+
+********************************************************************************
+COD.PLANILLA      APELLIDOS Y NOMBRES                                IMPORTE
+********************************************************************************
+
+1979324           BLAS ENCISO ROSA MARIA                          50.89
+
+                                    TOTAL SUBACTIV. 3 :       1         34.50
+
+ESSALUD                                                      PAGINA :   2
+GC. GESTION DE LAS PERSONAS                                   FECHA : 19/12/2013
+
+           ANEXOS SELECTIVOS PLANILLA DE HABERES MES DE NOVIEMBRE  -  2013
+
+PROGRAMA     : 02  SALUD          
+SUB-PROGRAMA : 05  RA Junin     
+ACTIVIDAD    : 01  H II A.Hurtado 
+S-ACTIVID.1  : 02  S Enfermeria 
+S-ACTIVID.2  : 02  Of Rec.Humanos 
+S-ACTIVID.3  : 01  U Adm Personal 
+CONCEPTO     : 214 SNE ESSALUD        
+
+********************************************************************************
+COD.PLANILLA      APELLIDOS Y NOMBRES                                IMPORTE
+********************************************************************************
+
+1449707           PARRA AGUILAR DE SANDO AIDA LUZ                       31.91
+
+                                    TOTAL SUBACTIV. 3 :       3        100.91
+                                    TOTAL SUBACTIV. 2 :       4        135.41
+                                    TOTAL SUBACTIV. 1 :       4        135.41
+
+ESSALUD                                                      PAGINA :   3
+GC. GESTION DE LAS PERSONAS                                   FECHA : 19/12/2013
+
+           ANEXOS SELECTIVOS PLANILLA DE HABERES MES DE NOVIEMBRE  -  2013
+
+PROGRAMA     : 02  SALUD          
+SUB-PROGRAMA : 05  RA Tacna     
+ACTIVIDAD    : 01  D HIII A.Carri 
+S-ACTIVID.1  : 03  S Enfermeria 
+S-ACTIVID.2  : 00  Despacho       
+S-ACTIVID.3  : 00                 
+CONCEPTO     : 214 SNE ESSALUD        
+
+********************************************************************************
+COD.PLANILLA      APELLIDOS Y NOMBRES                                IMPORTE
+********************************************************************************
+
+4428611            ACHO PONGO SUSANA MIRIAM                     31.91
+
+                                    TOTAL SUBACTIV. 3 :       1         31.91
+                                    TOTAL SUBACTIV. 2 :       1         31.91
+                                    TOTAL SUBACTIV. 1 :       1         31.91
+
+ESSALUD                                                      PAGINA :   4
+GC. GESTION DE LAS PERSONAS                                   FECHA : 19/12/2013
+
+           ANEXOS SELECTIVOS PLANILLA DE HABERES MES DE NOVIEMBRE  -  2013
+
+PROGRAMA     : 02  AFESSALUD          
+SUB-PROGRAMA : 05  Consejo Direc     
+ACTIVIDAD    : 01  Despacho 
+S-ACTIVID.1  : 04  Despacho  
+S-ACTIVID.2  : 02  
+S-ACTIVID.3  : 00                 
+CONCEPTO     : 214 SNE ESSALUD        
+
+********************************************************************************
+COD.PLANILLA      APELLIDOS Y NOMBRES                                IMPORTE
+********************************************************************************
+
+3047538           ROSELL CLAUDET GLADYS ELVIRA                              29.33
+
+                                    TOTAL SUBACTIV. 3 :       1         29.33
+                                    TOTAL SUBACTIV. 2 :       1         29.33
+
+ESSALUD                                                      PAGINA :   5
+GC. GESTION DE LAS PERSONAS                                   FECHA : 19/12/2013
+
+           ANEXOS SELECTIVOS PLANILLA DE HABERES MES DE NOVIEMBRE  -  2013
+
+PROGRAMA     : 02  AFESSALUD          
+SUB-PROGRAMA : 05  Of.Gral.Admin.     
+ACTIVIDAD    : 01  GC Ges Persona 
+S-ACTIVID.1  : 04  G Adm Personal  
+S-ACTIVID.2  : 03   
+S-ACTIVID.3  : 00                 
+CONCEPTO     : 214 SNE ESSALUD        
+
+********************************************************************************
+COD.PLANILLA      APELLIDOS Y NOMBRES                                IMPORTE
+********************************************************************************
+
+4335408           HIDALGO QUISPE REINA ZORAIDA                          29.33
+
+                                    TOTAL SUBACTIV. 3 :       1         29.33
+
+ESSALUD                                                      PAGINA :   6
+GC. GESTION DE LAS PERSONAS                                   FECHA : 19/12/2013
+
+           ANEXOS SELECTIVOS PLANILLA DE HABERES MES DE NOVIEMBRE  -  2013
+
+PROGRAMA     : 02  SALUD          
+SUB-PROGRAMA : 05  RA Sabogal     
+ACTIVIDAD    : 01  H II Luis Negr 
+S-ACTIVID.1  : 04  S Enfermeria  
+S-ACTIVID.2  : 03    
+S-ACTIVID.3  : 01   
+CONCEPTO     : 214 SNE ESSALUD        
+
+********************************************************************************
+COD.PLANILLA      APELLIDOS Y NOMBRES                                IMPORTE
+********************************************************************************
+
+5118432           QUISPE MAMANI YEVET SUGUEY RUTH                            34.50
+
+                                    TOTAL SUBACTIV. 3 :       1         50.89
+                                    TOTAL SUBACTIV. 2 :       2         80.22
+                                    TOTAL SUBACTIV. 1 :       3        109.55
+                                    TOTAL   ACTIVIDAD :       8        276.87
+
+ESSALUD                                                      PAGINA :   7
+GC. GESTION DE LAS PERSONAS                                   FECHA : 19/12/2013
+
+           ANEXOS SELECTIVOS PLANILLA DE HABERES MES DE NOVIEMBRE  -  2013
+
+PROGRAMA     : 02  SALUD          
+SUB-PROGRAMA : 05  RA Sabogal     
+ACTIVIDAD    : 02  Pol.Bellavista    
+S-ACTIVID.1  : 01  S Ayu Diag Tra      
+S-ACTIVID.2  : 01    
+S-ACTIVID.3  : 01   
+CONCEPTO     : 214 SNE ESSALUD        
+
+********************************************************************************
+COD.PLANILLA      APELLIDOS Y NOMBRES                                IMPORTE
+********************************************************************************
+
+2631852           CALDERON BERROSPI ESTHER                     34.50
+
+                                    TOTAL SUBACTIV. 3 :       1         34.50
+                                    TOTAL SUBACTIV. 2 :       1         34.50
+                                    TOTAL SUBACTIV. 1 :       1         34.50
+
+ESSALUD                                                      PAGINA :   8
+GC. GESTION DE LAS PERSONAS                                   FECHA : 19/12/2013
+
+           ANEXOS SELECTIVOS PLANILLA DE HABERES MES DE NOVIEMBRE  -  2013
+
+PROGRAMA     : 02  SALUD          
+SUB-PROGRAMA : 05  RA Sabogal     
+ACTIVIDAD    : 02  Pol.Pdo Arbulu    
+S-ACTIVID.1  : 03  S Ayu Diag Tra 
+S-ACTIVID.2  : 05   
+S-ACTIVID.3  : 00                 
+CONCEPTO     : 214 SNE ESSALUD        
+
+********************************************************************************
+COD.PLANILLA      APELLIDOS Y NOMBRES                                IMPORTE
+********************************************************************************
+
+1523353           COLAN VASQUEZ AIDA ESPERANZA                         18.40
+
+                                    TOTAL SUBACTIV. 3 :       1         18.40
+                                    TOTAL SUBACTIV. 2 :       1         18.40
+                                    TOTAL SUBACTIV. 1 :       1         18.40
+
+ESSALUD                                                      PAGINA :   9
+GC. GESTION DE LAS PERSONAS                                   FECHA : 19/12/2013
+
+           ANEXOS SELECTIVOS PLANILLA DE HABERES MES DE NOVIEMBRE  -  2013
+
+PROGRAMA     : 02  SALUD          
+SUB-PROGRAMA : 05  RA Sabogal     
+ACTIVIDAD    : 02  PM Chancay    
+S-ACTIVID.1  : 04  Despacho 
+S-ACTIVID.2  : 00         
+S-ACTIVID.3  : 00                 
+CONCEPTO     : 214 SNE ESSALUD        
+
+********************************************************************************
+COD.PLANILLA      APELLIDOS Y NOMBRES                                IMPORTE
+********************************************************************************
+
+2080335           PEREZ CARDENAS MARIA ELENA                        26.74
+
+
+                                    TOTAL SUBACTIV. 3 :       2         61.24
+                                    TOTAL SUBACTIV. 2 :       2         61.24
+
+ESSALUD                                                      PAGINA :  10
+GC. GESTION DE LAS PERSONAS                                   FECHA : 19/12/2013
+
+           ANEXOS SELECTIVOS PLANILLA DE HABERES MES DE NOVIEMBRE  -  2013
+
+PROGRAMA     : 02  SALUD          
+SUB-PROGRAMA : 05  RA Sabogal     
+ACTIVIDAD    : 02  H I Mongrut    
+S-ACTIVID.1  : 04  S Ayu Diag Tra 
+S-ACTIVID.2  : 01   
+S-ACTIVID.3  : 00                 
+CONCEPTO     : 214 SNE ESSALUD        
+
+********************************************************************************
+COD.PLANILLA      APELLIDOS Y NOMBRES                                IMPORTE
+********************************************************************************
+
+1611225           MENDOZA MURO MARIA GABRIELA                      31.91
+
+
+
+ESSALUD                                                      PAGINA :  11
+GC. GESTION DE LAS PERSONAS                                   FECHA : 19/12/2013
+
+           ANEXOS SELECTIVOS PLANILLA DE HABERES MES DE NOVIEMBRE  -  2013
+
+PROGRAMA     : 02  SALUD          
+SUB-PROGRAMA : 05  RA Sabogal     
+ACTIVIDAD    : 02  Pol.Hn.Donrose    
+S-ACTIVID.1  : 04  S Ayu Diag Tra 
+S-ACTIVID.2  : 01      
+S-ACTIVID.3  : 00                 
+CONCEPTO     : 214 SNE ESSALUD        
+
+********************************************************************************
+COD.PLANILLA      APELLIDOS Y NOMBRES                                IMPORTE
+********************************************************************************
+
+1425709           RIVERA CASTRO IRIS DALILA                       34.50
+
+
+                                    TOTAL SUBACTIV. 3 :      34        997.14
+                                    TOTAL SUBACTIV. 2 :      34        997.14
+
+ESSALUD                                                      PAGINA :  12
+GC. GESTION DE LAS PERSONAS                                   FECHA : 19/12/2013
+
+           ANEXOS SELECTIVOS PLANILLA DE HABERES MES DE NOVIEMBRE  -  2013
+
+PROGRAMA     : 02  SALUD          
+SUB-PROGRAMA : 05  RA Sabogal     
+ACTIVIDAD    : 02  HII G.Lanatta    
+S-ACTIVID.1  : 04  S Enfermeria 
+S-ACTIVID.2  : 02     
+S-ACTIVID.3  : 00                 
+CONCEPTO     : 214 SNE ESSALUD        
+
+********************************************************************************
+COD.PLANILLA      APELLIDOS Y NOMBRES                                IMPORTE
+********************************************************************************
+
+1403989           AGUILAR ALVAREZ SOLEDAD                          29.33
+
+                                    TOTAL SUBACTIV. 3 :      10        288.11
+                                    TOTAL SUBACTIV. 2 :      10        288.11
+
+ESSALUD                                                      PAGINA :  13
+GC. GESTION DE LAS PERSONAS                                   FECHA : 19/12/2013
+
+           ANEXOS SELECTIVOS PLANILLA DE HABERES MES DE NOVIEMBRE  -  2013
+
+PROGRAMA     : 02  SALUD          
+SUB-PROGRAMA : 05  RA Sabogal     
+ACTIVIDAD    : 02  HIV Sabogal    
+S-ACTIVID.1  : 04  Dpt Enfermeria 
+S-ACTIVID.2  : 03  
+S-ACTIVID.3  : 00                 
+CONCEPTO     : 214 SNE ESSALUD        
+
+********************************************************************************
+COD.PLANILLA      APELLIDOS Y NOMBRES                                IMPORTE
+********************************************************************************
+
+1519397           MOTTA LINARES MARITZA SOLEDAD                    34.50
+
+
+
+ESSALUD                                                      PAGINA :  14
+GC. GESTION DE LAS PERSONAS                                   FECHA : 19/12/2013
+
+           ANEXOS SELECTIVOS PLANILLA DE HABERES MES DE NOVIEMBRE  -  2013
+
+PROGRAMA     : 02  SALUD          
+SUB-PROGRAMA : 05  RA Arequipa     
+ACTIVIDAD    : 02  Ger.Red Asist.    
+S-ACTIVID.1  : 04  Of Gest y Des 
+S-ACTIVID.2  : 03  
+S-ACTIVID.3  : 00                 
+CONCEPTO     : 214 SNE ESSALUD        
+
+********************************************************************************
+COD.PLANILLA      APELLIDOS Y NOMBRES                                IMPORTE
+********************************************************************************
+
+4342750           CACERES DEL CARPIO ALEJANDRA GLADIS                          29.33
+
+
+
+ESSALUD                                                      PAGINA :  15
+GC. GESTION DE LAS PERSONAS                                   FECHA : 19/12/2013
+
+           ANEXOS SELECTIVOS PLANILLA DE HABERES MES DE NOVIEMBRE  -  2013
+
+PROGRAMA     : 02  SALUD          
+SUB-PROGRAMA : 05  RA Ancash     
+ACTIVIDAD    : 02  Ger.Red Asist.    
+S-ACTIVID.1  : 04  Of Coord Prest 
+S-ACTIVID.2  : 03  
+S-ACTIVID.3  : 00                 
+CONCEPTO     : 214 SNE ESSALUD        
+
+********************************************************************************
+COD.PLANILLA      APELLIDOS Y NOMBRES                                IMPORTE
+********************************************************************************
+
+2373342           CHERO YARLAQUE SILVIA                         31.91
+
+
+                                    TOTAL SUBACTIV. 3 :      44      1,419.43
+                                    TOTAL SUBACTIV. 2 :      44      1,419.43
+
+ESSALUD                                                      PAGINA :  16
+GC. GESTION DE LAS PERSONAS                                   FECHA : 19/12/2013
+
+           ANEXOS SELECTIVOS PLANILLA DE HABERES MES DE NOVIEMBRE  -  2013
+
+PROGRAMA     : 02  SALUD          
+SUB-PROGRAMA : 05  RA La Liberta     
+ACTIVIDAD    : 02  Ger.Red Asist.    
+S-ACTIVID.1  : 04  Of Gest y Des 
+S-ACTIVID.2  : 04    
+S-ACTIVID.3  : 00                 
+CONCEPTO     : 214 SNE ESSALUD        
+
+********************************************************************************
+COD.PLANILLA      APELLIDOS Y NOMBRES                                IMPORTE
+********************************************************************************
+
+3434500           ARROYO LEZMA DE MEDINA MIRTHA ISABEL                             29.33
+
+
+
+ESSALUD                                                      PAGINA :  17
+GC. GESTION DE LAS PERSONAS                                   FECHA : 19/12/2013
+
+           ANEXOS SELECTIVOS PLANILLA DE HABERES MES DE NOVIEMBRE  -  2013
+
+PROGRAMA     : 02  SALUD          
+SUB-PROGRAMA : 05  RA Lambayeque     
+ACTIVIDAD    : 02  Ger.Red Asist.    
+S-ACTIVID.1  : 04  Of Adm Reg Med 
+S-ACTIVID.2  : 04   
+S-ACTIVID.3  : 00                 
+CONCEPTO     : 214 SNE ESSALUD        
+
+********************************************************************************
+COD.PLANILLA      APELLIDOS Y NOMBRES                                IMPORTE
+********************************************************************************
+
+1776525           VIGO SALIRROSAS NORA ELIZABETH                  29.33
+
+
+                                    TOTAL SUBACTIV. 3 :      31        952.86
+                                    TOTAL SUBACTIV. 2 :      31        952.86
+
+ESSALUD                                                      PAGINA :  18
+GC. GESTION DE LAS PERSONAS                                   FECHA : 19/12/2013
+
+           ANEXOS SELECTIVOS PLANILLA DE HABERES MES DE NOVIEMBRE  -  2013
+
+PROGRAMA     : 02  SALUD          
+SUB-PROGRAMA : 05  RA Piura     
+ACTIVIDAD    : 02  Ger.Red Asist.    
+S-ACTIVID.1  : 04  Of Pla y Calid 
+S-ACTIVID.2  : 05  
+S-ACTIVID.3  : 00                 
+CONCEPTO     : 214 SNE ESSALUD        
+
+********************************************************************************
+COD.PLANILLA      APELLIDOS Y NOMBRES                                IMPORTE
+********************************************************************************
+
+1922141           DELGADO PIEDRA DELICIA DEL CONSUELO                       26.74
+
+
+
+ESSALUD                                                      PAGINA :  19
+GC. GESTION DE LAS PERSONAS                                   FECHA : 19/12/2013
+
+           ANEXOS SELECTIVOS PLANILLA DE HABERES MES DE NOVIEMBRE  -  2013
+
+PROGRAMA     : 02  SALUD          
+SUB-PROGRAMA : 05  RA Rebagliati     
+ACTIVIDAD    : 02  Ger.Red Asist.    
+S-ACTIVID.1  : 04  Of Administrac 
+S-ACTIVID.2  : 05  
+S-ACTIVID.3  : 00                 
+CONCEPTO     : 214 SNE ESSALUD        
+
+********************************************************************************
+COD.PLANILLA      APELLIDOS Y NOMBRES                                IMPORTE
+********************************************************************************
+
+1854342           FERNANDEZ GUZMAN CARMEN CONCEPCION                          26.74
+
+
+
+ESSALUD                                                      PAGINA :  20
+GC. GESTION DE LAS PERSONAS                                   FECHA : 19/12/2013
+
+           ANEXOS SELECTIVOS PLANILLA DE HABERES MES DE NOVIEMBRE  -  2013
+
+PROGRAMA     : 02  SALUD          
+SUB-PROGRAMA : 05  RA Almenara     
+ACTIVIDAD    : 02  Ger.Red Asist.    
+S-ACTIVID.1  : 04  Of C Inves D U 
+S-ACTIVID.2  : 05  
+S-ACTIVID.3  : 00                 
+CONCEPTO     : 214 SNE ESSALUD        
+
+********************************************************************************
+COD.PLANILLA      APELLIDOS Y NOMBRES                                IMPORTE
+********************************************************************************
+
+1603512           CARRILLO ALFARO DE JIMENEZ CELIA HILDA                          31.91
+
+
+
+ESSALUD                                                      PAGINA :  21
+GC. GESTION DE LAS PERSONAS                                   FECHA : 19/12/2013
+
+           ANEXOS SELECTIVOS PLANILLA DE HABERES MES DE NOVIEMBRE  -  2013
+
+PROGRAMA     : 02  SALUD          
+SUB-PROGRAMA : 05  RA Sabogal     
+ACTIVIDAD    : 02  Ger.Red Asist.    
+S-ACTIVID.1  : 04  Of Administrac 
+S-ACTIVID.2  : 05
+S-ACTIVID.3  : 00                 
+CONCEPTO     : 214 SNE ESSALUD        
+
+********************************************************************************
+COD.PLANILLA      APELLIDOS Y NOMBRES                                IMPORTE
+********************************************************************************
+
+1498788      BULEJE ESPINOZA FREDY RUTH                            29.33
+
+
+                                    TOTAL SUBACTIV. 3 :      64      1,911.73
+                                    TOTAL SUBACTIV. 2 :      64      1,911.73
+
+ESSALUD                                                      PAGINA :  22
+GC. GESTION DE LAS PERSONAS                                   FECHA : 19/12/2013
+
+           ANEXOS SELECTIVOS PLANILLA DE HABERES MES DE NOVIEMBRE  -  2013
+
+PROGRAMA     : 02  SALUD          
+SUB-PROGRAMA : 05  RA Tumbes     
+ACTIVIDAD    : 02  Dir.Red Asist.    
+S-ACTIVID.1  : 04  Despacho 
+S-ACTIVID.2  : 06  
+S-ACTIVID.3  : 00                 
+CONCEPTO     : 214 SNE ESSALUD        
+
+********************************************************************************
+COD.PLANILLA      APELLIDOS Y NOMBRES                                IMPORTE
+********************************************************************************
+
+5615805          JIMENEZ CALERO MARLIN MERCEDES                                    29.33
+
+5615658          GARCIA OJEDA FEBE                            26.74
+
+
+
+ESSALUD                                                      PAGINA :  23
+GC. GESTION DE LAS PERSONAS                                   FECHA : 19/12/2013
+
+           ANEXOS SELECTIVOS PLANILLA DE HABERES MES DE NOVIEMBRE  -  2013
+
+PROGRAMA     : 02  SALUD          
+SUB-PROGRAMA : 05  RA Huancaveli     
+ACTIVIDAD    : 02  Dir.Red Asist    
+S-ACTIVID.1  : 04  U Pres.Ec.y So 
+S-ACTIVID.2  : 06  
+S-ACTIVID.3  : 00                 
+CONCEPTO     : 214 SNE ESSALUD        
+
+********************************************************************************
+COD.PLANILLA      APELLIDOS Y NOMBRES                                IMPORTE
+********************************************************************************
+
+3886608           HUAMAN SOTO RHONY                            26.74
+
+
+
+ESSALUD                                                      PAGINA :  24
+GC. GESTION DE LAS PERSONAS                                   FECHA : 19/12/2013
+
+           ANEXOS SELECTIVOS PLANILLA DE HABERES MES DE NOVIEMBRE  -  2013
+
+PROGRAMA     : 02  SALUD          
+SUB-PROGRAMA : 05  RA Ayacucho     
+ACTIVIDAD    : 02  Dir.Red Asist    
+S-ACTIVID.1  : 04  Of Plan.y Cal. 
+S-ACTIVID.2  : 06  
+S-ACTIVID.3  : 00                 
+CONCEPTO     : 214 SNE ESSALUD        
+
+********************************************************************************
+COD.PLANILLA      APELLIDOS Y NOMBRES                                IMPORTE
+********************************************************************************
+
+2105982     CAMASCA SAEZ MARIA LUZ                   26.74
+
+                                    TOTAL SUBACTIV. 3 :      44      1,322.61
+                                    TOTAL SUBACTIV. 2 :      44      1,322.61
+
+ESSALUD                                                      PAGINA :  25
+GC. GESTION DE LAS PERSONAS                                   FECHA : 19/12/2013
+
+           ANEXOS SELECTIVOS PLANILLA DE HABERES MES DE NOVIEMBRE  -  2013
+
+PROGRAMA     : 02  SALUD          
+SUB-PROGRAMA : 05  RA Rebagliati     
+ACTIVIDAD    : 02  CEDHI    
+S-ACTIVID.1  : 04  Despacho 
+S-ACTIVID.2  : 07   
+S-ACTIVID.3  : 00                 
+CONCEPTO     : 214 SNE ESSALUD        
+
+********************************************************************************
+COD.PLANILLA      APELLIDOS Y NOMBRES                                IMPORTE
+********************************************************************************
+
+5263125           MEJIA PRADO GEOVANNA ELIA                   29.33
+
+5263156           CAYCHO CASTRO BRESCIA JOVANNA                               29.33
+
+
+ESSALUD                                                      PAGINA :  26
+GC. GESTION DE LAS PERSONAS                                   FECHA : 19/12/2013
+
+           ANEXOS SELECTIVOS PLANILLA DE HABERES MES DE NOVIEMBRE  -  2013
+
+PROGRAMA     : 02  SALUD          
+SUB-PROGRAMA : 05  GC Prest Salu     
+ACTIVIDAD    : 02  G A Sal Of.Fle    
+S-ACTIVID.1  : 04  SG Proy Espec
+S-ACTIVID.2  : 07   
+S-ACTIVID.3  : 00                 
+CONCEPTO     : 214 SNE ESSALUD        
+
+********************************************************************************
+COD.PLANILLA      APELLIDOS Y NOMBRES                                IMPORTE
+********************************************************************************
+
+3694240           ALVARADO CORDOVA AYME                                26.74
+
+3193360           ALBITRES AHUMADA RITA FABIOLA                           34.50
+
+                                    TOTAL SUBACTIV. 3 :      29        885.28
+                                    TOTAL SUBACTIV. 2 :      29        885.28
+
+ESSALUD                                                      PAGINA :  27
+GC. GESTION DE LAS PERSONAS                                   FECHA : 19/12/2013
+
+           ANEXOS SELECTIVOS PLANILLA DE HABERES MES DE NOVIEMBRE  -  2013
+
+PROGRAMA     : 02  SALUD          
+SUB-PROGRAMA : 05  GC Prest Salu     
+ACTIVIDAD    : 02  G A Sal Of.Fle  
+S-ACTIVID.1  : 04  STAE 
+S-ACTIVID.2  : 08  
+S-ACTIVID.3  : 00                 
+CONCEPTO     : 214 SNE ESSALUD        
+
+********************************************************************************
+COD.PLANILLA      APELLIDOS Y NOMBRES                                IMPORTE
+********************************************************************************
+
+4142261           ZU¥IGA PINEDO NANCY PAOLA                           31.91
+
+5001461           VILLANUEVA GOMEZ JULIANA                         26.74
+
+
+
+ESSALUD                                                      PAGINA :  28
+GC. GESTION DE LAS PERSONAS                                   FECHA : 19/12/2013
+
+           ANEXOS SELECTIVOS PLANILLA DE HABERES MES DE NOVIEMBRE  -  2013
+
+PROGRAMA     : 02  SALUD          
+SUB-PROGRAMA : 05  GC Prest Salu     
+ACTIVIDAD    : 02  G Procur y Tra    
+S-ACTIVID.1  : 04  SG Procura 
+S-ACTIVID.2  : 08  
+S-ACTIVID.3  : 00                 
+CONCEPTO     : 214 SNE ESSALUD        
+
+********************************************************************************
+COD.PLANILLA      APELLIDOS Y NOMBRES                                IMPORTE
+********************************************************************************
+
+5182810           GUILLEN RAMOS PATRICIA GIULIANA                          31.91
+
+2529071           CALDERON DIAZ ZOILA                                 29.33
+
+3824084           CUBAS VELASCO MADELAINE ROSA                         31.91
+
+
+ESSALUD                                                      PAGINA :  29
+GC. GESTION DE LAS PERSONAS                                   FECHA : 19/12/2013
+
+           ANEXOS SELECTIVOS PLANILLA DE HABERES MES DE NOVIEMBRE  -  2013
+
+PROGRAMA     : 02  SALUD          
+SUB-PROGRAMA : 05  GC Prest Salu     
+ACTIVIDAD    : 02  G A Sal Of.Fle    
+S-ACTIVID.1  : 04  SG At.D.PADOMI 
+S-ACTIVID.2  : 08  
+S-ACTIVID.3  : 00                 
+CONCEPTO     : 214 SNE ESSALUD        
+
+********************************************************************************
+COD.PLANILLA      APELLIDOS Y NOMBRES                                IMPORTE
+********************************************************************************
+
+4566076           ARAUJO ROSALES FLOR SILVIA                            29.33
+
+5132290           ALANIA CANGALAYA PATRICIA ILIANA                                31.91
+
+                                    TOTAL SUBACTIV. 3 :      48      1,424.40
+                                    TOTAL SUBACTIV. 2 :      48      1,424.40
+                                    TOTAL SUBACTIV. 1 :     306      9,262.80
+                                    TOTAL   ACTIVIDAD :     308      9,315.70
+
+ESSALUD                                                      PAGINA :  30
+GC. GESTION DE LAS PERSONAS                                   FECHA : 19/12/2013
+
+           ANEXOS SELECTIVOS PLANILLA DE HABERES MES DE NOVIEMBRE  -  2013
+
+PROGRAMA     : 02  SALUD          
+SUB-PROGRAMA : 05  GC Prest Salu     
+ACTIVIDAD    : 03  G A Sal Of.Fle  
+S-ACTIVID.1  : 07  Esc Emer Desas   
+S-ACTIVID.2  : 00   
+S-ACTIVID.3  : 00                 
+CONCEPTO     : 214 SNE ESSALUD        
+
+********************************************************************************
+COD.PLANILLA      APELLIDOS Y NOMBRES                                IMPORTE
+********************************************************************************
+
+3417949           PALOMINO MARQUEZ MANUEL GUZMAN                               31.91
+
+
+
+
+ESSALUD                                                      PAGINA :  31
+GC. GESTION DE LAS PERSONAS                                   FECHA : 19/12/2013
+
+           ANEXOS SELECTIVOS PLANILLA DE HABERES MES DE NOVIEMBRE  -  2013
+
+PROGRAMA     : 02  SALUD          
+SUB-PROGRAMA : 05  GC Prest Salu     
+ACTIVIDAD    : 03  G Procur y Tra  
+S-ACTIVID.1  : 07  Despacho   
+S-ACTIVID.2  : 00   
+S-ACTIVID.3  : 00                 
+CONCEPTO     : 214 SNE ESSALUD        
+
+********************************************************************************
+COD.PLANILLA      APELLIDOS Y NOMBRES                                IMPORTE
+********************************************************************************
+
+5321413           BRAVO QUISPE MARIA LUISA                              29.33
+
+5321475           ARRIOLA HUERTA PATRICIA JANET HORTE                      26.74
+
+
+ESSALUD                                                      PAGINA :  32
+GC. GESTION DE LAS PERSONAS                                   FECHA : 19/12/2013
+
+           ANEXOS SELECTIVOS PLANILLA DE HABERES MES DE NOVIEMBRE  -  2013
+
+PROGRAMA     : 02  SALUD          
+SUB-PROGRAMA : 05  GC Prest Salu     
+ACTIVIDAD    : 03  G A Sal Of.Fle  
+S-ACTIVID.1  : 07  CEPRIT   
+S-ACTIVID.2  : 00         
+S-ACTIVID.3  : 00                 
+CONCEPTO     : 214 SNE ESSALUD        
+
+********************************************************************************
+COD.PLANILLA      APELLIDOS Y NOMBRES                                IMPORTE
+********************************************************************************
+
+3478335           ALCANTARA RODRIGUEZ SHIRLEY YOJANSEN                           34.50
+
+1598712           AGUIRRE ABRILL BEATRIZ MARCELA                     29.33
+
+
+
+ESSALUD                                                      PAGINA :  33
+GC. GESTION DE LAS PERSONAS                                   FECHA : 19/12/2013
+
+           ANEXOS SELECTIVOS PLANILLA DE HABERES MES DE NOVIEMBRE  -  2013
+
+PROGRAMA     : 02  SALUD          
+SUB-PROGRAMA : 05  CN Salud Rena
+ACTIVIDAD    : 03  Gerencia  
+S-ACTIVID.1  : 07  Ser.Enfermeria   
+S-ACTIVID.2  : 00   
+S-ACTIVID.3  : 00                 
+CONCEPTO     : 214 SNE ESSALUD        
+
+********************************************************************************
+COD.PLANILLA      APELLIDOS Y NOMBRES                                IMPORTE
+********************************************************************************
+
+2079949           MORALES ROJAS VILMA BALVINA                               29.33
+
+2529499           JIMENEZ BARRIENTOS MARIA DEL ROSARIO                                    31.91
+
+
+ESSALUD                                                      PAGINA :  34
+GC. GESTION DE LAS PERSONAS                                   FECHA : 19/12/2013
+
+           ANEXOS SELECTIVOS PLANILLA DE HABERES MES DE NOVIEMBRE  -  2013
+
+PROGRAMA     : 02  SALUD          
+SUB-PROGRAMA : 05  INCOR     
+ACTIVIDAD    : 03  Gerencia  
+S-ACTIVID.1  : 07  D Cuid  Pacien   
+S-ACTIVID.2  : 00   
+S-ACTIVID.3  : 00                 
+CONCEPTO     : 214 SNE ESSALUD        
+
+********************************************************************************
+COD.PLANILLA      APELLIDOS Y NOMBRES                                IMPORTE
+********************************************************************************
+
+5063869           AQUINO BARZOLA EDITH ROSANA                                 29.33
+
+5064460           AMARO VASQUEZ CECILIA ESTELA                              34.50
+
+
+                                    TOTAL SUBACTIV. 3 :      81      2,605.71
+                                    TOTAL SUBACTIV. 2 :      81      2,605.71
+                                    TOTAL SUBACTIV. 1 :      81      2,605.71
+                                    TOTAL   ACTIVIDAD :      81      2,605.71
+
+ESSALUD                                                      PAGINA :  35
+GC. GESTION DE LAS PERSONAS                                   FECHA : 19/12/2013
+
+           ANEXOS SELECTIVOS PLANILLA DE HABERES MES DE NOVIEMBRE  -  2013
+
+PROGRAMA     : 02  SALUD          
+SUB-PROGRAMA : 05  Programa CEI     
+ACTIVIDAD    : 04  Sede Central   
+S-ACTIVID.1  : 04  GC Recur Human 
+S-ACTIVID.2  : 00   
+S-ACTIVID.3  : 00                 
+CONCEPTO     : 214 SNE ESSALUD        
+
+********************************************************************************
+COD.PLANILLA      APELLIDOS Y NOMBRES                                IMPORTE
+********************************************************************************
+
+3924974           SANCHEZ MACKAY MIRTHA PILAR                             31.91
+
+
+
+
+ESSALUD                                                      PAGINA :  36
+GC. GESTION DE LAS PERSONAS                                   FECHA : 19/12/2013
+
+           ANEXOS SELECTIVOS PLANILLA DE HABERES MES DE NOVIEMBRE  -  2013
+
+PROGRAMA     : 02  SALUD          
+SUB-PROGRAMA : 05  Org.Ctrol.Ins     
+ACTIVIDAD    : 04  RA Junin   
+S-ACTIVID.1  : 04  Of Cont desc I 
+S-ACTIVID.2  : 00   
+S-ACTIVID.3  : 00                 
+CONCEPTO     : 214 SNE ESSALUD        
+
+********************************************************************************
+COD.PLANILLA      APELLIDOS Y NOMBRES                                IMPORTE
+********************************************************************************
+
+2439438           CARDENAS MONAGO OLINDA                         34.50
+
+1513068           VALLE CISNEROS JOBITA ISABEL                             34.50
+
+
+
+ESSALUD                                                      PAGINA :  37
+GC. GESTION DE LAS PERSONAS                                   FECHA : 19/12/2013
+
+           ANEXOS SELECTIVOS PLANILLA DE HABERES MES DE NOVIEMBRE  -  2013
+
+PROGRAMA     : 02  SALUD          
+SUB-PROGRAMA : 05  Def.del Asegu     
+ACTIVIDAD    : 04  Of Nac Aten As   
+S-ACTIVID.1  : 04  RA Junin 
+S-ACTIVID.2  : 00         
+S-ACTIVID.3  : 00                 
+CONCEPTO     : 214 SNE ESSALUD        
+
+********************************************************************************
+COD.PLANILLA      APELLIDOS Y NOMBRES                                IMPORTE
+********************************************************************************
+
+4806071           SOTO CARHUAMACA ROCIO DEL PILAR ROXA                          29.33
+
+                                    TOTAL SUBACTIV. 3 :      49      1,501.72
+                                    TOTAL SUBACTIV. 2 :      49      1,501.72
+
+ESSALUD                                                      PAGINA :  38
+GC. GESTION DE LAS PERSONAS                                   FECHA : 19/12/2013
+
+           ANEXOS SELECTIVOS PLANILLA DE HABERES MES DE NOVIEMBRE  -  2013
+
+PROGRAMA     : 02  SALUD          
+SUB-PROGRAMA : 05  GC Pre.Soc.y     
+ACTIVIDAD    : 04  G.Pre.Sociales   
+S-ACTIVID.1  : 04  RA Tacna 
+S-ACTIVID.2  : 03     
+S-ACTIVID.3  : 00                 
+CONCEPTO     : 214 SNE ESSALUD        
+
+********************************************************************************
+COD.PLANILLA      APELLIDOS Y NOMBRES                                IMPORTE
+********************************************************************************
+
+3737535          ESCALANTE CARRASCO LADDY IVONNE                                 26.74
+
+                                    TOTAL SUBACTIV. 3 :      16        458.87
+                                    TOTAL SUBACTIV. 2 :      16        458.87
+                                    TOTAL SUBACTIV. 1 :      65      1,960.59
+                                    TOTAL   ACTIVIDAD :      65      1,960.59
+
+ESSALUD                                                      PAGINA :  39
+GC. GESTION DE LAS PERSONAS                                   FECHA : 19/12/2013
+
+           ANEXOS SELECTIVOS PLANILLA DE HABERES MES DE NOVIEMBRE  -  2013
+
+PROGRAMA     : 02  SALUD          
+SUB-PROGRAMA : 05  Def.del Asegu     
+ACTIVIDAD    : 04  Of Nac Aten As   
+S-ACTIVID.1  : 04  RA Moquegua 
+S-ACTIVID.2  : 03    
+S-ACTIVID.3  : 00                 
+CONCEPTO     : 214 SNE ESSALUD        
+
+********************************************************************************
+COD.PLANILLA      APELLIDOS Y NOMBRES                                IMPORTE
+********************************************************************************
+
+2536669           ARANDA JUAREZ MARIA ROSA                                   37.95
+
+                                    TOTAL SUBACTIV. 3 :      11        341.56
+                                    TOTAL SUBACTIV. 2 :      11        341.56
+                                    TOTAL SUBACTIV. 1 :      11        341.56
+                                    TOTAL   ACTIVIDAD :      11        341.56
+
+ESSALUD                                                      PAGINA :  40
+GC. GESTION DE LAS PERSONAS                                   FECHA : 19/12/2013
+
+           ANEXOS SELECTIVOS PLANILLA DE HABERES MES DE NOVIEMBRE  -  2013
+
+PROGRAMA     : 02  AFESSALUD          
+SUB-PROGRAMA : 05  GC Prest Salu     
+ACTIVIDAD    : 06  G Oper.Salud 
+S-ACTIVID.1  : 04  SG Oport Atenc 
+S-ACTIVID.2  : 03    
+S-ACTIVID.3  : 00                 
+CONCEPTO     : 214 SNE ESSALUD        
+
+********************************************************************************
+COD.PLANILLA      APELLIDOS Y NOMBRES                                IMPORTE
+********************************************************************************
+
+5601041           SOLIS ANCHANTE MAGALY PATRICIA                             29.33
+
+
+ESSALUD                                                      PAGINA :  41
+GC. GESTION DE LAS PERSONAS                                   FECHA : 19/12/2013
+
+           ANEXOS SELECTIVOS PLANILLA DE HABERES MES DE NOVIEMBRE  -  2013
+
+PROGRAMA     : 02  AFESSALUD          
+SUB-PROGRAMA : 05  GC Prest Salu     
+ACTIVIDAD    : 06  G C.Pres.Salud 
+S-ACTIVID.1  : 04  Despacho 
+S-ACTIVID.2  : 03     
+S-ACTIVID.3  : 00                 
+CONCEPTO     : 214 SNE ESSALUD        
+
+********************************************************************************
+COD.PLANILLA      APELLIDOS Y NOMBRES                                IMPORTE
+********************************************************************************
+
+5623816           DAVILA  CARMEN YOVANA                              31.91
+
+ESSALUD                                                      PAGINA :  42
+GC. GESTION DE LAS PERSONAS                                   FECHA : 19/12/2013
+
+           ANEXOS SELECTIVOS PLANILLA DE HABERES MES DE NOVIEMBRE  -  2013
+
+PROGRAMA     : 02  SALUD          
+SUB-PROGRAMA : 05  RA Rebagliati     
+ACTIVIDAD    : 02  Ente_prueba    
+S-ACTIVID.1  : 04  Despacho 
+S-ACTIVID.2  : 07   
+S-ACTIVID.3  : 00                 
+CONCEPTO     : 214 SNE ESSALUD        
+
+********************************************************************************
+COD.PLANILLA      APELLIDOS Y NOMBRES                                IMPORTE
+********************************************************************************
+
+1111111           MEJIA PADILLA GEOVANNA ELIA                   29.33
+
+2222222           QUISPE CASTRO BRESCIA JOVANNA                               29.33
+
+3333333           QUISPELAYA JUAN  JOVANNA                               29.33
+
+

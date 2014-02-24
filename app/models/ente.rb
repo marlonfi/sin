@@ -17,28 +17,7 @@ class Ente < ActiveRecord::Base
 			path = import.archivo.path
 			CSV.foreach(path, headers: true) do |row|
 				data_enfermera, data_trabajo = Enfermera.parse_row(row)
-				nombre_ente = Ente.get_ente_name(data_trabajo, data_enfermera[:regimen])
-				if data_trabajo[:programa] == 'SALUD'
-			  	if data_trabajo[:sub_programa][0..2] == 'RA '
-			  		red = RedAsistencial.find_by_cod_essalud(data_trabajo[:sub_programa])
-			  		crear_ente(red, nombre_ente)
-			  	elsif data_trabajo[:sub_programa] == 'Def.del Asegu'
-			  		red = RedAsistencial.find_by_cod_essalud(data_trabajo[:sub_actividad1])
-						crear_ente(red, nombre_ente)
-					elsif data_trabajo[:sub_programa] == 'GC Pre.Soc.y'
-						red = RedAsistencial.find_by_cod_essalud(data_trabajo[:sub_actividad1])
-						crear_ente(red, nombre_ente)
-					elsif data_trabajo[:sub_programa] == 'Org.Ctrol.Ins'
-						red = RedAsistencial.find_by_cod_essalud(data_trabajo[:actividad])
-						crear_ente(red, nombre_ente)		
-			  	else
-			  		red = RedAsistencial.find_by_cod_essalud('ORG. DESCONCENTRADOS')
-			  		crear_ente(red, nombre_ente)
-			  	end
-			  elsif data_trabajo[:programa] == 'AFESSALUD'
-			  	red = RedAsistencial.find_by_cod_essalud('ORG. DESCONCENTRADOS')
-			  	crear_ente(red, nombre_ente)
-			  end	
+				parse_entes(data_trabajo, data_enfermera[:regimen])
 			end
 			import.update_attributes(status: 'IMPORTADO')
 		rescue
@@ -46,10 +25,36 @@ class Ente < ActiveRecord::Base
 		end
 	end
 	
+	#parsea data_trabajo en crea ente
+	def self.parse_entes(data_trabajo, regimen)
+		nombre_ente = Ente.get_ente_name(data_trabajo, regimen)
+		if data_trabajo[:programa] == 'SALUD'
+	  	if data_trabajo[:sub_programa][0..2] == 'RA '
+	  		red = RedAsistencial.find_by_cod_essalud(data_trabajo[:sub_programa])
+	  		crear_ente(red, nombre_ente)
+	  	elsif data_trabajo[:sub_programa] == 'Def.del Asegu'
+	  		red = RedAsistencial.find_by_cod_essalud(data_trabajo[:sub_actividad1])
+				crear_ente(red, nombre_ente)
+			elsif data_trabajo[:sub_programa] == 'GC Pre.Soc.y'
+				red = RedAsistencial.find_by_cod_essalud(data_trabajo[:sub_actividad1])
+				crear_ente(red, nombre_ente)
+			elsif data_trabajo[:sub_programa] == 'Org.Ctrol.Ins'
+				red = RedAsistencial.find_by_cod_essalud(data_trabajo[:actividad])
+				crear_ente(red, nombre_ente)		
+	  	else
+	  		red = RedAsistencial.find_by_cod_essalud('ORG. DESCONCENTRADOS')
+	  		crear_ente(red, nombre_ente)
+	  	end
+	  elsif data_trabajo[:programa] == 'AFESSALUD'
+	  	red = RedAsistencial.find_by_cod_essalud('ORG. DESCONCENTRADOS')
+	  	crear_ente(red, nombre_ente)
+	  end	
+	end
 	def self.crear_ente(red, nombre_ente)
 		if red
 			ente = find_or_create_by(cod_essalud: nombre_ente)
 			red.entes << ente
+			ente
 		end
 	end
 

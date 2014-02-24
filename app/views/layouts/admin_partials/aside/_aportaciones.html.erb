@@ -1,0 +1,10 @@
+<li>
+  <% if  controller_name == 'pagos' %>
+  <a href="<%= pagos_path %>" class="active">
+  <%else%>        
+  <a href="<%= pagos_path %>" >
+  <% end %>
+    <i class="fa fa-usd"></i>
+    <span>Gestión de aportaciones</span>
+  </a>
+</li>

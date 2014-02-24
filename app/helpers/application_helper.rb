@@ -17,4 +17,7 @@ module ApplicationHelper
 			return ''
 		end
 	end
+	def meses_espanol
+	  %w(Enero Febrero Marzo Abril Mayo Junio Julio Agosto Setiembre Octubre Noviembre Diciembre) 
+	end
 end

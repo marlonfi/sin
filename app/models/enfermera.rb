@@ -1,7 +1,6 @@
 class Enfermera < ActiveRecord::Base
 	belongs_to :ente
-  has_many :bitacoras
-  
+  has_many :bitacoras  
   before_validation :generar_full_name
   before_save :generar_full_name
 	validates :cod_planilla, length: { is: 7 }
@@ -85,7 +84,7 @@ class Enfermera < ActiveRecord::Base
         end
       end
       if enfermera.b_sinesss != data_enfermera[:b_sinesss]
-        generar_bitacora(enfermera, ente)
+        generar_bitacora_afiliacion_desafiliacion(enfermera, ente)
       end
       enfermera.update_attributes(regimen: data_enfermera[:regimen], b_sinesss: data_enfermera[:b_sinesss],
                                  b_fedcut: data_enfermera[:b_fedcut], b_famesalud: data_enfermera[:b_famesalud],
@@ -98,13 +97,17 @@ class Enfermera < ActiveRecord::Base
     enfermera.ente = ente
     enfermera.save
   end
-  def self.generar_bitacora(enfermera, ente)
+  def self.generar_bitacora_afiliacion_desafiliacion(enfermera, ente)
     tipo = enfermera.b_sinesss ? 'DESAFILIACION' : 'AFILIACION'
     enfermera.bitacoras.create(import_id: @import.id, tipo: tipo,
                               status: 'PENDIENTE', ente_inicio: ente.cod_essalud,
                               ente_fin: ente.cod_essalud)
   end
-
+  def self.generar_bitacora_cambio_ente(enfermera, ente_inicio, ente_fin, import_id)
+    enfermera.bitacoras.create(import_id: import_id, tipo: 'TRASLADO',
+                              status: 'PENDIENTE', ente_inicio: ente_inicio,
+                              ente_fin: ente_fin)
+  end   
   def self.parse_actualizacion(row)
     data_enfermera = {}
     data_enfermera[:cod_planilla] = row['COD_PLANILLA'] if row['COD_PLANILLA']
@@ -147,6 +150,11 @@ class Enfermera < ActiveRecord::Base
     return data_enfermera,data_trabajo
   end 
 
+  def self.crear_enfermera_por_txt(ente, data_enfermera)
+    if ente
+      ente.enfermeras.create!(data_enfermera)
+    end
+  end
  	private
 
   def self.check_regimen(regimen)

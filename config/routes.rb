@@ -1,4 +1,9 @@
 Sinesss::Application.routes.draw do
+
+  match '/pagos/import', to:'pagos#import', as: 'pagos_import', via: 'get'
+  match '/pagos/importar', to:'pagos#importar', as: 'pagos_importar', via: 'post'
+  resources :pagos, :only => :index
+
   match '/bitacoras/:tipo', to:'bitacoras#index', as: 'tipo_bitacora', via: 'get'
   resources :bitacoras, :only => :index
 
@@ -27,7 +32,6 @@ Sinesss::Application.routes.draw do
   end
 
   match '/entes/import', to:'entes#import', as: 'entes_import', via: 'get'
-
   match '/entes/importar', to:'entes#importar', as: 'entes_importar', via: 'post'
   resources :entes do
     match '/enfermeras', to:'entes#enfermeras', as: 'enfermeras', via: 'get'

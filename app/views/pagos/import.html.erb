@@ -1,0 +1,44 @@
+<div class="col-lg-12">
+  <section class="panel">
+    <header class="panel-heading">
+        Atención! Se van a importar pagos, el archivo debe ser proveido por ESSALUD en formato TXT. 
+    </header>
+    <div class="panel-body">
+    	<%= form_tag pagos_importar_path, { multipart: true, :class => 'form-horizontal' }  do %>
+    		<span class="label label-danger">NOTA!</span>
+			  <span> Debes de indicar el año y mes que aparecen en el block de notas.</span>
+  			<div class="form-group">
+  			</br>
+			    <%= label_tag 'AÑO','AÑO', class: 'col-lg-2 col-sm-2 control-label' %>
+			    <div class="col-lg-10">
+			      <%= select_year Date.today,{ :start_year => 2013, :end_year => 2030},
+			      													 {class: "form-control m-bot15 s"} %>										   
+          </div>
+  			</div>
+
+  			<div class="form-group">
+			    <%= label_tag 'MES','MES', class: 'col-lg-2 col-sm-2 control-label' %>
+			    <div class="col-lg-10">
+			      <%= select_month Date.today,{ use_month_names: meses_espanol},{class: "form-control m-bot15 s"} %>	  
+          </div>
+  			</div>
+
+  			<div class="form-group">
+			    <%= label_tag :archivo, 'Archivo', class: 'col-lg-2 col-sm-2 control-label' %>
+			    <div class="col-lg-10">
+			      <%= file_field_tag :archivo ,:accept => '.txt' %>
+    				<p class="help-block">El formato debe ser TXT.</p>
+          </div>
+  			</div>
+
+  			<div class="form-group">
+			    <%= label_tag 'TIPO','TIPO', class: 'col-lg-2 col-sm-2 control-label' %>
+			    <div class="col-lg-10">
+			      <%= select_tag :tipo, "<option>CAS</option><option>NOMBRADOS Y CONTRATADOS</option>".html_safe, {class: "form-control m-bot15 s"} %>	  
+          </div>
+	 			</div>
+				<center><%= submit_tag "Procesar", class: 'btn btn-danger' %></center>
+			<% end %> 
+    </div>
+  </section>
+</div>

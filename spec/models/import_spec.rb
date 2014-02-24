@@ -22,6 +22,12 @@ describe Import do
 		expect(build(:import, status: 'WAT')).to_not be_valid
 	end
 
+	it "is a valid tipo_txt" do
+		expect(build(:import, tipo_txt: 'CAS')).to be_valid
+		expect(build(:import, tipo_txt: 'NOMBRADOS Y CONTRATADOS')).to be_valid
+		expect(build(:import, tipo_txt: 'Payment')).to_not be_valid
+	end
+
 	it "validates regimen in tipo_clase" do
 		expect(build(:import, tipo_clase: 'Enfermeras')).to be_valid
 		expect(build(:import, tipo_clase: 'Redes Asistenciales')).to be_valid
@@ -36,5 +42,4 @@ describe Import do
 		expect(build(:import, formato_org: 'SINESSS')).to be_valid
 		expect(build(:import, formato_org: 'ESSINESSS')).to_not be_valid
 	end
-
 end

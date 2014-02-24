@@ -104,9 +104,7 @@ describe Enfermera do
 	it "validates regimen in not cas contratado or nombreado" do
 		expect(build(:enfermera, regimen: 'IOKERO')).to have(1).errors_on(:regimen)
 	end
-
-  it 'creates a bitacora when a enfermera changes sinesss'
-
+  
   context 'importation of enfermeras' do
     before(:each) do
       @archivo = Import.create(tipo_clase: "Enfermera",

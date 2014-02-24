@@ -1,5 +1,5 @@
 class ImportsDatatable
-  delegate :params, :h, :print_status, :link_to, to: :@view
+  delegate :params, :h, :print_status, :month_year, :date_and_hour, :link_to, to: :@view
   #include Rails.application.routes.url_helpers
   
   def initialize(view)
@@ -21,9 +21,10 @@ private
       [
         print_status(import.status).html_safe,
         import.tipo_clase,
-        import.fecha_pago,
+        month_year(import.fecha_pago),
+        import.tipo_txt,
         import.formato_org,
-        import.created_at.strftime("%d/%m/%Y a las %I:%M%p"),
+        date_and_hour(import.created_at),
         link_to(File.basename(import.archivo_url), "imports/#{import.id}/download", :target => "_blank"),
         import.descripcion        
       ]
@@ -51,7 +52,7 @@ private
   end
 
   def sort_column
-    columns = %w[status tipo_clase fecha_pago formato_org created_at]
+    columns = %w[status tipo_clase fecha_pago tipo_txt formato_org created_at]
     columns[params[:iSortCol_0].to_i]
   end
 

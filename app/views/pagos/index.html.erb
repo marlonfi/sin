@@ -1,0 +1,24 @@
+<% provide(:title, 'Aportaciones de agremiados') %>
+<% provide(:content_header_path, pagos_path) %>
+<% provide(:content_header_data1,
+          "<i class='fa fa-usd'></i> Aportaciones de agremiados".html_safe) %>
+<% content_for :js_per_page do %>
+  <%= javascript_include_tag "import_pagos", "data-turbolinks-track" => true %>
+<% end %>
+
+
+<div class="row">
+  <div class="col-lg-12">
+    <section class="panel">
+      <header class="panel-heading">
+        Aportaciones de agremiados
+      </header>
+      <header class="panel-heading" style= 'text-align: center'>
+        <a class="btn btn-danger" data-toggle="modal" href="#myImportPagos", id='btnImportPagos'>
+            <i class="fa fa-upload"> </i> Importar
+        </a>         
+      </header>
+    </section>
+  </div>
+</div>
+<%= render 'index_import_pagos' %>

@@ -11,4 +11,10 @@ module ImportsHelper
 			'<span class="label label-success">IMPORTADO</span>'
 		end		
 	end
+	def month_year(date)
+		date ? date.strftime("%b, %Y") : ''
+	end
+	def date_and_hour(datetime)
+		datetime ? datetime.strftime("%d/%m/%Y a las %I:%M%p") : ''
+	end	
 end
