@@ -18,6 +18,7 @@ Sinesss::Application.routes.draw do
     match '/edit_junta/:junta_id', to:'juntas#edit', as: 'edit_junta', via: 'get'
     match '/editar_junta/:junta_id', to:'juntas#update', as: 'editar_junta', via: 'patch'
     match '/destruir_junta/:junta_id', to:'juntas#destroy', as: 'destroy_junta', via: 'delete'
+    match '/flujo_mensual', to: 'bases#flujo_mensual', as: 'flujo_mensual', via: 'get'
   end
 
   match '/enfermeras/import_data_actualizada', to:'enfermeras#import_data_actualizada', as: 'enfermeras_import_data_actualizada', via: 'get'
@@ -26,6 +27,7 @@ Sinesss::Application.routes.draw do
   match '/enfermeras/importar_essalud', to:'enfermeras#importar_essalud', as: 'enfermeras_importar_essalud', via: 'post'
   resources :enfermeras do
     match '/bitacoras', to:'enfermeras#bitacoras', as: 'bitacoras', via: 'get'
+    match '/aportaciones', to:'enfermeras#aportaciones', as: 'aportaciones', via: 'get'
     resources :bitacoras, :only => [:new, :create] do
       match '/status', to:'bitacoras#change_status', as: 'change_status', via: 'post'
     end

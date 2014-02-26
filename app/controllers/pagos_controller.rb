@@ -11,20 +11,20 @@ class PagosController < ApplicationController
     end  
   end
   def importar
-  	fecha = get_fecha(params[:date])
+  	fecha = get_full_fecha
   	importacion = Import.new(status: 'ESPERA', archivo: params[:archivo],
   													 tipo_clase: 'Pagos', tipo_txt: params[:tipo],
   													 formato_org: 'ESSALUD', fecha_pago: fecha )
     if importacion.save
-      Pago.import(importacion)
+      Pago.delay.import(importacion)
       redirect_to imports_path, notice:'El proceso de importacion durará unos minutos.'
     else
       redirect_to pagos_path, alert: 'El archivo es muy grande, o tiene un formato incorrecto.'
     end
   end
   private
-  def get_fecha(date)
-  	if date
+  def get_full_fecha()
+  	if params[:date]
   		'15-' + params[:date][:month] + '-' + params[:date][:year]
   	end
   end

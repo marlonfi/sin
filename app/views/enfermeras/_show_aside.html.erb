@@ -40,8 +40,12 @@
                   <% end %>   
                 <% end %>               
             </li>
+            <% if  action_name == 'bitacoras' %>
+            <li class="active">
+            <%else%>
             <li>
-                 <%= link_to '<i class="fa fa-usd"></i> Aportaciones'.html_safe, 's'%>
+            <% end %>
+                <%= link_to '<i class="fa fa-usd"></i> Aportaciones'.html_safe, enfermera_aportaciones_path(@enfermera) %>
             </li>
         </ul>
     </section>

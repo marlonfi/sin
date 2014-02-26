@@ -1,6 +1,9 @@
 class Enfermera < ActiveRecord::Base
 	belongs_to :ente
-  has_many :bitacoras  
+  has_many :bitacoras
+  has_many :pagos
+  delegate :base, :to => :ente, :allow_nil => true
+    
   before_validation :generar_full_name
   before_save :generar_full_name
 	validates :cod_planilla, length: { is: 7 }
@@ -39,6 +42,19 @@ class Enfermera < ActiveRecord::Base
   scope :no_afiliados_sinesss_por_ente, ->(ente_id) { where("ente_id = ? AND b_sinesss = ?", ente_id, false) }
   #contar_por_ente
   scope :por_ente, ->(ente_id) { where("ente_id = ?", ente_id) }
+  @@variable = 0.0
+  #manejar pagos
+  def make_payment(monto, import_file)
+    base = self.base
+    mes_cotizacion = import_file.fecha_pago
+    payment = self.pagos.find_or_create_by(mes_cotizacion: mes_cotizacion)
+    payment.mes_cotizacion = mes_cotizacion
+    payment.monto = monto
+    payment.generado_por = "Archivo: #{File.basename(import_file.archivo_url)}"
+    payment.base = base ? base.codigo_base : 'Pago libre'
+    payment.archivo = import_file.tipo_txt
+    payment.save!    
+  end
 
   #actualizar datos con excel
   def self.import_data_actualizada(import)
@@ -155,7 +171,31 @@ class Enfermera < ActiveRecord::Base
       ente.enfermeras.create!(data_enfermera)
     end
   end
- 	private
+
+  def self.generate_empty_payments(mes_cotizacion, tipo_txt)
+    if tipo_txt == 'CAS'
+      enfermeras = Enfermera.total_sinesss.where('regimen = ?', 'CAS') 
+    else
+      enfermeras = Enfermera.total_sinesss.where('regimen = ? OR regimen = ?',
+                                                 'CONTRATADO','NOMBRADO')
+    end
+    process_empty_payments(enfermeras, mes_cotizacion, tipo_txt)
+  end
+ 	
+  private
+  def self.process_empty_payments(enfermeras, mes_cotizacion, tipo_txt)
+    enfermeras.each do |enfermera|
+      if !enfermera.pagos.where(mes_cotizacion: mes_cotizacion).first
+        base = enfermera.base
+        base = base ? base.codigo_base : 'Pago libre'
+        enfermera.pagos.create!(mes_cotizacion: mes_cotizacion,
+                               monto: '0.0',
+                               generado_por: 'Falta de pago',
+                               base: base,
+                               archivo: tipo_txt)
+      end
+    end
+  end
 
   def self.check_regimen(regimen)
     if regimen[0..2] == 'CAS'

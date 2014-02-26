@@ -1,0 +1,35 @@
+<% provide(:title, "Flujo de dinero para Base: #{@basis.codigo_base}") %>
+<% provide(:content_header_path,  basis_path(@basis) ) %>
+<% provide(:content_header_data1,
+          "<i class='fa fa-h-square'></i> #{@basis.codigo_base}".html_safe) %>
+<% content_for :js_per_page do %>
+  <%= javascript_include_tag "ajax/flujo_mensual"%>
+<% end %>          
+<div class="row" id="first_fila">
+  <div class="col-lg-12">
+    <section class="panel">
+      <header class="panel-heading">
+        Ingresa fecha para ver aportaciones totales: <%= @basis.codigo_base %> 
+      </header>
+      <div class="panel-body">
+        <%= form_tag basis_flujo_mensual_path(@basis),
+                     {:method => "get", :class => 'form-inline', :remote => true } do %>
+          <div class="form-group">
+              <%= select_year Date.today,{ :start_year => 2013, :end_year => 2030},
+                                         {class: "form-control", style:'width:150px'} %>
+          </div>           
+          <div class="form-group">
+              <%= select_month Date.today,{ use_month_names: meses_espanol},{class: "form-control", style:'width:200px'} %>
+          </div>
+          <%= button_tag( :name => nil, class:"btn btn-info", id: 'btnGetAjax') do %>
+                    <i class="fa fa-search"></i> Buscar
+          <% end %>
+          <div class="form-group" id='loading'>              
+          </div>
+        <% end %>        
+      </div>
+    </section>
+  </div>
+</div>
+<div class="row" id="second_fila">
+</div>

@@ -1,6 +1,26 @@
 require 'spec_helper'
 
 describe Pago do
+
+  it "is invalid without enfermera_id" do
+    expect(build(:pago, enfermera_id: nil)).to have(1).errors_on(:enfermera_id)
+  end
+  it "is invalid without monto" do
+    expect(build(:pago, monto: nil)).to have(1).errors_on(:monto)
+  end
+  it "is invalid without mes_cotizacion" do
+    expect(build(:pago, mes_cotizacion: nil)).to have(2).errors_on(:mes_cotizacion)
+  end
+  it "is invalid without base" do
+    expect(build(:pago, base: nil)).to have(1).errors_on(:base)
+  end
+  it "is invalid without generado_por" do
+    expect(build(:pago, generado_por: nil)).to have(1).errors_on(:generado_por)
+  end
+  it "is a valid mes_cotizacion format" do
+    expect(build(:pago, mes_cotizacion: '12-popd-23oif')).to have(2).errors_on(:mes_cotizacion)
+  end
+  
   context 'importation of pagos' do
     before(:each) do
       @archivo = Import.create(tipo_clase: "Enfermera",

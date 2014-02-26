@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140222154903) do
+ActiveRecord::Schema.define(version: 20140225161016) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -129,6 +129,18 @@ ActiveRecord::Schema.define(version: 20140222154903) do
   end
 
   add_index "junta", ["base_id"], name: "index_junta_on_base_id", using: :btree
+
+  create_table "pagos", force: true do |t|
+    t.integer "enfermera_id"
+    t.decimal "monto",          precision: 8, scale: 2
+    t.date    "mes_cotizacion"
+    t.string  "base"
+    t.string  "generado_por"
+    t.string  "archivo"
+    t.string  "status"
+  end
+
+  add_index "pagos", ["mes_cotizacion", "base"], name: "index_pagos_on_mes_cotizacion_and_base", using: :btree
 
   create_table "red_asistencials", force: true do |t|
     t.string   "cod_essalud"

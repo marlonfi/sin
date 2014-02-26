@@ -1,15 +1,33 @@
 class Pago < ActiveRecord::Base
+	belongs_to :enfermera
+	validates_presence_of :enfermera_id, :monto, :mes_cotizacion, :base, :generado_por
+	validates_date :mes_cotizacion
+
+	scope :sum_por_fecha_archivo, ->(fecha,archivo) { where("mes_cotizacion = ? AND archivo = ?", fecha, archivo).sum(:monto) }
+	scope :por_fecha_base, ->(fecha,base) { where("mes_cotizacion = ? AND base = ?", fecha, base) }
+	scope :por_fecha_base_archivo, ->(fecha,base,archivo) { por_fecha_base(fecha,base).where("archivo = ?", archivo) }
+	scope :sum_por_fecha_base_archivo, ->(fecha,base,archivo) { por_fecha_base_archivo(fecha,base,archivo).sum(:monto)}
+
 	def self.import(import)
-		@paginas, @enfermeras = 0, 0
-		@import_file = import	
-		@data_trabajo = {}
-		path = import.archivo.path
-		file = File.new(path)
-		file.each_line do |line|
-	  	new_line = line.force_encoding("ISO-8859-1").encode("utf-8", replace: nil)
-	  	process_data_from_txt(new_line)
-	  end
-	  import.update_attributes(descripcion: "Paginas: #{@paginas} - Enfermeras: #{@enfermeras}")	  
+		begin
+			import.update_attributes(status: 'PROCESANDO')
+      @paginas, @enfermeras = 0, 0
+			@import_file = import	
+			@data_trabajo = {}
+			path = import.archivo.path
+			file = File.new(path)
+			file.each_line do |line|
+		  	new_line = line.force_encoding("ISO-8859-1").encode("utf-8", replace: nil)
+		  	process_data_from_txt(new_line)
+		  end
+		  Enfermera.generate_empty_payments(@import_file.fecha_pago, @import_file.tipo_txt)
+		  total_importado = 'S/. ' + Pago.sum_por_fecha_archivo(@import_file.fecha_pago,
+		  													 @import_file.tipo_txt).to_s	
+      import.update_attributes(status: 'IMPORTADO',
+      												descripcion: "Paginas: #{@paginas} - Enfermeras: #{@enfermeras} - Monto: #{total_importado}")
+    rescue
+      import.update_attributes(status: 'ERROR')
+    end		  
 	end
 
 	private
@@ -38,9 +56,10 @@ class Pago < ActiveRecord::Base
 				else
 					data_enfermera[:regimen] = 'CONTRATADO'
 				end
-				data_enfermera[:nombres] = new_line[2..-1].join(' ')
+				data_enfermera[:nombres] = new_line[2..-1].join(' ')				
+				enfermera = make_chages(data_enfermera)
+				enfermera.make_payment(aportacion, @import_file) if enfermera
 				@enfermeras = @enfermeras + 1
-				make_chages(data_enfermera)
 				#process_payment(data: new_line, programa: programa, subprograma: subprograma, actividad: actividad, act1: act1)
 			end
 		end		
@@ -74,6 +93,7 @@ class Pago < ActiveRecord::Base
                               	ente_fin: ente.cod_essalud, descripcion: 'Nueva enfermera generada por el block de notas.')
 			end
 		end
+		return enfermera
 	end
 
 	def self.get_enfermera_and_ente(data_enfermera)

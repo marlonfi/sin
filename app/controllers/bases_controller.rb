@@ -20,7 +20,20 @@ class BasesController < ApplicationController
       redirect_to bases_path, alert: 'El archivo es muy grande, o tiene un formato incorrecto.'
     end
   end
-  
+  def flujo_mensual
+    @basis = Base.find(params[:basis_id])
+    if request.xhr?
+      @cotizacion = get_full_fecha
+      @money_contratados = Pago.sum_por_fecha_base_archivo(@cotizacion, @basis.codigo_base, 'NOMBRADOS Y CONTRATADOS')
+      @money_cas = Pago.sum_por_fecha_base_archivo(@cotizacion, @basis.codigo_base, 'CAS')
+      @money_total = @money_contratados + @money_cas
+      @asignacion = @money_total/2
+    end
+    respond_to do |format|
+      format.html
+      format.js { render 'bases/ajax_js/flujo_mensual' }
+    end
+  end
   def miembros
     if !request.xhr?
       @basis = Base.find(params[:basis_id])
@@ -110,5 +123,10 @@ class BasesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def basis_params
       params.require(:base).permit(:codigo_base, :nombre_base)
+    end
+    def get_full_fecha
+      if params[:date]
+        '15-' + params[:date][:month] + '-' + params[:date][:year]
+      end
     end
 end
