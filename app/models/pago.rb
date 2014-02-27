@@ -4,6 +4,7 @@ class Pago < ActiveRecord::Base
 	validates_date :mes_cotizacion
 
 	scope :sum_por_fecha_archivo, ->(fecha,archivo) { where("mes_cotizacion = ? AND archivo = ?", fecha, archivo).sum(:monto) }
+	scope :por_fecha, ->(fecha) {where('mes_cotizacion = ?', fecha)}
 	scope :por_fecha_base, ->(fecha,base) { where("mes_cotizacion = ? AND base = ?", fecha, base) }
 	scope :por_fecha_base_archivo, ->(fecha,base,archivo) { por_fecha_base(fecha,base).where("archivo = ?", archivo) }
 	scope :sum_por_fecha_base_archivo, ->(fecha,base,archivo) { por_fecha_base_archivo(fecha,base,archivo).sum(:monto)}
@@ -60,7 +61,6 @@ class Pago < ActiveRecord::Base
 				enfermera = make_chages(data_enfermera)
 				enfermera.make_payment(aportacion, @import_file) if enfermera
 				@enfermeras = @enfermeras + 1
-				#process_payment(data: new_line, programa: programa, subprograma: subprograma, actividad: actividad, act1: act1)
 			end
 		end		
 	end
@@ -84,7 +84,6 @@ class Pago < ActiveRecord::Base
           Enfermera.cambiar_ente(enfermera,ente)      
         end
 			end
-
 		else
 			enfermera = Enfermera.crear_enfermera_por_txt(ente, data_enfermera)
 			if enfermera

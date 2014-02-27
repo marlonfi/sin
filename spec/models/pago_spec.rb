@@ -26,8 +26,9 @@ describe Pago do
       @archivo = Import.create(tipo_clase: "Enfermera",
                               archivo: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root,
                               '/spec/factories/files/lista_essalud.csv'))))
-      @archivo2 = Import.create(tipo_clase: "Enfermera", tipo_txt: 'NOMBRADOS Y CONTRATADOS',
-                              archivo: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root,
+      @archivo2 = Import.create(tipo_clase: "Pago", tipo_txt: 'NOMBRADOS Y CONTRATADOS',
+                                fecha_pago: '15-10-2013',
+                               archivo: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root,
                               '/spec/factories/files/pagos_txt.TXT'))))
       RedAsistencial.import(@archivo)
       Ente.import(@archivo)
@@ -35,7 +36,7 @@ describe Pago do
     end
     it "creates aditional Enfermeras" do
       expect(Ente.find_by_cod_essalud('Ente_prueba')).to eq(nil)
-    	expect{
+      expect{
 				Pago.import(@archivo2)
 			}.to change(Enfermera, :count).by(3)
       enfermera1 = Enfermera.find_by_cod_planilla('1111111')
@@ -111,4 +112,38 @@ describe Pago do
       expect(bitacora22.ente_fin).to eq('D HII Moquegua')
     end
 	end
+  context 'generation of pagos' do
+    before(:each) do
+      @archivo = Import.create(tipo_clase: "Enfermera",
+                              archivo: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root,
+                              '/spec/factories/files/lista_essalud.csv'))))
+      @archivo2 = Import.create(tipo_clase: "Pago", tipo_txt: 'NOMBRADOS Y CONTRATADOS',
+                                fecha_pago: '15-10-2013',
+                               archivo: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root,
+                              '/spec/factories/files/pagos_txt.TXT'))))
+      RedAsistencial.import(@archivo)
+      Ente.import(@archivo)
+      Enfermera.import_essalud(@archivo)
+    end
+    it "creates all pagos, including the Falta de pago" do
+      expect{
+        Pago.import(@archivo2)
+      }.to change(Pago, :count).by(56)
+    end
+    it "creates empty pagos" do
+      Pago.import(@archivo2)
+      expect(Pago.por_fecha(@archivo2.fecha_pago).
+            where(generado_por: 'Falta de pago').count).to eq(2)
+      enfermera1 = Enfermera.find_by_cod_planilla('1449707')
+      enfermera2 = Enfermera.find_by_cod_planilla('4428611')
+      expect(Pago.por_fecha(@archivo2.fecha_pago).
+            where(generado_por: 'Falta de pago').count).to eq(2)
+      expect(enfermera1.pagos.first.monto).to eq(0.0)
+      expect(enfermera2.pagos.first.monto).to eq(0.0)
+    end
+    it 'generates all pgos with the correct monto_total' do
+      Pago.import(@archivo2)
+      expect(Pago.por_fecha(@archivo2.fecha_pago).sum(:monto).to_f).to eq(1652.08)
+    end
+  end
 end
