@@ -1,0 +1,4 @@
+$('#second_fila').html('<%= escape_javascript(render("pagos/ajax_html/flujo_mensual_table_montos")) %>');
+$('#third_fila').html('<%= escape_javascript(render("pagos/ajax_html/flujo_mensual_datatable_enfermeras")) %>');
+$.show_datatable();  
+$('#loadingspan').remove();

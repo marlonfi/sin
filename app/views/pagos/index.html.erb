@@ -4,8 +4,14 @@
           "<i class='fa fa-usd'></i> Aportaciones de agremiados".html_safe) %>
 <% content_for :js_per_page do %>
   <%= javascript_include_tag "import_pagos", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "chosen"%>
+  <%= javascript_include_tag "ajax/flujo_mensual"%>
+  <%= javascript_include_tag "datatables_flujo_mensual" %>
 <% end %>
-
+<% content_for :css_per_page do %>
+  <%= stylesheet_link_tag "chosen", media: "all" %>
+  <%= stylesheet_link_tag "datatables", media: "all" %>
+<% end %>
 
 <div class="row">
   <div class="col-lg-12">
@@ -13,12 +19,21 @@
       <header class="panel-heading">
         Aportaciones de agremiados
       </header>
-      <header class="panel-heading" style= 'text-align: center'>
-        <a class="btn btn-danger" data-toggle="modal" href="#myImportPagos", id='btnImportPagos'>
-            <i class="fa fa-upload"> </i> Importar
-        </a>         
-      </header>
+        <div class="panel-body">
+          <%= render 'filter_form' %>       
+        </div>      
     </section>
   </div>
+</div>
+<div class="row" id="second_fila">
+</div>
+<div class="row" id="third_fila">
+</div>
+<div class="row" id="fourth_fila">
+  <header class="panel-heading" style= 'text-align: center'>
+    <a class="btn btn-danger" data-toggle="modal" href="#myImportPagos", id='btnImportPagos'>
+        <i class="fa fa-upload"> </i> Importar
+    </a>         
+  </header>
 </div>
 <%= render 'index_import_pagos' %>

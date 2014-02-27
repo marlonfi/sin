@@ -23,15 +23,18 @@ class BasesController < ApplicationController
   def flujo_mensual
     @basis = Base.find(params[:basis_id])
     if request.xhr?
-      @cotizacion = get_full_fecha
-      @money_contratados = Pago.sum_por_fecha_base_archivo(@cotizacion, @basis.codigo_base, 'NOMBRADOS Y CONTRATADOS')
-      @money_cas = Pago.sum_por_fecha_base_archivo(@cotizacion, @basis.codigo_base, 'CAS')
-      @money_total = @money_contratados + @money_cas
-      @asignacion = @money_total/2
+      unless params[:cotizacion]
+        @cotizacion = get_full_fecha
+        @money_contratados = Pago.sum_por_fecha_base_archivo(@cotizacion, @basis.codigo_base, 'NOMBRADOS Y CONTRATADOS')
+        @money_cas = Pago.sum_por_fecha_base_archivo(@cotizacion, @basis.codigo_base, 'CAS')
+        @money_total = @money_contratados + @money_cas
+        @asignacion = @money_total/2
+      end
     end
     respond_to do |format|
       format.html
       format.js { render 'bases/ajax_js/flujo_mensual' }
+      format.json { render json: FlujosDatatable.new(view_context, @basis.codigo_base) }
     end
   end
   def miembros

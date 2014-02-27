@@ -4,7 +4,12 @@
           "<i class='fa fa-h-square'></i> #{@basis.codigo_base}".html_safe) %>
 <% content_for :js_per_page do %>
   <%= javascript_include_tag "ajax/flujo_mensual"%>
-<% end %>          
+  <%= javascript_include_tag "datatables_flujo_mensual" %>
+<% end %>
+<% content_for :css_per_page do %>
+  <%= stylesheet_link_tag "datatables", media: "all"%>
+<% end %>
+          
 <div class="row" id="first_fila">
   <div class="col-lg-12">
     <section class="panel">
@@ -32,4 +37,6 @@
   </div>
 </div>
 <div class="row" id="second_fila">
+</div>
+<div class="row" id="third_fila">
 </div>

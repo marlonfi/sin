@@ -1,8 +1,29 @@
 class PagosController < ApplicationController
 	layout 'admin'
-  def index 	
+  def index
+    @bases = Base.all 	
   end
-
+  def listar
+    if request.xhr?
+      if params[:codigo_base]
+        @codigo_base = params[:codigo_base]
+      else
+        @codigo_base = params[:base][:codigo_base] == '' ? 'Pago libre' : params[:base][:codigo_base]
+      end
+      unless params[:cotizacion]
+        @cotizacion = get_full_fecha
+        @money_contratados = Pago.sum_por_fecha_base_archivo(@cotizacion, @codigo_base, 'NOMBRADOS Y CONTRATADOS')
+        @money_cas = Pago.sum_por_fecha_base_archivo(@cotizacion, @codigo_base, 'CAS')
+        @money_total = @money_contratados + @money_cas
+        @asignacion = @money_total/2
+      end
+    end
+    respond_to do |format|
+      format.html { redirect_to pagos_path, alert: 'No autorizado.' }
+      format.js { render 'pagos/ajax_js/flujo_mensual' }
+      format.json { render json: FlujosDatatable.new(view_context, @codigo_base) }
+    end
+  end
   def import
   	if !request.xhr?
       redirect_to pagos_path, alert: 'No autorizado.'

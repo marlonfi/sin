@@ -1,0 +1,33 @@
+<div class="col-lg-12">
+  <section class="panel">
+    <header class="panel-heading">
+      Pagos correspondientes a <%= month_year(Date.parse(@cotizacion)) %> 
+    </header>
+    <div class="panel-body">
+       <table  class="display table table-bordered table-striped" id="flujo_mensual",
+                  data-source='<%= pagos_listar_path(:codigo_base => @codigo_base, :cotizacion => @cotizacion, format: "json") %>'>
+            <thead>
+              <tr>
+                <th><i class="fa fa-female"></i> Enfermera</th>
+                <th><i class=" fa fa-h-square"></i> Base Aportante</th>
+                <th><i class=" fa fa-calendar"></i> Mes cotización</th>
+                <th><i class="fa fa-usd"></i> Monto</th>
+                <th><i class="fa fa-hospital-o"> Generado por</th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+            <tfoot>
+              <tr>
+                <th><i class="fa fa-female"></i> Enfermera</th>
+                <th><i class=" fa fa-h-square"></i> Base Aportante</th>
+                <th><i class=" fa fa-calendar"></i> Mes cotización</th>
+                <th><i class="fa fa-usd"></i> Monto</th>
+                <th><i class="fa fa-hospital-o"> Generado por</th>
+              </tr>
+            </tfoot>
+          </table> 
+    </div>      
+  </section>
+</div>
+

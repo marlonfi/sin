@@ -19,6 +19,7 @@ $(function() {
  $("#ente_base_id").chosen();
  $("#bitacora_ente_inicio").chosen();
  $("#bitacora_ente_fin").chosen();
+ $("#base_codigo_base").chosen();
 });
 
 

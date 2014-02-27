@@ -6,6 +6,7 @@ class Pago < ActiveRecord::Base
 	scope :sum_por_fecha_archivo, ->(fecha,archivo) { where("mes_cotizacion = ? AND archivo = ?", fecha, archivo).sum(:monto) }
 	scope :por_fecha, ->(fecha) {where('mes_cotizacion = ?', fecha)}
 	scope :por_fecha_base, ->(fecha,base) { where("mes_cotizacion = ? AND base = ?", fecha, base) }
+	scope :sum_por_fecha_base, ->(fecha,base) { por_fecha_base(fecha,base).sum(:monto)}
 	scope :por_fecha_base_archivo, ->(fecha,base,archivo) { por_fecha_base(fecha,base).where("archivo = ?", archivo) }
 	scope :sum_por_fecha_base_archivo, ->(fecha,base,archivo) { por_fecha_base_archivo(fecha,base,archivo).sum(:monto)}
 
