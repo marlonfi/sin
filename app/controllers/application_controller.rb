@@ -11,6 +11,15 @@ class ApplicationController < ActionController::Base
   	@total_afiliaciones = Bitacora.pendientes.where(tipo: 'AFILIACION').count
   	@total_desafiliaciones = Bitacora.pendientes.where(tipo: 'DESAFILIACION').count
   	@total_traslados = Bitacora.pendientes.where(tipo: 'TRASLADO').count
-  	@total_otros = Bitacora.pendientes.where(tipo: 'OTROS').count 
+  	@total_otros = Bitacora.pendientes.where(tipo: 'OTROS').count
+    @ultimo_archivo_importado = Import.where(tipo_clase: 'Pagos').last
+    if @ultimo_archivo_importado
+      @total_impagos = Pago.where('generado_por = ? AND mes_cotizacion = ?', 'Falta de pago',
+                                 @ultimo_archivo_importado.fecha_pago)
+      @count_total_impagos = @total_impagos.count
+    else
+      @count_total_impagos = nil
+    end
+
   end
 end

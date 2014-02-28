@@ -35,42 +35,28 @@
         <li id="header_inbox_bar" class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                 <i class="fa fa-envelope-o"></i>
-                <span class="badge bg-important">2</span>
+                <span class="badge bg-important"><%= @count_total_impagos%></span>
             </a>
+            <% if @ultimo_archivo_importado%>
             <ul class="dropdown-menu extended inbox">
                 <div class="notify-arrow notify-arrow-red"></div>
                 <li>
-                    <p class="red">Tienes 2 mensajes</p>
-                </li>
+                    <p class="red">Tienes <%= @count_total_impagos%> agremiados sin aportación</p>
+                </li>                
                 <li>
                     <a href="#">
-                        <span class="photo"><%= image_tag("iokero_logo.jpg", size: "29x29", alt: "") %></span>
+                        <span class="photo"><%= image_tag("logo.jpg", size: "29x29", alt: "") %></span>
                         <span class="subject">
-                        <span class="from">Iokero</span>
-                        <span class="time">Hace 1 minuto</span>
+                        <span class="from">Generados por el sistema.</span>
                         </span>
                         <span class="message">
-                            Registro de cambio de base
-                        </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="photo"><%= image_tag("iokero_logo.jpg", size: "29x29", alt: "") %></span>
-                        <span class="subject">
-                        <span class="from">Iokero</span>
-                        <span class="time">10 mins</span>
-                        </span>
-                        <span class="message">
-                            Registro de cambio de base
+                            Mes: <%= month_year(@ultimo_archivo_importado.fecha_pago) %>
                         </span>
                     </a>
                 </li>
                
-                <li>
-                    <a href="#">Ver todos los mensajes</a>
-                </li>
             </ul>
+            <% end %>
         </li>
         <!-- inbox dropdown end -->
 
