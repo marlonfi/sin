@@ -44,7 +44,7 @@
                     <p class="red">Tienes <%= @count_total_impagos%> agremiados sin aportación</p>
                 </li>                
                 <li>
-                    <a href="#">
+                    <%= link_to pagos_retrasos_path(cotizacion: @ultimo_archivo_importado.fecha_pago) do%>
                         <span class="photo"><%= image_tag("logo.jpg", size: "29x29", alt: "") %></span>
                         <span class="subject">
                         <span class="from">Generados por el sistema.</span>
@@ -52,7 +52,7 @@
                         <span class="message">
                             Mes: <%= month_year(@ultimo_archivo_importado.fecha_pago) %>
                         </span>
-                    </a>
+                    <% end %>    
                 </li>
                
             </ul>

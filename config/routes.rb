@@ -3,6 +3,7 @@ Sinesss::Application.routes.draw do
   match '/pagos/import', to:'pagos#import', as: 'pagos_import', via: 'get'
   match '/pagos/importar', to:'pagos#importar', as: 'pagos_importar', via: 'post'
   match '/pagos/listar', to:'pagos#listar', as: 'pagos_listar', via: 'get'
+  match '/pagos/retrasos', to:'pagos#retrasos', as: 'pagos_retrasos', via: 'get'
   resources :pagos, :only => :index
 
   match '/bitacoras/:tipo', to:'bitacoras#index', as: 'tipo_bitacora', via: 'get'

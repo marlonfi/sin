@@ -120,9 +120,13 @@ class Enfermera < ActiveRecord::Base
                               ente_fin: ente.cod_essalud)
   end
   def self.generar_bitacora_cambio_ente(enfermera, ente_inicio, ente_fin, import_id)
+    base1 = Ente.find_by_cod_essalud(ente_inicio).base
+    base2 = Ente.find_by_cod_essalud(ente_fin).base
+    descripcion = base1 == base2 ?
+                  'No implica cambio de base.' : "Implica cambio de base."
     enfermera.bitacoras.create(import_id: import_id, tipo: 'TRASLADO',
                               status: 'PENDIENTE', ente_inicio: ente_inicio,
-                              ente_fin: ente_fin)
+                              ente_fin: ente_fin, descripcion: descripcion)
   end   
   def self.parse_actualizacion(row)
     data_enfermera = {}

@@ -1,0 +1,77 @@
+<% provide(:title, "Registro de impagos") %>
+<% provide(:content_header_path,  pagos_path) %>
+
+          
+<div class="row" id="first_fila">
+  <div class="col-lg-12">
+    <section class="panel">
+      <header class="panel-heading">
+      </header>
+      <div class="panel-body">
+        <%= form_tag pagos_retrasos_path,
+                     {:method => "get", :class => 'form-inline'} do %>
+          <div class="form-group">
+              <%= select_year Date.parse(@cotizacion),{ :start_year => 2013, :end_year => 2030},
+                                         {class: "form-control", style:'width:150px'} %>
+          </div>           
+          <div class="form-group">
+              <%= select_month Date.parse(@cotizacion),{ use_month_names: meses_espanol},{class: "form-control", style:'width:200px'} %>
+          </div>
+          <%= button_tag( :name => nil, class:"btn btn-info", id: 'btnGetAjax') do %>
+                    <i class="fa fa-search"></i> Buscar
+          <% end %>
+          <div class="form-group" id='loading'>              
+          </div>
+        <% end %>        
+      </div>
+    </section>
+  </div>
+</div>
+
+<div class="row" id="second_fila">
+	<div class="col-lg-12">
+		<section class="panel">
+		  <header class="panel-heading">
+		    Impagos correspondientes a <%= month_year(Date.parse(@cotizacion)) %> 
+		  </header>
+		  <div class="panel-body">	    
+				<% if !@pagos.empty? %>
+		    <table  class="display table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th><i class="fa fa-female"></i> Enfermera</th>
+              <th><i class=" fa fa-h-square"></i> Base Aportante</th>
+              <th><i class=" fa fa-calendar"></i> Mes cotización</th>
+              <th><i class="fa fa-usd"></i> Monto</th>
+              <th><i class="fa fa-hospital-o"> Generado por</th>
+            </tr>
+          </thead>
+          <tbody>
+          	<% @pagos.each do |pago|%>
+          	<tr>
+          		<th><%= link_to(pago.enfermera.full_name, enfermera_path(pago.enfermera.id)) %></th>
+              <th><%= pago.base %></th>
+              <th><%= month_year(pago.mes_cotizacion) %></th>
+              <th><%= number_to_currency(pago.monto, :unit => "S/. ") %></th>
+              <th><%= pago.generado_por %></th>
+          	</tr>
+          	<%end%>	
+          </tbody>
+          <tfoot>
+            <tr>
+              <th><i class="fa fa-female"></i> Enfermera</th>
+              <th><i class=" fa fa-h-square"></i> Base Aportante</th>
+              <th><i class=" fa fa-calendar"></i> Mes cotización</th>
+              <th><i class="fa fa-usd"></i> Monto</th>
+              <th><i class="fa fa-hospital-o"> Generado por</th>
+            </tr>
+          </tfoot>
+        </table>
+        <% else %>
+        	No existen pagos pendientes.
+        <% end %> 
+		  </div>      
+		</section>
+	</div>
+</div>
+

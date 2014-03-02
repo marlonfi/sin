@@ -3,6 +3,16 @@ class PagosController < ApplicationController
   def index
     @bases = Base.all 	
   end
+  def retrasos
+    if params[:cotizacion]
+      @cotizacion = params[:cotizacion]
+    elsif params[:date]
+      @cotizacion = get_full_fecha
+    else
+      @cotizacion = Time.now.strftime("%d-%m-%Y").to_s
+    end
+    @pagos = Pago.includes(:enfermera).where('generado_por = ? AND mes_cotizacion =  ?', 'Falta de pago', @cotizacion)
+  end
   def listar
     if request.xhr?
       if params[:codigo_base]

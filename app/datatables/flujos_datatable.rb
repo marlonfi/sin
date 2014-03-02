@@ -1,5 +1,5 @@
 class FlujosDatatable
-  delegate :params, :h, :link_to, :month_year , to: :@view
+  delegate :params, :h, :link_to, :number_to_currency, :month_year , to: :@view
   #include Rails.application.routes.url_helpers  
 
   def initialize(view, codigo_base)
@@ -26,7 +26,7 @@ private
         link_to(enfermera.full_name, "/enfermeras/#{enfermera.id}"),
         pago.base,
         month_year(pago.mes_cotizacion),
-        pago.monto,
+        number_to_currency(pago.monto, :unit => "S/. "),
         pago.generado_por
       ]
     end
