@@ -1,5 +1,6 @@
 Sinesss::Application.routes.draw do
 
+  mount RailsEmailPreview::Engine, at: 'emails'
   match '/pagos/import', to:'pagos#import', as: 'pagos_import', via: 'get'
   match '/pagos/importar', to:'pagos#importar', as: 'pagos_importar', via: 'post'
   match '/pagos/listar', to:'pagos#listar', as: 'pagos_listar', via: 'get'
@@ -55,9 +56,11 @@ Sinesss::Application.routes.draw do
   get "/dashboard", to: 'home#dashboard'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
-
+  get "/reports", to: 'reports#index'
+  post "/reports/send_payments_reports", to: 'reports#send_payments_reports'
   # You can have the root of your site routed with "root"
   root :to => redirect("/dashboard")
+
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

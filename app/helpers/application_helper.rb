@@ -20,4 +20,11 @@ module ApplicationHelper
 	def meses_espanol
 	  %w(Enero Febrero Marzo Abril Mayo Junio Julio Agosto Setiembre Octubre Noviembre Diciembre) 
 	end
+	def email_monto(pago)
+		pago ?  number_to_currency(pago.monto, :unit => "S/. ") : 'Sin registro.'
+	end
+	def email_base(pago)
+		pago ? pago.base : 'Sin registro.'
+	end
+	
 end
