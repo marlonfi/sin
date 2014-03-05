@@ -1,0 +1,14 @@
+<% provide(:title, 'Reportes') %>
+<% provide(:content_header_path, reports_path) %>
+<% provide(:content_header_data1,
+          "<i class='fa fa-bar-chart-o'></i> Zona de reportes".html_safe) %>
+<% content_for :js_per_page do %>
+  <%= javascript_include_tag "chosen"%>
+<% end %>
+<% content_for :css_per_page do %>
+  <%= stylesheet_link_tag "chosen", media: "all" %>
+<% end %>
+
+<%= render 'pdf_actual_agremiados_base'%>
+<%= render 'pdf_mensual_agremiados_y_aportaciones_base'%>
+<%= render 'pdf_mensual_cotizaciones_atrasadas'%>

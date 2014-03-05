@@ -1,0 +1,11 @@
+<li class="sub-menu">
+    <% if  controller_name == 'reports' %>
+    <a href="<%= reports_path %>" class="active">
+    <%else%>        
+    <a href="<%= reports_path %>" >
+    <% end %>
+        <i class="fa fa-bar-chart-o"></i>
+        <span>Reportes</span>        
+    </a>
+</li>
+

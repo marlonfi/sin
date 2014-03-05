@@ -1,5 +1,11 @@
 Sinesss::Application.routes.draw do
 
+  #reports
+  match '/reports', to: 'reports#index', as: 'reports', via: 'get'
+  match '/reports/bases_aportaciones', to: 'reports#bases_aportaciones', as: 'reports_bases_aportaciones', via: 'get'
+  match '/reports/pagos_faltantes', to: 'reports#pagos_faltantes', as: 'reports_pagos_faltantes', via: 'get'
+  match '/reports/bases_miembros', to: 'reports#bases_miembros', as: 'reports_bases_miembros', via: 'get'
+
   match '/pagos/import', to:'pagos#import', as: 'pagos_import', via: 'get'
   match '/pagos/importar', to:'pagos#importar', as: 'pagos_importar', via: 'post'
   match '/pagos/listar', to:'pagos#listar', as: 'pagos_listar', via: 'get'
@@ -40,7 +46,6 @@ Sinesss::Application.routes.draw do
   resources :entes do
     match '/enfermeras', to:'entes#enfermeras', as: 'enfermeras', via: 'get'
   end
-
 
   get '/red_asistencials/import', to:'red_asistencials#import', as: 'red_asistencial_import'
   post '/red_asistencials/importar', to:'red_asistencials#importar', as: 'red_asistencial_importar'
