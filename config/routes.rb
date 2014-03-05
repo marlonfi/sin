@@ -57,6 +57,7 @@ Sinesss::Application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
   get "/reports", to: 'reports#index'
+  get "/reports_pdf", to: 'reports#pdf', as: 'reports_pdf'
   post "/reports/send_payments_reports", to: 'reports#send_payments_reports'
   # You can have the root of your site routed with "root"
   root :to => redirect("/dashboard")
