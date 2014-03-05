@@ -129,7 +129,7 @@ class BasesController < ApplicationController
     end
     def get_full_fecha
       if params[:date]
-        '15-' + params[:date][:month] + '-' + params[:date][:year]
+        Date.parse('15-' + params[:date][:month] + '-' + params[:date][:year]).to_S
       end
     end
 end

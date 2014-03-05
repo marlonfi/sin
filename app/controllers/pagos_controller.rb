@@ -56,7 +56,7 @@ class PagosController < ApplicationController
   private
   def get_full_fecha()
   	if params[:date]
-  		'15-' + params[:date][:month] + '-' + params[:date][:year]
+  		Date.parse('15-' + params[:date][:month] + '-' + params[:date][:year]).to_s
   	end
   end
 end
