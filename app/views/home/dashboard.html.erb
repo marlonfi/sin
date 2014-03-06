@@ -1,3 +1,13 @@
+<% content_for :js_per_page do %>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+  <script src="http://cdn.oesmith.co.uk/morris-0.4.3.min.js"></script>
+  <%= javascript_include_tag "morris" %>
+  <%= javascript_include_tag "ajax/flujo_mensual" %>
+<% end %>
+<% content_for :css_per_page do %>
+  <%= stylesheet_link_tag "morris", media: "all"%>
+<% end %>
+
 <div class="row state-overview">
     <div class="col-lg-3 col-sm-6">
         <section class="panel">
@@ -24,18 +34,56 @@
                 <p>Bases</p>
             </div>
         </section>
-    </div>    
+    </div>   
 </div>
 
 <div class="row">
-<div class="col-lg-6">
-  <section class="panel">
-      <header class="panel-heading">
-        Enfermeras por régimen laboral 
-      </header>
-      <div class="panel-body">
-          
-      </div>
-  </section>
-  </div>
+    <div class="col-lg-4">
+        <section class="panel">
+            <header class="panel-heading">
+                Enfermeras por régimen laboral
+            </header>
+            <div class="panel-body">
+            <div id="regimenes" data-cas="<%= Enfermera.where(regimen: 'CAS').count %>"
+                                data-nombrados="<%= Enfermera.where(regimen: 'NOMBRADO').count %>"
+                                data-contratados="<%= Enfermera.where(regimen: 'CONTRATADO').count %>" style= 'height: 250px;'>
+            </div>          
+          </div>
+        </section>
+    </div>
+    <div class="col-lg-8">
+        <section class="panel">
+            <header class="panel-heading">
+                Flujo mensual de ingresos CEN
+            </header>
+            <div class="panel-body">
+                <%= content_tag :div, "", id: "flujo_mensual", data: { cen: chart_flujo_mensual(Pago.ingresos_cen_ultimos_meses(5))}, style: "height: 250px;" %>
+            </div>
+        </section>
+    </div>    
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <section class="panel">
+            <header class="panel-heading">
+                Agremiados por mes 
+            </header>
+            <div class="panel-body" >
+                <%= form_tag enfermeras_anual_chart_path,
+                               {:method => "get", :class => 'form-inline', :remote => true } do %>
+                    <div class="form-group">
+                        <%= select_year Date.today,{ :start_year => 2013, :end_year => 2030},
+                                                   {class: "form-control", style:'width:150px'} %>
+                    </div>
+                    <%= button_tag( :name => nil, class:"btn btn-info", id: 'btnGetAjax') do %>
+                              <i class="fa fa-search"></i> Buscar
+                    <% end %>
+                    <div class="form-group" id='loading'>              
+                    </div>
+                <% end %> 
+                <div id='bar_chart'>
+                </div>
+            </div>
+        </section>
+    </div>    
 </div>

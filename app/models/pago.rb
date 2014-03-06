@@ -105,4 +105,18 @@ class Pago < ActiveRecord::Base
 		end
 		return enfermera, ente
 	end
+
+	def self.ingresos_cen_ultimos_meses(lapso_meses)
+		fecha_actual =  Date.parse(Time.now.strftime("%d-%m-%Y").to_s).change(day:15)
+		meses = [fecha_actual]
+		data = {}
+		(1..lapso_meses).each do |n|
+			meses << (fecha_actual - n.month)
+		end
+		meses.each do |mes|
+			data[mes.strftime("%b, %Y")] = [(Pago.sum_por_fecha_archivo(mes.to_s, 'CAS')/2).to_f]
+			data[mes.strftime("%b, %Y")] << (Pago.sum_por_fecha_archivo(mes.to_s, 'NOMBRADOS Y CONTRATADOS')/2).to_f
+		end
+		return data
+	end
 end

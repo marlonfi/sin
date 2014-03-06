@@ -185,6 +185,10 @@ class Enfermera < ActiveRecord::Base
     end
     process_empty_payments(enfermeras, mes_cotizacion, tipo_txt)
   end
+
+  def self.data_anual(year)
+    year
+  end
  	
   private
   def self.process_empty_payments(enfermeras, mes_cotizacion, tipo_txt)

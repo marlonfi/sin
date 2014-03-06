@@ -1,0 +1,1 @@
+$('#bar_chart').html('<%= escape_javascript(render("enfermeras/ajax_html/anual_chart")) %>');

@@ -40,6 +40,7 @@ Sinesss::Application.routes.draw do
   match '/enfermeras/importar_data_actualizada', to:'enfermeras#importar_data_actualizada', as: 'enfermeras_importar_data_actualizada', via: 'post'
   match '/enfermeras/import_essalud', to:'enfermeras#import_essalud', as: 'enfermeras_import_essalud', via: 'get'
   match '/enfermeras/importar_essalud', to:'enfermeras#importar_essalud', as: 'enfermeras_importar_essalud', via: 'post'
+  match '/enfermeras/anual_chart', to: 'enfermeras#anual_chart', as: 'enfermeras_anual_chart', via: 'get'
   resources :enfermeras do
     match '/bitacoras', to:'enfermeras#bitacoras', as: 'bitacoras', via: 'get'
     match '/aportaciones', to:'enfermeras#aportaciones', as: 'aportaciones', via: 'get'

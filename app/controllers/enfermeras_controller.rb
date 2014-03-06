@@ -90,6 +90,10 @@ class EnfermerasController < ApplicationController
     end
   end
 
+  def anual_chart
+    @year = params[:date][:year]
+  end
+
   private
   def set_enfermera
     @enfermera = Enfermera.find(params[:id])
