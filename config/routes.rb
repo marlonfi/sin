@@ -2,9 +2,16 @@ Sinesss::Application.routes.draw do
 
   #reports
   match '/reports', to: 'reports#index', as: 'reports', via: 'get'
-  match '/reports/bases_aportaciones', to: 'reports#bases_aportaciones', as: 'reports_bases_aportaciones', via: 'get'
-  match '/reports/pagos_faltantes', to: 'reports#pagos_faltantes', as: 'reports_pagos_faltantes', via: 'get'
-  match '/reports/bases_miembros', to: 'reports#bases_miembros', as: 'reports_bases_miembros', via: 'get'
+  match '/reports/bases_aportaciones', to: 'reports#bases_aportaciones',
+                                     as: 'reports_bases_aportaciones', via: 'get'
+  match '/reports/pagos_faltantes', to: 'reports#pagos_faltantes',
+                                    as: 'reports_pagos_faltantes', via: 'get'
+  match '/reports/bases_miembros', to: 'reports#bases_miembros',
+                                   as: 'reports_bases_miembros', via: 'get'
+  match '/reports/entes_sin_base', to: 'reports#entes_sin_base',
+                                   as: 'reports_entes_sin_base', via: 'get'
+  match '/reports/aportaciones_por_base', to: 'reports#aportaciones_por_base',
+                                   as: 'reports_aportaciones_por_base', via: 'get'                                 
 
   match '/pagos/import', to:'pagos#import', as: 'pagos_import', via: 'get'
   match '/pagos/importar', to:'pagos#importar', as: 'pagos_importar', via: 'post'

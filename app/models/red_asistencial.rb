@@ -22,4 +22,19 @@ class RedAsistencial < ActiveRecord::Base
 			import.update_attributes(status: 'ERROR')
 		end				
 	end
+
+	def self.with_bases()
+		redes = RedAsistencial.all.map {|red| red.cod_essalud}
+		red_y_bases = {}
+		redes.each do |red|
+			red_y_bases[red] = []
+		end
+		Base.all.each do |base|
+			ente = base.entes.first
+			if ente
+				red_y_bases[ente.red_asistencial.cod_essalud] << base
+			end	
+		end	
+		return red_y_bases
+	end
 end
