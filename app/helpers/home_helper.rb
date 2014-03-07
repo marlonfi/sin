@@ -9,6 +9,10 @@ module HomeHelper
 		data_for_js.reverse
 	end
 	def chart_enfermeras_anual(data)
-		data
+		data_for_js = []
+		data.each do |k,v|
+			data_for_js << {month: k, enfermeras: v}
+		end
+		return data_for_js
 	end
 end

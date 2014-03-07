@@ -14,7 +14,6 @@ class BasesDatatable
       iTotalDisplayRecords: bases.total_entries,
       aaData: data
     }
-    #debugger
   end
   
 private

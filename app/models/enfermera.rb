@@ -187,7 +187,15 @@ class Enfermera < ActiveRecord::Base
   end
 
   def self.data_anual(year)
-    year
+    meses = []
+    data = {}
+    (1..12).each do |n|
+      meses << Date.parse("15-#{n}-#{year}")
+    end
+    meses.each do |mes|
+      data[mes.strftime("%b, %Y")] = Pago.por_fecha(mes.to_s).count
+    end
+    return data
   end
  	
   private
