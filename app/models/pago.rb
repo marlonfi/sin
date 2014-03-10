@@ -32,7 +32,40 @@ class Pago < ActiveRecord::Base
     end		  
 	end
 
+	def self.ingresos_cen_ultimos_meses(lapso_meses)
+		fecha_actual =  Date.parse(Time.now.strftime("%d-%m-%Y").to_s).change(day:15)
+		meses = [fecha_actual]
+		data = {}
+		(1..lapso_meses).each do |n|
+			meses << (fecha_actual - n.month)
+		end
+		meses.each do |mes|
+			data[mes.strftime("%b, %Y")] = [(Pago.sum_por_fecha_archivo(mes.to_s, 'CAS')/2).to_f]
+			data[mes.strftime("%b, %Y")] << (Pago.sum_por_fecha_archivo(mes.to_s, 'NOMBRADOS Y CONTRATADOS')/2).to_f
+		end
+		return data
+	end
+
+	def self.ingresos_base_anual(basis,year)
+		meses = []
+    data = {}
+    (1..12).each do |n|
+      meses << Date.parse("15-#{n}-#{year}")
+    end
+    meses.each do |mes|
+			data[mes.strftime("%b, %Y")] = [(Pago.sum_por_fecha_base_archivo(mes.to_s,
+																			 basis.codigo_base, 'CAS')/2).to_f]
+			data[mes.strftime("%b, %Y")] << (Pago.sum_por_fecha_base_archivo(mes.to_s,
+																		 	basis.codigo_base, 'NOMBRADOS Y CONTRATADOS')/2).to_f
+		end
+		return data
+	end
+
+
+
+
 	private
+
 	def self.process_data_from_txt(new_line)
 		if /^ESSALUD\s+PAGINA/.match(new_line)
 			@paginas = @paginas + 1			
@@ -106,17 +139,5 @@ class Pago < ActiveRecord::Base
 		return enfermera, ente
 	end
 
-	def self.ingresos_cen_ultimos_meses(lapso_meses)
-		fecha_actual =  Date.parse(Time.now.strftime("%d-%m-%Y").to_s).change(day:15)
-		meses = [fecha_actual]
-		data = {}
-		(1..lapso_meses).each do |n|
-			meses << (fecha_actual - n.month)
-		end
-		meses.each do |mes|
-			data[mes.strftime("%b, %Y")] = [(Pago.sum_por_fecha_archivo(mes.to_s, 'CAS')/2).to_f]
-			data[mes.strftime("%b, %Y")] << (Pago.sum_por_fecha_archivo(mes.to_s, 'NOMBRADOS Y CONTRATADOS')/2).to_f
-		end
-		return data
-	end
+	
 end

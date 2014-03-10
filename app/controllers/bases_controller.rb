@@ -46,7 +46,17 @@ class BasesController < ApplicationController
       format.json { render json: BasesMiembrosDatatable.new(view_context) }
     end
   end
+  def estadisticas
+    @basis = Base.find(params[:basis_id])
+    if request.xhr?
+      @year = params[:date][:year]
+    end
+    respond_to do |format|
+      format.html
+      format.js { render 'bases/ajax_js/base_estadisticas' }
+    end
 
+  end
   def index
     respond_to do |format|
       format.html
@@ -129,7 +139,7 @@ class BasesController < ApplicationController
     end
     def get_full_fecha
       if params[:date]
-        Date.parse('15-' + params[:date][:month] + '-' + params[:date][:year]).to_S
+        Date.parse('15-' + params[:date][:month] + '-' + params[:date][:year]).to_s
       end
     end
 end

@@ -106,6 +106,4 @@ class Ente < ActiveRecord::Base
   def self.get_ente(data_trabajo, regimen)
   	return Ente.find_by_cod_essalud(get_ente_name(data_trabajo, regimen))
   end
-
-
 end

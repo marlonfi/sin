@@ -1,0 +1,10 @@
+<div class="col-lg-12">
+  <section class="panel">
+    <header class="panel-heading">
+      Flujo mensual <%= @year %> 
+    </header>
+    <div class="panel-body">
+       <%= content_tag :div, "", id: "base_money_mensual", data: { base: chart_flujo_mensual(Pago.ingresos_base_anual(@basis,@year)).reverse}, style: "height: 250px;" %>
+    </div>      
+  </section>
+</div>

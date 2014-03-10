@@ -197,6 +197,17 @@ class Enfermera < ActiveRecord::Base
     end
     return data
   end
+  def self.data_anual_with_basis(basis, year)
+    meses = []
+    data = {}
+    (1..12).each do |n|
+      meses << Date.parse("15-#{n}-#{year}")
+    end
+    meses.each do |mes|
+      data[mes.strftime("%b, %Y")] = Pago.por_fecha_base(mes.to_s, basis.codigo_base).count
+    end
+    return data
+  end
  	
   private
   def self.process_empty_payments(enfermeras, mes_cotizacion, tipo_txt)

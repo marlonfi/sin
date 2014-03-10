@@ -4,7 +4,7 @@ Morris.Bar({
 	data: $('#agremiados_mensual').data('enfermeras'),
 	xkey: 'month',
 	ykeys: ['enfermeras'],
-	labels: ['# Agre.'],
+	labels: ['Agremiados'],
 	barColors: ['#FF6B6B'],
 });
 $('#loadingspan').remove();
