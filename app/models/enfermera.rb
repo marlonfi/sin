@@ -52,6 +52,9 @@ class Enfermera < ActiveRecord::Base
     payment.monto = monto
     payment.generado_por = "Archivo: #{File.basename(import_file.archivo_url)}"
     payment.base = base ? base.codigo_base : 'Pago libre'
+    if payment.base == 'Pago libre'
+      payment.ente_libre = self.ente.cod_essalud
+    end  
     payment.archivo = import_file.tipo_txt
     payment.save!    
   end

@@ -22,9 +22,10 @@ private
   def data
     pagos.map do |pago|
       enfermera = pago.enfermera
+      base = pago.base == 'Pago libre' ? "Pago libre (#{pago.ente_libre})" : pago.base
       [
         link_to(enfermera.full_name, "/enfermeras/#{enfermera.id}"),
-        pago.base,
+        base,
         month_year(pago.mes_cotizacion),
         number_to_currency(pago.monto, :unit => "S/. "),
         pago.generado_por

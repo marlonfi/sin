@@ -121,9 +121,13 @@ describe Pago do
                                 fecha_pago: '15-10-2013',
                                archivo: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root,
                               '/spec/factories/files/pagos_txt.TXT'))))
+      @bases = Import.create(tipo_clase: "Base",
+                              archivo: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root,
+                              '/spec/factories/files/bases.csv'))))
       RedAsistencial.import(@archivo)
       Ente.import(@archivo)
       Enfermera.import_essalud(@archivo)
+      Base.import_bases(@bases)
     end
     it "creates all pagos, including the Falta de pago" do
       expect{
@@ -144,6 +148,29 @@ describe Pago do
     it 'generates all pgos with the correct monto_total' do
       Pago.import(@archivo2)
       expect(Pago.por_fecha(@archivo2.fecha_pago).sum(:monto).to_f).to eq(1652.08)
+    end
+    it 'collocates the pago in the correct base' do      
+      Pago.import(@archivo2)
+      pago1 = Enfermera.find_by_cod_planilla('1979324').pagos.first
+      pago2 = Enfermera.find_by_cod_planilla('5001461').pagos.first
+      pago3 = Enfermera.find_by_cod_planilla('2439438').pagos.first
+      expect(pago1.base).to eq('B-D HII Moquegua')
+      expect(pago1.monto.to_f).to eq(50.89)
+      expect(pago2.base).to eq('B-STAE')
+      expect(pago2.monto.to_f).to eq(26.74)
+      expect(pago3.base).to eq('B-D HIV Huancayo')
+      expect(pago3.monto.to_f).to eq(34.50)
+    end
+    it 'show for pagos libres in what ente goes the payment' do
+      Pago.import(@archivo2)
+      pago1 = Enfermera.find_by_cod_planilla('2080335').pagos.first
+      pago2 = Enfermera.find_by_cod_planilla('2222222').pagos.first
+      expect(pago1.base).to eq('Pago libre')
+      expect(pago1.monto.to_f).to eq(26.74)
+      expect(pago1.ente_libre).to eq('PM Chancay')
+      expect(pago2.base).to eq('Pago libre')
+      expect(pago2.monto.to_f).to eq(29.33)
+      expect(pago2.ente_libre).to eq('Ente_prueba')
     end
   end
 end

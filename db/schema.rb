@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140225161016) do
+ActiveRecord::Schema.define(version: 20140323191932) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -138,6 +138,7 @@ ActiveRecord::Schema.define(version: 20140225161016) do
     t.string  "generado_por"
     t.string  "archivo"
     t.string  "status"
+    t.string  "ente_libre"
   end
 
   add_index "pagos", ["mes_cotizacion", "base"], name: "index_pagos_on_mes_cotizacion_and_base", using: :btree

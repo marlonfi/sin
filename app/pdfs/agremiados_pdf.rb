@@ -82,7 +82,8 @@ class AgremiadosPdf < Prawn::Document
 	  all_pagos = []
 	  @pagos.each do |pago|
 	  	enfermera =  pago.enfermera
-	  	all_pagos << [enfermera.cod_planilla,enfermera.full_name, pago.base, month_year(pago.mes_cotizacion),
+	  	base = pago.base == 'Pago libre' ? "Pago libre (#{pago.ente_libre})" : pago.base
+	  	all_pagos << [enfermera.cod_planilla,enfermera.full_name, base, month_year(pago.mes_cotizacion),
 	  							 number_to_currency(pago.monto, :unit => "S/. ")]
 	  end
 	  #debugger
@@ -99,9 +100,10 @@ class AgremiadosPdf < Prawn::Document
 	    style(row(0).columns(0), :borders => [:top, :left, :bottom])
 	    style(row(0).columns(-1), :borders => [:top, :right, :bottom])
 	    style(row(-1), :border_width => 2)
-	    style(column(2..-1), :align => :right)
+	    style(column(2..-1), :align => :left)
 	    style(columns(0), :width => 75)
 	    style(columns(1), :width => 225)
+	    style(columns(4), :width => 50)
 	  end
 
 	  move_down 1
