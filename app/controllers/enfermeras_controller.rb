@@ -64,7 +64,8 @@ class EnfermerasController < ApplicationController
 
   def aportaciones
     @enfermera = Enfermera.find(params[:enfermera_id])
-    @aportaciones = @enfermera.pagos.order(mes_cotizacion: :desc)
+    @aportaciones = @enfermera.pagos.paginate(:page => params[:page], :per_page => 12).
+                    order(mes_cotizacion: :desc)
   end
   def bitacoras
     @enfermera = Enfermera.find(params[:enfermera_id])
