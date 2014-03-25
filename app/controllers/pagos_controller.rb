@@ -3,6 +3,13 @@ class PagosController < ApplicationController
   def index
     @bases = Base.all 	
   end
+  def new
+    @enfermera = Enfermera.find(params[:enfermera_id])
+    @bases = Base.all
+  end
+  def create
+    debugger
+  end
   def retrasos
     if params[:cotizacion]
       @cotizacion = params[:cotizacion]

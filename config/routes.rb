@@ -48,6 +48,7 @@ Sinesss::Application.routes.draw do
     resources :bitacoras, :only => [:new, :create] do
       match '/status', to:'bitacoras#change_status', as: 'change_status', via: 'post'
     end
+    resources :pagos, :only => [:new, :create]
   end
 
   match '/entes/import', to:'entes#import', as: 'entes_import', via: 'get'
