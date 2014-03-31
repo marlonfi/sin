@@ -48,7 +48,7 @@ a, a:hover, a:focus {
 
 .form-signin {
     max-width: 330px;
-    margin: 100px auto 0;
+    margin: 25px auto 0;
     background: #fff;
     border-radius: 5px;
     -webkit-border-radius: 5px;
@@ -4397,7 +4397,7 @@ tr.odd.gradeX td.sorting_1, tr.even.gradeX td.sorting_1, table.display tr.even.g
 /*lock screen*/
 
 .lock-screen {
-    /*background:#02bac6 url("../img/lock-bg.jpg");*/
+    background: #02bac6 image-url("lock-bg.jpg");
     background-size: cover;
     background-repeat: repeat;
 }

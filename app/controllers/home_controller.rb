@@ -1,6 +1,9 @@
 class HomeController < ApplicationController
-	layout 'admin'
   def dashboard
-  	@bases = Base.all  	
+  	@bases = Base.all
+  	render :layout => 'admin'  	
+  end
+  def principal
+  	render :layout => 'principal'
   end
 end
