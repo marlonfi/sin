@@ -1,7 +1,9 @@
 #encoding: utf-8
 class RedAsistencialsController < ApplicationController
+  before_filter :authenticate_user!
   before_action :set_red_asistencial, only: [:edit, :update, :destroy]
   layout 'admin'
+  
   def index
     @red_asistencials = RedAsistencial.order(cod_essalud: :asc)
   end

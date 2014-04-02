@@ -1,5 +1,7 @@
 class PagosController < ApplicationController
-	layout 'admin'
+	before_filter :authenticate_user!
+  layout 'admin'
+
   def index
     @bases = Base.all 	
   end

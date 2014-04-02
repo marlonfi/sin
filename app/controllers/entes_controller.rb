@@ -1,4 +1,5 @@
 class EntesController < ApplicationController
+  before_filter :authenticate_user!
   before_action :set_ente, only: [:show, :edit, :update, :destroy]
   layout 'admin'
   # GET /entes

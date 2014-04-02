@@ -25,6 +25,11 @@
             </div>
         <% end %>
     </div>
+    <%if flash[:alert]%>
+			<div class="alert alert-block alert-danger" style='margin-top:10px'>
+			  <strong><center><%= flash[:alert]%></center></strong>
+			</div>		    
+		<%end%>
 </div>
 <script>
     function startTime()

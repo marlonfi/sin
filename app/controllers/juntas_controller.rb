@@ -1,5 +1,6 @@
 class JuntasController < ApplicationController
-  layout 'admin'
+  before_filter :authenticate_user!
+  layout 'admin'  
   
   def new
     @basis = Base.find(params[:basis_id])

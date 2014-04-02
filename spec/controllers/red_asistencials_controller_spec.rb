@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe RedAsistencialsController do
+  before(:each) do
+    @user = create(:user)
+    sign_in @user 
+  end
   describe 'GET #index' do
     context 'without adittional parameters' do
       it "returns ordered by cod_essalud" do

@@ -1,4 +1,5 @@
 class BasesController < ApplicationController
+  before_filter :authenticate_user!
   before_action :set_basis, only: [:show, :edit, :update, :destroy]
   layout 'admin'
   # GET /bases

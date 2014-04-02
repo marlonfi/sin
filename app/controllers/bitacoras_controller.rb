@@ -1,4 +1,5 @@
 class BitacorasController < ApplicationController
+  before_filter :authenticate_user!
   before_action :set_bitacora, only: [:show, :edit, :update, :destroy]
   layout 'admin'
   # GET /bitacoras

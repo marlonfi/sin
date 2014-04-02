@@ -1,5 +1,6 @@
 Sinesss::Application.routes.draw do
 
+  devise_for :users,:controllers => {:sessions => "users/sessions"}
   #reports
   match '/reports', to: 'reports#index', as: 'reports', via: 'get'
   match '/reports/bases_aportaciones', to: 'reports#bases_aportaciones',

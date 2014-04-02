@@ -1,5 +1,7 @@
 class ReportsController < ApplicationController
+  before_filter :authenticate_user!
   layout 'admin'
+  
   def index
     @bases = Base.order(:codigo_base)
   end  

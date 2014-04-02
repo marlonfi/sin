@@ -1,4 +1,5 @@
 class EnfermerasController < ApplicationController
+  before_filter :authenticate_user!
   before_action :set_enfermera, only: [:show, :edit, :update, :destroy]
   layout 'admin'
   # GET /enfermeras
