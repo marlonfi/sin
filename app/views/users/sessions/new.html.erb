@@ -7,7 +7,7 @@
                      :html => {:class => 'form-signin'}) do |f| %>
             <h2 class="form-signin-heading">INGRESO AL SISTEMA</h2>
             <div class="login-wrap">
-                <%= f.text_field :email, autofocus: true, class: 'form-control',
+                <%= f.text_field :dni, autofocus: true, class: 'form-control',
                                   placeholder: 'DNI' %>
                 <%= f.password_field :password, autocomplete: "off", class: 'form-control',
                                   placeholder: 'Password' %>
@@ -26,10 +26,10 @@
         <% end %>
     </div>
     <%if flash[:alert]%>
-			<div class="alert alert-block alert-danger" style='margin-top:10px'>
-			  <strong><center><%= flash[:alert]%></center></strong>
-			</div>		    
-		<%end%>
+		<div class="alert alert-block alert-danger" style='margin-top:10px'>
+		  <strong><center><%= flash[:alert]%></center></strong>
+		</div>		    
+	<%end%>
 </div>
 <script>
     function startTime()

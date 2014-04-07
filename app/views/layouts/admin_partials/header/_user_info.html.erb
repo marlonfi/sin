@@ -7,8 +7,8 @@
         <!-- user login dropdown start-->
         <li class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                <%= image_tag("iokero_logo.jpg", size: "29x29", alt: "") %>
-                <span class="username">Usuario Iokero</span>
+                <%= image_tag("logo.jpg", size: "29x29", alt: "") %>
+                <span class="username">USUARIO: <%= current_user.apellidos_nombres%></span>
                 <b class="caret"></b>
             </a>
             <ul class="dropdown-menu extended logout">
