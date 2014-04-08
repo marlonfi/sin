@@ -7,8 +7,8 @@ FactoryGirl.define do
     dni '46399081'
     apellidos_nombres 'Paez Chavez Wenceslao'
     cargo 'Secretario General'
-		factory :super_admin do
-    	super_admin true
+		factory :superadmin do
+    	superadmin true
     end
     factory :banned_user do
     	desabilitado true

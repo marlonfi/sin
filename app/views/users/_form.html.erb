@@ -1,0 +1,119 @@
+<%= form_for @user, :html => {:class => 'form-horizontal'}  do |f| %>
+  <div class="form-group">
+    <%= f.label :dni, 'DNI', class: 'col-lg-2 col-sm-2 control-label' %>
+    <div class="col-lg-10">
+      <%= f.text_field :dni, class: 'form-control' %>
+      <p class="help-block" id="error_notice"><%= f.object.errors[:dni].join(", ")%></p>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :apellidos_nombres,'Ap. y Nomb.', class: 'col-lg-2 col-sm-2 control-label' %>
+    <div class="col-lg-10">
+      <%= f.text_field :apellidos_nombres, class: 'form-control' %>
+      <p class="help-block" id="error_notice"><%= f.object.errors[:apellidos_nombres].join(", ")%></p>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :cargo, 'Cargo', class: 'col-lg-2 col-sm-2 control-label' %>
+    <div class="col-lg-10">
+      <%= f.text_field :cargo, class: 'form-control' %>
+      <p class="help-block" id="error_notice"><%= f.object.errors[:cargo].join(", ")%></p>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :superadmin,'¿Superadmin?', class: 'col-lg-2 col-sm-2 control-label' %>
+    <div class="col-lg-10">
+      <label class="radio inline">
+          <%= f.radio_button :superadmin, true,  class: 'multiple_classes'%>
+            SI (Privilegios de escritura y lectura para manejar usuarios del sistema)
+        </label> 
+        <label class="radio inline"> 
+          <%= f.radio_button :superadmin, false,  class: 'multiple_classes'%> NO
+        </label>
+      <p class="help-block" id="error_notice"><%= f.object.errors[:superadmin].join(", ")%></p>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :admin,'¿Admin?', class: 'col-lg-2 col-sm-2 control-label' %>
+    <div class="col-lg-10">
+      <label class="radio inline">
+          <%= f.radio_button :admin, true,  class: 'multiple_classes'%> 
+            SI (Privilegios de escritura y lectura para manejar las aportaciones y donaciones)
+        </label> 
+        <label class="radio inline"> 
+          <%= f.radio_button :admin, false,  class: 'multiple_classes'%> NO
+        </label>
+      <p class="help-block" id="error_notice"><%= f.object.errors[:admin].join(", ")%></p>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :organizacional,'¿Organizacional?', class: 'col-lg-2 col-sm-2 control-label' %>
+    <div class="col-lg-10">
+      <label class="radio inline">
+          <%= f.radio_button :organizacional, true,  class: 'multiple_classes'%> 
+            SI (Privilegios de escritura y lectura para manejar redes asistenciales, entes, bases, enfermeras, juntas directivas y bitácoras. Tiene privilegios de lectura para aportaciones, donaciones y reportes.)
+        </label> 
+        <label class="radio inline"> 
+          <%= f.radio_button :organizacional, false,  class: 'multiple_classes'%> NO
+        </label>
+      <p class="help-block" id="error_notice"><%= f.object.errors[:organizacional].join(", ")%></p>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :informatica,'¿Informática?', class: 'col-lg-2 col-sm-2 control-label' %>
+    <div class="col-lg-10">
+      <label class="radio inline">
+          <%= f.radio_button :informatica, true,  class: 'multiple_classes'%> 
+            SI (Privilegios para importar datos al sistema.)
+        </label> 
+        <label class="radio inline"> 
+          <%= f.radio_button :informatica, false,  class: 'multiple_classes'%> NO
+        </label>
+      <p class="help-block" id="error_notice"><%= f.object.errors[:informatica].join(", ")%></p>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :reader,'¿Reader?', class: 'col-lg-2 col-sm-2 control-label' %>
+    <div class="col-lg-10">
+      <label class="radio inline">
+          <%= f.radio_button :reader, true,  class: 'multiple_classes'%> 
+            SI (Privilegios similares a Organizacional, pero solo con permisos de lectura, no puede crear ni editar.)
+        </label> 
+        <label class="radio inline"> 
+          <%= f.radio_button :reader, false,  class: 'multiple_classes'%> NO
+        </label>
+      <p class="help-block" id="error_notice"><%= f.object.errors[:reader].join(", ")%></p>
+    </div>
+  </div>
+  
+  <header class="panel-heading" style= 'text-align: center'>    
+  </header>
+
+  <div class="form-group">
+    <%= f.label :desabilitado,'¿Deshabilitado?', class: 'col-lg-2 col-sm-2 control-label' %>
+    <div class="col-lg-10">
+      <label class="radio inline">
+          <%= f.radio_button :desabilitado, true,  class: 'multiple_classes'%> 
+            SI (Quitar acceso al sistema al usuario)
+        </label> 
+        <label class="radio inline"> 
+          <%= f.radio_button :desabilitado, false,  class: 'multiple_classes'%> NO
+        </label>
+      <p class="help-block" id="error_notice"><%= f.object.errors[:desabilitado].join(", ")%></p>
+    </div>
+  </div>
+
+  <div class="form-group">
+      <div class="col-lg-offset-2 col-lg-10">
+          <%= f.submit 'Guardar', class:'btn btn-info'%>         
+      </div>
+  </div>
+
+<% end %>

@@ -1,0 +1,22 @@
+<% provide(:title, "Nuevo usuario") %>
+<% provide(:content_header_path,  users_path) %>
+<% provide(:content_header_data1,
+          "<i class='fa fa-user'></i> Usuarios del sistema".html_safe) %>
+<% provide(:content_header_data2,
+          "Nuevo usuario".html_safe) %>
+
+<div class="row">
+    <aside class="profile-info col-lg-9">
+        <section>
+            <div class="panel panel-primary">
+                <div class="panel-heading"> Registro de nuevo usuario</div>
+                <div class="panel-body">
+                 	<%= render 'form' %>     
+                </div>
+                <span class="label label-danger" style="width:750px">
+                  OJO: La contraseña del usuario será el DNI ingresado.
+                </span></br>
+            </div>
+        </section>       
+    </aside>
+</div>

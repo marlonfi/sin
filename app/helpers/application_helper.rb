@@ -20,6 +20,13 @@ module ApplicationHelper
 	def meses_espanol
 	  %w(Enero Febrero Marzo Abril Mayo Junio Julio Agosto Setiembre Octubre Noviembre Diciembre) 
 	end
+
+	def booleano?(bool)
+		bool ? 'SI': 'NO'
+	end
+	def banned?(bool)
+		bool ? 'Desabilitado' : 'Habilitado'
+	end
 	#for devise
 	def resource_name
     :user

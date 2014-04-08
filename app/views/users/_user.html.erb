@@ -1,0 +1,12 @@
+<tr>
+  <td><%= user.dni %></td>
+  <td><%= user.apellidos_nombres %></td>
+  <td><%= user.cargo %></td>
+  <td><%= date_and_hour user.last_sign_in_at %></td>
+  <td><%= booleano? user.superadmin %></td>
+  <td><%= booleano? user.admin %></td> 
+  <td><%= booleano? user.organizacional %></td> 
+  <td><%= booleano? user.informatica %></td> 
+  <td><%= booleano? user.reader %></td>
+  <td><%= banned? user.desabilitado %></td>              
+</tr>

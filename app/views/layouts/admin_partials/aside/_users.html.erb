@@ -1,0 +1,12 @@
+<% if can? :manage, User %>
+<li>
+  <% if  controller_name == 'users' %>
+  <a href="<%= users_path %>" class="active">
+  <%else%>        
+  <a href="<%= users_path %>" >
+  <% end %>
+    <i class="fa fa-user"></i>
+    <span>Usuarios</span>
+  </a>
+</li>
+<% end %>
