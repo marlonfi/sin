@@ -2,8 +2,13 @@ Sinesss::Application.routes.draw do
 
   devise_for :users,:controllers => {:sessions => "users/sessions"},
              :skip => :registrations
-             
-  resources :users         
+  
+  match '/mi_perfil', to: 'users#mi_perfil', as: 'mi_perfil', via: 'get' 
+  match '/edit_my_password', to: 'users#edit_password', as: 'edit_password', via: 'get'           
+  match '/update_my_password', to: 'users#update_password', as: 'update_password', via: 'patch' 
+  resources :users do
+    match '/reset_password', to: 'users#reset_password', as: "reset_password", via: 'post'
+  end         
   #reports
   match '/reports', to: 'reports#index', as: 'reports', via: 'get'
   match '/reports/bases_aportaciones', to: 'reports#bases_aportaciones',

@@ -1,0 +1,46 @@
+<% provide(:title, "Mi perfil") %>
+<% provide(:content_header_path,  dashboard_path) %>
+<% provide(:content_header_data1,
+          "<i class='fa fa-user'></i> Mi perfil".html_safe) %>
+<div class="row">
+    <aside class="profile-info col-lg-9">
+        <section class="panel">
+            <div class="bio-graph-heading">
+                MI PERFIL
+            </div>
+            <header class="panel-heading"></header>
+            <div class="panel-body bio-graph-info">
+                <h1>Datos usuario</h1>
+                <div class="row">
+                    <div class="bio-row">
+                        <p><span>DNI </span>: <%= @user.dni%></p>
+                    </div>
+                    <div class="bio-row">
+                        <p><span>CARGO </span>: <%= @user.cargo%></p>
+                    </div>
+                    <div class="bio-row">
+                        <p><span>AP. Y NOMBRES</span>: <%= @user.apellidos_nombres%></p>
+                    </div>
+                    <div class="bio-row">
+                        <p><span>SUPERADMIN</span>: <%= booleano? @user.superadmin %></p>
+                    </div>
+                    <div class="bio-row">
+                        <p><span>ADMIN</span>: <%= booleano? @user.admin%></p>
+                    </div>
+                    <div class="bio-row">
+                        <p><span>ORGANIZACI.</span>: <%= booleano? @user.organizacional%></p>
+                    </div>
+                    <div class="bio-row">
+                        <p><span>INFORMATICA</span>: <%= booleano? @user.informatica%></p>
+                    </div>
+                    <div class="bio-row">
+                        <p><span>READER</span>: <%= booleano? @user.reader%></p>
+                    </div>
+                </div>
+                <span class="label label-danger" style="width:750px">
+                  OJO: Si alguno de los datos no son correctos, comuniquese con el SUPERADMIN del sistema.
+                </span></br>
+            </div>       
+        </section>       
+    </aside>
+</div>

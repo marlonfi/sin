@@ -1,0 +1,37 @@
+<% provide(:title, "Editar usuario con DNI #{@user.dni}") %>
+<% provide(:content_header_path,  users_path) %>
+<% provide(:content_header_data1,
+          "<i class='fa fa-user'></i> Usuarios del sistema".html_safe) %>
+<% provide(:content_header_data2,
+          "Editar usuario".html_safe) %>
+
+<div class="row">
+    <aside class="profile-info col-lg-9">
+        <section>
+            <div class="panel panel-primary">
+                <div class="panel-heading"> Editar usuario con DNI <%= @user.dni %></div>
+                <div class="panel-body">
+                 	<%= render 'form' %>     
+                </div>
+                <span class="label label-danger" style="width:750px">
+                  OJO: La contraseña no será editada, si desea puede resetearla.
+                </span></br>
+            </div>
+        </section>       
+    </aside>
+</div>
+
+<div class="row">
+    <aside class="profile-info col-lg-9">
+        <section>
+            <div class="panel panel-primary">
+                <div class="panel-heading"> Resetear contraseña.</div>
+                <div class="panel-body">
+                    <%= link_to(user_reset_password_path(@user), :class => 'btn btn-danger btn-xs', method: :post, :confirm => "Se cambiara la contraseña al DNI #{@user.dni}") do %>
+                      <i class="fa fa-pencil"> Resetear contraseña</i>
+                    <% end %> 
+                </div>
+            </div>
+        </section>       
+    </aside>
+</div>

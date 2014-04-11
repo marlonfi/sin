@@ -8,5 +8,9 @@
   <td><%= booleano? user.organizacional %></td> 
   <td><%= booleano? user.informatica %></td> 
   <td><%= booleano? user.reader %></td>
-  <td><%= banned? user.desabilitado %></td>              
+  <td><%= banned? user.desabilitado %></td>
+  <td><%= link_to(edit_user_path(user), :class => 'btn btn-primary btn-xs') do %>
+      <i class="fa fa-pencil"> </i>
+    <% end %>
+  </td>              
 </tr>

@@ -29,4 +29,45 @@ feature 'Creando usuarios' do
 			expect(page).to have_content 'Acceso denegado.'
 		end
 	end
+	
+	context 'A user visit perfil' do
+		background do
+			@user1 = create(:user, dni: '46399081', password: 'hola1234', password_confirmation: 'hola1234',
+											apellidos_nombres: 'jose jose')
+			loguear('46399081', 'hola1234')
+		end
+		scenario 'visit perfl' do
+			visit mi_perfil_path
+			expect(page).to have_content 'MI PERFIL'
+		end	
+	end
+
+	context 'A user changes his password' do
+		background do
+			@user1 = create(:user, dni: '46399081', password: 'hola1234', password_confirmation: 'hola1234',
+											apellidos_nombres: 'jose jose')
+			loguear('46399081', 'hola1234')
+		end
+		scenario 'with good data' do
+			visit edit_password_path
+			fill_in 'user[current_password]', with: 'hola12345'
+			fill_in 'user[password]', with: 'hola12345'
+			fill_in 'user[password_confirmation]', with: 'hola12345'
+			click_button('Cambiar')
+			expect(page).to have_content 'Hubo un problema. Recuerde que el password'
+		end
+		scenario 'with complete ok data' do
+			visit edit_password_path
+			fill_in 'user[current_password]', with: 'hola1234'
+			fill_in 'user[password]', with: 'hola12345'
+			fill_in 'user[password_confirmation]', with: 'hola12345'
+			click_button('Cambiar')
+			expect(page).to have_content 'Se ha cambiado su password correctamente'
+			cerrar_sesion
+			loguear('46399081','hola1234')
+			expect(page).to have_content 'INGRESO AL SISTEMA'
+			loguear('46399081','hola12345')
+			expect(page).to have_content 'jose jose'
+		end
+	end
 end
