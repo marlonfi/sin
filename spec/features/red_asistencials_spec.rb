@@ -2,8 +2,9 @@
 require "spec_helper"
 
 feature 'Redes asistenciales management' do
-
 	background do
+		@user1 = create(:organizacional, dni: '46399081', password: 'hola1234', password_confirmation: 'hola1234')
+	  loguear('46399081', 'hola1234')
 		create(:red_asistencial, cod_essalud: 'RA Puno')
 		visit red_asistencials_path
 	end
@@ -30,6 +31,13 @@ feature 'Redes asistenciales management' do
 end
 
 feature "Import managment RA" do
+	background do
+		@user1 = create(:informatica, dni: '46399081', password: 'hola1234', password_confirmation: 'hola1234')
+	  loguear('46399081', 'hola1234')
+		create(:red_asistencial, cod_essalud: 'RA Puno')
+		visit red_asistencials_path
+	end
+
 	scenario "toggles modal for import", js: true do
 		visit red_asistencials_path
 		expect(page).to_not have_content 'Importar Redes Asistenciales'
@@ -44,5 +52,4 @@ feature "Import managment RA" do
 		click_button('Procesar')
 		expect(page).to have_content 'OK! El proceso de importacion durará unos minutos.'
 	end
-
 end

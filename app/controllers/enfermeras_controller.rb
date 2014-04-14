@@ -1,5 +1,7 @@
 class EnfermerasController < ApplicationController
   before_filter :authenticate_user!
+  load_and_authorize_resource
+  skip_authorize_resource :only => [:index]
   before_action :set_enfermera, only: [:show, :edit, :update, :destroy]
   layout 'admin'
   # GET /enfermeras
@@ -24,7 +26,40 @@ class EnfermerasController < ApplicationController
   # GET /enfermeras/1/edit
   def edit
   end
-  #get
+  
+  def aportaciones
+    @enfermera = Enfermera.find(params[:enfermera_id])
+    @aportaciones = @enfermera.pagos.paginate(:page => params[:page], :per_page => 12).
+                    order(mes_cotizacion: :desc)
+  end
+  def bitacoras
+    @enfermera = Enfermera.find(params[:enfermera_id])
+    @bitacoras = @enfermera.bitacoras.order(created_at: :desc)
+  end
+  def create
+    @enfermera = Enfermera.new(enfermera_params)
+
+    if @enfermera.save
+      redirect_to @enfermera, notice: 'Se registró correctamente la enfermera'
+    else
+      flash.now[:alert] = 'Hubo un problema. No se registró la enfermera'
+      render action: 'new'      
+    end    
+  end
+
+  def update
+    if @enfermera.update(enfermera_params)
+      redirect_to @enfermera, notice: 'Se actualizó correctamente la enfermera.'
+    else
+      flash.now[:alert] = 'Hubo un problema. No se pudo actualizar los datos.'
+      render action: 'edit'
+    end
+  end
+
+  def anual_chart
+    @year = params[:date][:year]
+  end
+
   def import_essalud
     if !request.xhr?
       redirect_to enfermeras_path, alert: 'No autorizado.'
@@ -61,39 +96,6 @@ class EnfermerasController < ApplicationController
     else
       redirect_to enfermeras_path, alert: 'El archivo es muy grande, o tiene un formato incorrecto.'
     end
-  end
-
-  def aportaciones
-    @enfermera = Enfermera.find(params[:enfermera_id])
-    @aportaciones = @enfermera.pagos.paginate(:page => params[:page], :per_page => 12).
-                    order(mes_cotizacion: :desc)
-  end
-  def bitacoras
-    @enfermera = Enfermera.find(params[:enfermera_id])
-    @bitacoras = @enfermera.bitacoras.order(created_at: :desc)
-  end
-  def create
-    @enfermera = Enfermera.new(enfermera_params)
-
-    if @enfermera.save
-      redirect_to @enfermera, notice: 'Se registró correctamente la enfermera'
-    else
-      flash.now[:alert] = 'Hubo un problema. No se registró la enfermera'
-      render action: 'new'      
-    end    
-  end
-
-  def update
-    if @enfermera.update(enfermera_params)
-      redirect_to @enfermera, notice: 'Se actualizó correctamente la enfermera.'
-    else
-      flash.now[:alert] = 'Hubo un problema. No se pudo actualizar los datos.'
-      render action: 'edit'
-    end
-  end
-
-  def anual_chart
-    @year = params[:date][:year]
   end
 
   private

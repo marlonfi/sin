@@ -4,9 +4,54 @@ class Ability
   def initialize(user)
     if user.superadmin?
        can :manage, User
-    else
-
     end
+    if user.informatica?
+       can :import, RedAsistencial
+       can :importar, RedAsistencial
+
+       can :import, Ente
+       can :importar, Ente
+
+       can :importar_data_actualizada, Enfermera
+       can :import_data_actualizada, Enfermera
+       can :import_essalud, Enfermera
+       can :importar_essalud, Enfermera
+       
+       can :index, Import
+       can :download, Import
+    end
+    if user.organizacional?
+       can :new, RedAsistencial
+       can :create, RedAsistencial
+       can :edit, RedAsistencial
+       can :update, RedAsistencial
+       can :destroy, RedAsistencial
+       can :show, RedAsistencial
+       can :entes, RedAsistencial
+
+       can :new, Ente
+       can :create, Ente
+       can :edit, Ente
+       can :update, Ente
+       can :destroy, Ente
+       can :show, Ente
+       can :enfermeras, Ente 
+    end
+    if user.reader?
+       can :show, RedAsistencial
+       can :entes, RedAsistencial
+
+       can :show, Ente
+       can :enfermeras, Ente 
+    end
+    if user.admin?       
+       can :show, RedAsistencial
+       can :entes, RedAsistencial
+
+       can :show, Ente
+       can :enfermeras, Ente  
+    end
+
     # Define abilities for the passed in user here. For example:
     #
     #   user ||= User.new # guest user (not logged in)

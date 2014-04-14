@@ -10,6 +10,18 @@ FactoryGirl.define do
 		factory :superadmin do
     	superadmin true
     end
+    factory :admin do
+      admin true
+    end
+    factory :organizacional do
+      organizacional true
+    end
+    factory :informatica do
+      informatica true
+    end
+    factory :reader do
+      reader true
+    end
     factory :banned_user do
     	desabilitado true
     end

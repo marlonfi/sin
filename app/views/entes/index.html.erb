@@ -13,6 +13,7 @@
 <div class="row">
   <div class="col-lg-12">
     <section class="panel">
+      <%if can? :show, Ente%>
       <header class="panel-heading">
         Listado de entes
       </header>
@@ -45,13 +46,18 @@
           </table>
         </div>
       </div>
+      <%end%>
       <header class="panel-heading" style= 'text-align: center'>
+        <%if can? :edit, Ente%>
         <%= link_to new_ente_path, :class => 'btn btn-success' do %>
           <i class="fa fa-hospital-o"> </i> Nuevo ente
         <% end %>
+        <% end %>
+        <%if can? :importar, Ente%>
         <a class="btn btn-warning" data-toggle="modal" href="#myImportEnteModal", id='btnImportEnte'>
             <i class="fa fa-upload"> </i> Importar
-        </a>         
+        </a>
+        <% end %>         
       </header>
     </section>
   </div>

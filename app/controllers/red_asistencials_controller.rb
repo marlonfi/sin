@@ -1,6 +1,8 @@
 #encoding: utf-8
 class RedAsistencialsController < ApplicationController
   before_filter :authenticate_user!
+  load_and_authorize_resource
+  skip_authorize_resource :only => [:index]
   before_action :set_red_asistencial, only: [:edit, :update, :destroy]
   layout 'admin'
   
@@ -8,17 +10,50 @@ class RedAsistencialsController < ApplicationController
     @red_asistencials = RedAsistencial.order(cod_essalud: :asc)
   end
   
+  
   def new
     @red_asistencial = RedAsistencial.new
   end
 
+  def create
+    @red_asistencial = RedAsistencial.new(red_asistencial_params)
+    if @red_asistencial.save
+      redirect_to(red_asistencials_path,
+                  notice: "Se registró correctamente la red asistencial: #{@red_asistencial.cod_essalud}.")
+    else
+      flash.now[:alert] = 'Hubo un problema. No se registró la red asistencial.'
+      render action: 'new'
+    end
+  end
+
   def edit
   end
+  def update
+    if @red_asistencial.update(red_asistencial_params)
+      redirect_to red_asistencials_path, notice: "Se actualizó correctamente la red asistencial: #{@red_asistencial.cod_essalud}."
+    else
+      flash.now[:alert] = 'Hubo un problema. No se pudo actualizar los datos.'
+      render action: 'edit'
+    end
+  end  
+
+  def destroy
+    @red_asistencial.destroy
+    redirect_to red_asistencials_path, notice: "Se eliminó correctamente la red asistencial."
+  end
+
+  #Get actions
+  def show
+  end
+
   def entes
     @red_asistencial = RedAsistencial.find(params[:red_asistencial_id])
     @entes = @red_asistencial.entes
     render 'ra_entes'
   end
+  
+
+  #access only for informatica user
   def import
     if !request.xhr?
       redirect_to red_asistencials_path, alert: 'No autorizado.'
@@ -36,35 +71,6 @@ class RedAsistencialsController < ApplicationController
     else
       redirect_to red_asistencials_path, alert: 'El archivo es muy grande, o tiene un formato incorrecto.'
     end
-  end 
-
-  def create
-    @red_asistencial = RedAsistencial.new(red_asistencial_params)
-    if @red_asistencial.save
-      redirect_to(red_asistencials_path,
-                  notice: "Se registró correctamente la red asistencial: #{@red_asistencial.cod_essalud}.")
-    else
-      flash.now[:alert] = 'Hubo un problema. No se registró la red asistencial.'
-      render action: 'new'
-    end
-  end
-
-  def update
-    if @red_asistencial.update(red_asistencial_params)
-      redirect_to red_asistencials_path, notice: "Se actualizó correctamente la red asistencial: #{@red_asistencial.cod_essalud}."
-    else
-      flash.now[:alert] = 'Hubo un problema. No se pudo actualizar los datos.'
-      render action: 'edit'
-    end
-  end
-  
-
-  def destroy
-    @red_asistencial.destroy
-    redirect_to red_asistencials_path, notice: "Se eliminó correctamente la red asistencial."
-  end
-
-  def show
   end
 
   private

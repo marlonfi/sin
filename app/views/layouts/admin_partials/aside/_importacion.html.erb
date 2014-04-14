@@ -1,3 +1,4 @@
+<% if can? :download, Import %>
 <li class="sub-menu">
     <% if  controller_name == 'imports' %>
     <a href="<%= imports_path %>" class="active">
@@ -8,4 +9,4 @@
         <span>Log de data importada</span>        
     </a>
 </li>
-
+<% end %>

@@ -1,9 +1,19 @@
 class EntesController < ApplicationController
   before_filter :authenticate_user!
+  load_and_authorize_resource
+  skip_authorize_resource :only => [:index]
+
   before_action :set_ente, only: [:show, :edit, :update, :destroy]
   layout 'admin'
   # GET /entes
   # GET /entes.json
+
+  def index
+    respond_to do |format|
+      format.html
+      format.json { render json: EntesDatatable.new(view_context) }
+    end
+  end
 
   def enfermeras
     if !request.xhr?
@@ -14,51 +24,12 @@ class EntesController < ApplicationController
       format.json { render json: EntesEnfermerasDatatable.new(view_context) }
     end
   end
-
-  def index
-    respond_to do |format|
-      format.html
-      format.json { render json: EntesDatatable.new(view_context) }
-    end
-  end
-
   # GET /entes/1
   # GET /entes/1.json
   def show
     @red = @ente.red_asistencial
   end
 
-  # GET /entes/new
-  def new
-    @redes = RedAsistencial.all
-    @bases = Base.all
-    @ente = Ente.new
-  end
-
-  # GET /entes/1/edit
-  def edit
-    @redes = RedAsistencial.all
-    @bases = Base.all
-  end
-
-  def import
-    if !request.xhr?
-      redirect_to entes_path, alert: 'No autorizado.'
-    else
-      render :layout => false
-    end
-  end
-
-  def importar
-    importacion = Import.new(status: 'ESPERA', archivo: params[:archivo], tipo_clase: 'Entes',
-                            descripcion: params[:descripcion], formato_org: 'ESSALUD')
-    if importacion.save
-      Ente.delay.import(importacion)
-      redirect_to imports_path, notice:'El proceso de importacion durará unos minutos.'
-    else
-      redirect_to entes_path, alert: 'El archivo es muy grande, o tiene un formato incorrecto.'
-    end
-  end 
   # POST /entes
   # POST /entes.json
   def create
@@ -93,6 +64,38 @@ class EntesController < ApplicationController
     redirect_to entes_path, notice: "Se eliminó correctamente el ente."
   end
 
+  # GET /entes/new
+  def new
+    @redes = RedAsistencial.all
+    @bases = Base.all
+    @ente = Ente.new
+  end
+
+  # GET /entes/1/edit
+  def edit
+    @redes = RedAsistencial.all
+    @bases = Base.all
+  end
+
+  def import
+    if !request.xhr?
+      redirect_to entes_path, alert: 'No autorizado.'
+    else
+      render :layout => false
+    end
+  end
+
+  def importar
+    importacion = Import.new(status: 'ESPERA', archivo: params[:archivo], tipo_clase: 'Entes',
+                            descripcion: params[:descripcion], formato_org: 'ESSALUD')
+    if importacion.save
+      Ente.delay.import(importacion)
+      redirect_to imports_path, notice:'El proceso de importacion durará unos minutos.'
+    else
+      redirect_to entes_path, alert: 'El archivo es muy grande, o tiene un formato incorrecto.'
+    end
+  end 
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_ente

@@ -5,6 +5,8 @@ feature 'Entes management' do
 	background do
 		@red = create(:red_asistencial, cod_essalud: 'RA Puno')
 		@red.entes.create(cod_essalud: 'Hospi')
+		@user1 = create(:organizacional, dni: '46399081', password: 'hola1234', password_confirmation: 'hola1234')
+	  loguear('46399081', 'hola1234')
 		visit entes_path
 	end
 
@@ -39,7 +41,10 @@ feature 'Entes management' do
 end
 
 feature "Import managment Ente" do
-
+	background do
+		@user1 = create(:informatica, dni: '46399081', password: 'hola1234', password_confirmation: 'hola1234')
+	  loguear('46399081', 'hola1234')
+	end
 	scenario "toggles modal for import", js: true do
 		visit entes_path
 		expect(page).to_not have_content 'Importar Entes'
@@ -67,6 +72,8 @@ feature "Change Ente RA" do
     @ra_sabogal = RedAsistencial.find_by_cod_essalud('RA Sabogal')
     @ente_sabogal = Ente.find_by_cod_essalud('HII G.Lanatta')
     @ente_junin = Ente.find_by_cod_essalud('Def.del Asegu-RA Junin')
+    @user1 = create(:organizacional, dni: '46399081', password: 'hola1234', password_confirmation: 'hola1234')
+	  loguear('46399081', 'hola1234')
 	end
 	scenario "change the RA::Entes" do
 		visit edit_ente_path(@ente_sabogal)
@@ -97,6 +104,8 @@ feature "Change Base of Ente" do
   	@base1 = Base.find_by_codigo_base('B-D HIV Huancayo')
     @base2 = Base.find_by_codigo_base('B-HIV Sabogal')
     @ente1 = Ente.find_by_cod_essalud('Def.del Asegu-RA Junin')
+    @user1 = create(:organizacional, dni: '46399081', password: 'hola1234', password_confirmation: 'hola1234')
+	  loguear('46399081', 'hola1234')
 	end
 	scenario "change the Ente::Base" do
 		expect(@base1.entes).to include(@ente1)
