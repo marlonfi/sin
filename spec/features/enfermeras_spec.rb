@@ -2,6 +2,10 @@
 require "spec_helper"
 
 feature "Import managment: enfermera_actualizacion_datos" do
+	background do
+		@user1 = create(:informatica, dni: '46399081', password: 'hola1234', password_confirmation: 'hola1234')
+	  loguear('46399081', 'hola1234')		
+	end
 	scenario "toggles modal for import", js: true do
 		visit enfermeras_path
 		expect(page).to_not have_content 'Actualizar Data de las Enfermeras'
@@ -27,6 +31,10 @@ feature "Import managment: enfermera_actualizacion_datos" do
 end
 
 feature "Import managment: enfermera" do
+	background do
+		@user1 = create(:informatica, dni: '46399081', password: 'hola1234', password_confirmation: 'hola1234')
+	  loguear('46399081', 'hola1234')		
+	end
 	scenario "toggles modal for import", js: true do
 		visit enfermeras_path
 		expect(page).to_not have_content 'Importar enfermeras'
@@ -51,6 +59,9 @@ feature "Import managment: enfermera" do
 end
 feature "Change Enfermeras Ente" do
 	background do
+		@user1 = create(:organizacional, dni: '46399081', password: 'hola1234', password_confirmation: 'hola1234')
+	  loguear('46399081', 'hola1234')		
+	
 		@archivo = Import.create(tipo_clase: "Red Asistencial",
                               archivo: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root,
                               '/spec/factories/files/lista_essalud.csv'))))

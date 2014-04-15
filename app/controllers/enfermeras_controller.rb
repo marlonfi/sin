@@ -1,7 +1,7 @@
 class EnfermerasController < ApplicationController
   before_filter :authenticate_user!
   load_and_authorize_resource
-  skip_authorize_resource :only => [:index]
+  skip_authorize_resource :only => [:index, :anual_chart]
   before_action :set_enfermera, only: [:show, :edit, :update, :destroy]
   layout 'admin'
   # GET /enfermeras
@@ -17,7 +17,7 @@ class EnfermerasController < ApplicationController
   # GET /enfermeras/1.json
   def show
   end
-
+   
   # GET /enfermeras/new
   def new
     @enfermera = Enfermera.new

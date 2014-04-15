@@ -2,7 +2,11 @@
 require "spec_helper"
 
 feature "Navigation" do
-	scenario "toggles display organizationals links", js: true do
+	background do
+    @user1 = create(:user, dni: '46399081', password: 'hola1234', password_confirmation: 'hola1234')
+    loguear('46399081', 'hola1234')
+  end
+  scenario "toggles display organizationals links", js: true do
 		visit dashboard_path
 		expect(page).to_not have_content 'Redes Asistenciales'
 		expect(page).to_not have_content 'Enfermeras'

@@ -16,7 +16,7 @@ class Ability
        can :import_data_actualizada, Enfermera
        can :import_essalud, Enfermera
        can :importar_essalud, Enfermera
-       
+
        can :index, Import
        can :download, Import
     end
@@ -35,21 +35,38 @@ class Ability
        can :update, Ente
        can :destroy, Ente
        can :show, Ente
-       can :enfermeras, Ente 
+       can :enfermeras, Ente
+
+       
+       can :new, Enfermera
+       can :edit, Enfermera
+       can :create, Enfermera
+       can :update, Enfermera
+       can :aportaciones, Enfermera
+       can :bitacoras, Enfermera
+       can :show, Enfermera
     end
     if user.reader?
        can :show, RedAsistencial
        can :entes, RedAsistencial
 
        can :show, Ente
-       can :enfermeras, Ente 
+       can :enfermeras, Ente
+
+       can :aportaciones, Enfermera
+       can :bitacoras, Enfermera
+       can :show, Enfermera 
     end
     if user.admin?       
        can :show, RedAsistencial
        can :entes, RedAsistencial
 
        can :show, Ente
-       can :enfermeras, Ente  
+       can :enfermeras, Ente
+
+       can :aportaciones, Enfermera
+       can :bitacoras, Enfermera
+       can :show, Enfermera  
     end
 
     # Define abilities for the passed in user here. For example:
