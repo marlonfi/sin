@@ -1,3 +1,4 @@
+<% if current_user.admin? || current_user.organizacional? || current_user.reader? %>
 <li class="sub-menu">
     <% if  controller_name == 'reports' %>
     <a href="<%= reports_path %>" class="active">
@@ -8,4 +9,5 @@
         <span>Reportes</span>        
     </a>
 </li>
+<%end%>
 

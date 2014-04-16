@@ -79,6 +79,7 @@ class Ability
        
        can :retrasos, Pago
        can :listar, Pago
+  
     end
     if user.reader?
        can :show, RedAsistencial

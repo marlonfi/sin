@@ -1,5 +1,6 @@
 class ReportsController < ApplicationController
   before_filter :authenticate_user!
+  before_filter :check_autorizacion
   layout 'admin'
   
   def index
@@ -85,6 +86,11 @@ class ReportsController < ApplicationController
   def get_full_fecha()
     if params[:date]
       Date.parse('15-' + params[:date][:month] + '-' + params[:date][:year]).to_s
+    end
+  end
+  def check_autorizacion
+    unless current_user.admin? || current_user.organizacional? || current_user.reader?
+      redirect_to dashboard_path, alert: 'No authorizado'
     end
   end 
 end
