@@ -31,7 +31,7 @@
             <% end %>
         </li>
         <!-- inbox dropdown end -->
-
+        <%if can? :index, Bitacora%>
         <!-- notification dropdown start-->
         <li id="header_notification_bar" class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#" id='notificaciones'>
@@ -87,6 +87,7 @@
             </ul>
         </li>
         <!-- notification dropdown end -->
+        <%end%>
     </ul>
     <!--  notification end -->
 </div>

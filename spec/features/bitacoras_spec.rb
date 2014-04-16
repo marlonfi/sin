@@ -3,6 +3,8 @@ require "spec_helper"
 
 feature 'Bitacoras management' do
 	background do
+		@user1 = create(:organizacional, dni: '46399081', password: 'hola1234', password_confirmation: 'hola1234')
+	  loguear('46399081', 'hola1234')		
 		@archivo = Import.create(tipo_clase: "Enfermera",
                               archivo: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root,
                               '/spec/factories/files/lista_essalud.csv'))))
@@ -41,4 +43,27 @@ feature 'Bitacoras management' do
 		}.to change(@enfermera.bitacoras, :count).by(1)
 		expect(page).to_not have_content 'Afiliaciones sin resolver.'
 	end		
+end
+
+feature "Notifications bell of bitacoras" do
+	scenario "not shows fo informatica user" do
+		@user1 = create(:informatica, dni: '46399081', password: 'hola1234', password_confirmation: 'hola1234')
+	  loguear('46399081', 'hola1234')
+		expect(page).to_not have_content 'notificaciones pendientes'		
+	end
+	scenario "shows fo organizacional user" do
+		@user1 = create(:organizacional, dni: '46399081', password: 'hola1234', password_confirmation: 'hola1234')
+	  loguear('46399081', 'hola1234')
+		expect(page).to have_content 'notificaciones pendientes'		
+	end
+	scenario "shows fo admin user" do
+		@user1 = create(:admin, dni: '46399081', password: 'hola1234', password_confirmation: 'hola1234')
+	  loguear('46399081', 'hola1234')
+		expect(page).to have_content 'notificaciones pendientes'		
+	end
+	scenario "shows fo reader user" do
+		@user1 = create(:reader, dni: '46399081', password: 'hola1234', password_confirmation: 'hola1234')
+	  loguear('46399081', 'hola1234')
+		expect(page).to have_content 'notificaciones pendientes'		
+	end
 end

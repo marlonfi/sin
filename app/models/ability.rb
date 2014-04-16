@@ -17,6 +17,11 @@ class Ability
        can :import_essalud, Enfermera
        can :importar_essalud, Enfermera
 
+       can :import, Base
+       can :importar, Base
+       can :import_juntas, Base
+       can :importar_juntas, Base
+
        can :index, Import
        can :download, Import
     end
@@ -45,6 +50,22 @@ class Ability
        can :aportaciones, Enfermera
        can :bitacoras, Enfermera
        can :show, Enfermera
+
+       can :new, Base
+       can :create, Base
+       can :edit, Base
+       can :update, Base
+       can :destroy, Base
+
+       can :show, Base
+       can :flujo_mensual, Base
+       can :miembros, Base
+       can :estadisticas, Base
+
+       can :index, Bitacora
+       can :new, Bitacora
+       can :create, Bitacora
+       can :change_status, Bitacora
     end
     if user.reader?
        can :show, RedAsistencial
@@ -55,7 +76,14 @@ class Ability
 
        can :aportaciones, Enfermera
        can :bitacoras, Enfermera
-       can :show, Enfermera 
+       can :show, Enfermera
+
+       can :show, Base
+       can :flujo_mensual, Base
+       can :miembros, Base
+       can :estadisticas, Base
+
+       can :index, Bitacora 
     end
     if user.admin?       
        can :show, RedAsistencial
@@ -66,7 +94,14 @@ class Ability
 
        can :aportaciones, Enfermera
        can :bitacoras, Enfermera
-       can :show, Enfermera  
+       can :show, Enfermera
+       
+       can :show, Base
+       can :flujo_mensual, Base
+       can :miembros, Base
+       can :estadisticas, Base 
+
+       can :index, Bitacora 
     end
 
     # Define abilities for the passed in user here. For example:
