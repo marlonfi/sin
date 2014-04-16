@@ -9,11 +9,15 @@
     <% end %>  
   </td>
   <td>
+    <%if can? :edit, RedAsistencial%>
     <%= link_to(edit_red_asistencial_path(red_asistencial), :class => 'btn btn-primary btn-xs') do %>
       <i class="fa fa-pencil"> </i> Editar
     <% end %>
+    <%end%>
+    <%if can? :destroy, RedAsistencial%>
     <%= link_to red_asistencial, :class => 'btn btn-danger btn-xs', method: :delete, data: { confirm: '¿Estás seguro?. Se eliminará una red asistencial. ' } do %>
       <i class="fa fa-trash-o"> </i> Eliminar
     <% end %>
+    <%end%>
   </td>             
 </tr>

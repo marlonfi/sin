@@ -24,6 +24,9 @@ class Ability
 
        can :index, Import
        can :download, Import
+
+       can :import, Pago
+       can :importar, Pago
     end
     if user.organizacional?
        can :new, RedAsistencial
@@ -66,6 +69,16 @@ class Ability
        can :new, Bitacora
        can :create, Bitacora
        can :change_status, Bitacora
+
+       can :new, Junta
+       can :create, Junta
+       can :edit, Junta
+       can :update, Junta
+       can :destroy, Junta
+
+       
+       can :retrasos, Pago
+       can :listar, Pago
     end
     if user.reader?
        can :show, RedAsistencial
@@ -83,7 +96,10 @@ class Ability
        can :miembros, Base
        can :estadisticas, Base
 
-       can :index, Bitacora 
+       can :index, Bitacora
+
+       can :retrasos, Pago
+       can :listar, Pago 
     end
     if user.admin?       
        can :show, RedAsistencial
@@ -101,7 +117,10 @@ class Ability
        can :miembros, Base
        can :estadisticas, Base 
 
-       can :index, Bitacora 
+       can :index, Bitacora
+
+       can :retrasos, Pago
+       can :listar, Pago 
     end
 
     # Define abilities for the passed in user here. For example:

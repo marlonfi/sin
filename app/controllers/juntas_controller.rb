@@ -1,7 +1,7 @@
 class JuntasController < ApplicationController
   before_filter :authenticate_user!
   layout 'admin'  
-  
+  load_and_authorize_resource
   def new
     @basis = Base.find(params[:basis_id])
     @junta = @basis.juntas.build

@@ -16,12 +16,14 @@
 <div class="row">
   <div class="col-lg-12">
     <section class="panel">
+      <% if can? :listar, Pago%>
       <header class="panel-heading">
         Aportaciones de agremiados
       </header>
-        <div class="panel-body">
-          <%= render 'filter_form' %>       
-        </div>      
+      <div class="panel-body">
+        <%= render 'filter_form' %>       
+      </div>
+      <%end%>      
     </section>
   </div>
 </div>
@@ -30,10 +32,12 @@
 <div class="row" id="third_fila">
 </div>
 <div class="row" id="fourth_fila">
+  <% if can? :import, Pago%>
   <header class="panel-heading" style= 'text-align: center'>
     <a class="btn btn-danger" data-toggle="modal" href="#myImportPagos", id='btnImportPagos'>
         <i class="fa fa-upload"> </i> Importar
     </a>         
   </header>
+  <%end%>
 </div>
 <%= render 'index_import_pagos' %>

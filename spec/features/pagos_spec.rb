@@ -2,6 +2,10 @@
 require "spec_helper"
 
 feature "Pagos managment" do
+	background do
+		@user1 = create(:informatica, dni: '46399081', password: 'hola1234', password_confirmation: 'hola1234')
+	  loguear('46399081', 'hola1234')		
+	end
 	scenario "gives file and import", js: true do
 		visit pagos_path
 		click_link 'Importar'

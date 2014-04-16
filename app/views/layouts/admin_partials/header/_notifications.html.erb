@@ -4,6 +4,7 @@
         <!-- settings start -->
         <!-- settings end -->
         <!-- inbox dropdown start-->
+        <% if can? :retrasos, Pago%>
         <li id="header_inbox_bar" class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                 <i class="fa fa-envelope-o"></i>
@@ -30,6 +31,7 @@
             </ul>
             <% end %>
         </li>
+        <% end %>
         <!-- inbox dropdown end -->
         <%if can? :index, Bitacora%>
         <!-- notification dropdown start-->

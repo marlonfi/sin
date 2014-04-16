@@ -27,11 +27,15 @@
         <td><%= fecha_con_formato junta.fin_gestion %></td>
         <td><%= junta.descripcion %></td>
         <td>
+          <%if can? :edit, Junta%>
           <%= link_to(basis_edit_junta_path(@basis.id, junta.id), :class => 'btn btn-primary btn-xs') do %>
             <i class="fa fa-pencil"> </i>
           <% end %>
+          <% end %>
+          <%if can? :destroy, Junta%>
           <%= link_to basis_destroy_junta_path(@basis.id,junta.id), :class => 'btn btn-danger btn-xs', method: :delete, data: { confirm: '¿Estás seguro?. Se eliminará una Junta Directiva. ' } do %>
             <i class="fa fa-trash-o"> </i>
+          <% end %>
           <% end %>
         </td>          
       </tr>
