@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140407145121) do
+ActiveRecord::Schema.define(version: 20140417233526) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -79,6 +79,9 @@ ActiveRecord::Schema.define(version: 20140407145121) do
     t.date     "fecha_inscripcion_sinesss"
     t.date     "fecha_ingreso_essalud"
     t.string   "photo"
+    t.string   "especialidad"
+    t.string   "maestria"
+    t.string   "doctorado"
   end
 
   add_index "enfermeras", ["ente_id", "cod_planilla", "b_sinesss"], name: "index_enfermeras_on_ente_id_and_cod_planilla_and_b_sinesss", using: :btree

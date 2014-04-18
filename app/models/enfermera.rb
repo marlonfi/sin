@@ -20,6 +20,7 @@ class Enfermera < ActiveRecord::Base
   validates :factor_sanguineo, length: { maximum: 250 }
   validates :domicilio_completo, length: { maximum: 250 }
   validates :telefono, length: { maximum: 250 }
+  validates :especialidad, length: { maximum: 250 }
 
   validates_length_of :dni, :is => 8, :allow_blank => true
 
@@ -28,6 +29,8 @@ class Enfermera < ActiveRecord::Base
 
   validates_inclusion_of :regimen, :in => ['CONTRATADO', 'CAS', 'NOMBRADO']
   validates_inclusion_of :sexo, :in => ['MASCULINO', 'FEMENINO'], :allow_blank => true
+  validates_inclusion_of :maestria, :in => ['SI', 'NO'], :allow_blank => true
+  validates_inclusion_of :doctorado, :in => ['SI', 'NO'], :allow_blank => true
  	#para enfermeras  
   scope :sin_sindicato, -> { where(b_sinesss: false, b_fedcut:false, b_famesalud:false) }
   scope :total_sinesss, -> { where(b_sinesss: true) }
@@ -65,6 +68,7 @@ class Enfermera < ActiveRecord::Base
       import.update_attributes(status: 'PROCESANDO')
       path = import.archivo.path
       CSV.foreach(path, headers: true) do |row|
+        #parsea los rows del pdf para obeter un hsh con la data de la enfermera
         data_enfermera = parse_actualizacion(row)
         enfermera = Enfermera.find_by_cod_planilla(data_enfermera[:cod_planilla])
         if enfermera
@@ -146,6 +150,9 @@ class Enfermera < ActiveRecord::Base
     data_enfermera[:domicilio_completo] = row['DOMICILIO_COMPLETO'] if row['DOMICILIO_COMPLETO']
     data_enfermera[:fecha_inscripcion_sinesss] = row['FECHA_INSCRIPCION_SINESSS'] if row['FECHA_INSCRIPCION_SINESSS']
     data_enfermera[:regimen] = row['REGIMEN'] if row['REGIMEN']
+    data_enfermera[:especialidad] = row['ESPECIALIDAD'] if row['ESPECIALIDAD']
+    data_enfermera[:maestria] = row['MAESTRIA'] if row['MAESTRIA']
+    data_enfermera[:doctorado] = row['DOCTORADO'] if row['DOCTORADO']
     return data_enfermera
   end
 

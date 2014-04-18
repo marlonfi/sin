@@ -32,7 +32,7 @@ describe Enfermera do
 	it "does not allow a enfermera with a cod_planilla lenght nil" do
 		expect(build(:enfermera, cod_planilla: nil)).to have(1).errors_on(:cod_planilla)
 	end
-  	it "validates format of email" do
+  it "validates format of email" do
 		expect(build(:enfermera, email: 'asdsads.com')).to have(1).errors_on(:email)
 	end
 	it "validates lenght of email" do
@@ -61,6 +61,9 @@ describe Enfermera do
   end
   it "does not allow a telefono with more of 250 characters" do
     expect(build(:enfermera, telefono: "a"*252)).to have(1).errors_on(:telefono)
+  end
+  it "does not allow a especialidad with more of 250 characters" do
+    expect(build(:enfermera, especialidad: "a"*252)).to have(1).errors_on(:especialidad)
   end
   it "validates sexo valid" do
     expect(build(:enfermera, sexo: 'MASCULINO')).to be_valid
@@ -104,8 +107,28 @@ describe Enfermera do
 	it "validates regimen in not cas contratado or nombreado" do
 		expect(build(:enfermera, regimen: 'IOKERO')).to have(1).errors_on(:regimen)
 	end
-  
-  context 'importation of enfermeras' do
+  it "validates maestria in si " do
+    expect(build(:enfermera, maestria: 'SI')).to be_valid
+  end
+  it "validates maestria in no" do
+    expect(build(:enfermera, maestria: 'NO')).to be_valid
+  end
+  it "validates maestria in other of si or no" do
+    expect(build(:enfermera, maestria: 'NOsa')).to be_invalid
+  end
+  it "validates doctorado in si " do
+    expect(build(:enfermera, doctorado: 'SI')).to be_valid
+  end
+  it "validates doctorado in NO " do
+    expect(build(:enfermera, doctorado: 'NO')).to be_valid
+  end
+  it "validates doctorado in other of si or no" do
+    expect(build(:enfermera, maestria: 'no')).to be_invalid
+  end
+end
+
+describe Enfermera do  
+  context 'importation of enfermeras from ESSALUD' do
     before(:each) do
       @archivo = Import.create(tipo_clase: "Enfermera",
                               archivo: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root,
@@ -200,8 +223,62 @@ describe Enfermera do
       end
     end
   end
+end
+describe Enfermera do
+  context 'on second Matriz importation' do
+    before(:each) do
+      @archivo = Import.create(tipo_clase: "Enfermera",
+                              archivo: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root,
+                              '/spec/factories/files/lista_essalud.csv'))))
+      @archivo2 = Import.create(tipo_clase: "Enfermera",
+                              archivo: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root,
+                              '/spec/factories/files/actualizacion_datos_enfermera.csv'))))
+      @archivo3 = Import.create(tipo_clase: "Enfermera",
+                              archivo: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root,
+                              '/spec/factories/files/segunda_lista_essalud.csv'))))
+      RedAsistencial.import(@archivo)
+      Ente.import(@archivo)
+      Enfermera.import_essalud(@archivo)
+    end
+    it 'creates the new enfermeras' do
+      expect{
+        Enfermera.import_essalud(@archivo3)
+      }.to change(Enfermera, :count).by(1)
+    end
+    it 'updates data of registered enfermeras' do
+      Enfermera.import_essalud(@archivo3)
+      enfermera1 = Enfermera.find_by_cod_planilla('5118432')
+      enfermera2 = Enfermera.find_by_cod_planilla('3478335')
+      expect(enfermera1.regimen).to eq('NOMBRADO')
+      expect(enfermera2.b_fedcut).to be_true
+      expect(enfermera2.b_famesalud).to be_true
+    end
+    it 'changes ente from the non_sinesss enfermeras' do
+      Enfermera.import_essalud(@archivo3)
+      enfermera1 = Enfermera.find_by_cod_planilla('1449707')
+      enfermera2 = Enfermera.find_by_cod_planilla('5118432')
+      ente = Ente.find_by_cod_essalud('H II A.Hurtado')
+      expect(enfermera1.ente).to eq(ente)
+      expect(enfermera2.ente).to eq(ente)
+    end
+    it 'creates bitacora for afiliacion and desafiliacion' do
+      Enfermera.import_essalud(@archivo3)
+      enfermera1 = Enfermera.find_by_cod_planilla('5601041')
+      enfermera2 = Enfermera.find_by_cod_planilla('1513068')
+      bit_enf1 = enfermera1.bitacoras.first
+      bit_enf2 = enfermera2.bitacoras.first
+      expect(bit_enf1.import_id).to eq(@archivo3.id)
+      expect(bit_enf2.import_id).to eq(@archivo3.id)
+      expect(bit_enf1.tipo).to eq('AFILIACION')
+      expect(bit_enf2.tipo).to eq('DESAFILIACION')
+      expect(bit_enf1.status).to eq('PENDIENTE')
+      expect(bit_enf2.status).to eq('PENDIENTE')      
+    end      
+  end
+end
 
-  context 'actualizacion of enfermeras' do
+describe Enfermera do
+  context 'actualizacion of enfermeras from own data' do
     before(:each) do
       @archivo = Import.create(tipo_clase: "Enfermera",
                               archivo: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root,
@@ -276,60 +353,48 @@ describe Enfermera do
       it 'has the correct regimen' do                
         expect(@enfermera1.regimen).to eq('CAS')
         expect(@enfermera2.regimen).to eq('CONTRATADO')
-      end  
-    end  
+      end
+      it 'doesnt change their data of estudios' do
+        expect(@enfermera1.especialidad).to eq(nil)
+        expect(@enfermera2.maestria).to eq(nil)
+      end
+    end
+    context 'a second importation changes the especialidad maestria y doctorado & dont change other atributes' do
+      before(:each) do
+        @archivo3 = Import.create(tipo_clase: "Enfermera",
+                                archivo: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root,
+                                '/spec/factories/files/actualizacion_estudios.csv'))))
+        Enfermera.import_data_actualizada(@archivo3)
+        @enfermera1 = Enfermera.find_by_cod_planilla('2439438')
+        @enfermera2 = Enfermera.find_by_cod_planilla('4342750')
+        @enfermera3 = Enfermera.find_by_cod_planilla('1519397')
+        @enfermera4 = Enfermera.find_by_cod_planilla('1498788')
+        @enfermera5 = Enfermera.find_by_cod_planilla('1603512')
+      end
+      it 'doesnt change the other enfermeras attributes' do
+        expect(@enfermera1.domicilio_completo).to eq(nil)
+        expect(@enfermera2.domicilio_completo).to eq('JR.ATALAYA 1122')
+        expect(@enfermera3.domicilio_completo).to eq('JR.ATALAYA 1123')
+        expect(@enfermera2.dni).to eq('23232324')
+        expect(@enfermera3.nombres).to eq('MARITZA SOLEDAD')
+        expect(@enfermera2.telefono).to eq('222269')
+      end
+      it 'a enfermera with the correct data' do
+        expect(@enfermera1.especialidad).to eq('NEO')
+        expect(@enfermera2.especialidad).to eq('CIRUGIA')
+        expect(@enfermera4.especialidad).to eq('NEONATO')
+        expect(@enfermera1.maestria).to eq('SI')
+        expect(@enfermera2.maestria).to eq('NO')
+        expect(@enfermera4.maestria).to eq(nil)
+        expect(@enfermera1.doctorado).to eq('SI')
+        expect(@enfermera2.doctorado).to eq('NO')
+        expect(@enfermera4.doctorado).to eq(nil)
+      end
+      it 'doesnt update data with invalid attributes' do
+        expect(@enfermera3.especialidad).to eq(nil)
+        expect(@enfermera3.maestria).to eq(nil)
+        expect(@enfermera3.doctorado).to eq(nil)
+      end        
+    end    
   end
 end
-describe Enfermera do
-  context 'on second Matriz importation' do
-    before(:each) do
-      @archivo = Import.create(tipo_clase: "Enfermera",
-                              archivo: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root,
-                              '/spec/factories/files/lista_essalud.csv'))))
-      @archivo2 = Import.create(tipo_clase: "Enfermera",
-                              archivo: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root,
-                              '/spec/factories/files/actualizacion_datos_enfermera.csv'))))
-      @archivo3 = Import.create(tipo_clase: "Enfermera",
-                              archivo: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root,
-                              '/spec/factories/files/segunda_lista_essalud.csv'))))
-      RedAsistencial.import(@archivo)
-      Ente.import(@archivo)
-      Enfermera.import_essalud(@archivo)
-    end
-    it 'creates the new enfermeras' do
-      expect{
-        Enfermera.import_essalud(@archivo3)
-      }.to change(Enfermera, :count).by(1)
-    end
-    it 'updates data of registered enfermeras' do
-      Enfermera.import_essalud(@archivo3)
-      enfermera1 = Enfermera.find_by_cod_planilla('5118432')
-      enfermera2 = Enfermera.find_by_cod_planilla('3478335')
-      expect(enfermera1.regimen).to eq('NOMBRADO')
-      expect(enfermera2.b_fedcut).to be_true
-      expect(enfermera2.b_famesalud).to be_true
-    end
-    it 'changes ente from the non_sinesss enfermeras' do
-      Enfermera.import_essalud(@archivo3)
-      enfermera1 = Enfermera.find_by_cod_planilla('1449707')
-      enfermera2 = Enfermera.find_by_cod_planilla('5118432')
-      ente = Ente.find_by_cod_essalud('H II A.Hurtado')
-      expect(enfermera1.ente).to eq(ente)
-      expect(enfermera2.ente).to eq(ente)
-    end
-    it 'creates bitacora for afiliacion and desafiliacion' do
-      Enfermera.import_essalud(@archivo3)
-      enfermera1 = Enfermera.find_by_cod_planilla('5601041')
-      enfermera2 = Enfermera.find_by_cod_planilla('1513068')
-      bit_enf1 = enfermera1.bitacoras.first
-      bit_enf2 = enfermera2.bitacoras.first
-      expect(bit_enf1.import_id).to eq(@archivo3.id)
-      expect(bit_enf2.import_id).to eq(@archivo3.id)
-      expect(bit_enf1.tipo).to eq('AFILIACION')
-      expect(bit_enf2.tipo).to eq('DESAFILIACION')
-      expect(bit_enf1.status).to eq('PENDIENTE')
-      expect(bit_enf2.status).to eq('PENDIENTE')      
-    end      
-  end
-end
-

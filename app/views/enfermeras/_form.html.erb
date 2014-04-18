@@ -122,6 +122,40 @@
   </div>
 
   <div class="form-group">
+    <%= f.label :especialidad, class: 'col-lg-2 col-sm-2 control-label' %>
+    <div class="col-lg-10">
+      <%= f.text_field :especialidad, class: 'form-control' %>
+      <p class="help-block" id="error_notice"><%= f.object.errors[:especialidad].join(", ")%></p>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :maestria,'¿Maestria?', class: 'col-lg-2 col-sm-2 control-label' %>
+    <div class="col-lg-10">
+      <label class="radio inline">
+          <%= f.radio_button :maestria, 'SI',  class: 'multiple_classes'%> SI
+        </label> 
+        <label class="radio inline"> 
+          <%= f.radio_button :maestria, 'NO',  class: 'multiple_classes'%> NO
+        </label>
+      <p class="help-block" id="error_notice"><%= f.object.errors[:maestria].join(", ")%></p>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :doctorado,'¿Doctorado?', class: 'col-lg-2 col-sm-2 control-label' %>
+    <div class="col-lg-10">
+      <label class="radio inline">
+          <%= f.radio_button :doctorado, 'SI',  class: 'multiple_classes'%> SI
+        </label> 
+        <label class="radio inline"> 
+          <%= f.radio_button :doctorado, 'NO',  class: 'multiple_classes'%> NO
+        </label>
+      <p class="help-block" id="error_notice"><%= f.object.errors[:doctorado].join(", ")%></p>
+    </div>
+  </div>  
+
+  <div class="form-group">
     <%= f.label :b_sinesss,'¿SINESSS?', class: 'col-lg-2 col-sm-2 control-label' %>
     <div class="col-lg-10">
       <label class="radio inline">
