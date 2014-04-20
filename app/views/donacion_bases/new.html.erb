@@ -1,0 +1,17 @@
+<% provide(:title, "Nueva donación") %>
+<% provide(:content_header_path,  basis_donacion_bases_path(@basis) ) %>
+<% provide(:content_header_data1,
+          "<i class='fa fa-check-circle'></i> #{@basis.codigo_base}".html_safe) %>
+
+<div class="row">
+    <aside class="profile-info col-lg-9">
+        <section>
+            <div class="panel panel-primary">
+                <div class="panel-heading">Nueva donación para base: <%= @basis.codigo_base %> </div>
+                <div class="panel-body">
+                 		<%= render 'form' %>     
+                </div>
+            </div>
+        </section>       
+    </aside>
+</div>

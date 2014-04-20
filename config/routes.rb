@@ -44,6 +44,7 @@ Sinesss::Application.routes.draw do
     match '/destruir_junta/:junta_id', to:'juntas#destroy', as: 'destroy_junta', via: 'delete'
     match '/flujo_mensual', to: 'bases#flujo_mensual', as: 'flujo_mensual', via: 'get'
     match '/estadisticas', to: 'bases#estadisticas', as: 'estadisticas', via: 'get'
+    resources :donacion_bases
   end
 
   match '/enfermeras/import_data_actualizada', to:'enfermeras#import_data_actualizada', as: 'enfermeras_import_data_actualizada', via: 'get'

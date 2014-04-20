@@ -2,6 +2,7 @@ class Base < ActiveRecord::Base
 	has_many :entes, :dependent => :nullify
 	has_many :juntas, :dependent => :destroy
 	has_many :enfermeras, through: :entes
+	has_many :donaciones, :foreign_key => 'base_id', :class_name => "DonacionBase"
 	validates_presence_of :codigo_base
 	validates_uniqueness_of :codigo_base, :case_sensitive => false
 	validates :codigo_base, length: { maximum: 250 }

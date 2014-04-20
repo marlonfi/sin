@@ -1,0 +1,49 @@
+<% content_for :js_per_page do %>
+  <%= javascript_include_tag "js/bootstrap-datepicker.js"%>
+  <%= javascript_include_tag "js/advanced-form-components.js"%>   
+<% end %>
+<% content_for :css_per_page do %>
+  <%= stylesheet_link_tag "css/datepicker.css", media: "all" %>
+<% end %>
+
+<%= form_for([@basis, @donacion], :html => {:class => 'form-horizontal'} ) do |f| %>
+  <div class="form-group">
+    <%= f.label :product_name, 'Producto a donar', class: 'col-lg-2 col-sm-2 control-label' %>
+    <div class="col-lg-10">
+      <%= f.text_field :product_name, class: 'form-control' %>
+      <p class="help-block" id="error_notice"><%= f.object.errors[:product_name].join(", ")%></p>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :category, 'Categoría', class: 'col-lg-2 col-sm-2 control-label' %>
+    <div class="col-lg-10">
+      <%= f.text_field :category, class: 'form-control' %>
+      <p class="help-block" id="error_notice"><%= f.object.errors[:category].join(", ")%></p>
+    </div>
+  </div>
+  
+   <div class="form-group">
+    <%= f.label :release_date,'Fecha entrega', class: 'col-lg-2 col-sm-2 control-label' %>
+    <div class="col-md-3 col-xs-11">
+      <div data-date-viewmode="years" data-date-format="dd-mm-yyyy" data-date=""  class="input-append date dpYears">
+          <%= f.text_field :release_date, class: 'form-control', :value => fecha_con_formato(f.object.release_date) %>
+          <span class="input-group-btn add-on">
+            <button class="btn btn-danger" type="button"><i class="fa fa-calendar"></i></button>
+          </span>
+      </div>
+      <span class="help-block">Selecciona fecha</span>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :descripcion, 'Descripción (MAX 250)', class: 'col-lg-2 col-sm-2 control-label' %>
+    <div class="col-lg-10">
+      <%= f.text_area :descripcion, rows: 5, class: 'form-control' %>
+      <p class="help-block" id="error_notice"><%= f.object.errors[:descripcion].join(", ")%></p>
+    </div>
+  </div>
+
+  <div class="actions">
+    <%= f.submit 'Guardar', class:'btn btn-info'%>
+  </div>
+<% end %>

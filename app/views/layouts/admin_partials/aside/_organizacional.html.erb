@@ -1,7 +1,7 @@
 <li class="sub-menu">
     <% if  controller_name == 'red_asistencials' || controller_name == 'entes' ||
            controller_name == 'enfermeras' || controller_name == 'bases' ||
-           controller_name == 'juntas' %>
+           controller_name == 'juntas' || controller_name == 'donacion_bases'%>
     <a href="javascript:;" class="active">
     <%else%>        
     <a href="javascript:;">
@@ -11,7 +11,7 @@
     </a>
     <ul class="sub">
 
-        <% if  controller_name == 'bases' || controller_name == 'juntas' %>
+        <% if  controller_name == 'bases' || controller_name == 'juntas' || controller_name == 'donacion_bases'%>
         <li class="active">
         <%else%>
         <li>
