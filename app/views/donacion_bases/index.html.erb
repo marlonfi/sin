@@ -38,7 +38,7 @@
                   <i class="fa fa-pencil"> </i> Editar
                 <% end %>
                 <% end %>
-                <% if can? :delete, DonacionBase%>
+                <% if can? :destroy, DonacionBase%>
                 <%= link_to  basis_donacion_basis_path(@basis.id,donacion.id), :class => 'btn btn-danger btn-xs', method: :delete, data: { confirm: '¿Estás seguro?. Se eliminará este registro. ' } do %>
                   <i class="fa fa-trash-o"> </i> Eliminar
                 <% end %>

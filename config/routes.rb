@@ -20,7 +20,11 @@ Sinesss::Application.routes.draw do
   match '/reports/entes_sin_base', to: 'reports#entes_sin_base',
                                    as: 'reports_entes_sin_base', via: 'get'
   match '/reports/aportaciones_por_base', to: 'reports#aportaciones_por_base',
-                                   as: 'reports_aportaciones_por_base', via: 'get'                                 
+                                   as: 'reports_aportaciones_por_base', via: 'get'
+  match '/reports/donaciones_bases', to: 'reports#donaciones_bases',
+                                   as: 'reports_donaciones_bases', via: 'get'                                 
+
+
 
   match '/pagos/import', to:'pagos#import', as: 'pagos_import', via: 'get'
   match '/pagos/importar', to:'pagos#importar', as: 'pagos_importar', via: 'post'

@@ -82,6 +82,22 @@ class ReportsController < ApplicationController
     end
   end
 
+  def donaciones_bases
+    fecha_inicio = Date.parse('1-' + '1' + '-' + params[:date][:year]).to_s
+    fecha_fin = Date.parse('31-' + '12' + '-' + params[:date][:year]).to_s
+    donaciones = DonacionBase.includes(:base).where("release_date >= ? AND release_date <= ?", fecha_inicio, fecha_fin)
+    respond_to do |format|
+      format.html
+      format.pdf do 
+        pdf = DonacionesBasesPdf.new(donaciones, fecha_inicio, fecha_fin, view_context)
+        send_data pdf.render, filename: "Donaciones_bases_#{params[:date][:year]}.pdf",
+                              type: "application/pdf",
+                              disposition: "inline"
+
+      end
+    end
+  end
+
   private
   def get_full_fecha()
     if params[:date]
