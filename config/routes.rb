@@ -23,7 +23,8 @@ Sinesss::Application.routes.draw do
                                    as: 'reports_aportaciones_por_base', via: 'get'
   match '/reports/donaciones_bases', to: 'reports#donaciones_bases',
                                    as: 'reports_donaciones_bases', via: 'get'                                 
-
+  match '/reports/asignaciones_enfermeras', to: 'reports#asignaciones_enfermeras',
+                                   as: 'reports_asignaciones_enfermeras', via: 'get'                                 
 
 
   match '/pagos/import', to:'pagos#import', as: 'pagos_import', via: 'get'
@@ -63,6 +64,7 @@ Sinesss::Application.routes.draw do
       match '/status', to:'bitacoras#change_status', as: 'change_status', via: 'post'
     end
     resources :pagos, :only => [:new, :create]
+    resources :donacion_enfermeras
   end
 
   match '/entes/import', to:'entes#import', as: 'entes_import', via: 'get'

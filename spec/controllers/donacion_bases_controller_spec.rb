@@ -84,18 +84,18 @@ describe DonacionBasesController do
         it "saves the new bitacora in the database" do
           expect{
             post :create, basis_id: @base.id, donacion_base: {product_name: "Escritorio", 
-                          category: 'PENDIENTE'}}.to change(@base.donaciones, :count).by(1)
+                          category: 'PENDIENTE', release_date: '12-12-1990'}}.to change(@base.donaciones, :count).by(1)
         end
 
         it "redirects to enfermera_bitacoras_path" do
           post :create, basis_id: @base.id, donacion_base: {product_name: "Escritorio", 
-                          category: 'PENDIENTE'}
+                          category: 'PENDIENTE', release_date: '12-12-1990'}
           expect(response).to redirect_to basis_donacion_bases_path(@base.id)
         end
 
         it "show the creation flash message" do
           post :create, basis_id: @base.id, donacion_base: {product_name: "Escritorio", 
-                          category: 'PENDIENTE'}
+                          category: 'PENDIENTE', release_date: '12-12-1990'}
           flash[:notice].should =~ /Se registró correctamente/i
         end
 
@@ -105,17 +105,17 @@ describe DonacionBasesController do
         it "does not save the new bitacora in the database" do
           expect{
             post :create, basis_id: @base.id, donacion_base: {product_name: nil, 
-                          category: 'PENDIENTE'}
+                          category: 'PENDIENTE', release_date: '12-12-1990'}
           }.to_not change(@base.donaciones, :count)
         end
         it "re-renders the :new template" do
           post :create, basis_id: @base.id, donacion_base: {product_name: nil, 
-                          category: 'PENDIENTE'}
+                          category: 'PENDIENTE', release_date: '12-12-1990'}
           expect(response).to render_template :new
         end
         it "show the fail flash message" do
           post :create, basis_id: @base.id, donacion_base: {product_name: nil, 
-                          category: 'PENDIENTE'}
+                          category: 'PENDIENTE', release_date: '12-12-1990'}
           flash[:alert].should =~ /Hubo un problema. No se registró/i
         end
       end

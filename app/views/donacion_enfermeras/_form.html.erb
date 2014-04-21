@@ -1,0 +1,51 @@
+<% content_for :js_per_page do %>
+  <%= javascript_include_tag "js/bootstrap-datepicker.js"%>
+  <%= javascript_include_tag "js/advanced-form-components.js"%>  
+  <%= javascript_include_tag "price_format"%> 
+<% end %>
+<% content_for :css_per_page do %>
+  <%= stylesheet_link_tag "css/datepicker.css", media: "all" %>
+<% end %>
+
+<%= form_for([@enfermera, @donacion], :html => {:class => 'form-horizontal'} ) do |f| %>
+  <div class="form-group">
+    <%= f.label :motivo, 'Motivo de la asignación', class: 'col-lg-2 col-sm-2 control-label' %>
+    <div class="col-lg-10">
+      <%= f.text_field :motivo, class: 'form-control' %>
+      <p class="help-block" id="error_notice"><%= f.object.errors[:motivo].join(", ")%></p>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :monto, 'Monto (S/.)', class: 'col-lg-2 col-sm-2 control-label' %>
+    <div class="col-lg-10">
+      <%= f.text_field :monto, class: 'form-control', id: 'monto' %>
+      <p class="help-block" id="error_notice"><%= f.object.errors[:monto].join(", ")%></p>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <%= f.label :fecha_entrega,'Fecha entrega', class: 'col-lg-2 col-sm-2 control-label' %>
+    <div class="col-md-3 col-xs-11">
+      <div data-date-viewmode="years" data-date-format="dd-mm-yyyy" data-date=""  class="input-append date dpYears">
+          <%= f.text_field :fecha_entrega, class: 'form-control', :value => fecha_con_formato(f.object.fecha_entrega) %>
+          <span class="input-group-btn add-on">
+            <button class="btn btn-danger" type="button"><i class="fa fa-calendar"></i></button>
+          </span>
+      </div>
+      <span class="help-block">Selecciona fecha</span>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :descripcion, 'Descripción (MAX 250)', class: 'col-lg-2 col-sm-2 control-label' %>
+    <div class="col-lg-10">
+      <%= f.text_area :descripcion, rows: 5, class: 'form-control' %>
+      <p class="help-block" id="error_notice"><%= f.object.errors[:descripcion].join(", ")%></p>
+    </div>
+  </div>
+
+  <div class="actions">
+    <%= f.submit 'Guardar', class:'btn btn-info'%>
+  </div>
+<% end %>
+

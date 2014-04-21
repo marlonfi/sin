@@ -2,6 +2,7 @@ class Enfermera < ActiveRecord::Base
 	belongs_to :ente
   has_many :bitacoras
   has_many :pagos
+  has_many :donaciones, :foreign_key => 'enfermera_id', :class_name => "DonacionEnfermera"
   delegate :base, :to => :ente, :allow_nil => true
     
   before_validation :generar_full_name

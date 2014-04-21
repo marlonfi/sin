@@ -14,6 +14,7 @@
 
 $(function() {
 	$('#monto').priceFormat({
-    prefix: ''
+    prefix: '',
+    thousandsSeparator: ''
 	});
 });

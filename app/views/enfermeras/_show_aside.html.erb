@@ -47,6 +47,13 @@
             <% end %>
                 <%= link_to '<i class="fa fa-usd"></i> Aportaciones'.html_safe, enfermera_aportaciones_path(@enfermera) %>
             </li>
+            <% if  action_name == 'bitacoras' %>
+            <li class="active">
+            <%else%>
+            <li>
+            <% end %>
+                <%= link_to '<i class="fa fa-try"></i> Asignaciones'.html_safe, enfermera_donacion_enfermeras_path(@enfermera) %>
+            </li>
         </ul>
     </section>
 </aside>

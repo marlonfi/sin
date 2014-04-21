@@ -81,6 +81,7 @@ class Ability
        can :listar, Pago
   
        can :index, DonacionBase
+       can :index, DonacionEnfermera
     end
     if user.reader?
        can :show, RedAsistencial
@@ -103,7 +104,8 @@ class Ability
        can :retrasos, Pago
        can :listar, Pago
 
-       can :index, DonacionBase 
+       can :index, DonacionBase
+       can :index, DonacionEnfermera 
     end
     if user.admin?       
        can :show, RedAsistencial
@@ -131,7 +133,14 @@ class Ability
        can :update, DonacionBase
        can :new, DonacionBase
        can :create, DonacionBase
-       can :destroy, DonacionBase 
+       can :destroy, DonacionBase
+
+       can :index, DonacionEnfermera
+       can :edit, DonacionEnfermera
+       can :update, DonacionEnfermera
+       can :new, DonacionEnfermera
+       can :create, DonacionEnfermera
+       can :destroy, DonacionEnfermera 
     end
 
     # Define abilities for the passed in user here. For example:

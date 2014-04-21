@@ -1,0 +1,17 @@
+<% provide(:title, "Editar asignación de enfermera: #{@enfermera.full_name}") %>
+<% provide(:content_header_path,  enfermera_donacion_enfermeras_path(@enfermera) ) %>
+<% provide(:content_header_data1,
+          "<i class='fa fa-check-circle'></i> #{@enfermera.full_name}".html_safe) %>
+
+<div class="row">
+    <aside class="profile-info col-lg-9">
+        <section>
+            <div class="panel panel-primary">
+                <div class="panel-heading">Editar asignación de enfermera: <%= @enfermera.full_name %> </div>
+                <div class="panel-body">
+                 		<%= render 'form' %>     
+                </div>
+            </div>
+        </section>       
+    </aside>
+</div>

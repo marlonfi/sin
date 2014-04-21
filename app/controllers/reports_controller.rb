@@ -97,6 +97,22 @@ class ReportsController < ApplicationController
       end
     end
   end
+  def asignaciones_enfermeras
+    fecha_inicio = Date.parse('1-' + '1' + '-' + params[:date][:year]).to_s
+    fecha_fin = Date.parse('31-' + '12' + '-' + params[:date][:year]).to_s
+    donaciones = DonacionEnfermera.includes(:enfermera).where("fecha_entrega >= ? AND fecha_entrega <= ?", fecha_inicio, fecha_fin)
+    respond_to do |format|
+      format.html
+      format.pdf do 
+        pdf = DonacionesEnfermerasPdf.new(donaciones, fecha_inicio, fecha_fin, view_context)
+        send_data pdf.render, filename: "Asignaciones_enfermeras_#{params[:date][:year]}.pdf",
+                              type: "application/pdf",
+                              disposition: "inline"
+
+      end
+    end
+  end
+
 
   private
   def get_full_fecha()
