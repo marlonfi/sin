@@ -1,0 +1,80 @@
+<% provide(:title, "Editar aportación para: #{@enfermera.full_name}") %>
+<% provide(:content_header_path,  enfermera_aportaciones_path(@enfermera) ) %>
+<% provide(:content_header_data1,
+          "<i class='fa fa-female'></i> #{@enfermera.full_name}".html_safe) %>
+<% content_for :js_per_page do %>
+  <%= javascript_include_tag "price_format"%>
+<% end %>
+
+
+
+<div class="row">
+	<div class="col-lg-12">
+  <!--revenue start-->
+  	<section class="panel">
+      <div class="revenue-head">
+          <span>
+              <i class="fa fa-usd"></i>
+          </span>
+          <h3>Registro de aportación para: <%= @enfermera.full_name%></h3>
+          <span class="rev-combo pull-right">
+             Aportacion a editar: <%= month_year(@aportacion.mes_cotizacion) %>
+          </span>
+      </div>
+      <div class="panel-body">
+      	<%= form_tag enfermera_pago_path(@enfermera,@pago), method: :patch do %>
+          <span class="label label-danger">NOTA!</span>
+          <span> Ojo los cambios que se realizen puede afectar al balance.</span>
+          <div class="form-group">
+          </br>
+            <%= label_tag 'AÑO','AÑO', class: 'col-lg-2 col-sm-2 control-label' %>
+            <div class="col-lg-10">
+              <%= select_year @pago.mes_cotizacion,{ :start_year => 2013, :end_year => 2030},
+                                         {class: "form-control m-bot15 s"} %>                      
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= label_tag 'MES','MES', class: 'col-lg-2 col-sm-2 control-label' %>
+            <div class="col-lg-10">
+              <%= select_month @pago.mes_cotizacion,{ use_month_names: meses_espanol},{class: "form-control m-bot15 s"} %>    
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= label_tag 'BASE','BASE', class: 'col-lg-2 col-sm-2 control-label' %>
+            <div class="col-lg-10">
+            <%= collection_select(:base, :codigo_base, @bases,
+               :codigo_base, :codigo_base, {:prompt => 'Pago libre',
+               selected: (@pago.base if @pago.base != 'Pago libre') }, {class: "form-control m-bot15 s"})  %>
+            </div>
+          </div>
+          <div class="form-group">
+            <%= label_tag 'Monto','Monto (S/.)', class: 'col-lg-2 col-sm-2 control-label' %>
+            <div class="col-lg-10">
+              <%= text_field_tag :monto, @pago.monto, class: 'form-control m-bot15 s' %>    
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= label_tag :voucher,'Número Op. Vaucher', class: 'col-lg-2 col-sm-2 control-label' %>
+            <div class="col-lg-10">
+              <%= text_field_tag :voucher, @pago.voucher , class: 'form-control m-bot15 s' %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= label_tag :comentario,'Comentario', class: 'col-lg-2 col-sm-2 control-label' %>
+            <div class="col-lg-10">
+              <%= text_field_tag :comentario, @pago.comentario , class: 'form-control m-bot15 s' %>
+            </div>
+          </div>
+
+          <center><%= submit_tag "Actualizar pago", class: 'btn btn-primary' %></center>
+
+          <%end%>
+
+      </div>      
+  	</section>
+	</div>
+</div>

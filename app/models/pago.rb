@@ -1,7 +1,13 @@
 class Pago < ActiveRecord::Base
 	belongs_to :enfermera
-	validates_presence_of :enfermera_id, :monto, :mes_cotizacion, :base, :generado_por
+	validates_presence_of :enfermera_id, :monto, :mes_cotizacion, :base, :generado_por,
+												:ente_libre
 	validates_date :mes_cotizacion
+	validates_numericality_of :monto
+
+	validates :voucher, length: { maximum: 250 }
+	validates :comentario, length: { maximum: 250 }
+	validates :log, length: { maximum: 2000 }
 
 	scope :sum_por_fecha_archivo, ->(fecha,archivo) { where("mes_cotizacion = ? AND archivo = ?", fecha, archivo).sum(:monto) }
 	scope :por_fecha, ->(fecha) {where('mes_cotizacion = ?', fecha)}
@@ -42,10 +48,12 @@ class Pago < ActiveRecord::Base
 		meses.each do |mes|
 			data[mes.strftime("%b, %Y")] = [(Pago.sum_por_fecha_archivo(mes.to_s, 'CAS')/2).to_f]
 			data[mes.strftime("%b, %Y")] << (Pago.sum_por_fecha_archivo(mes.to_s, 'NOMBRADOS Y CONTRATADOS')/2).to_f
+			data[mes.strftime("%b, %Y")] << (Pago.sum_por_fecha_archivo(mes.to_s, 'VOUCHER')/2).to_f
 		end
 		return data
 	end
 
+	#para la creacion del grafico anual de aportaciones de base
 	def self.ingresos_base_anual(basis,year)
 		meses = []
     data = {}
@@ -57,6 +65,8 @@ class Pago < ActiveRecord::Base
 																			 basis.codigo_base, 'CAS')/2).to_f]
 			data[mes.strftime("%b, %Y")] << (Pago.sum_por_fecha_base_archivo(mes.to_s,
 																		 	basis.codigo_base, 'NOMBRADOS Y CONTRATADOS')/2).to_f
+			data[mes.strftime("%b, %Y")] << (Pago.sum_por_fecha_base_archivo(mes.to_s,
+																		 	basis.codigo_base, 'VOUCHER')/2).to_f
 		end
 		return data
 	end

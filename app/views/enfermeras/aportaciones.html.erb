@@ -18,6 +18,8 @@
               <th><i class="fa fa-usd"></i> Monto</th>
               <th><i class="fa fa-exclamation-circle"></i> Base aportante</th>
               <th><i class="fa fa-hospital-o"></i> Generado por</th>
+              <th><i class="fa fa-calendar"></i> Creado el</th>
+              <th><th>
             </tr>
           </thead>
           <tbody>
@@ -26,7 +28,15 @@
               <th><%= month_year(aportacion.mes_cotizacion) %></th>
               <th><%= number_to_currency(aportacion.monto, :unit => "S/. ") %></th>
               <th><%= aportacion.base %></th>
-              <th><%= aportacion.generado_por + ', '+ aportacion.archivo %></th>
+              <th><%= aportacion.generado_por + ', '+ aportacion.archivo  %></th>
+              <th><%= fecha_con_formato aportacion.created_at %></th>
+              <th>
+                <%if can? :update, Pago%>
+                <%= link_to(edit_enfermera_pago_path(@enfermera, aportacion), :class => 'btn btn-primary btn-xs') do %>
+                  <i class="fa fa-pencil"> </i> Editar
+                <% end %>
+                <%end%>
+              </th>
             <tr>
            <%end%>
           </tbody>
@@ -35,11 +45,13 @@
       <header class="panel-heading" style= 'text-align: center'>
         <%= will_paginate @aportaciones, class:'apple_pagination',:previous_label => 'Anterior', :next_label => 'Siguiente' %>
       </header>
+      <%if can? :create, Pago%>
       <header class="panel-heading" style= 'text-align: center'>  
         <%= link_to new_enfermera_pago_path(@enfermera), class: "btn btn-danger" do %>
           <i class="fa fa-usd"></i> Registrar aportación
         <% end %>      
       </header>
+      <% end %>  
     </section>
   </div>
 </div>

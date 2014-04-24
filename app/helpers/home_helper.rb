@@ -4,7 +4,8 @@ module HomeHelper
 		data.each do |k,v|
 			cas = v[0] == 0.to_f ? nil : v[0]
 			cn = v[1] == 0.to_f ? nil : v[1]
-			data_for_js << {month: k, cas: cas, cn: cn}
+			vou = v[2] == 0.to_f ? nil : v[2]
+			data_for_js << {month: k, cas: cas, cn: cn, vou: vou}
 		end
 		data_for_js.reverse
 	end

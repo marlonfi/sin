@@ -127,6 +127,10 @@ class Ability
 
        can :retrasos, Pago
        can :listar, Pago
+       can :new, Pago
+       can :create, Pago
+       #can :edit, Pago
+       #can :update, Pago
 
        can :index, DonacionBase
        can :edit, DonacionBase

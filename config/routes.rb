@@ -13,6 +13,8 @@ Sinesss::Application.routes.draw do
   match '/reports', to: 'reports#index', as: 'reports', via: 'get'
   match '/reports/bases_aportaciones', to: 'reports#bases_aportaciones',
                                      as: 'reports_bases_aportaciones', via: 'get'
+  match '/reports/bases_aportaciones_voucher', to: 'reports#bases_aportaciones_voucher',
+                                    as: 'reports_bases_aportaciones_voucher', via: 'get'
   match '/reports/pagos_faltantes', to: 'reports#pagos_faltantes',
                                     as: 'reports_pagos_faltantes', via: 'get'
   match '/reports/bases_miembros', to: 'reports#bases_miembros',
@@ -21,6 +23,8 @@ Sinesss::Application.routes.draw do
                                    as: 'reports_entes_sin_base', via: 'get'
   match '/reports/aportaciones_por_base', to: 'reports#aportaciones_por_base',
                                    as: 'reports_aportaciones_por_base', via: 'get'
+  match '/reports/aportaciones_por_base_voucher', to: 'reports#aportaciones_por_base_voucher',
+                                   as: 'reports_aportaciones_por_base_voucher', via: 'get'                                 
   match '/reports/donaciones_bases', to: 'reports#donaciones_bases',
                                    as: 'reports_donaciones_bases', via: 'get'                                 
   match '/reports/asignaciones_enfermeras', to: 'reports#asignaciones_enfermeras',

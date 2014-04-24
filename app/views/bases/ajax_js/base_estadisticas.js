@@ -6,13 +6,14 @@ Morris.Area({
   element: 'base_money_mensual',
   data: day_data,
   xkey: 'month',
-  ykeys: ['cn', 'cas'],
-  labels: ['CN', 'CAS'],
+  ykeys: ['cn', 'cas', 'vou'],
+  labels: ['CN', 'CAS', 'VOUCHER'],
   preUnits: 'S/. ',
   parseTime: false,
   lineColors: [
     '#69D2E7',
-    '#F38630'
+    '#F38630',
+    '#556270'
   ],
 });
 Morris.Bar({

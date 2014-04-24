@@ -51,14 +51,12 @@ class Enfermera < ActiveRecord::Base
   def make_payment(monto, import_file)
     base = self.base
     mes_cotizacion = import_file.fecha_pago
-    payment = self.pagos.find_or_create_by(mes_cotizacion: mes_cotizacion)
+    payment = self.pagos.build()#find_or_create_by(mes_cotizacion: mes_cotizacion)
     payment.mes_cotizacion = mes_cotizacion
     payment.monto = monto
     payment.generado_por = "Archivo: #{File.basename(import_file.archivo_url)}"
     payment.base = base ? base.codigo_base : 'Pago libre'
-    if payment.base == 'Pago libre'
-      payment.ente_libre = self.ente.cod_essalud
-    end  
+    payment.ente_libre = self.ente.cod_essalud
     payment.archivo = import_file.tipo_txt
     payment.save!    
   end
@@ -230,7 +228,8 @@ class Enfermera < ActiveRecord::Base
                                monto: '0.0',
                                generado_por: 'Falta de pago',
                                base: base,
-                               archivo: tipo_txt)
+                               archivo: tipo_txt,
+                               ente_libre: enfermera.ente.cod_essalud)
       end
     end
   end

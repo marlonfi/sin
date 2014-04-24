@@ -7,5 +7,6 @@ FactoryGirl.define do
     mes_cotizacion  '15-06-2014'
     base 'B-H II Sabogal'
     generado_por 'Archivo'
+    ente_libre 'libre'
   end
 end

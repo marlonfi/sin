@@ -21,6 +21,7 @@ $(function() {
  $("#bitacora_ente_fin").chosen();
  $("#base_codigo_base").chosen();
  $("#base_miembros").chosen();
+ $("#voucher").chosen();
 });
 
 

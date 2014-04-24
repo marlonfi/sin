@@ -1,0 +1,30 @@
+<div class="row">
+  <div class="col-lg-12">
+    <section class="panel">
+      <header class="panel-heading">
+        Reporte PDF mensual de agremiados y aportaciones con VOUCHER
+      </header>
+        <div class="panel-body">
+          <%= form_tag (reports_bases_aportaciones_voucher_path + '.pdf'),
+	           {:method => "get", :class => 'form-inline', :target => '_blank' } do %>
+						<div class="form-group">
+					    <%= collection_select(:base, :codigo_base, @bases,
+					         :codigo_base, :codigo_base, {:prompt => 'Pago libre'}, {class: "form-control", id: 'voucher'})  %>
+					  </div>          
+						<div class="form-group">
+						    <%= select_year Date.today,{ :start_year => 2013, :end_year => 2030},
+						                               {class: "form-control", style:'width:150px'} %>
+						</div>           
+						<div class="form-group">
+						    <%= select_month Date.today,{ use_month_names: meses_espanol},{class: "form-control", style:'width:200px'} %>
+						</div>
+						<%= button_tag( :name => nil, class:"btn btn-info", id: 'btnGetAjax') do %>
+						          <i class="fa fa-file-text"></i> Generar PDF
+						<% end %>
+						<div class="form-group" id='loading'>              
+						</div>
+					<% end %>       
+        </div>      
+    </section>
+  </div>
+</div>

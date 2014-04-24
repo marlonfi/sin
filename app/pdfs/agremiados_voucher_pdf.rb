@@ -1,4 +1,4 @@
-class AgremiadosPdf < Prawn::Document
+class AgremiadosVoucherPdf < Prawn::Document
 	delegate :month_year, :number_to_currency, :date_and_hour,  to: :@view
 	def initialize(pagos,base,fecha,view)
 		super()
@@ -57,7 +57,7 @@ class AgremiadosPdf < Prawn::Document
 	  move_down @lineheight_y
 	  text_box "AGREMIADOS: #{@pagos.count} enfermeras(os)", :at => [@address_x, cursor]
 	  move_down @lineheight_y
-		text_box "OJO: No se incluyen los aportantes con VOUCHER", :at => [@address_x, cursor]
+		text_box "Listado de aportantes con VOUCHER", :at => [@address_x, cursor]
 	  move_cursor_to last_measured_y
 
 	  invoice_header_data = [

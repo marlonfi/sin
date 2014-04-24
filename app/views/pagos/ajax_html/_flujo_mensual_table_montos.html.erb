@@ -8,8 +8,9 @@
           <thead>
             <tr>
               <th><i class="fa fa-h-square"></i> Cod. Base</th>
-              <th><i class="fa fa-usd"></i> Ingresos por contratados y nombrados</th>
+              <th><i class="fa fa-usd"></i> Ingresos por Contr. y Nom.</th>
               <th><i class="fa fa-usd"></i> Ingresos por CAS</th>
+              <th><i class="fa fa-usd"></i> Ingresos VOUCHER.</th>
               <th><i class="fa fa-usd"></i> Total Ingresos</th>
               <th><i class="fa fa-usd"></i> Asignación Base</th>
               <th><i class="fa fa-usd"></i> Asignación CEN</th>
@@ -20,6 +21,7 @@
               <th><%= @codigo_base %></th>
               <th><%= number_to_currency(@money_contratados, :unit => "S/. ") %></th>
               <th><%= number_to_currency(@money_cas, :unit => "S/. ") %></th>
+              <th><%= number_to_currency(@money_voucher, :unit => "S/. ") %></th>
               <th><%= number_to_currency(@money_total, :unit => "S/. ") %></th>
               <th><%= number_to_currency(@asignacion, :unit => "S/. ") %></th>
               <th><%= number_to_currency(@asignacion, :unit => "S/. ") %></th>

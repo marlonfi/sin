@@ -12,8 +12,63 @@ class PagosController < ApplicationController
     @bases = Base.all
   end
   def create
-    debugger
+    @enfermera = Enfermera.find(params[:enfermera_id])
+    fecha = get_full_fecha()
+    base = params[:base][:codigo_base] == '' ? 'Pago libre' : params[:base][:codigo_base]
+    @pago = @enfermera.pagos.build(monto: params[:monto], mes_cotizacion: fecha, base: base,
+                      ente_libre: @enfermera.ente.cod_essalud, voucher: params[:voucher],
+                      comentario: params[:comentario], generado_por: current_user.apellidos_nombres,
+                      archivo: 'VOUCHER')
+    if @pago.save
+      #deletes if there is a pago faltante with that same mes_contizacion
+      pago_retrasado = @enfermera.pagos.
+                  where('generado_por = ? AND mes_cotizacion =  ?', 'Falta de pago', fecha).first
+      if pago_retrasado
+        pago_retrasado.destroy
+      end       
+      redirect_to enfermera_aportaciones_path(@enfermera), notice: 'Se registró correctamente el pago.'
+    else
+      @bases = Base.all
+      flash.now[:alert] = 'Hubo un problema. No se registró. Revisar el monto.'
+      render action: 'new'      
+    end 
   end
+
+
+  def edit
+    @enfermera = Enfermera.find(params[:enfermera_id])
+    @aportacion = @enfermera.pagos.find(params[:id])
+    @bases = Base.all
+    if (DateTime.now.to_date - 15.days) > @aportacion.created_at
+       redirect_to enfermera_aportaciones_path(@enfermera), alert: "UD. ya no puede editar este pago."
+    else
+      render
+    end
+  end
+  def update
+    @enfermera = Enfermera.find(params[:enfermera_id])
+    @aportacion = @enfermera.pagos.find(params[:id])
+    fecha = get_full_fecha()
+    base = params[:base][:codigo_base] == '' ? 'Pago libre' : params[:base][:codigo_base]
+    if (DateTime.now.to_date - 15.days) > @aportacion.created_at
+       redirect_to enfermera_aportaciones_path(@enfermera), alert: "UD. ya no puede editar este pago."
+    else
+      log = @aportacion.log || ''
+      @aportacion.log = log + "(#{@aportacion.monto} || #{@aportacion.mes_cotizacion} || #{@aportacion.base} ||
+                #{@aportacion.generado_por} ||  #{@aportacion.archivo} ||  #{@aportacion.voucher})"
+      if @aportacion.update_attributes(monto: params[:monto], mes_cotizacion: fecha, base: base,
+                      ente_libre: @enfermera.ente.cod_essalud, voucher: params[:voucher],
+                      comentario: params[:comentario], generado_por: current_user.apellidos_nombres,
+                      archivo: 'VOUCHER')
+        redirect_to enfermera_aportaciones_path(@enfermera), notice: 'Se actualizó correctamente el pago'
+      else
+        @bases = Base.all
+        flash.now[:alert] = 'Hubo un problema. No se actualizó. Revisar el monto.'
+        render action: 'edit'
+      end      
+    end
+  end
+
   def retrasos
     if params[:cotizacion]
       @cotizacion = params[:cotizacion]
@@ -35,7 +90,8 @@ class PagosController < ApplicationController
         @cotizacion = get_full_fecha
         @money_contratados = Pago.sum_por_fecha_base_archivo(@cotizacion, @codigo_base, 'NOMBRADOS Y CONTRATADOS')
         @money_cas = Pago.sum_por_fecha_base_archivo(@cotizacion, @codigo_base, 'CAS')
-        @money_total = @money_contratados + @money_cas
+        @money_voucher = Pago.sum_por_fecha_base_archivo(@cotizacion, @codigo_base, 'VOUCHER')
+        @money_total = @money_contratados + @money_cas + @money_voucher
         @asignacion = @money_total/2
       end
     end
@@ -54,14 +110,20 @@ class PagosController < ApplicationController
   end
   def importar
   	fecha = get_full_fecha
-  	importacion = Import.new(status: 'ESPERA', archivo: params[:archivo],
-  													 tipo_clase: 'Pagos', tipo_txt: params[:tipo],
-  													 formato_org: 'ESSALUD', fecha_pago: fecha )
-    if importacion.save
-      Pago.delay.import(importacion)
-      redirect_to imports_path, notice:'El proceso de importacion durará unos minutos.'
+    importado = Import.where("tipo_clase = ? AND fecha_pago = ? AND tipo_txt = ?",
+                             'Pagos', fecha, params[:tipo]).first
+    if importado#para no dejar importar dos veces el mismo archivo
+      redirect_to pagos_path, alert: 'Ya se importó ese archivo, revisar el log de importaciones.'
     else
-      redirect_to pagos_path, alert: 'El archivo es muy grande, o tiene un formato incorrecto.'
+    	importacion = Import.new(status: 'ESPERA', archivo: params[:archivo],
+    													 tipo_clase: 'Pagos', tipo_txt: params[:tipo],
+    													 formato_org: 'ESSALUD', fecha_pago: fecha )
+      if importacion.save
+        Pago.delay.import(importacion)
+        redirect_to imports_path, notice:'El proceso de importacion durará unos minutos.'
+      else
+        redirect_to pagos_path, alert: 'El archivo es muy grande, o tiene un formato incorrecto.'
+      end
     end
   end
   private

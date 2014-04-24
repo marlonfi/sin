@@ -1,5 +1,5 @@
 <% provide(:title, "Registrar aportación para: #{@enfermera.full_name}") %>
-<% provide(:content_header_path,  enfermera_path(@enfermera) ) %>
+<% provide(:content_header_path,  enfermera_aportaciones_path(@enfermera) ) %>
 <% provide(:content_header_data1,
           "<i class='fa fa-female'></i> #{@enfermera.full_name}".html_safe) %>
 <% content_for :js_per_page do %>
@@ -57,6 +57,20 @@
 				      <%= text_field_tag :monto,'', class: 'form-control m-bot15 s' %>	  
 	          </div>
 	  			</div>
+
+	  			<div class="form-group">
+				    <%= label_tag :voucher,'Número Op. Vaucher', class: 'col-lg-2 col-sm-2 control-label' %>
+				    <div class="col-lg-10">
+				      <%= text_field_tag :voucher,'', class: 'form-control m-bot15 s' %>
+				    </div>
+				  </div>
+
+				  <div class="form-group">
+				    <%= label_tag :comentario,'Comentario', class: 'col-lg-2 col-sm-2 control-label' %>
+				    <div class="col-lg-10">
+				      <%= text_field_tag :comentario,'', class: 'form-control m-bot15 s' %>
+				    </div>
+				  </div>
 
 	  			<center><%= submit_tag "Registrar pago", class: 'btn btn-primary' %></center>
 

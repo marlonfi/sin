@@ -7,7 +7,7 @@
 <% content_for :css_per_page do %>
   <%= stylesheet_link_tag "morris", media: "all"%>
 <% end %>
-
+<%if can? :show, Enfermera%>
 <div class="row state-overview">
     <div class="col-lg-3 col-sm-6">
         <section class="panel">
@@ -87,3 +87,4 @@
         </section>
     </div>    
 </div>
+<%end%>
