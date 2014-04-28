@@ -27,6 +27,14 @@ module ApplicationHelper
 	def banned?(bool)
 		bool ? 'Desabilitado' : 'Habilitado'
 	end
+
+	#for_email
+	def email_monto(pago)
+		pago ?  number_to_currency(pago.monto, :unit => "S/. ") : 'Sin registro.'
+	end
+	def email_base(pago)
+		pago ? pago.base : 'Sin registro.'
+	end
 	#for devise
 	def resource_name
     :user

@@ -54,7 +54,7 @@
             <div class="panel panel-primary">
                 <div class="panel-heading"> Envio de emails de la actualidad de cotizaciones a las agremiadas</div>
                 <div class="panel-body">
-                    <%= link_to(enviar_emails_path(), :class => 'btn btn-danger btn-xs', method: :post, :confirm => "Se procederá al envio de emails.") do %>
+                    <%= link_to(enviar_emails_path(), :class => 'btn btn-danger btn-xs', method: :post, data: { confirm: 'Se procederá al envio de emails.' }) do %>
                       <i class="fa fa-pencil"> Enviar emails</i>
                     <% end %> 
                 </div>

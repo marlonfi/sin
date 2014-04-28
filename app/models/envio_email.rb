@@ -22,6 +22,9 @@ class EnvioEmail < ActiveRecord::Base
   	enfermeras_con_correo,
   	total_con_email,
   	total_sin_email  = EnvioEmail.enfermeras_con_correo(enfermeras)
+    enfermeras_con_correo.each do |enfermera|
+      CotizacionesMailer.estado_cotizaciones_email(enfermera, ultima_cotizacion).deliver
+    end
   	return total_con_email, total_sin_email
   end
   def self.enfermeras_con_correo(enfermeras)

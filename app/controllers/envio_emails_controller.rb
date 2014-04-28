@@ -20,7 +20,7 @@ class EnvioEmailsController < ApplicationController
         @envio_email = EnvioEmail.create!(fecha_envio: Date.today, ultimo_mes_enviado: ultimo_mes_importado,
                emails_enviados: 0, emails_no_enviados: 0, generado_por: current_user.apellidos_nombres,
                status:'ESPERA', acumulado: 1 )
-        @envio_email.procesar_emails
+        @envio_email.delay.procesar_emails
         redirect_to envio_emails_path, notice: 'Se iniciará el envio de emails.'
       end
     else

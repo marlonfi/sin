@@ -373,13 +373,12 @@
                                 <td align="center">
                                     <table class="date" border="0" cellpadding="0" cellspacing="0">
                                         <tbody><tr>
-                                            <td>
-                                                <%= image_tag image_url('email-img/icon-cal.png'), style: 'display: block;', alt: 'icon 1', width: '13'%>
+                                            <td> 
                                             </td>
                                             <td>&nbsp;&nbsp;</td>
                                             <td style="color: #fefefe; font-size: 11px; font-weight: normal; font-family: Helvetica, Arial, sans-serif;">
                                                 <singleline>
-                                                    <%= fecha_con_formato(Time.now) %>
+                                                    Fecha de envio: <%= fecha_con_formato(Time.now) %>
                                                 </singleline>
                                             </td>
                                         </tr>
@@ -399,7 +398,6 @@
                                     <table class="tel" align="center" border="0" cellpadding="0" cellspacing="0">
                                         <tbody><tr>
                                             <td>
-                                                <%= image_tag image_url('email-img/icon-tel.png'), style: 'display: block;', alt: 'icon 2', width: '17'%>
                                             </td>
                                             <td>&nbsp;&nbsp;</td>
                                             <td style="color: #fefefe; font-size: 11px; font-weight: normal; font-family: Helvetica, Arial, sans-serif;">
@@ -451,7 +449,7 @@
                         <tbody><tr>
                             <td  class="main-header" style="color: #484848; font-size: 16px; font-weight: normal; font-family: Helvetica, Arial, sans-serif;">
 
-                                Mensaje de la gestión
+                                Email correspondiente a la aportación: <%= month_year(@primero)%>
 
                             </td>
                         </tr>
@@ -459,7 +457,7 @@
                         <tr>
                             <td  class="main-subheader" style="color: #a4a4a4; font-size: 12px; font-weight: normal; line-height:20px; font-family: Helvetica, Arial, sans-serif;">
 
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ac diam vel orci suscipit accumsan vitae dapibus felis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ac diam vel orci suscipit accumsan vitae dapibus felis.  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ac diam vel orci suscipit accumsan vitae dapibus felis ...
+                                El CEN SINESSS 2013-2016 predecido por el LIC. ELMER MASCARO PEREZ , le saluda via este correo electrónico y hace uso de este medio para mantenerlo(a) informado(a) sobre el estado de sus aportaciones a nuestro sindicato.
 
                             </td>
                         </tr>
@@ -619,66 +617,15 @@
 </tr>
 
 
-<tr><td height="35"></td></tr>
 
-
-<!-- prefooter -->
-
+<tr><td height="10"></td></tr>
 <tr>
-    <td>
-        <table class="container-middle" align="center" border="0" cellpadding="0" cellspacing="0" width="560">
-            <tbody><tr>
-                <td>
-
-
-                    <table class="nav" align="center" border="0" cellpadding="0" cellspacing="0">
-                        <tbody><tr><td height="10"></td></tr>
-                        <tr>
-                            <td  style="font-size: 13px; font-family: Helvetica, Arial, sans-serif;" align="center">
-                                <table align="center" border="0" cellpadding="0" cellspacing="0">
-                                    <tbody><tr>
-                                        <td>
-                                            <a style="display: block; width: 16px;" href="#"><img  style="display: block;" src="img/email-img/social-google.png" alt="google plus" width="16"></a>
-                                        </td>
-                                        <td>&nbsp;&nbsp;&nbsp;</td>
-                                        <td>
-                                            <a style="display: block; width: 16px;" href="#"><img  style="display: block;" src="img/email-img/social-youtube.png" alt="youtube" width="16"></a>
-                                        </td>
-                                        <td>&nbsp;&nbsp;&nbsp;</td>
-                                        <td>
-                                            <a style="display: block; width: 16px;" href="#"><img style="display: block;" src="img/email-img/social-facebook.png" alt="facebook" width="16"></a>
-                                        </td>
-                                        <td>&nbsp;&nbsp;&nbsp;</td>
-                                        <td>
-                                            <a style="display: block; width: 16px;" href="#"><img  style="display: block;" src="img/email-img/social-twitter.png" alt="twitter" width="16"></a>
-                                        </td>
-                                        <td>&nbsp;&nbsp;&nbsp;</td>
-                                        <td>
-                                            <a style="display: block; width: 16px;" href="#"><img  style="display: block;" src="img/email-img/social-linkedin.png" alt="linkedin" width="16"></a>
-                                        </td>
-                                    </tr>
-                                    </tbody></table>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </td>
-            </tr>
-            </tbody></table>
-    </td>
-</tr>
-<!-- end prefooter  -->
-
-<tr><td height="20"></td></tr>
-<tr>
-    <td style="color: #939393; font-size: 11px; font-weight: normal; font-family: Helvetica, Arial, sans-serif;" class="prefooter-header" align="center">
-
-         
+    <td style="color: #939393; font-size: 11px; font-weight: normal; font-family: Helvetica, Arial, sans-serif;" class="prefooter-header" align="center">       
 
     </td>
 </tr>
 
-<tr><td height="30"></td></tr>
+<tr><td height="15"></td></tr>
 
 <tr>
     <td  style="color: #939393; font-size: 11px; font-weight: normal; font-family: Helvetica, Arial, sans-serif;" class="prefooter-subheader" align="center">
@@ -701,7 +648,8 @@
     <tr bgcolor="7087A3">
         <td  style="color: #fff; font-size: 10px; font-weight: normal; font-family: Helvetica, Arial, sans-serif;" align="center">
 
-            Iokero © Copyright <%= Time.now.year%> . All Rights Reserved
+            Desarrollado por Iokero © Copyright <%= Time.now.year%> . All Rights Reserved </br>
+            <%= link_to 'http://www.iokero.com/', 'http://www.iokero.com/', style: 'color: white;'%>
 
         </td>
     </tr>
