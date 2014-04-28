@@ -1,5 +1,9 @@
 Sinesss::Application.routes.draw do
 
+  #match '/enviar_emails', to: 'envio_emails#enviar_emails', as: 'enviar_emails', via: 'get'
+  match '/enviar_emails', to: 'envio_emails#enviar_emails', as: 'enviar_emails', via: 'post'
+  resources :envio_emails, only: [:index]
+
   devise_for :users,:controllers => {:sessions => "users/sessions"},
              :skip => :registrations
   

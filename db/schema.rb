@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140423164416) do
+ActiveRecord::Schema.define(version: 20140427174632) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -124,6 +124,18 @@ ActiveRecord::Schema.define(version: 20140423164416) do
   end
 
   add_index "entes", ["red_asistencial_id", "base_id", "cod_essalud"], name: "index_entes_on_red_asistencial_id_and_base_id_and_cod_essalud", using: :btree
+
+  create_table "envio_emails", force: true do |t|
+    t.date     "fecha_envio"
+    t.date     "ultimo_mes_enviado"
+    t.integer  "emails_enviados"
+    t.integer  "emails_no_enviados"
+    t.string   "generado_por"
+    t.integer  "acumulado"
+    t.string   "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "imports", force: true do |t|
     t.string   "tipo_clase"

@@ -112,7 +112,8 @@ class PagosController < ApplicationController
   	fecha = get_full_fecha
     importado = Import.where("tipo_clase = ? AND fecha_pago = ? AND tipo_txt = ?",
                              'Pagos', fecha, params[:tipo]).first
-    if importado#para no dejar importar dos veces el mismo archivo
+    #ultimo_importado = Import.where("tipo_clase = ?", 'Pagos' ).last
+    if importado #|| (Date.parse(get_full_fecha) < ultimo_importado.fecha_pago)#para no dejar importar dos veces el mismo archivo
       redirect_to pagos_path, alert: 'Ya se importó ese archivo, revisar el log de importaciones.'
     else
     	importacion = Import.new(status: 'ESPERA', archivo: params[:archivo],

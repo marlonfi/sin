@@ -1,0 +1,12 @@
+<% if can? :index, EnvioEmail %>
+<li class="sub-menu">
+    <% if  controller_name == 'envio_emails' %>
+    <a href="<%= envio_emails_path %>" class="active">
+    <%else%>        
+    <a href="<%=  envio_emails_path  %>" >
+    <% end %>
+        <i class="fa fa-envelope"></i>
+        <span>Envio emails</span>        
+    </a>
+</li>
+<% end %>

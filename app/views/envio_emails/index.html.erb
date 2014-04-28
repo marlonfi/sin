@@ -1,0 +1,64 @@
+<% provide(:title, 'Envio de emails transaccionales') %>
+<% provide(:content_header_path,  envio_emails_path) %>
+<% provide(:content_header_data1,
+          "<i class='fa fa-envelope'></i> Emails transaccionales".html_safe) %>
+<% content_for :js_per_page do %>
+  <%= javascript_include_tag "datatables_emails" %>
+<% end %>
+<% content_for :css_per_page do %>
+  <%= stylesheet_link_tag "datatables", media: "all"%>
+<% end %>
+
+<div class="row">
+  <div class="col-lg-12">
+    <section class="panel">
+      <header class="panel-heading">
+        Log de emails enviados
+      </header>
+      <div class="panel-body">
+        <div class="adv-table">
+          <table  class="display table table-bordered table-striped" id="emails"
+                  data-source="<%= envio_emails_path(format: "json") %>">
+            <thead>
+              <tr>
+                <th><i class="fa fa-bullhorn"></i> STATUS</th>
+                <th><i class=" fa fa-calendar"></i> FECHA ENVIO </th>
+                <th><i class=" fa fa-calendar"></i> ULTIMA COTIZACIÓN ENVIADA </th>
+                <th><i class=" fa fa-bookmark"></i> Emails enviados </th>
+                <th><i class=" fa fa-bookmark"></i> Emails no enviados </th>
+                <th><i class=" fa fa-user"></i> Generado Por </th>
+              </tr>
+            </thead>
+            <tbody>                  
+            </tbody>
+            <tfoot>
+              <tr>
+                <th><i class="fa fa-bullhorn"></i> STATUS</th>
+                <th><i class=" fa fa-calendar"></i> FECHA ENVIO </th>
+                <th><i class=" fa fa-calendar"></i> ULTIMA COTIZACIÓN ENVIADA </th>
+                <th><i class=" fa fa-bookmark"></i> Emails enviados </th>
+                <th><i class=" fa fa-bookmark"></i> Emails no enviados </th>
+                <th><i class=" fa fa-user"></i> Generado Por </th>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>    
+    </section>
+  </div>
+</div>
+
+<div class="row">
+    <aside class="profile-info col-lg-9">
+        <section>
+            <div class="panel panel-primary">
+                <div class="panel-heading"> Envio de emails de la actualidad de cotizaciones a las agremiadas</div>
+                <div class="panel-body">
+                    <%= link_to(enviar_emails_path(), :class => 'btn btn-danger btn-xs', method: :post, :confirm => "Se procederá al envio de emails.") do %>
+                      <i class="fa fa-pencil"> Enviar emails</i>
+                    <% end %> 
+                </div>
+            </div>
+        </section>       
+    </aside>
+</div>

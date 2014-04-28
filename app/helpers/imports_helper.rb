@@ -9,6 +9,8 @@ module ImportsHelper
 			'<span class="label label-danger">ERROR</span>'
 		when 'IMPORTADO'
 			'<span class="label label-success">IMPORTADO</span>'
+		when 'ENVIADO'
+			'<span class="label label-success">ENVIADO</span>'
 		end		
 	end
 	def month_year(date)

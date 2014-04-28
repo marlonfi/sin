@@ -22,6 +22,9 @@ class Ability
        can :import_juntas, Base
        can :importar_juntas, Base
 
+       can :index, EnvioEmail
+       can :enviar_emails, EnvioEmail
+
        can :index, Import
        can :download, Import
 
