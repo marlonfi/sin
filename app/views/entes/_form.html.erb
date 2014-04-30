@@ -47,7 +47,7 @@
     <div class="col-lg-10">
       <%= collection_select(:ente, :red_asistencial_id, @redes,
          :id, :cod_essalud, {:prompt => 'Ingresa una red'}, {class: "form-control m-bot15 s"})  %>
-      <p class="help-block" id="error_notice"><%= f.object.errors[:red_asistencial_id].join(", ")%></p>
+      <p class="help-block" id="error_notice"><%= f.object.errors[:red_asistencial].join(", ")%></p>
     </div>
   </div>
   <div class="form-group">

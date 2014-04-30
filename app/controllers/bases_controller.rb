@@ -68,7 +68,8 @@ class BasesController < ApplicationController
         @cotizacion = get_full_fecha
         @money_contratados = Pago.sum_por_fecha_base_archivo(@cotizacion, @basis.codigo_base, 'NOMBRADOS Y CONTRATADOS')
         @money_cas = Pago.sum_por_fecha_base_archivo(@cotizacion, @basis.codigo_base, 'CAS')
-        @money_total = @money_contratados + @money_cas
+        @money_voucher = Pago.sum_por_fecha_base_archivo(@cotizacion, @basis.codigo_base, 'VOUCHER')
+        @money_total = @money_contratados + @money_cas + @money_voucher
         @asignacion = @money_total/2
       end
     end

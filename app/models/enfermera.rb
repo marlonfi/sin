@@ -7,7 +7,7 @@ class Enfermera < ActiveRecord::Base
     
   before_validation :generar_full_name
   before_save :generar_full_name
-	validates :cod_planilla, length: { is: 7 }
+	validates :cod_planilla, length: { is: 7}
 	validates_presence_of :ente_id, :apellido_paterno, :apellido_materno,
 												:nombres, :full_name
   validates_inclusion_of :b_sinesss, :in => [true, false]                      

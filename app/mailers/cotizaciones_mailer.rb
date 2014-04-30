@@ -1,7 +1,7 @@
 class CotizacionesMailer < ActionMailer::Base
   add_template_helper(ApplicationHelper)
   add_template_helper(ImportsHelper)
-  default :from => "no-reply@sinesss.org"
+  default :from => "\"Aportaciones SINESSS \" <no-responder@sinesss.org>"
 
   def estado_cotizaciones_email(enfermera, ultima_cotizacion)
   	@enfermera = enfermera

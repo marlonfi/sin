@@ -18,6 +18,70 @@
 #
 # To learn more, please read the Rails Internationalization guide
 # available at http://guides.rubyonrails.org/i18n.html.
-
 en:
-  hello: "Hello world"
+  activerecord:
+    errors:
+      models:
+        enfermera:
+          attributes:
+            dni:
+              wrong_length: 'debe tener %{count} caracteres'
+            regimen:
+              inclusion: 'debes seleccionar de la lista'
+            b_sinesss:
+              inclusion: 'debes seleccionar si esta agremiado o no'
+            cod_planilla:
+              wrong_length: 'debe tener %{count} caracteres'
+              taken: 'ya existe, debe ser unico'
+            ente_id:
+              blank: "es requerido"
+            apellido_materno:
+              blank: "es requerido"
+            nombres:
+              blank: "es requerido"
+            apellido_paterno:
+              blank: "es requerido"
+        red_asistencial:
+          attributes:
+            cod_essalud:
+              blank: "es requerido"
+              taken: 'ya existe, debe ser unico'
+        ente:
+          attributes:
+            cod_essalud:
+              blank: "es requerido"
+              taken: 'ya existe, debe ser unico'
+            red_asistencial:
+              blank: "debes seleccionar una red"              
+        donacion_enfermera:
+          attributes:
+            motivo:
+              blank: "es requerido"
+            fecha_entrega:
+              blank: "es requerido"
+            monto:
+              blank: "es requerido"
+              not_a_number: "debes ingresar un monto numerico"
+              numericality: 
+                greater_than: "debe ser mayor a %{count}"
+        bitacora:
+          attributes:
+            tipo:
+              inclusion: 'debes seleccionar de la lista'
+            status:
+              inclusion: 'debes seleccionar de la lista'
+        base:
+          attributes:
+            codigo_base:
+              blank: "es requerido"
+              taken: 'ya existe, debe ser unico'
+        user:
+          attributes:
+            dni:
+              blank: "es requerido"
+              taken: 'ya existe, debe ser unico'
+              wrong_length: 'debe tener %{count} caracteres'
+            apellidos_nombres:
+              blank: "es requerido"
+            cargo:
+              blank: "es requerido"
