@@ -17,6 +17,9 @@
 						</div>           
 						<div class="form-group">
 						    <%= select_month Date.today,{ use_month_names: meses_espanol},{class: "form-control", style:'width:200px'} %>
+						</div>						
+						<div class="form-group">
+						    <%= check_box_tag 'con_pagos', 'yes', true %>
 						</div>
 						<%= button_tag( :name => nil, class:"btn btn-info", id: 'btnGetAjax') do %>
 						          <i class="fa fa-file-text"></i> Generar PDF

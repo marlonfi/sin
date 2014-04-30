@@ -1,11 +1,12 @@
 class AgremiadosVoucherPdf < Prawn::Document
 	delegate :month_year, :number_to_currency, :date_and_hour,  to: :@view
-	def initialize(pagos,base,fecha,view)
+	def initialize(pagos,base,fecha,view, con_pagos)
 		super()
 		@pagos = pagos
 		@pago_total = @pagos.sum(:monto)
 		@pagos = pagos.sort_by { |obj| obj.enfermera.full_name }
 		@base = base
+		@con_pagos = con_pagos
 		@basis = Base.find_by_codigo_base(base)
 		@fecha = fecha
 		@view = view
@@ -57,6 +58,13 @@ class AgremiadosVoucherPdf < Prawn::Document
 	  move_down @lineheight_y
 	  text_box "AGREMIADOS: #{@pagos.count} enfermeras(os)", :at => [@address_x, cursor]
 	  move_down @lineheight_y
+	  if @con_pagos
+	  text_box "PDF con los montos aportados por los agremiados", :at => [@address_x, cursor]
+	  move_down @lineheight_y
+		else
+		text_box "PDF sin los montos aportados por los agremiados", :at => [@address_x, cursor]
+	  move_down @lineheight_y
+		end
 		text_box "Listado de aportantes con VOUCHER", :at => [@address_x, cursor]
 	  move_cursor_to last_measured_y
 
@@ -80,6 +88,7 @@ class AgremiadosVoucherPdf < Prawn::Document
   	
 	  move_down 45
 	  all_pagos = []
+	  if @con_pagos
 	  @pagos.each do |pago|
 	  	enfermera =  pago.enfermera
 	  	base = pago.base == 'Pago libre' ? "Pago libre (#{pago.ente_libre})" : pago.base
@@ -91,6 +100,19 @@ class AgremiadosVoucherPdf < Prawn::Document
 	    [["Cod. Planilla", "Enfermera", "Base aportante", "Mes aportación", "Monto"]] +
 	    all_pagos +
 	    [[" ", " ", " ", " ", " "]]
+	  else
+	  	@pagos.each do |pago|
+		  	enfermera =  pago.enfermera
+		  	base = pago.base == 'Pago libre' ? "Pago libre (#{pago.ente_libre})" : pago.base
+		  	all_pagos << [enfermera.cod_planilla,enfermera.full_name, base, month_year(pago.mes_cotizacion),
+		  							 pago.ente_libre]
+		  end
+		  #debugger
+		  invoice_services_data = 
+		    [["Cod. Planilla", "Enfermera", "Base aportante", "Mes aportación", "Trabaja en"]] +
+		    all_pagos +
+		    [[" ", " ", " ", " ", " "]]
+	  end  
 	  
 
 	  table(invoice_services_data, :width => bounds.width) do

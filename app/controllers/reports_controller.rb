@@ -8,13 +8,14 @@ class ReportsController < ApplicationController
   end  
   def bases_aportaciones
     fecha = get_full_fecha()
+    con_pagos = (params[:con_pagos] == 'yes') ? true : false
     base = params[:base][:codigo_base] == '' ? 'Pago libre' : params[:base][:codigo_base]
     pagos = Pago.includes(:enfermera).por_fecha_base(fecha, base)
     pagos = pagos.where('archivo = ? OR archivo =  ?', 'CAS', 'NOMBRADOS Y CONTRATADOS')
     respond_to do |format|
       format.html
       format.pdf do 
-        pdf = AgremiadosPdf.new(pagos,base,fecha,view_context)
+        pdf = AgremiadosPdf.new(pagos,base,fecha,view_context, con_pagos)
         send_data pdf.render, filename: "#{base}_mes_cotizacion_#{fecha}.pdf",
                               type: "application/pdf",
                               disposition: "inline"
@@ -26,12 +27,13 @@ class ReportsController < ApplicationController
   def bases_aportaciones_voucher
     fecha = get_full_fecha()
     base = params[:base][:codigo_base] == '' ? 'Pago libre' : params[:base][:codigo_base]
+    con_pagos = (params[:con_pagos] == 'yes') ? true : false
     pagos = Pago.includes(:enfermera).por_fecha_base(fecha, base)
     pagos = pagos.where('archivo = ?', 'VOUCHER')
     respond_to do |format|
       format.html
       format.pdf do 
-        pdf = AgremiadosVoucherPdf.new(pagos,base,fecha,view_context)
+        pdf = AgremiadosVoucherPdf.new(pagos,base,fecha,view_context, con_pagos)
         send_data pdf.render, filename: "#{base}_mes_cotizacion_#{fecha}.pdf",
                               type: "application/pdf",
                               disposition: "inline"
