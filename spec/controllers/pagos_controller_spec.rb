@@ -146,34 +146,95 @@ describe PagosController do
     end
   end
 
-  #describe 'GET #edit' do
-  #  context 'with authorized admin user' do
-  #    before(:each) do
-   #     @user = create(:admin)
-    #    sign_in @user
-     #   @enfermera = create(:enfermera)
-      #  @pago = @enfermera.pagos.create(monto:'12.12', mes_cotizacion:'12-12-1990',
-       #                   archivo:'VOUCHER', generado_por: 'yo', base:'basek', ente_libre:'libre')
-#      end
- #     it "renders the :edit view" do
-  #      get :edit, enfermera_id: @enfermera.id, id: @pago.id
-   #     expect(response).to render_template :edit
-    #  end
-    #end
-#    context 'with un-authorized user' do
- #     before (:each) do
-  #      @user = create(:organizacional)
-   #     sign_in  @user
-    #    @enfermera = create(:enfermera)
-     #   @pago = @enfermera.pagos.create(monto:'12.12', mes_cotizacion:'12-12-1990',
-      #                    archivo:'VOUCHER', generado_por: 'yo', base:'basek', ente_libre:'libre')
-#      end
- #     it "show the correct access negated message" do
-  #      get :edit, enfermera_id: @enfermera.id, id: @pago.id
-   #     flash[:alert].should =~ /Acceso denegado./
-    #  end           
-    #end        
-  #end
+  describe 'GET #edit' do
+    context 'with authorized admin user' do
+      before(:each) do
+        @user = create(:admin)
+        sign_in @user
+        @enfermera = create(:enfermera)
+        @pago = @enfermera.pagos.create(monto:'12.12', mes_cotizacion:'12-12-1990',
+                          archivo:'VOUCHER', generado_por: 'yo', base:'basek', ente_libre:'libre',
+                          created_at:'30-05-2014')
+        @pago_fuera = @enfermera.pagos.create(monto:'12.12', mes_cotizacion:'12-12-1990',
+                          archivo:'VOUCHER', generado_por: 'yo', base:'basek', ente_libre:'libre',
+                          created_at:'12-12-1990')
+        @empty_pago = @enfermera.pagos.create(monto:'12.12', mes_cotizacion:'12-12-1990',
+                          archivo:'VOUCHER', generado_por: 'Falta de pago', base:'basek', ente_libre:'libre',
+                          created_at:'12-12-1990')
+      end
+      it "renders the :edit view con pago on time" do
+        get :edit, enfermera_id: @enfermera.id, id: @pago.id
+        expect(response).to render_template :edit
+      end
+      it 'does not render the template for empy payments' do
+        get :edit, enfermera_id: @enfermera.id, id: @empty_pago.id
+        expect(response).to redirect_to enfermera_aportaciones_path(@enfermera)
+        flash[:alert].should =~ /Para reemplazar la falta de pago, registre el pago con el mismo mes de aportacion./
+      end
+      it 'does not render the template in a created_at out of range' do
+        get :edit, enfermera_id: @enfermera.id, id: @pago_fuera.id
+        expect(response).to redirect_to enfermera_aportaciones_path(@enfermera)
+        flash[:alert].should =~ /UD. ya no puede editar este pago, fuera de fecha./
+      end
+    end
+
+    context 'with un-authorized user' do
+      before (:each) do
+        @user = create(:organizacional)
+        sign_in  @user
+        @enfermera = create(:enfermera)
+        @pago = @enfermera.pagos.create(monto:'12.12', mes_cotizacion:'12-12-1990',
+                          archivo:'VOUCHER', generado_por: 'yo', base:'basek', ente_libre:'libre')
+      end
+      it "show the correct access negated message" do
+        get :edit, enfermera_id: @enfermera.id, id: @pago.id
+        flash[:alert].should =~ /Acceso denegado./
+      end           
+    end        
+  end
+
+  describe 'PATCH #update' do
+    context 'with authorized admin user' do
+      before(:each) do
+        @user = create(:admin)
+        sign_in @user
+        @enfermera = create(:enfermera)
+        @pago = @enfermera.pagos.create(monto:'12.12', mes_cotizacion:'12-12-1990',
+                          archivo:'VOUCHER', generado_por: 'yo', base:'basek', ente_libre:'libre',
+                          created_at:'30-05-2014')
+        @pago_importado = @enfermera.pagos.create(monto:'12.12', mes_cotizacion:'12-12-1990',
+                          archivo:'Importdo', generado_por: 'yo', base:'basek', ente_libre:'libre',
+                          created_at:'30-05-2014')
+        @pago_faltante = @enfermera.pagos.create(monto:'12.12', mes_cotizacion:'12-12-1990',
+                          archivo:'VOUCHER', generado_por: 'Falta de pago', base:'basek', ente_libre:'libre',
+                          created_at:'30-05-2014')
+      end
+      it 'allows to edit all of payments created by voucher' do
+        patch :update, enfermera_id: @enfermera.id, id: @pago.id, base: {codigo_base: 'hhh'},
+              monto: '12.13', date: {month: '12', year: '2000'}, voucher: '0909', comentario:'hola'
+        @pago.reload
+        expect(@pago.base).to eq('hhh')
+        expect(@pago.monto).to eq(12.13)
+        expect(@pago.comentario).to eq('hola')
+        expect(@pago.mes_cotizacion).to eq(Date.parse('15-12-2000'))
+      end
+      it 'allows to edit only base && comentario for payments generated by importation' do
+        patch :update, enfermera_id: @enfermera.id, id: @pago_importado.id, base: {codigo_base: 'hhh'},
+              monto: '23.13', date: {month: '12', year: '2000'}, voucher: '0909', comentario:'hola'
+        @pago_importado.reload
+        expect(@pago_importado.base).to eq('hhh')
+        expect(@pago_importado.monto.to_f).to eq(12.12)
+        expect(@pago_importado.comentario).to eq('hola')
+        expect(@pago_importado.mes_cotizacion).to eq(Date.parse('12-12-1990'))      
+      end
+      it 'does not allow to update payment out of date && empty payments' do
+        patch :update, enfermera_id: @enfermera.id, id: @pago_faltante.id, base: {codigo_base: 'hhh'},
+              monto: '23.13', date: {month: '12', year: '2000'}, voucher: '0909', comentario:'hola'
+        expect(response).to redirect_to enfermera_aportaciones_path(@enfermera)
+        flash[:alert].should =~ /Prohibido./
+      end
+    end
+  end
 
 
   describe 'GET #retrasos' do

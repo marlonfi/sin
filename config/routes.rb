@@ -71,7 +71,7 @@ Sinesss::Application.routes.draw do
     resources :bitacoras, :only => [:new, :create] do
       match '/status', to:'bitacoras#change_status', as: 'change_status', via: 'post'
     end
-    resources :pagos, :only => [:new, :create]
+    resources :pagos, :only => [:new, :create, :edit, :update]
     resources :donacion_enfermeras
   end
 

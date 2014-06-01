@@ -16,6 +16,10 @@ class Pago < ActiveRecord::Base
 	scope :por_fecha_base_archivo, ->(fecha,base,archivo) { por_fecha_base(fecha,base).where("archivo = ?", archivo) }
 	scope :sum_por_fecha_base_archivo, ->(fecha,base,archivo) { por_fecha_base_archivo(fecha,base,archivo).sum(:monto)}
 
+	#tiempo que se da para editar un pago, en dis
+	TIEMPO_PARA_EDITAR = 15
+	#########################
+
 	def self.import(import)
 		begin
 			import.update_attributes(status: 'PROCESANDO')
@@ -71,8 +75,17 @@ class Pago < ActiveRecord::Base
 		return data
 	end
 
+	def editable_generado_por?
+		self.generado_por == 'Falta de pago' ? false : true
+	end
 
+	def editable_en_fecha?
+		(DateTime.now.to_date - TIEMPO_PARA_EDITAR.days) > self.created_at ? false : true
+	end
 
+	def total_editable?
+		self.archivo == 'VOUCHER'
+	end
 
 	private
 

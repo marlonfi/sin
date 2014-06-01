@@ -38,11 +38,15 @@ class PagosController < ApplicationController
   def edit
     @enfermera = Enfermera.find(params[:enfermera_id])
     @aportacion = @enfermera.pagos.find(params[:id])
-    @bases = Base.all
-    if (DateTime.now.to_date - 15.days) > @aportacion.created_at
-       redirect_to enfermera_aportaciones_path(@enfermera), alert: "UD. ya no puede editar este pago."
+    if @aportacion.editable_generado_por?
+      @bases = Base.all
+      if @aportacion.editable_en_fecha?
+        render         
+      else
+        redirect_to enfermera_aportaciones_path(@enfermera), alert: "UD. ya no puede editar este pago, fuera de fecha."
+      end     
     else
-      render
+       redirect_to enfermera_aportaciones_path(@enfermera), alert: "Para reemplazar la falta de pago, registre el pago con el mismo mes de aportacion."
     end
   end
   def update
@@ -50,22 +54,37 @@ class PagosController < ApplicationController
     @aportacion = @enfermera.pagos.find(params[:id])
     fecha = get_full_fecha()
     base = params[:base][:codigo_base] == '' ? 'Pago libre' : params[:base][:codigo_base]
-    if (DateTime.now.to_date - 15.days) > @aportacion.created_at
+    unless @aportacion.editable_en_fecha?
        redirect_to enfermera_aportaciones_path(@enfermera), alert: "UD. ya no puede editar este pago."
     else
-      log = @aportacion.log || ''
-      @aportacion.log = log + "(#{@aportacion.monto} || #{@aportacion.mes_cotizacion} || #{@aportacion.base} ||
-                #{@aportacion.generado_por} ||  #{@aportacion.archivo} ||  #{@aportacion.voucher})"
-      if @aportacion.update_attributes(monto: params[:monto], mes_cotizacion: fecha, base: base,
-                      ente_libre: @enfermera.ente.cod_essalud, voucher: params[:voucher],
-                      comentario: params[:comentario], generado_por: current_user.apellidos_nombres,
-                      archivo: 'VOUCHER')
-        redirect_to enfermera_aportaciones_path(@enfermera), notice: 'Se actualizó correctamente el pago'
+      if @aportacion.editable_generado_por?
+        if @aportacion.total_editable?
+          log = @aportacion.log || ''
+          @aportacion.log = log + "(#{@aportacion.monto} || #{@aportacion.mes_cotizacion} || #{@aportacion.base} ||
+                    #{@aportacion.generado_por} ||  #{@aportacion.archivo} ||  #{@aportacion.voucher})"
+          if @aportacion.update_attributes(monto: params[:monto], mes_cotizacion: fecha, base: base,
+                          ente_libre: @enfermera.ente.cod_essalud, voucher: params[:voucher],
+                          comentario: params[:comentario], generado_por: current_user.apellidos_nombres)
+            redirect_to enfermera_aportaciones_path(@enfermera), notice: 'Se actualizó correctamente el pago'
+          else
+            @bases = Base.all
+            flash.now[:alert] = 'Hubo un problema. No se actualizó. Revisar el monto.'
+            render action: 'edit'
+          end
+        else
+          log = @aportacion.log || ''
+          @aportacion.log = log + "#{@aportacion.base} || #{@current_user.apellidos_nombres})"
+          if @aportacion.update_attributes(base: base, comentario: params[:comentario])
+            redirect_to enfermera_aportaciones_path(@enfermera), notice: 'Se actualizó correctamente el pago'
+          else 
+            @bases = Base.all
+            flash.now[:alert] = 'Hubo un problema. No se actualizó.'
+            render action: 'edit'
+          end
+        end
       else
-        @bases = Base.all
-        flash.now[:alert] = 'Hubo un problema. No se actualizó. Revisar el monto.'
-        render action: 'edit'
-      end      
+        redirect_to enfermera_aportaciones_path(@enfermera), alert: "Prohibido."
+      end           
     end
   end
 

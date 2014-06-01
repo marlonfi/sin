@@ -32,9 +32,11 @@
               <th><%= fecha_con_formato aportacion.created_at %></th>
               <th>
                 <%if can? :update, Pago%>
+                <%if aportacion.editable_generado_por? && aportacion.editable_en_fecha?%>
                 <%= link_to(edit_enfermera_pago_path(@enfermera, aportacion), :class => 'btn btn-primary btn-xs') do %>
                   <i class="fa fa-pencil"> </i> Editar
                 <% end %>
+                <%end%>
                 <%end%>
               </th>
             <tr>
