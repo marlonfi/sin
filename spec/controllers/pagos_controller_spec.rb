@@ -152,9 +152,10 @@ describe PagosController do
         @user = create(:admin)
         sign_in @user
         @enfermera = create(:enfermera)
+        allowed_date = DateTime.now.to_date - 13.days
         @pago = @enfermera.pagos.create(monto:'12.12', mes_cotizacion:'12-12-1990',
                           archivo:'VOUCHER', generado_por: 'yo', base:'basek', ente_libre:'libre',
-                          created_at:'30-05-2014')
+                          created_at: allowed_date)
         @pago_fuera = @enfermera.pagos.create(monto:'12.12', mes_cotizacion:'12-12-1990',
                           archivo:'VOUCHER', generado_por: 'yo', base:'basek', ente_libre:'libre',
                           created_at:'12-12-1990')
@@ -197,17 +198,18 @@ describe PagosController do
     context 'with authorized admin user' do
       before(:each) do
         @user = create(:admin)
+        allowed_date = DateTime.now.to_date - 13.days
         sign_in @user
         @enfermera = create(:enfermera)
         @pago = @enfermera.pagos.create(monto:'12.12', mes_cotizacion:'12-12-1990',
                           archivo:'VOUCHER', generado_por: 'yo', base:'basek', ente_libre:'libre',
-                          created_at:'30-05-2014')
+                          created_at: allowed_date)
         @pago_importado = @enfermera.pagos.create(monto:'12.12', mes_cotizacion:'12-12-1990',
                           archivo:'Importdo', generado_por: 'yo', base:'basek', ente_libre:'libre',
-                          created_at:'30-05-2014')
+                          created_at:allowed_date)
         @pago_faltante = @enfermera.pagos.create(monto:'12.12', mes_cotizacion:'12-12-1990',
                           archivo:'VOUCHER', generado_por: 'Falta de pago', base:'basek', ente_libre:'libre',
-                          created_at:'30-05-2014')
+                          created_at:allowed_date)
       end
       it 'allows to edit all of payments created by voucher' do
         patch :update, enfermera_id: @enfermera.id, id: @pago.id, base: {codigo_base: 'hhh'},
