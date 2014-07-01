@@ -203,13 +203,14 @@ describe EnfermerasController do
         it "changes @enf's attributes" do
           patch :update, id: @enfermera, enfermera: {ente_id: @ente.id, nombres: 'Iokero', cod_planilla:'1234567',
             													apellido_paterno: 'dsd', apellido_materno: 'sdsd', regimen:"NOMBRADO",
-            													b_sinesss:true, especialidad: 'NEO', doctorado: 'SI'}
+            													b_sinesss:false, especialidad: 'NEO', doctorado: 'SI'}
           @enfermera.reload
           expect(@enfermera.cod_planilla).to eq("1234567")
           expect(@enfermera.regimen).to eq("NOMBRADO")
           expect(@enfermera.especialidad).to eq("NEO")
           expect(@enfermera.doctorado).to eq("SI")
           expect(@enfermera.maestria).to eq(nil)
+          expect(@enfermera.b_sinesss).to be_true
         end
 
         it "redirects to the enfermera#show" do
@@ -254,6 +255,64 @@ describe EnfermerasController do
       end
       it "show the correct access negated message" do
         patch :update, id: @enfermera , enfermera: attributes_for(:enfermera)
+        flash[:alert].should =~ /Acceso denegado./
+      end           
+    end 
+  end
+
+  describe 'POST #afiliacion_desafiliacion' do
+    context 'with authorized organizacional user' do
+      before :each do
+        @user = create(:organizacional)
+        sign_in @user
+        @red = RedAsistencial.create(cod_essalud: 'cod1')
+        @ente = @red.entes.create(cod_essalud: 'huancayo')
+        @enfermera = @ente.enfermeras.create(nombres: 'Iokero', cod_planilla:'1231456',
+                                      apellido_paterno: 'dsd', apellido_materno: 'sdsd', regimen:"CAS",
+                                      b_sinesss:true)
+      end
+
+      context "valid attributes" do
+        it "changes afiliacion to sindicato" do
+          post :afiliacion_desafiliacion, enfermera_id: @enfermera.id, descripcion: 'desafiliando ando'
+          @enfermera.reload
+          expect(@enfermera.b_sinesss).to_not be_true
+          post :afiliacion_desafiliacion, enfermera_id: @enfermera.id, descripcion: 'desafiliando ando'
+          @enfermera.reload
+          expect(@enfermera.b_sinesss).to be_true
+        end
+        it 'creates a bitacora for afiliacion' do
+          post :afiliacion_desafiliacion, enfermera_id: @enfermera.id, descripcion: 'desafiliando ando'
+          expect(@enfermera.bitacoras.count).to eq(1)
+          bitacora_afiliacion = @enfermera.bitacoras.last
+          expect(bitacora_afiliacion.status).to eq('SOLUCIONADO')
+          expect(bitacora_afiliacion.tipo).to eq('DESAFILIACION')
+          expect(bitacora_afiliacion.descripcion).to eq('desafiliando ando')
+        end
+        it 'creates a bitacora for desafiliacion' do
+          @enfermera.update_attributes(b_sinesss: false)
+          @enfermera.reload
+          post :afiliacion_desafiliacion, enfermera_id: @enfermera.id, descripcion: 'afiliando ando'
+          expect(@enfermera.bitacoras.count).to eq(1)
+          bitacora_afiliacion = @enfermera.bitacoras.last
+          expect(bitacora_afiliacion.status).to eq('SOLUCIONADO')
+          expect(bitacora_afiliacion.tipo).to eq('AFILIACION')
+          expect(bitacora_afiliacion.descripcion).to eq('afiliando ando')
+        end       
+      end     
+    end
+    context 'with un-authorized user' do
+      before (:each) do
+        @user = create(:user)
+        sign_in  @user
+        @red = RedAsistencial.create(cod_essalud: 'cod1')
+        @ente = @red.entes.create(cod_essalud: 'huancayo')
+        @enfermera = @ente.enfermeras.create(nombres: 'Iokero', cod_planilla:'1231456',
+                                      apellido_paterno: 'dsd', apellido_materno: 'sdsd', regimen:"CAS",
+                                      b_sinesss:true)
+      end
+      it "show the correct access negated message" do
+        post :afiliacion_desafiliacion, enfermera_id: @enfermera.id, descripcion: 'desafiliando ando'
         flash[:alert].should =~ /Acceso denegado./
       end           
     end 

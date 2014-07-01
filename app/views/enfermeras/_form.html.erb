@@ -71,6 +71,7 @@
     </div>
   </div> 
 
+  <% if action_name == 'new'%>
   <div class="form-group">
     <%= f.label :ente_id,'Ente Perteneciente', class: 'col-lg-2 col-sm-2 control-label' %>
     <div class="col-lg-10">
@@ -79,6 +80,14 @@
       <p class="help-block" id="error_notice"><%= f.object.errors[:ente_id].join(", ")%></p>
     </div>
   </div>
+  <% else %>
+    <div class="form-group">
+    <%= f.label 'Ente Perteneciente','Ente Perteneciente', class: 'col-lg-2 col-sm-2 control-label' %>
+    <div class="col-lg-10">
+      <%= @enfermera.ente.cod_essalud%>
+    </div>
+  </div>
+  <% end %>
 
   <div class="form-group">
     <%= f.label :domicilio_completo, class: 'col-lg-2 col-sm-2 control-label' %>
@@ -155,6 +164,7 @@
     </div>
   </div>  
 
+  <% if action_name == 'new'%>
   <div class="form-group">
     <%= f.label :b_sinesss,'¿SINESSS?', class: 'col-lg-2 col-sm-2 control-label' %>
     <div class="col-lg-10">
@@ -167,6 +177,14 @@
       <p class="help-block" id="error_notice"><%= f.object.errors[:b_sinesss].join(", ")%></p>
     </div>
   </div>
+  <% else %>
+    <div class="form-group">
+    <%= f.label '¿SINESSS?','¿SINESSS?', class: 'col-lg-2 col-sm-2 control-label' %>
+    <div class="col-lg-10">
+      <%= @enfermera.b_sinesss ? 'Agremiado' : 'No Agremiado'%>
+    </div>
+  </div>
+  <% end %>
 
   <div class="form-group">
     <%= f.label :b_fedcut,'¿FED_CUT?', class: 'col-lg-2 col-sm-2 control-label' %>

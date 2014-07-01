@@ -60,7 +60,18 @@ class Enfermera < ActiveRecord::Base
     payment.archivo = import_file.tipo_txt
     payment.save!    
   end
-
+  #afilia o desafilia a la enfermera de acuerdo a su estado, ademas crea bitacora
+  def afiliar_desafiliar(descripcion)
+    estado = self.b_sinesss
+    crear_bitacora_afiliacion_desafiliacion(descripcion)
+    self.update_attributes(b_sinesss: !estado)
+  end
+  def crear_bitacora_afiliacion_desafiliacion(descripcion)
+    tipo = self.b_sinesss ? 'DESAFILIACION' : 'AFILIACION'
+    ente = self.ente
+    self.bitacoras.create(tipo: tipo, status: 'SOLUCIONADO', ente_inicio: ente.cod_essalud,
+                              ente_fin: ente.cod_essalud, descripcion: descripcion)
+  end
   #actualizar datos con excel
   def self.import_data_actualizada(import)
     begin

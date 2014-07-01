@@ -1,0 +1,18 @@
+<% if can? :update, Enfermera%>
+<center>
+    <% if !@enfermera.b_sinesss%>
+        <a class="btn btn btn-danger" data-toggle="modal" href="#afiliacion_modal", id='btnAfilicaionModal'>
+            <i class="fa fa-check-circle-o"> </i> Afiliar
+        </a>        
+    <% else %>
+        <a class="btn btn btn-danger" data-toggle="modal" href="#afiliacion_modal", id='btnAfilicaionModal'>
+            <i class="fa fa-times-circle-o"> </i> Desafiliar
+        </a> 
+    <% end %>
+    <%= link_to '#', :class => 'btn btn-warning' do %>
+      <i class="fa fa-arrows-v"> </i> Trasladar
+    <% end %>
+</center>    
+<% end %>
+
+

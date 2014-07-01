@@ -13,6 +13,12 @@
             <%= render 'show_work_data'%>
             <header class="panel-heading"></header>
             <%= render 'show_personal_data'%>            
-        </section>       
+        </section>
+        <section class="panel">
+            <%= render 'show_buttons'%>         
+        </section>         
     </aside>
 </div>
+<% if can? :update, Enfermera%>
+<%= render 'show_afiliacion_modal'%>
+<% end %>

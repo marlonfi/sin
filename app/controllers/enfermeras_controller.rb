@@ -48,7 +48,7 @@ class EnfermerasController < ApplicationController
   end
 
   def update
-    if @enfermera.update(enfermera_params)
+    if @enfermera.update(enfermera_update_params)
       redirect_to @enfermera, notice: 'Se actualizó correctamente la enfermera.'
     else
       flash.now[:alert] = 'Hubo un problema. No se pudo actualizar los datos.'
@@ -79,6 +79,7 @@ class EnfermerasController < ApplicationController
     end
   end
 
+  #get modal para importar data actualiada
   def import_data_actualizada
     if !request.xhr?
       redirect_to enfermeras_path, alert: 'No autorizado.'
@@ -87,6 +88,7 @@ class EnfermerasController < ApplicationController
     end
   end
 
+  #metodo para la importacion csv de data actualizadoa
   def importar_data_actualizada
     importacion = Import.new(status: 'ESPERA', archivo: params[:archivo], tipo_clase: 'Enfermeras',
                             descripcion: params[:descripcion], formato_org: 'SINESSS')
@@ -98,11 +100,27 @@ class EnfermerasController < ApplicationController
     end
   end
 
+  #METODO D LOS BOTONES DE AFILIACON Y DESAFILIACION
+  def afiliacion_desafiliacion
+    @enfermera = Enfermera.find(params[:enfermera_id])
+    afiliado = @enfermera.b_sinesss
+    @enfermera.afiliar_desafiliar(params[:descripcion])
+    redirect_to @enfermera, notice: "Se #{afiliado ? 'desafilió' : 'afilió'} la enfermera al sindicato." 
+  end
+
   private
+  
   def set_enfermera
     @enfermera = Enfermera.find(params[:id])
   end
 
+  def enfermera_update_params
+    params.require(:enfermera).permit(:cod_planilla, :apellido_paterno, :apellido_materno, :nombres, :email,
+                             :regimen, :b_fedcut, :b_famesalud, :b_excel, :dni,
+                             :sexo, :factor_sanguineo, :fecha_nacimiento, :domicilio_completo, :telefono,
+                             :telefono, :fecha_inscripcion_sinesss, :fecha_ingreso_essalud, :especialidad,
+                             :maestria, :doctorado)
+  end
   def enfermera_params
     params.require(:enfermera).permit(:ente_id, :cod_planilla, :apellido_paterno, :apellido_materno, :nombres, :email,
                              :regimen, :b_sinesss, :b_fedcut, :b_famesalud, :b_excel, :dni,

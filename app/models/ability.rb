@@ -56,6 +56,7 @@ class Ability
        can :aportaciones, Enfermera
        can :bitacoras, Enfermera
        can :show, Enfermera
+       can :afiliacion_desafiliacion, Enfermera
 
        can :new, Base
        can :create, Base
