@@ -260,6 +260,64 @@ describe EnfermerasController do
     end 
   end
 
+  describe 'POST #trasladar' do
+    context 'with authorized organizacional user' do
+      before :each do
+        @user = create(:organizacional)
+        sign_in @user
+        @red = RedAsistencial.create(cod_essalud: 'cod1')
+        @ente = @red.entes.create(cod_essalud: 'huancayo')
+        @ente_final = @red.entes.create(cod_essalud: 'lima')
+        @enfermera = @ente.enfermeras.create(nombres: 'Iokero', cod_planilla:'1231456',
+                                      apellido_paterno: 'dsd', apellido_materno: 'sdsd', regimen:"CAS",
+                                      b_sinesss:true)
+      end
+      context "valid attributes" do
+        it "changes enfermera ente" do
+          post :trasladar, enfermera_id: @enfermera.id, ente: {cod_essalud: 'lima'}, descripcion: 'TRASLADANDO ando'
+          @enfermera.reload
+          expect(@enfermera.ente).to eq(@ente_final)
+        end
+        it 'creates a bitacora for traslado' do
+          post :trasladar, enfermera_id: @enfermera.id, ente: {cod_essalud: 'lima'}, descripcion: 'TRASLADANDO ando'
+          @enfermera.reload
+          expect(@enfermera.bitacoras.count).to eq(1)
+          bitacora_traslado = @enfermera.bitacoras.last
+          expect(bitacora_traslado.status).to eq('SOLUCIONADO')
+          expect(bitacora_traslado.tipo).to eq('TRASLADO')
+          expect(bitacora_traslado.descripcion).to eq('TRASLADANDO ando')
+          expect(bitacora_traslado.ente_inicio).to eq('huancayo')
+          expect(bitacora_traslado.ente_fin).to eq('lima')
+        end              
+      end
+      context 'invalid attributes' do
+        it "does not accept with not selected ente" do
+          post :trasladar, enfermera_id: @enfermera.id, ente: {cod_essalud: ''}, descripcion: 'TRASLADANDO ando'
+          flash[:alert].should =~ /Para trasladar un enfermera/i
+        end
+        it "does not accept with not finded ente" do
+          post :trasladar, enfermera_id: @enfermera.id, ente: {cod_essalud: 'wevo'}, descripcion: 'TRASLADANDO ando'
+          flash[:alert].should =~ /No se encontro el nuevo ente en la base de datos/i
+        end
+      end 
+    end
+    context 'with un-authorized user' do
+      before (:each) do
+        @user = create(:user)
+        sign_in  @user
+        @red = RedAsistencial.create(cod_essalud: 'cod1')
+        @ente = @red.entes.create(cod_essalud: 'huancayo')
+        @enfermera = @ente.enfermeras.create(nombres: 'Iokero', cod_planilla:'1231456',
+                                      apellido_paterno: 'dsd', apellido_materno: 'sdsd', regimen:"CAS",
+                                      b_sinesss:true)
+      end
+      it "show the correct access negated message" do
+        post :trasladar, enfermera_id: @enfermera.id, ente: {cod_essalud: 'wevo'}, descripcion: 'TRASLADANDO ando'
+        flash[:alert].should =~ /Acceso denegado./
+      end           
+    end
+  end
+
   describe 'POST #afiliacion_desafiliacion' do
     context 'with authorized organizacional user' do
       before :each do

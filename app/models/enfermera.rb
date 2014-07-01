@@ -72,6 +72,17 @@ class Enfermera < ActiveRecord::Base
     self.bitacoras.create(tipo: tipo, status: 'SOLUCIONADO', ente_inicio: ente.cod_essalud,
                               ente_fin: ente.cod_essalud, descripcion: descripcion)
   end
+
+  #traslada a la enfermera
+  def trasladar(ente_inicial, ente_final, descripcion)
+    self.ente = ente_final
+    self.save
+    crear_bitacora(ente_inicial, ente_final, descripcion)
+  end
+  def crear_bitacora(ente_inicial, ente_final, descripcion)
+    self.bitacoras.create(tipo: 'TRASLADO', status: 'SOLUCIONADO', ente_inicio: ente_inicial.cod_essalud,
+                          ente_fin: ente_final.cod_essalud, descripcion: descripcion)
+  end
   #actualizar datos con excel
   def self.import_data_actualizada(import)
     begin

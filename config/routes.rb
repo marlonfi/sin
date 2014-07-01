@@ -69,6 +69,7 @@ Sinesss::Application.routes.draw do
     match '/bitacoras', to:'enfermeras#bitacoras', as: 'bitacoras', via: 'get'
     match '/aportaciones', to:'enfermeras#aportaciones', as: 'aportaciones', via: 'get'
     match '/afiliacion_desafiliacion', to:'enfermeras#afiliacion_desafiliacion', as: 'afiliacion_desafiliacion', via: 'post'
+    match '/trasladar', to:'enfermeras#trasladar', as: 'trasladar', via: 'post'
     resources :bitacoras, :only => [:new, :create] do
       match '/status', to:'bitacoras#change_status', as: 'change_status', via: 'post'
     end

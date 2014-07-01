@@ -107,9 +107,25 @@ class EnfermerasController < ApplicationController
     @enfermera.afiliar_desafiliar(params[:descripcion])
     redirect_to @enfermera, notice: "Se #{afiliado ? 'desafilió' : 'afilió'} la enfermera al sindicato." 
   end
+  #metodo de lo btones pra transladar enfermera
+  def trasladar
+    @enfermera = Enfermera.find(params[:enfermera_id])
+    if params[:ente][:cod_essalud] == ''
+      redirect_to @enfermera, alert: 'Para trasladar un enfermera, no olvide seleccionar el nuevo lugar de trabajo.'
+    else
+      ente_final = Ente.find_by_cod_essalud(params[:ente][:cod_essalud])
+      if ente_final
+        ente_inicial = @enfermera.ente
+        @enfermera.trasladar(ente_inicial, ente_final, params[:descripcion])
+        redirect_to @enfermera, notice: "Se trasladó a la enfermera del lugar de trabajo '#{ente_inicial.cod_essalud}' a '#{ente_final.cod_essalud}' "
+      else
+        redirect_to @enfermera, alert: 'No se encontro el nuevo ente en la base de datos.'
+      end   
+    end
+  end
 
   private
-  
+
   def set_enfermera
     @enfermera = Enfermera.find(params[:id])
   end

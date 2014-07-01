@@ -5,13 +5,13 @@
             <i class="fa fa-check-circle-o"> </i> Afiliar
         </a>        
     <% else %>
-        <a class="btn btn btn-danger" data-toggle="modal" href="#afiliacion_modal", id='btnAfilicaionModal'>
+        <a class="btn btn btn-danger" data-toggle="modal" href="#afiliacion_modal", id='btndesaModal'>
             <i class="fa fa-times-circle-o"> </i> Desafiliar
         </a> 
     <% end %>
-    <%= link_to '#', :class => 'btn btn-warning' do %>
-      <i class="fa fa-arrows-v"> </i> Trasladar
-    <% end %>
+    <a class="btn btn btn-warning" data-toggle="modal" href="#trasladar_modal", id='btnTraladoModal'>
+        <i class="fa fa-arrows-v"> </i> Trasladar
+    </a>
 </center>    
 <% end %>
 
